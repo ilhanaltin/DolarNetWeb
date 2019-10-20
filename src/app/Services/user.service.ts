@@ -1,7 +1,12 @@
+import { UserVM } from './../Models/User/UserVM';
+import { PagingVM } from './../Models/PagingVM';
+import { ServiceResult } from './../Models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UserListDetailVM } from '../Models/User/UserListDetailVM';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +24,7 @@ export class UserService {
         .pipe(map(response=>response));
   }
 
-  getAll(){
+  getAll() : Observable<ServiceResult<UserListDetailVM>>{
 
     let myParams = new HttpParams()
     .append('ItemCount', '10')
@@ -30,7 +35,43 @@ export class UserService {
     
     let options = { headers: headerWithToken, params: myParams };
 
-    return this.httpClient.get(environment.apiURL + environment.UserGetAll, options)
-          .pipe(map(response=>response));
+    return this.httpClient.get<ServiceResult<UserListDetailVM>>(environment.apiURL + environment.UserGetAll, options)
+      .pipe(
+        map(responseData => 
+          {
+            var resp = new ServiceResult<UserListDetailVM>();          
+
+            resp.Messages = [];
+            resp.Result = new UserListDetailVM();
+            
+            let userVMList: UserVM[] = [];
+            let pagingVM = new PagingVM();
+
+            resp.Messages = responseData["result"]["messages"];
+
+            pagingVM.CurrentPage = responseData["result"]["result"]["pagingVM"]["currentPage"];
+            pagingVM.PageItemCount = responseData["result"]["result"]["pagingVM"]["cageItemCount"];
+            pagingVM.TotalCount = responseData["result"]["result"]["pagingVM"]["totalCount"];
+            pagingVM.TotalPage = responseData["result"]["result"]["pagingVM"]["totalPage"];
+
+            resp.Result.PagingVM = pagingVM;
+
+            responseData["result"]["result"]["userList"].forEach(element => {
+                var _userVM = new UserVM();
+
+                _userVM.Email = element["email"];
+                _userVM.Name = element["name"];
+                _userVM.Surname = element["surname"];
+                _userVM.UserName = element["userName"];
+                _userVM.UserStatus = element["userStatus"];
+                _userVM.UserStatusTypeId = element["userStatusTypeId"];
+                
+                userVMList.push(_userVM);
+            });
+
+            resp.Result.UserList = userVMList;
+            
+            return resp;
+          }));
   }
 }

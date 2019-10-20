@@ -4,5 +4,5 @@ import { UserVM } from './UserVM';
 export class UserListDetailVM
 {
     UserList: UserVM [];
-    PagingVM: PagingVM;
+    PagingVM: PagingVM;    
 }

@@ -1,6 +1,6 @@
 export class ServiceResult<T>
 {
-    Messages: [];
-    Result: any;
-    Status: any;
+    Messages: string [];
+    Result: T;
+    Status: number;
 }
