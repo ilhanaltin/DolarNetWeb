@@ -1,7 +1,8 @@
+import { UserVM } from './../Models/User/UserVM';
 import { UserService } from './../Services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ServiceResult } from '../Models/ServiceResult';
-import { UserListDetailVM } from '../Models/User/UserListDetailVM';
+import { UserListResponseDetailsVM } from '../Models/User/UserListResponseDetailsVM';
 
 @Component({
   selector: 'test',
@@ -10,23 +11,46 @@ import { UserListDetailVM } from '../Models/User/UserListDetailVM';
 })
 export class TestComponent implements OnInit {
 
-  usersVM : ServiceResult<UserListDetailVM>;
+  usersVM : ServiceResult<UserListResponseDetailsVM>;
+
+  currentUserVM: UserVM;
+
+  getByIdUser: UserVM;
+  
+  registeredUser: UserVM;
 
   constructor(private userService: UserService) { 
   }
 
   ngOnInit() {
-    //this.userService.login().subscribe(response =>{
-    //  console.log(response);
-    //  localStorage.setItem("token","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIxIiwidW5pcXVlX25hbWUiOiLEsGxoYW4iLCJmYW1pbHlfbmFtZSI6IkFMVElOIiwicm9sZSI6IjEuWcO2bmV0aWNpIiwibmJmIjoxNTcwNDc2OTgzLCJleHAiOjE2MDIwMTI5ODMsImlhdCI6MTU3MDQ3Njk4M30.8-5VRRHrWXAj6NiNrZpwTn1QyopkIVq2MTO00yIsQPQ");
-    //});
-
-    console.log("test");
-    let result : ServiceResult<UserListDetailVM>;
+    this.userService.login().subscribe(response =>{
+      this.currentUserVM = response.Result.User;
+      localStorage.setItem("token","Bearer " + response.Result.Token);
+    });
 
     this.userService.getAll().subscribe(result =>{
+      console.log(result.Result.UserList);
       this.usersVM = result; 
-      console.log(this.usersVM.Result.UserList);
     });
+
+    this.userService.getById().subscribe(response =>{
+      this.getByIdUser = response.Result.User;
+    });
+
+    /*this.userService.register().subscribe(response =>{
+      this.registeredUser = new UserVM();
+      this.registeredUser.Name = response.Result.Name;
+      this.registeredUser.Surname = response.Result.Surname;
+      this.registeredUser.Email = response.Result.Email;
+      this.registeredUser.UserName = response.Result.UserName;
+    });*/
+
+    this.userService.post().subscribe(response => {
+      console.log(response.Status);
+    });
+
+    /*this.userService.delete().subscribe(response=>{
+      console.log(response.Status);
+    });*/
   }
 }

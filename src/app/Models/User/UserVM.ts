@@ -1,5 +1,6 @@
 export class UserVM
 {
+    Id: number;
     UserName: string;
     Name: string;
     Surname: string;

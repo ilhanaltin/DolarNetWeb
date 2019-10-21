@@ -8,8 +8,11 @@ export const environment = {
   
   //User - Services
   Authenticate: "User/Authenticate",
-  UserGetAll: "User"
-
+  Register: "User/Register",
+  UpdateUser: "User",
+  GetAllUser: "User",
+  DeleteUser: "User",
+  GetById: "User/GetById"
 };
 
 /*
