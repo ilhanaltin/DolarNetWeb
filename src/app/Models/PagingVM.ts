@@ -1,7 +1,7 @@
 export class PagingVM
 {
-    TotalCount: number;
-    TotalPage: number;
-    CurrentPage: number;
-    PageItemCount: number;
+    totalCount: number;
+    totalPage: number;
+    currentPage: number;
+    pageItemCount: number;
 }

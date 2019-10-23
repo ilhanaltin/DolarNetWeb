@@ -1,10 +1,10 @@
 export class UserVM
 {
-    Id: number;
-    UserName: string;
-    Name: string;
-    Surname: string;
-    Email: string;
-    UserStatusTypeId: number;
-    UserStatus: string
+    id: number;
+    userName: string;
+    name: string;
+    surname: string;
+    email: string;
+    userStatusTypeId: number;
+    userStatus: string
 }

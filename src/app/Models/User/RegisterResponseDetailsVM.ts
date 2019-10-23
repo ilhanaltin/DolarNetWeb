@@ -1,8 +1,8 @@
 export class RegisterResponseDetailsVM{
-        UserId: number;
-        UserName: string;
-        Email: string;
-        Name: string;
-        Surname: string;
-        RoleTypeId: number;
+        userId: number;
+        userName: string;
+        email: string;
+        name: string;
+        surname: string;
+        roleTypeId: number;
 }

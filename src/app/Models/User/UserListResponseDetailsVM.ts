@@ -3,6 +3,6 @@ import { UserVM } from './UserVM';
 
 export class UserListResponseDetailsVM
 {
-    UserList: UserVM [];
-    PagingVM: PagingVM;    
+    userList: UserVM [];
+    pagingVM: PagingVM;    
 }

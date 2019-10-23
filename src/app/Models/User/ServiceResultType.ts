@@ -1,4 +1,4 @@
-export class ServiceResult<T>
+export class ServiceResulType<T>
 {
     messages: string [];
     result: T;

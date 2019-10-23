@@ -24,17 +24,18 @@ export class TestComponent implements OnInit {
 
   ngOnInit() {
     this.userService.login().subscribe(response =>{
-      this.currentUserVM = response.Result.User;
-      localStorage.setItem("token","Bearer " + response.Result.Token);
+      this.currentUserVM = response.result.user;
+      localStorage.setItem("token","Bearer " + response.result.token);
+      console.log(response.result.user);
     });
 
     this.userService.getAll().subscribe(result =>{
-      console.log(result.Result.UserList);
+      console.log('osman',result.result.userList);
       this.usersVM = result; 
     });
 
     this.userService.getById().subscribe(response =>{
-      this.getByIdUser = response.Result.User;
+      this.getByIdUser = response.result.user;
     });
 
     /*this.userService.register().subscribe(response =>{
@@ -45,9 +46,9 @@ export class TestComponent implements OnInit {
       this.registeredUser.UserName = response.Result.UserName;
     });*/
 
-    this.userService.post().subscribe(response => {
+    /*this.userService.post().subscribe(response => {
       console.log(response.Status);
-    });
+    });*/
 
     /*this.userService.delete().subscribe(response=>{
       console.log(response.Status);

@@ -2,6 +2,6 @@ import { UserVM } from './UserVM';
 
 export class LoginResponseDetailsVM
 {
-    User: UserVM;
-    Token: string
+    user: UserVM;
+    token: string
 }

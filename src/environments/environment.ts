@@ -14,7 +14,12 @@ export const environment = {
   CheckEmail: "User/CheckEmail",
   GetAllUser: "User",
   DeleteUser: "User",
-  GetById: "User/GetById"
+  GetById: "User/GetById",
+
+  //Portfolio
+  PortfolioGet: "Portfolio",
+  PortfolioPost: "Portfolio",
+  PortfolioDelete: "Portfolio"
 };
 
 /*
