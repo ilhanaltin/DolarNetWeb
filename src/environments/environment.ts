@@ -10,6 +10,8 @@ export const environment = {
   Authenticate: "User/Authenticate",
   Register: "User/Register",
   UpdateUser: "User",
+  ChangePassword: "User/ChangePassword",
+  CheckEmail: "User/CheckEmail",
   GetAllUser: "User",
   DeleteUser: "User",
   GetById: "User/GetById"

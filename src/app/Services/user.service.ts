@@ -4,7 +4,7 @@ import { PagingVM } from './../Models/PagingVM';
 import { ServiceResult } from './../Models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserListResponseDetailsVM } from '../Models/User/UserListResponseDetailsVM';
 import { Observable } from 'rxjs';
@@ -225,4 +225,54 @@ export class UserService {
             return resp;
           }));
   }
+
+  changePassword() : Observable<ServiceResult<StandartResponseDetailsVM>>
+  {
+    let post = { 
+      Id: 2,
+      OldPassword: 'e44f5f0bf7a453a731217f288641ab16', 
+      NewPassword: 'e44f5f0bf7a453a731217f288641ab16'
+  };
+
+    let headerWithToken = this.headers.set("Authorization", localStorage.getItem("token"));
+    
+    let options = { headers: headerWithToken };
+
+    return this.httpClient.post(environment.apiURL + environment.ChangePassword, JSON.stringify(post), options)
+        .pipe(
+          map(responseData => {
+            var resp = new ServiceResult<StandartResponseDetailsVM>();
+
+            resp.Messages = [];
+            resp.Result = new StandartResponseDetailsVM();
+            resp.Status = responseData["result"]["status"];
+            resp.Messages = responseData["result"]["result"]["messages"];
+
+            return resp;
+          }));
+  }
+
+  CheckEmail() : Observable<ServiceResult<StandartResponseDetailsVM>>
+  {
+    let myParams = new HttpParams()
+    .append('email', 'ilhanaltin79@gmail.com')
+
+    let headerWithToken = this.headers.set("Authorization", localStorage.getItem("token"));
+    
+    let options = { headers: headerWithToken, params: myParams };
+
+    return this.httpClient.delete<ServiceResult<StandartResponseDetailsVM>>(environment.apiURL + environment.CheckEmail, options)
+      .pipe(
+        map(responseData => 
+          {
+            var resp = new ServiceResult<StandartResponseDetailsVM>();          
+
+            resp.Messages = [];
+            resp.Result = new StandartResponseDetailsVM();
+            resp.Status = responseData["result"]["status"];
+            resp.Messages = responseData["result"]["result"]["messages"];
+
+            return resp;
+          }));
+        }
 }
