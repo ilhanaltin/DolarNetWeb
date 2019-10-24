@@ -19,7 +19,18 @@ export const environment = {
   //Portfolio
   PortfolioGet: "Portfolio",
   PortfolioPost: "Portfolio",
-  PortfolioDelete: "Portfolio"
+  PortfolioDelete: "Portfolio",
+
+    //Holding
+    HoldingGet: "Holding",
+    HoldingoPost: "Holding",
+    HoldingoDelete: "Holding",
+
+    //Blog
+    BlogGetAll: "Blog",
+    BlogGetById: "Blog/GetById",
+    BlogPost: "Blog",
+    BlogDelete: "Blog"
 };
 
 /*

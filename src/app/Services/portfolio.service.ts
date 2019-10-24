@@ -1,40 +1,27 @@
-import { StandartResponseDetailsVM } from './../Models/User/StandartResponseDetailsVM';
+import { StandartResponseDetailsVM } from '../Models/StandartResponseDetailsVM';
 import { Observable } from 'rxjs';
 import { ServiceResult } from './../Models/ServiceResult';
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { PortfolioListResponseDetailsVM } from '../Models/Portfolio/PortfolioListResponseDetailsVM';
-import { map } from 'rxjs/operators';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PortfolioService {
 
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private options = { headers: this.headers };
-
-  constructor(private httpClient : HttpClient) { }
+  constructor(private baseService: BaseService) { }
 
   get() : Observable<ServiceResult<PortfolioListResponseDetailsVM>>{
+    
     let myParams = new HttpParams()
     .append('ItemCount', '10')
     .append('PageId', '1')
     .append('RoleId', '1');
 
-  let headerWithToken = this.headers.set("Authorization", localStorage.getItem("token"));
-
-  let options = { headers: headerWithToken, params: myParams };
-
-  return this.httpClient.get<ServiceResult<PortfolioListResponseDetailsVM>>(environment.apiURL + environment.PortfolioGet, options)
-    .pipe(
-      map(responseData => {
-
-        var resp = responseData as ServiceResult<PortfolioListResponseDetailsVM>;
-        
-        return resp;
-      }));
+    return this.baseService.get<PortfolioListResponseDetailsVM>(environment.apiURL + environment.PortfolioGet, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -44,34 +31,13 @@ export class PortfolioService {
       CoinTypeId: 1
     };
 
-    let headerWithToken = this.headers.set("Authorization", localStorage.getItem("token"));
-
-    let options = { headers: headerWithToken };
-
-    return this.httpClient.post(environment.apiURL + environment.PortfolioPost, JSON.stringify(post), options)
-      .pipe(
-        map(responseData => {
-
-          var resp = responseData as ServiceResult<StandartResponseDetailsVM>;          
-
-          return resp;
-        }));
+    return this.baseService.post(environment.apiURL + environment.PortfolioPost, post);
   }
 
   delete(): Observable<ServiceResult<StandartResponseDetailsVM>> {
     let myParams = new HttpParams()
       .append('id', '1')
 
-    let headerWithToken = this.headers.set("Authorization", localStorage.getItem("token"));
-
-    let options = { headers: headerWithToken, params: myParams };
-
-    return this.httpClient.delete<ServiceResult<StandartResponseDetailsVM>>(environment.apiURL + environment.PortfolioDelete, options)
-      .pipe(
-        map(responseData => {
-          var resp = responseData as ServiceResult<StandartResponseDetailsVM>;
-
-          return resp;
-        }));
+    return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(environment.apiURL + environment.PortfolioDelete, myParams);
   }
 }

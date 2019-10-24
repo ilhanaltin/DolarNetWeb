@@ -6,5 +6,5 @@ export class UserVM
     surname: string;
     email: string;
     userStatusTypeId: number;
-    userStatus: string
+    userStatusTypeName: string
 }

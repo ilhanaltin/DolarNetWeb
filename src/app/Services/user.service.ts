@@ -1,9 +1,8 @@
-import { StandartResponseDetailsVM } from './../Models/User/StandartResponseDetailsVM';
+import { StandartResponseDetailsVM } from '../Models/StandartResponseDetailsVM';
 import { ServiceResult } from './../Models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { HttpParams } from '@angular/common/http';
 import { UserListResponseDetailsVM } from '../Models/User/UserListResponseDetailsVM';
 import { Observable } from 'rxjs';
 import { LoginResponseDetailsVM } from '../Models/User/LoginResponseDetailsVM';
@@ -16,10 +15,7 @@ import { BaseService } from './base.service';
 })
 export class UserService {
 
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private options = { headers: this.headers };
-
-  constructor(private httpClient: HttpClient, private baseService: BaseService) { }
+  constructor(private baseService: BaseService) { }
 
   register(): Observable<ServiceResult<RegisterResponseDetailsVM>> {
     
