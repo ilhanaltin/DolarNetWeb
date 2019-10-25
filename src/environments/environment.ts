@@ -30,7 +30,14 @@ export const environment = {
     BlogGetAll: "Blog",
     BlogGetById: "Blog/GetById",
     BlogPost: "Blog",
-    BlogDelete: "Blog"
+    BlogDelete: "Blog",
+
+    //Integration Services
+    IntegrationGetAll: "Integration",
+    IntegrationGetById: "Integration/GetById",
+    IntegrationPost: "Integration",
+    IntegrationDelete: "Integration"
+    
 };
 
 /*
