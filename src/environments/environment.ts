@@ -36,8 +36,23 @@ export const environment = {
     IntegrationGetAll: "Integration",
     IntegrationGetById: "Integration/GetById",
     IntegrationPost: "Integration",
-    IntegrationDelete: "Integration"
-    
+    IntegrationDelete: "Integration",
+
+    //Audit
+    AuditGetAll: "Logs",
+    AuditGetById: "GetById",
+    AuditPost: "Logs",
+
+    //Types
+    TypesGetActionTypes: "Types/GetActionTypes",
+    TypesGetCoinTypes: "Types/GetCoinTypes",
+    TypesGetCrudTypes: "Types/GetCrudTypes",
+    TypesGetLogTypes: "Types/GetLogTypes",
+    TypesGetPostCategoryTypes: "Types/GetPostCategoryTypes",
+    TypesGetPostStatusTypes: "Types/GetPostStatusTypes",
+    TypesGetRoleTypes: "Types/GetRoleTypes",
+    TypesGetServiceTypes: "Types/GetServiceTypes",
+    TypesGetUserStatusTypes: "Types/GetUserStatusTypes"
 };
 
 /*
