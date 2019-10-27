@@ -21,14 +21,14 @@ export class BlogService {
       .append('PageId', '1')
       .append('CategoryId', '-1');
 
-      return this.baseService.get<PostListResponseDetailsVM>(environment.apiURL + environment.BlogGetAll,myParams);
+      return this.baseService.get<PostListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.GetAll,myParams);
   }
 
   getById() : Observable<ServiceResult<PostResponseDetailsVM>> {
     let myParams = new HttpParams()
     .append('id', '1')
 
-    return this.baseService.get<PostResponseDetailsVM>(environment.apiURL + environment.BlogGetById, myParams);
+    return this.baseService.get<PostResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.GetById, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -41,13 +41,13 @@ export class BlogService {
       PostStatusTypeId: 1
     };
 
-    return this.baseService.post<StandartResponseDetailsVM>(environment.apiURL + environment.BlogPost, post);
+    return this.baseService.post<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.Post, post);
   }
 
   delete(): Observable<ServiceResult<StandartResponseDetailsVM>>{
     let myParams = new HttpParams()
       .append('id', '1')
 
-      return this.baseService.delete<StandartResponseDetailsVM>(environment.apiURL + environment.BlogDelete, myParams);
+      return this.baseService.delete<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.Delete, myParams);
   }
 }

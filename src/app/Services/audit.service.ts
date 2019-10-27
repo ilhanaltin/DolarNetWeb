@@ -21,7 +21,7 @@ export class AuditService {
     .append('PageId', '1')
     .append('TypeId', '-1');
 
-    return this.baseService.get<LogListResponseDetailsVM>(environment.apiURL + environment.AuditGetAll, myParams);
+    return this.baseService.get<LogListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Audit.GetAll, myParams);
 
   }
 
@@ -29,7 +29,7 @@ export class AuditService {
     let myParams = new HttpParams()
     .append('id', '1')
 
-    return this.baseService.get<LogResponseDetailsVM>(environment.apiURL + environment.AuditGetById, myParams);
+    return this.baseService.get<LogResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Audit.GetById, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -41,6 +41,6 @@ export class AuditService {
       Detail: 'test log'
     };
 
-    return this.baseService.post<StandartResponseDetailsVM>(environment.apiURL + environment.AuditPost, log);
+    return this.baseService.post<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Audit.Post, log);
   }
 }

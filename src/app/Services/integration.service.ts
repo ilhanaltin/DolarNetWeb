@@ -17,14 +17,14 @@ export class IntegrationService {
 
   get(){
 
-    return this.baseService.get<ServiceListResponseDetailsVM>(environment.apiURL + environment.IntegrationGetAll);
+    return this.baseService.get<ServiceListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Integration.GetAll);
   }
 
   getById(){
     let myParams = new HttpParams()
     .append('id', '1')
 
-    return this.baseService.get<ServiceResponseDetailsVM>(environment.apiURL + environment.IntegrationGetById, myParams);
+    return this.baseService.get<ServiceResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Integration.GetById, myParams);
   }
 
   post()  : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -37,13 +37,13 @@ export class IntegrationService {
       IsActive: true
     };
 
-    return this.baseService.post<StandartResponseDetailsVM>(environment.apiURL + environment.IntegrationPost, service);
+    return this.baseService.post<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Integration.Post, service);
   }
 
   delete(){
     let myParams = new HttpParams()
       .append('id', '1')
 
-      return this.baseService.delete<StandartResponseDetailsVM>(environment.apiURL + environment.IntegrationDelete, myParams);
+      return this.baseService.delete<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Integration.Delete, myParams);
   }
 }

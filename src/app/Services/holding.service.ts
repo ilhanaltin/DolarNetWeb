@@ -21,7 +21,7 @@ export class HoldingService {
     .append('PageId', '1')
     .append('RoleId', '1');
 
-    return this.baseService.get<HoldingListResponseDetailsVM>(environment.apiURL + environment.HoldingGet, myParams);
+    return this.baseService.get<HoldingListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Holding.Get, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -31,13 +31,13 @@ export class HoldingService {
       CoinTypeId: 1
     };
 
-    return this.baseService.post(environment.apiURL + environment.HoldingoPost, post);
+    return this.baseService.post(environment.Api.Main.Url + environment.Services.Holding.Post, post);
   }
 
   delete(): Observable<ServiceResult<StandartResponseDetailsVM>> {
     let myParams = new HttpParams()
       .append('id', '1')
 
-    return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(environment.apiURL + environment.HoldingoDelete, myParams);
+    return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(environment.Api.Main.Url + environment.Services.Holding.Delete, myParams);
   }
 }

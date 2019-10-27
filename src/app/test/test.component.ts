@@ -3,6 +3,10 @@ import { UserService } from './../Services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { ServiceResult } from '../Models/ServiceResult';
 import { UserListResponseDetailsVM } from '../Models/User/UserListResponseDetailsVM';
+import { CurrencyService } from '../Services/currency.service';
+import { HistoricalVM } from '../Models/Currency/HistoricalVM';
+import { CurrencyChangeVM } from '../Models/Currency/CurrencyChangeVM';
+import { LatestVM } from '../Models/Currency/LatestVM';
 
 @Component({
   selector: 'test',
@@ -19,24 +23,93 @@ export class TestComponent implements OnInit {
   
   registeredUser: UserVM;
 
-  constructor(private userService: UserService) { 
+  yesterdayData: HistoricalVM;
+  
+  latestData: LatestVM;
+
+  CurrencyChangeList: CurrencyChangeVM[] = [];
+
+  constructor(private userService: UserService, private currencyService: CurrencyService) { 
   }
 
   ngOnInit() {
-    this.userService.login().subscribe(response =>{
+    /*this.userService.login().subscribe(response =>{
       this.currentUserVM = response.result.user;
       localStorage.setItem("token","Bearer " + response.result.token);
       console.log(response.result.user);
-    });
+    });*/
 
-    this.userService.getAll().subscribe(result =>{
+    /*this.userService.getAll().subscribe(result =>{
       console.log('osman',result.result.userList);
       this.usersVM = result; 
-    });
+    });*/
 
-    this.userService.getById().subscribe(response =>{
+    /*this.userService.getById().subscribe(response =>{
       this.getByIdUser = response.result.user;
     });
+
+    this.currencyService.convertTo().subscribe(response=>{
+      console.log(response);
+    })*/
+
+    var latestDataFromStoreage = this.currencyService.getLatestFromStorage();
+
+    if(latestDataFromStoreage.isValid)
+    {
+      this.latestData = latestDataFromStoreage.data;
+      console.log("latest from storeage");
+      console.log(this.latestData);
+    }
+    else
+    {
+      this.currencyService.getLatest().subscribe(latest =>
+        {
+            this.latestData = latest;
+            console.log("latest from service");
+            console.log(latest);
+        });
+    }
+
+    var yesterdayDataFromStoreage = this.currencyService.getYesterdayFromStorage();
+
+    console.log(yesterdayDataFromStoreage);
+    
+    if(yesterdayDataFromStoreage.isValid)
+    {
+      this.yesterdayData = yesterdayDataFromStoreage.data;
+      console.log("yesterday from storeage");
+      console.log(this.yesterdayData);
+    }
+    else
+    {
+      this.currencyService.getYesterday().subscribe(yesterday =>
+        {
+            this.yesterdayData = yesterday;
+            console.log("yesterday from service");
+            console.log(yesterday);
+        });
+    }
+
+    /*this.currencyService.getYesterday().subscribe(yesterday =>{
+      
+      this.historicalData = yesterday;
+
+      this.currencyService.getLatest().subscribe(latest =>{
+
+        latest.currencyRates.rates.forEach(element => {
+          let currencyChange = new CurrencyChangeVM();
+          var yestCurrency= this.historicalData.currencyRates.rates.find(t=>t.currency == element.currency).rate;
+          currencyChange.currency = element.currency;
+          currencyChange.period = 1;
+          currencyChange.periodType = 1;
+          currencyChange.change = ((yestCurrency-element.rate)*100) / yestCurrency;  
+          
+          this.CurrencyChangeList.push(currencyChange);
+        });          
+      });
+
+      console.log(this.CurrencyChangeList);
+    });*/
 
     /*this.userService.register().subscribe(response =>{
       this.registeredUser = new UserVM();

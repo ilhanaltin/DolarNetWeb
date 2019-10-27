@@ -11,6 +11,6 @@ export class TypesService {
   constructor(private baseService: BaseService) { }
 
   get(action: string){
-      return this.baseService.get<TypeResponseDetailsVM>(environment.apiURL + action);
+      return this.baseService.get<TypeResponseDetailsVM>(environment.Api.Main.Url + action);
   }
 }

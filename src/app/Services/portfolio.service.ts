@@ -21,7 +21,7 @@ export class PortfolioService {
     .append('PageId', '1')
     .append('RoleId', '1');
 
-    return this.baseService.get<PortfolioListResponseDetailsVM>(environment.apiURL + environment.PortfolioGet, myParams);
+    return this.baseService.get<PortfolioListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Portfolio.Get, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -31,13 +31,13 @@ export class PortfolioService {
       CoinTypeId: 1
     };
 
-    return this.baseService.post(environment.apiURL + environment.PortfolioPost, post);
+    return this.baseService.post(environment.Api.Main.Url + environment.Services.Portfolio.Post, post);
   }
 
   delete(): Observable<ServiceResult<StandartResponseDetailsVM>> {
     let myParams = new HttpParams()
       .append('id', '1')
 
-    return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(environment.apiURL + environment.PortfolioDelete, myParams);
+    return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(environment.Api.Main.Url + environment.Services.Portfolio.Delete, myParams);
   }
 }
