@@ -1,3 +1,4 @@
+import { CoinsService } from './../Services/coins.service';
 import { UserVM } from './../Models/User/UserVM';
 import { UserService } from './../Services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -29,7 +30,9 @@ export class TestComponent implements OnInit {
 
   CurrencyChangeList: CurrencyChangeVM[] = [];
 
-  constructor(private userService: UserService, private currencyService: CurrencyService) { 
+  constructor(private userService: UserService, 
+    private currencyService: CurrencyService,
+    private coinsService: CoinsService) { 
   }
 
   ngOnInit() {
@@ -52,7 +55,7 @@ export class TestComponent implements OnInit {
       console.log(response);
     })*/
 
-    var latestDataFromStoreage = this.currencyService.getLatestFromStorage();
+    /*var latestDataFromStoreage = this.currencyService.getLatestFromStorage();
 
     if(latestDataFromStoreage.isValid)
     {
@@ -64,13 +67,13 @@ export class TestComponent implements OnInit {
     {
       this.currencyService.getLatest().subscribe(latest =>
         {
-            this.latestData = latest;
+            this.latestData = latest.result;
             console.log("latest from service");
             console.log(latest);
         });
-    }
+    }*/
 
-    var yesterdayDataFromStoreage = this.currencyService.getYesterdayFromStorage();
+    /*var yesterdayDataFromStoreage = this.currencyService.getYesterdayFromStorage();
 
     console.log(yesterdayDataFromStoreage);
     
@@ -84,11 +87,18 @@ export class TestComponent implements OnInit {
     {
       this.currencyService.getYesterday().subscribe(yesterday =>
         {
-            this.yesterdayData = yesterday;
+            this.yesterdayData = yesterday.result;
             console.log("yesterday from service");
             console.log(yesterday);
         });
-    }
+    }*/
+
+    this.currencyService.getYesterday().subscribe(yesterday =>
+      {
+          this.yesterdayData = yesterday.result;
+          console.log("yesterday from service");
+          console.log(yesterday);
+      });
 
     /*this.currencyService.getYesterday().subscribe(yesterday =>{
       
@@ -110,6 +120,19 @@ export class TestComponent implements OnInit {
 
       console.log(this.CurrencyChangeList);
     });*/
+
+    /*this.coinsService.getTickers().subscribe(result =>{
+      console.log(result.result.vol_24hr_pcnt);
+    });
+
+    this.coinsService.convertTo().subscribe(result =>{
+      console.log(result);
+    });
+
+    this.coinsService.getAllPrices().subscribe(result =>{
+      console.log(result.result.prices[0]);
+    });*/
+    
 
     /*this.userService.register().subscribe(response =>{
       this.registeredUser = new UserVM();

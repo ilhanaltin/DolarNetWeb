@@ -1,22 +1,24 @@
+import { ServiceResult } from './../Models/ServiceResult';
+import { ConvertCurrencyVM } from './../Models/Currency/ConvertCurrencyVM';
 import { DataValidation } from './../Models/Currency/DataValidation';
 import { RatesVM } from './../Models/Currency/RatesVM';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { LatestVM } from '../Models/Currency/LatestVM';
 import { Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { HistoricalVM } from '../Models/Currency/HistoricalVM';
-import { ConvertVM } from '../Models/Currency/ConvertVM';
 import { CurrencyRateVM } from '../Models/Currency/CurrencyRateVM';
+import { BaseService } from './base.service';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrencyService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private baseService: BaseService) { }
 
   getLatestFromStorage() : DataValidation<LatestVM>
   {
@@ -43,35 +45,37 @@ export class CurrencyService {
     return response;
   }
 
-  getLatest() : Observable<LatestVM>
+  getLatest() : Observable<ServiceResult<LatestVM>>
   {
     let symbols= ['USD', 'EUR'];
     let baseCurrency = "TRY";
 
-    return this.httpClient.get(environment.Api.Currency.Url 
-        + environment.Api.Currency.Endpoint.Latest 
-          + "?access_key=" + environment.Api.Currency.AccessKey 
-            + "&base=" + baseCurrency
-            + "&symbols=" + symbols)
+    let myParams = new HttpParams()
+    .append('access_key', environment.Api.Currency.AccessKey)
+    .append('base', baseCurrency)
+    .append('symbols', symbols.join(","));
+
+    return this.baseService.getForCurrency(environment.Api.Currency.Url 
+      + environment.Api.Currency.Endpoint.Latest, myParams)
       .pipe(map(responseData =>{
-        var resp = responseData as LatestVM;
+        var resp = responseData as ServiceResult<LatestVM>;
 
         let currencyRates = new CurrencyRateVM();
         var rates: RatesVM[] = [];
   
         let rateUSD = new RatesVM();
         rateUSD.currency = "USD";
-        rateUSD.rate = responseData["rates"]["USD"] as number;
+        rateUSD.rate = resp.result["rates"]["USD"] as number;
         rates.push(rateUSD);
   
         let rateEUR = new RatesVM();
         rateEUR.currency = "EUR";
-        rateEUR.rate = responseData["rates"]["EUR"] as number;
+        rateEUR.rate = resp.result["rates"]["EUR"] as number;
         rates.push(rateEUR);
   
-        currencyRates.date = resp.date;
+        currencyRates.date = resp.result.date;
         currencyRates.rates = rates;
-        resp.currencyRates = currencyRates;
+        resp.result.currencyRates = currencyRates;
 
         localStorage.setItem(environment.SessionKeys.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp));
 
@@ -100,8 +104,6 @@ export class CurrencyService {
     let time = yesterdayTime - storedDataDate;  //msec
     let hoursDiff = time / (3600 * 1000);
 
-    console.log(hoursDiff);
-
     if(hoursDiff <= 24)
     {
       response.isValid = true;
@@ -111,7 +113,7 @@ export class CurrencyService {
     return response;
   }
 
-  getYesterday() : Observable<HistoricalVM>
+  getYesterday() : Observable<ServiceResult<HistoricalVM>>
   {    
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
@@ -119,30 +121,34 @@ export class CurrencyService {
     let symbols = ['USD', 'EUR'];
     let baseCurrency = "TRY";
 
-    return this.httpClient.get(environment.Api.Currency.Url 
-      + formatDate(yesterday,'yyyy-MM-dd','en-US').toString()
-        + "?access_key=" + environment.Api.Currency.AccessKey 
-          + "&base=" + baseCurrency
-          + "&symbols=" + symbols.join(","))
-    .pipe(map(responseData =>{
-      var resp = responseData as HistoricalVM;
+    let myParams = new HttpParams()
+    .append('access_key', environment.Api.Currency.AccessKey)
+    .append('base', baseCurrency)
+    .append('symbols', symbols.join(","));
 
+    return this.baseService.getForCurrency(environment.Api.Currency.Url 
+      + formatDate(yesterday,'yyyy-MM-dd','en-US').toString(), myParams)
+    .pipe(map(responseData =>{
+      
+      var resp = responseData as ServiceResult<HistoricalVM>;
+
+      console.log(resp);
       let currencyRates = new CurrencyRateVM();
       var rates: RatesVM[] = [];
 
       let rateUSD = new RatesVM();
       rateUSD.currency = "USD";
-      rateUSD.rate = responseData["rates"]["USD"] as number;
+      rateUSD.rate = resp.result["rates"]["USD"] as number;
       rates.push(rateUSD);
 
       let rateEUR = new RatesVM();
       rateEUR.currency = "EUR";
-      rateEUR.rate = responseData["rates"]["EUR"] as number;
+      rateEUR.rate = resp.result["rates"]["EUR"] as number;
       rates.push(rateEUR);
 
-      currencyRates.date = resp.date;
+      currencyRates.date = resp.result.date;
       currencyRates.rates = rates;
-      resp.currencyRates = currencyRates;
+      resp.result.currencyRates = currencyRates;
 
       localStorage.setItem(environment.SessionKeys.CurrencyDataHistoricalYesterday ,JSON.stringify(resp));
 
@@ -150,13 +156,13 @@ export class CurrencyService {
     }));
   }
 
-  convertTo() : Observable<ConvertVM>{
+  convertTo() : Observable<ServiceResult<ConvertCurrencyVM>>{
     
     let from = "TRY";
     let to = "USD";
     let amount = 25;
 
-    return this.httpClient.get(environment.Api.Currency.Url 
+    return this.baseService.getForCurrency(environment.Api.Currency.Url 
       + environment.Api.Currency.Endpoint.Convert 
         + "?access_key=" + environment.Api.Currency.AccessKey 
           + "&from=" + from
@@ -164,7 +170,7 @@ export class CurrencyService {
           + "&amount=" + amount)
     .pipe(map(responseData => {
 
-      var resp = responseData as ConvertVM;
+      var resp = responseData as ServiceResult<ConvertCurrencyVM>;
 
       return resp;
     }));

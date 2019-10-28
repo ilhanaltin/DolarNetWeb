@@ -1,7 +1,7 @@
 import { QueryVM } from './QueryVM';
 import { InfoVM } from './InfoVM';
 
-export class ConvertVM
+export class ConvertCurrencyVM
 {
     success: boolean;
     query: QueryVM;

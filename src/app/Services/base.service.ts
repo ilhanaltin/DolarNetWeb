@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ServiceResult } from '../Models/ServiceResult';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -66,5 +67,38 @@ export class BaseService {
 
           return resp;
         }));
+  }
+
+  getForCoins<T>(url: string, params: HttpParams = null)
+  {
+    var headersForCoins = this.headers.set(environment.Api.Coin.Header.Header_Host, environment.Api.Coin.Header.Header_Host_Value);  
+    headersForCoins = headersForCoins.set(environment.Api.Coin.Header.Header_Key, environment.Api.Coin.Header.Header_Key_Value);  
+
+    let options = params == null ? {headers: headersForCoins}: {headers: headersForCoins, params: params};
+
+    return this.httpClient.get(url, options)
+    .pipe(
+      map(responseData => {
+
+        var resp = new ServiceResult<T>();
+        resp.result = responseData as T;
+        resp.status = 200;
+
+        return resp;
+      }));
+  }
+
+  getForCurrency<T>(url: string, params: HttpParams = null)
+  {
+    return this.httpClient.get(url, {params: params})
+    .pipe(
+      map(responseData => {
+
+        var resp = new ServiceResult<T>();
+        resp.result = responseData as T;
+        resp.status = 200;
+        
+        return resp;
+      }));
   }
 }
