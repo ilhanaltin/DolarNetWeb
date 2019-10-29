@@ -24,7 +24,7 @@ export class CurrencyService {
   {
     var response = new DataValidation<LatestVM>();
 
-    var periodicData = JSON.parse(localStorage.getItem(environment.SessionKeys.CurrencyDataRefreshedPeriodically)) as LatestVM;
+    var periodicData = JSON.parse(localStorage.getItem(environment.SessionKeys.Currency.CurrencyDataRefreshedPeriodically)) as LatestVM;
 
     if(periodicData == null)
     {
@@ -77,7 +77,7 @@ export class CurrencyService {
         currencyRates.rates = rates;
         resp.result.currencyRates = currencyRates;
 
-        localStorage.setItem(environment.SessionKeys.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp));
+        localStorage.setItem(environment.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp));
 
         return resp;
       }));
@@ -90,7 +90,7 @@ export class CurrencyService {
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
 
-    var storedYesterdayData = JSON.parse(localStorage.getItem(environment.SessionKeys.CurrencyDataHistoricalYesterday)) as HistoricalVM;
+    var storedYesterdayData = JSON.parse(localStorage.getItem(environment.SessionKeys.Currency.CurrencyDataHistoricalYesterday)) as HistoricalVM;
 
     if(storedYesterdayData == null)
     {
@@ -150,7 +150,7 @@ export class CurrencyService {
       currencyRates.rates = rates;
       resp.result.currencyRates = currencyRates;
 
-      localStorage.setItem(environment.SessionKeys.CurrencyDataHistoricalYesterday ,JSON.stringify(resp));
+      localStorage.setItem(environment.SessionKeys.Currency.CurrencyDataHistoricalYesterday ,JSON.stringify(resp));
 
       return resp;
     }));

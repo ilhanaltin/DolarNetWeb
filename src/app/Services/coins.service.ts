@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { ConvertCoinVM } from './../Models/Coins/ConvertCoinVM';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -7,20 +8,30 @@ import { TickersVM } from '../Models/Coins/TickersVM';
 import { CoinPricesContainerVM } from '../Models/Coins/CoinPricesContainerVM';
 import { ServiceResult } from '../Models/ServiceResult';
 import { BaseService } from './base.service';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoinsService {
 
-  constructor(private baseService: BaseService) { }
+  constructor(private baseService: BaseService,
+    private storageService: StorageService) { }
 
   getTickers(): Observable<ServiceResult<TickersVM>>
   {
     let myParams = new HttpParams()
     .append('coin', 'ETH');
 
-    return this.baseService.getForCoins(environment.Api.Coin.Url + environment.Api.Coin.Endpoint.Endpoint_ticker, myParams);
+    return this.baseService.getForCoins(environment.Api.Coin.Url + environment.Api.Coin.Endpoint.Endpoint_ticker, myParams)
+      .pipe(map(responseData=>{
+
+        var resp = responseData as ServiceResult<TickersVM>;
+
+        this.storageService.setItem(environment.SessionKeys.Coin.CoinTickersData,JSON.stringify(resp));
+
+        return resp;
+    }));
   }
 
   convertTo() : Observable<ServiceResult<ConvertCoinVM>>

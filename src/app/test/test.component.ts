@@ -10,6 +10,8 @@ import { CurrencyChangeVM } from '../Models/Currency/CurrencyChangeVM';
 import { LatestVM } from '../Models/Currency/LatestVM';
 import { timer, Subscription, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { StorageService } from '../Services/storage.service';
 
 @Component({
   selector: 'test',
@@ -18,6 +20,8 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TestComponent implements OnInit {
 
+  public Editor = ClassicEditor;
+  
   usersVM : ServiceResult<UserListResponseDetailsVM>;
 
   currentUserVM: UserVM;
@@ -38,21 +42,28 @@ export class TestComponent implements OnInit {
   
   constructor(private userService: UserService, 
     private currencyService: CurrencyService,
-    private coinsService: CoinsService) { 
+    private coinsService: CoinsService,
+    private storageService: StorageService) { 
   }
 
   ngOnInit() {
+
+    this.storageService.watchStorage().subscribe((data:boolean) => {
+      // this will call whenever your localStorage data changes
+      // use localStorage code here and set your data here for ngFor
+        console.log("Local Storage Değişti!!!");
+      })
 
     /*const ti = timer(2000,1000);    
     this.myTimerSub = ti.subscribe(t => {    
         console.log("Tick");    
     });*/
 
-    /*this.subscription = timer(0, 10000).pipe(
+    this.subscription = timer(0, 10000).pipe(
       switchMap(() => this.coinsService.getTickers()))
       .subscribe(result => {
         console.log(result.result.vol_24hr_pcnt);
-    });*/
+    });
 
     /*this.userService.login().subscribe(response =>{
       this.currentUserVM = response.result.user;

@@ -40,8 +40,13 @@ export const environment = {
   },
   SessionKeys:
   {
-    CurrencyDataHistoricalYesterday: "CurrencyDataHistoricalYesterday",
-    CurrencyDataRefreshedPeriodically: "CurrencyDataRefreshedPeriodically"
+    Currency:{
+      CurrencyDataHistoricalYesterday: "CurrencyDataHistoricalYesterday",
+      CurrencyDataRefreshedPeriodically: "CurrencyDataRefreshedPeriodically"
+    },
+    Coin:{
+      CoinTickersData: "CoinTickersData"
+    }
   },
   Services:
   {
