@@ -8,6 +8,8 @@ import { CurrencyService } from '../Services/currency.service';
 import { HistoricalVM } from '../Models/Currency/HistoricalVM';
 import { CurrencyChangeVM } from '../Models/Currency/CurrencyChangeVM';
 import { LatestVM } from '../Models/Currency/LatestVM';
+import { timer, Subscription, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'test',
@@ -30,12 +32,28 @@ export class TestComponent implements OnInit {
 
   CurrencyChangeList: CurrencyChangeVM[] = [];
 
+  private myTimerSub: Subscription;    
+  subscription: Subscription;
+  statusText: string;
+  
   constructor(private userService: UserService, 
     private currencyService: CurrencyService,
     private coinsService: CoinsService) { 
   }
 
   ngOnInit() {
+
+    /*const ti = timer(2000,1000);    
+    this.myTimerSub = ti.subscribe(t => {    
+        console.log("Tick");    
+    });*/
+
+    /*this.subscription = timer(0, 10000).pipe(
+      switchMap(() => this.coinsService.getTickers()))
+      .subscribe(result => {
+        console.log(result.result.vol_24hr_pcnt);
+    });*/
+
     /*this.userService.login().subscribe(response =>{
       this.currentUserVM = response.result.user;
       localStorage.setItem("token","Bearer " + response.result.token);
@@ -93,12 +111,12 @@ export class TestComponent implements OnInit {
         });
     }*/
 
-    this.currencyService.getYesterday().subscribe(yesterday =>
+    /*this.currencyService.getYesterday().subscribe(yesterday =>
       {
           this.yesterdayData = yesterday.result;
           console.log("yesterday from service");
           console.log(yesterday);
-      });
+      });*/
 
     /*this.currencyService.getYesterday().subscribe(yesterday =>{
       
@@ -148,6 +166,6 @@ export class TestComponent implements OnInit {
 
     /*this.userService.delete().subscribe(response=>{
       console.log(response.Status);
-    });*/
+    });*/    
   }
 }
