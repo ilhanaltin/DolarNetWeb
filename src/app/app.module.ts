@@ -20,6 +20,6 @@ import {APP_BASE_HREF} from '@angular/common';
     CKEditorModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
-  bootstrap: [AppComponent,TestComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
