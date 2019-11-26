@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { ServiceResult } from './../Models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { PortfolioListResponseDetailsVM } from '../Models/Portfolio/PortfolioListResponseDetailsVM';
 import { BaseService } from './base.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestComponent } from './test.component';
+import { FooterDolarnetComponent } from './footer-dolarnet.component';
 
-describe('TestComponent', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+describe('FooterDolarnetComponent', () => {
+  let component: FooterDolarnetComponent;
+  let fixture: ComponentFixture<FooterDolarnetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TestComponent ]
+      declarations: [ FooterDolarnetComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
+    fixture = TestBed.createComponent(FooterDolarnetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

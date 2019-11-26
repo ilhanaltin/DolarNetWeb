@@ -1,4 +1,4 @@
-import { PagingVM } from './../PagingVM';
+import { PagingVM } from '../pagingVM';
 import { UserVM } from './UserVM';
 
 export class UserListResponseDetailsVM

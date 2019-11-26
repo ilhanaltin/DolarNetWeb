@@ -3,15 +3,29 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestComponent } from './test/test.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {APP_BASE_HREF} from '@angular/common';
+import { HomeComponent } from './main/pages/home/home.component';
+import { SliderComponent } from './main/pages/slider/slider.component';
+import { ConverterComponent } from './main/pages/converter/converter.component';
+import { MarketAnalyseComponent } from './main/pages/market-analyse/market-analyse.component';
+import { NavigationHeaderComponent } from './main/pages/header/navigation-header/navigation-header.component';
+import { CurrencyBarComponent } from './main/pages/header/currency-bar/currency-bar.component';
+import { FooterDolarnetComponent } from './main/pages/footer-dolarnet/footer-dolarnet/footer-dolarnet.component';
+import { HomePostListComponent } from './main/pages/home-post-list/home-post-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    NavigationHeaderComponent,
+    HomeComponent,
+    CurrencyBarComponent,
+    SliderComponent,
+    ConverterComponent,
+    MarketAnalyseComponent,
+    FooterDolarnetComponent,
+    HomePostListComponent
   ],
   imports: [
     BrowserModule,
