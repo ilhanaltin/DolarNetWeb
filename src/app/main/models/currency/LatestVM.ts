@@ -1,4 +1,4 @@
-import { CurrencyRateVM } from './currencyRateVM';
+import { CurrencyRateVM } from './CurrencyRateVM';
 
 export class LatestVM {
     success: boolean;

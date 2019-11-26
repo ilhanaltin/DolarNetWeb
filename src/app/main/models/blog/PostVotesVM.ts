@@ -1,4 +1,4 @@
-import { UserVM } from './../user/userVM';
+import { UserVM } from './../user/UserVM';
 
 export class PostVotesVM {
     userId: number;

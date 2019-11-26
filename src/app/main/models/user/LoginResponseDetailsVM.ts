@@ -1,4 +1,4 @@
-import { UserVM } from './userVM';
+import { UserVM } from './UserVM';
 
 export class LoginResponseDetailsVM
 {

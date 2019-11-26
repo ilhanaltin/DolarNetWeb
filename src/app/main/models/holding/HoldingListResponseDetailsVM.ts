@@ -1,4 +1,4 @@
-import { HoldingVM } from './holdingVM';
+import { HoldingVM } from './HoldingVM';
 
 export class HoldingListResponseDetailsVM
 {

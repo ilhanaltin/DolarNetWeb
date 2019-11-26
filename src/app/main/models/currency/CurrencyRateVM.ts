@@ -1,4 +1,4 @@
-import { RatesVM } from './ratesVM';
+import { RatesVM } from './RatesVM';
 
 export class CurrencyRateVM{
     date: Date;
