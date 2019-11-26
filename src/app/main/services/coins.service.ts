@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ServiceResult } from '../Models/ServiceResult';
+import { ServiceResult } from '../models/ServiceResult';
 import { BaseService } from './base.service';
 import { StorageService } from './storage.service';
 import { TickersVM } from '../models/coins/TickersVM';

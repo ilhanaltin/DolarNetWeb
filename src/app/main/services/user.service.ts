@@ -1,4 +1,4 @@
-import { ServiceResult } from './../Models/ServiceResult';
+import { ServiceResult } from './../models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';

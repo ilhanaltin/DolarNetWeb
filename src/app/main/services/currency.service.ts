@@ -1,9 +1,9 @@
-import { ServiceResult } from './../Models/ServiceResult';
-import { DataValidation } from './../Models/Currency/DataValidation';
+import { ServiceResult } from './../models/ServiceResult';
+import { DataValidation } from './../models/Currency/DataValidation';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { LatestVM } from '../Models/Currency/LatestVM';
+import { LatestVM } from '../models/Currency/LatestVM';
 import { Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { BaseService } from './base.service';

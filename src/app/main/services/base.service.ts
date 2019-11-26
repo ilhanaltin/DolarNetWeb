@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { ServiceResult } from '../Models/ServiceResult';
+import { ServiceResult } from '../models/ServiceResult';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 

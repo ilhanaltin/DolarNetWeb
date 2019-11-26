@@ -3,7 +3,7 @@ import { BaseService } from './base.service';
 import { HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { ServiceResult } from '../Models/ServiceResult';
+import { ServiceResult } from '../models/ServiceResult';
 import { ServiceListResponseDetailsVM } from '../models/integration/ServiceListResponseDetailsVM';
 import { ServiceResponseDetailsVM } from '../models/integration/ServiceResponseDetailsVM';
 import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
