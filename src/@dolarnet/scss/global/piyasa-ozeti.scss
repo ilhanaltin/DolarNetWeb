@@ -1,0 +1,40 @@
+.piyasa-ozeti {
+width: 100%;
+    border: 1.81766px solid #F0F0F0;
+    box-sizing: border-box;
+    border-radius: $border-radius;
+    padding: 17px 13px;
+
+    &-header {
+        h1 {
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+
+            color: #000000;
+            position: relative;
+            padding-bottom: 20px;
+
+            &::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 5px;
+                height: 2px;
+                width: 100%;
+                background-color: #ccc;
+            }
+        }
+    }
+
+    &-content {
+        &-item {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            color: #000000;
+
+
+        }
+    }
+}
