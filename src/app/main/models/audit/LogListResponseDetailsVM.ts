@@ -1,4 +1,4 @@
-import { LogVM } from './LogVM';
+import { LogVM } from './logVM';
 
 export class LogListResponseDetailsVM{
     logList: LogVM[];

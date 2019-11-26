@@ -1,4 +1,4 @@
-import { PortfolioVM } from './PortfolioVM';
+import { PortfolioVM } from './portfolioVM';
 
 export class PortfolioListResponseDetailsVM
 {

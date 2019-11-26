@@ -1,5 +1,5 @@
-import { QueryVM } from './QueryVM';
-import { InfoVM } from './InfoVM';
+import { QueryVM } from './queryVM';
+import { InfoVM } from './infoVM';
 
 export class ConvertCurrencyVM
 {

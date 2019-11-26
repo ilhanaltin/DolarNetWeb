@@ -1,6 +1,6 @@
-import { PostVotesVM } from './PostVotesVM';
-import { PostCommentsVM } from './PostCommentVM';
-import { UserVM } from '../User/UserVM';
+import { PostVotesVM } from './postVotesVM';
+import { PostCommentsVM } from './postCommentVM';
+import { UserVM } from '../user/userVM';
 
 export class PostVM{
     title: string;

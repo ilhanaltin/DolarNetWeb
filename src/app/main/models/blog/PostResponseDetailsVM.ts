@@ -1,4 +1,4 @@
-import { PostVM } from './PostVM';
+import { PostVM } from './postVM';
 
 export class PostResponseDetailsVM {
     post: PostVM

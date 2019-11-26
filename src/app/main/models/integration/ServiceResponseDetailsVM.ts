@@ -1,4 +1,4 @@
-import { ServiceVM } from './ServiceVM';
+import { ServiceVM } from './serviceVM';
 
 export class ServiceResponseDetailsVM
 {

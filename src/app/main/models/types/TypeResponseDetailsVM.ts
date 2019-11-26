@@ -1,4 +1,4 @@
-import { TypeVM } from './TypeVM';
+import { TypeVM } from './typeVM';
 
 export class TypeResponseDetailsVM{
     typeList: TypeVM[];

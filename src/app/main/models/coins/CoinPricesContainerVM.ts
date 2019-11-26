@@ -1,5 +1,5 @@
 import { Time } from '@angular/common';
-import { CoinPriceVM } from './CoinPriceVM';
+import { CoinPriceVM } from './coinPriceVM';
 
 export class CoinPricesContainerVM
 {
