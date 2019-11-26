@@ -1,12 +1,12 @@
-import { ServiceResponseDetailsVM } from './../Models/Integration/ServiceResponseDetailsVM';
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpParams } from '@angular/common/http';
-import { ServiceListResponseDetailsVM } from '../Models/Integration/ServiceListResponseDetailsVM';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { ServiceResult } from '../Models/ServiceResult';
-import { StandartResponseDetailsVM } from '../Models/StandartResponseDetailsVM';
+import { ServiceListResponseDetailsVM } from '../models/integration/ServiceListResponseDetailsVM';
+import { ServiceResponseDetailsVM } from '../models/integration/ServiceResponseDetailsVM';
+import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
 
 @Injectable({
   providedIn: 'root'

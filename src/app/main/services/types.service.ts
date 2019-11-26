@@ -1,7 +1,7 @@
-import { TypeResponseDetailsVM } from './../Models/Types/TypeResponseDetailsVM';
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { environment } from 'src/environments/environment';
+import { TypeResponseDetailsVM } from '../models/types/TypeResponseDetailsVM';
 
 @Injectable({
   providedIn: 'root'

@@ -1,17 +1,17 @@
 import { ServiceResult } from './../Models/ServiceResult';
-import { ConvertCurrencyVM } from './../Models/Currency/ConvertCurrencyVM';
 import { DataValidation } from './../Models/Currency/DataValidation';
-import { RatesVM } from './../Models/Currency/RatesVM';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { LatestVM } from '../Models/Currency/LatestVM';
 import { Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
-import { HistoricalVM } from '../Models/Currency/HistoricalVM';
-import { CurrencyRateVM } from '../Models/Currency/CurrencyRateVM';
 import { BaseService } from './base.service';
 import { HttpParams } from '@angular/common/http';
+import { CurrencyRateVM } from '../models/currency/CurrencyRateVM';
+import { RatesVM } from '../models/currency/RatesVM';
+import { HistoricalVM } from '../models/currency/HistoricalVM';
+import { ConvertCurrencyVM } from '../models/currency/ConvertCurrencyVM';
 
 @Injectable({
   providedIn: 'root'
