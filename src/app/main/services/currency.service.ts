@@ -1,5 +1,5 @@
+import { DataValidation } from './../models/currency/DataValidation';
 import { ServiceResult } from './../models/ServiceResult';
-import { DataValidation } from './../models/Currency/DataValidation';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
@@ -20,7 +20,8 @@ export class CurrencyService {
 
   constructor(private baseService: BaseService) { }
 
-  getLatestFromStorage() : DataValidation<LatestVM>
+
+  getFromStorage() : DataValidation<LatestVM>
   {
     var response = new DataValidation<LatestVM>();
 
@@ -31,12 +32,12 @@ export class CurrencyService {
       return response;
     }
 
-    let storedDataDate = new Date(periodicData.timestamp).getTime();
+    let storedDataDate = new Date(periodicData.timestamp * 1000).getTime();
     let nowDateTime = new Date(Date.now()).getTime();
     let time = nowDateTime - storedDataDate;  //msec
     let minutesDiff = time / (60 * 1000);
 
-    if(minutesDiff > 60)
+    if(minutesDiff < 60)
     {
       response.isValid = true;
       response.data = periodicData;
@@ -45,7 +46,7 @@ export class CurrencyService {
     return response;
   }
 
-  getLatest() : Observable<ServiceResult<LatestVM>>
+  getFromApi() : Observable<ServiceResult<LatestVM>>
   {
     let symbols= ['USD', 'EUR'];
     let baseCurrency = "TRY";
@@ -77,12 +78,14 @@ export class CurrencyService {
         currencyRates.rates = rates;
         resp.result.currencyRates = currencyRates;
 
-        localStorage.setItem(environment.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp));
+        localStorage.setItem(environment.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp.result));
+
+        resp.status = 200;
 
         return resp;
       }));
   }
-
+  
   getYesterdayFromStorage() : DataValidation<HistoricalVM>
   {
     var response = new DataValidation<HistoricalVM>();
