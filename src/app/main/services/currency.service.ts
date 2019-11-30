@@ -48,17 +48,20 @@ export class CurrencyService {
 
   getFromApi() : Observable<ServiceResult<LatestVM>>
   {
-    let symbols= ['USD', 'EUR'];
-    let baseCurrency = "TRY";
+    let symbols= ['TRY', 'USD'];
+    //let baseCurrency = "EUR";
 
     let myParams = new HttpParams()
     .append('access_key', environment.Api.Currency.AccessKey)
-    .append('base', baseCurrency)
+    //.append('base', baseCurrency)
     .append('symbols', symbols.join(","));
 
     return this.baseService.getForCurrency(environment.Api.Currency.Url 
       + environment.Api.Currency.Endpoint.Latest, myParams)
       .pipe(map(responseData =>{
+
+        console.log(responseData);
+
         var resp = responseData as ServiceResult<LatestVM>;
 
         let currencyRates = new CurrencyRateVM();
@@ -69,10 +72,10 @@ export class CurrencyService {
         rateUSD.rate = resp.result["rates"]["USD"] as number;
         rates.push(rateUSD);
   
-        let rateEUR = new RatesVM();
-        rateEUR.currency = "EUR";
-        rateEUR.rate = resp.result["rates"]["EUR"] as number;
-        rates.push(rateEUR);
+        let rateTRY = new RatesVM();
+        rateTRY.currency = "TRY";
+        rateTRY.rate = resp.result["rates"]["TRY"] as number;
+        rates.push(rateTRY);
   
         currencyRates.date = resp.result.date;
         currencyRates.rates = rates;

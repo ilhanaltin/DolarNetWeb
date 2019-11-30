@@ -7,12 +7,12 @@
       <div class="currency-converter-content">
         <div class="form-group d-flex flex-column">
           <div class="input-group mb-3 ">
-            <input type="number" class="form-control" placeholder="1" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" (input)="onTextBoxChange($event.target.value,'1')">
+            <input type="number" class="form-control" [(ngModel)] ="currencyFirst" placeholder="" aria-label="Recipient's username"
+              aria-describedby="basic-addon2" (input)="onTextBoxChange('1')">
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterFirst" id="converterFirst" (change)="onConverterChange($event.target.value,'1')">
+                    <select class="form-control" name="converterFirst" id="converterFirst" [(ngModel)]="currencyTypeFirst" (change)="onConverterChange($event.target.value,'1')">
                         <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].name" [selected]="curr.id == '1'">
                             {{curr.name}}
                         </option>
@@ -23,12 +23,12 @@
           </div>
           
           <div class="input-group mb-3 ">
-            <input type="number" class="form-control" placeholder="6,231" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" (input)="onTextBoxChange($event.target.value,'2')">
+            <input type="number" class="form-control" [(ngModel)]="currencySecond" placeholder="" aria-label="Recipient's username"
+              aria-describedby="basic-addon2" (input)="onTextBoxChange('2')">
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterSecond" id="converterSecond" (change)="onConverterChange($event.target.value,'2')">
+                    <select class="form-control" name="converterSecond" id="converterSecond" [(ngModel)]="currencyTypeSecond" (change)="onConverterChange($event.target.value,'2')">
                         <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].name" [selected]="curr.id == '2'">
                             {{curr.name}}
                         </option>
@@ -38,12 +38,12 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="number" class="form-control" placeholder="5,631" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" (input)="onTextBoxChange($event.target.value,'3')">
+            <input type="number" class="form-control" [(ngModel)]="currencyThird" placeholder="" aria-label="Recipient's username"
+              aria-describedby="basic-addon2" (input)="onTextBoxChange('3')">
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterThird" id="converterThird" (change)="onConverterChange($event.target.value,'3')">
+                    <select class="form-control" name="converterThird" id="converterThird" [(ngModel)]="currencyTypeThird" (change)="onConverterChange($event.target.value,'3')">
                         <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].name" [selected]="curr.id == '3'">
                             {{curr.name}}
                         </option>
