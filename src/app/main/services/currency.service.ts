@@ -1,3 +1,4 @@
+import { GlobalConstants } from './../models/constants/GlobalConstants';
 import { DataValidation } from './../models/currency/DataValidation';
 import { ServiceResult } from './../models/ServiceResult';
 import { environment } from 'src/environments/environment';
@@ -19,7 +20,6 @@ import { ConvertCurrencyVM } from '../models/currency/ConvertCurrencyVM';
 export class CurrencyService {
 
   constructor(private baseService: BaseService) { }
-
 
   getFromStorage() : DataValidation<LatestVM>
   {
@@ -48,13 +48,10 @@ export class CurrencyService {
 
   getFromApi() : Observable<ServiceResult<LatestVM>>
   {
-    let symbols= ['TRY', 'USD'];
-    //let baseCurrency = "EUR";
-
     let myParams = new HttpParams()
     .append('access_key', environment.Api.Currency.AccessKey)
     //.append('base', baseCurrency)
-    .append('symbols', symbols.join(","));
+    .append('symbols', GlobalConstants.symbols.join(","));
 
     return this.baseService.getForCurrency(environment.Api.Currency.Url 
       + environment.Api.Currency.Endpoint.Latest, myParams)
@@ -67,16 +64,13 @@ export class CurrencyService {
         let currencyRates = new CurrencyRateVM();
         var rates: RatesVM[] = [];
   
-        let rateUSD = new RatesVM();
-        rateUSD.currency = "USD";
-        rateUSD.rate = resp.result["rates"]["USD"] as number;
-        rates.push(rateUSD);
-  
-        let rateTRY = new RatesVM();
-        rateTRY.currency = "TRY";
-        rateTRY.rate = resp.result["rates"]["TRY"] as number;
-        rates.push(rateTRY);
-  
+        GlobalConstants.symbols.forEach(sym => {
+          let rateUSD = new RatesVM();
+          rateUSD.currency = sym;
+          rateUSD.rate = resp.result["rates"][sym] as number;
+          rates.push(rateUSD);
+        });
+
         currencyRates.date = resp.result.date;
         currencyRates.rates = rates;
         resp.result.currencyRates = currencyRates;

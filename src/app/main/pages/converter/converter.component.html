@@ -13,8 +13,8 @@
               <span class="input-group-text" id="basic-addon2">
                 <div class="form-group mb-0">
                     <select class="form-control" name="converterFirst" id="converterFirst" [(ngModel)]="currencyTypeFirst" (change)="onConverterChange($event.target.value,'1')">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].name" [selected]="curr.id == '1'">
-                            {{curr.name}}
+                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
+                            {{curr.adi}}
                         </option>
                     </select>
                 </div>
@@ -29,8 +29,8 @@
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
                     <select class="form-control" name="converterSecond" id="converterSecond" [(ngModel)]="currencyTypeSecond" (change)="onConverterChange($event.target.value,'2')">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].name" [selected]="curr.id == '2'">
-                            {{curr.name}}
+                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '2'">
+                            {{curr.adi}}
                         </option>
                     </select>
                 </div>
@@ -44,8 +44,8 @@
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
                     <select class="form-control" name="converterThird" id="converterThird" [(ngModel)]="currencyTypeThird" (change)="onConverterChange($event.target.value,'3')">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].name" [selected]="curr.id == '3'">
-                            {{curr.name}}
+                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
+                            {{curr.adi}}
                         </option>
                     </select>
                 </div>

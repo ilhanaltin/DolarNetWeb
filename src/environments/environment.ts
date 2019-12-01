@@ -18,7 +18,7 @@ export const environment = {
         Latest: "latest",
         Convert: "convert"
       },
-      AccessKey: "07956779c4a73384f694471deba9610e"
+      AccessKey: "d0b5ebf24379ec61a70dc9a83d95cf92"
     },
     Coin:
     {

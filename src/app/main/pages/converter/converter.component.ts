@@ -4,6 +4,7 @@ import { LatestVM } from '../../models/Currency/LatestVM';
 import { Subject } from 'rxjs';
 import { HomeComponent } from '../home/home.component';
 import { takeUntil } from 'rxjs/operators';
+import { TypeVM } from '../../models/types/TypeVM';
 
 @Component({
   selector: 'converter',
@@ -123,11 +124,16 @@ export class ConverterComponent implements OnInit {
   }
 
   getCurrencies() {
-    return [
-      { id: 1, name: 'TRY' },
-      { id: 2, name: 'USD' },
-      { id: 3, name: 'EUR' }
-    ];
+
+    let currencyArray: TypeVM[] = [];
+    GlobalConstants.symbols.forEach(function(value, index){
+      let curr = new TypeVM();
+      curr.adi = value;
+      curr.id = index + 1;
+      currencyArray.push(curr);
+   });
+
+    return currencyArray;
   }
 
    /**
