@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { ServiceResult } from '../models/ServiceResult';
 import { PostListResponseDetailsVM } from '../models/blog/PostListResponseDetailsVM';
 import { PostResponseDetailsVM } from '../models/blog/PostResponseDetailsVM';
 import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
+import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -21,14 +21,14 @@ export class BlogService {
       .append('PageId', '1')
       .append('CategoryId', '-1');
 
-      return this.baseService.get<PostListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.GetAll,myParams);
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams);
   }
 
   getById() : Observable<ServiceResult<PostResponseDetailsVM>> {
     let myParams = new HttpParams()
     .append('id', '1')
 
-    return this.baseService.get<PostResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.GetById, myParams);
+    return this.baseService.get<PostResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetById, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -41,13 +41,13 @@ export class BlogService {
       PostStatusTypeId: 1
     };
 
-    return this.baseService.post<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.Post, post);
+    return this.baseService.post<StandartResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.Post, post);
   }
 
   delete(): Observable<ServiceResult<StandartResponseDetailsVM>>{
     let myParams = new HttpParams()
       .append('id', '1')
 
-      return this.baseService.delete<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Blog.Delete, myParams);
+      return this.baseService.delete<StandartResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.Delete, myParams);
   }
 }

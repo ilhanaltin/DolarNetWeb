@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    localStorage.setItem("token","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIxIiwidW5pcXVlX25hbWUiOiLEsGxoYW4iLCJmYW1pbHlfbmFtZSI6IkFMVElOIiwicm9sZSI6IjEuWcO2bmV0aWNpIiwibmJmIjoxNTcwNDc2OTgzLCJleHAiOjE2MDIwMTI5ODMsImlhdCI6MTU3MDQ3Njk4M30.8-5VRRHrWXAj6NiNrZpwTn1QyopkIVq2MTO00yIsQPQ")
+
     const ti = timer(0,10000);
 
     this.myTimerSub = ti.subscribe(t => {    

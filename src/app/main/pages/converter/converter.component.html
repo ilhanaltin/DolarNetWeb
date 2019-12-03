@@ -12,7 +12,7 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterFirst" id="converterFirst" [(ngModel)]="currencyTypeFirst" (change)="onConverterChange($event.target.value,'1')">
+                    <select class="form-control" name="converterFirst" id="converterFirst" [(ngModel)]="currencyTypeFirst" (change)="onConverterChange()">
                         <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
                             {{curr.adi}}
                         </option>
@@ -28,7 +28,7 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterSecond" id="converterSecond" [(ngModel)]="currencyTypeSecond" (change)="onConverterChange($event.target.value,'2')">
+                    <select class="form-control" name="converterSecond" id="converterSecond" [(ngModel)]="currencyTypeSecond" (change)="onConverterChange()">
                         <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '2'">
                             {{curr.adi}}
                         </option>
@@ -43,7 +43,7 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterThird" id="converterThird" [(ngModel)]="currencyTypeThird" (change)="onConverterChange($event.target.value,'3')">
+                    <select class="form-control" name="converterThird" id="converterThird" [(ngModel)]="currencyTypeThird" (change)="onConverterChange()">
                         <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
                             {{curr.adi}}
                         </option>
@@ -57,14 +57,14 @@
 
           <div class="d-flex align-items-center justify-content-between ">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                value="option1">
-              <label class="form-check-label" for="inlineRadio1">Alış</label>
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioAlis"
+              [(ngModel)]="optionAlisSatis" [value]="1" [checked]="optionAlisSatis=='1'" (change)="onConverterChange()">
+              <label class="form-check-label" for="inlineRadioAlis">Alış</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                value="option2">
-              <label class="form-check-label" for="inlineRadio2">Satış</label>
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioSatis"
+              [(ngModel)]="optionAlisSatis" [value]="2" [checked]="optionAlisSatis === '2'" (change)="onConverterChange()">
+              <label class="form-check-label" for="inlineRadioSatis">Satış</label>
             </div>
           </div>
 

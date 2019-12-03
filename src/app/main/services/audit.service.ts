@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { ServiceResult } from '../models/ServiceResult';
 import { LogListResponseDetailsVM } from '../models/audit/LogListResponseDetailsVM';
 import { LogResponseDetailsVM } from '../models/audit/LogResponseDetailsVM';
 import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
+import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,7 @@ export class AuditService {
     .append('PageId', '1')
     .append('TypeId', '-1');
 
-    return this.baseService.get<LogListResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Audit.GetAll, myParams);
+    return this.baseService.get<LogListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Audit.GetAll, myParams);
 
   }
 
@@ -29,7 +29,7 @@ export class AuditService {
     let myParams = new HttpParams()
     .append('id', '1')
 
-    return this.baseService.get<LogResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Audit.GetById, myParams);
+    return this.baseService.get<LogResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Audit.GetById, myParams);
   }
 
   post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
@@ -41,6 +41,6 @@ export class AuditService {
       Detail: 'test log'
     };
 
-    return this.baseService.post<StandartResponseDetailsVM>(environment.Api.Main.Url + environment.Services.Audit.Post, log);
+    return this.baseService.post<StandartResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Audit.Post, log);
   }
 }

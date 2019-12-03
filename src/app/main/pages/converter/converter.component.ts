@@ -1,6 +1,6 @@
+import { RatesVM } from './../../models/currency/RatesVM';
 import { GlobalConstants } from './../../models/constants/GlobalConstants';
 import { Component, OnInit } from '@angular/core';
-import { LatestVM } from '../../models/Currency/LatestVM';
 import { Subject } from 'rxjs';
 import { HomeComponent } from '../home/home.component';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class ConverterComponent implements OnInit {
 
   currencies = [];
   selectedD = 2;
-  currencyData: LatestVM;
+  currencyRates: RatesVM[];
   currencyFirst: number;
   currencySecond: number;
   currencyThird: number;
@@ -25,6 +25,8 @@ export class ConverterComponent implements OnInit {
   currencyTypeThird: string;
 
   baseConverter: string;
+
+  optionAlisSatis: number;
 
   // Private
   private _unsubscribeAll: Subject<any>;
@@ -40,6 +42,8 @@ export class ConverterComponent implements OnInit {
      this.currencyTypeThird = "EUR";
 
      this.baseConverter = "1";
+     
+     this.optionAlisSatis = GlobalConstants.Alis;
    }
 
   ngOnInit() {
@@ -47,11 +51,11 @@ export class ConverterComponent implements OnInit {
     this._homeComponent.onCurrencyDataChanged
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(resp => {
-                this.currencyData = resp;
+                this.currencyRates = resp;
             });
   }
 
-  onConverterChange(currencyKey, converter)
+  onConverterChange()
   {
     this.onTextBoxChange(this.baseConverter);
   }  
@@ -60,65 +64,58 @@ export class ConverterComponent implements OnInit {
   {
     this.baseConverter = converter;
 
+    let currencyFirstBuyOrSell = this.currencyTypeFirst === GlobalConstants.baseCurrency ? 1 :
+      (this.optionAlisSatis == GlobalConstants.Alis ? 
+        this.currencyRates.find(t=>t.code === this.currencyTypeFirst).buying : 
+            this.currencyRates.find(t=>t.code === this.currencyTypeFirst).selling);
+
+    let currencySecondBuyOrSell = this.currencyTypeSecond === GlobalConstants.baseCurrency ? 1 :
+      (this.optionAlisSatis == GlobalConstants.Alis ? 
+        this.currencyRates.find(t=>t.code === this.currencyTypeSecond).buying : 
+          this.currencyRates.find(t=>t.code === this.currencyTypeSecond).selling);
+
+    let currencyThirdBuyOrSell = this.currencyTypeThird === GlobalConstants.baseCurrency ? 1 :
+      (this.optionAlisSatis == GlobalConstants.Alis ? 
+        this.currencyRates.find(t=>t.code === this.currencyTypeThird).buying : 
+          this.currencyRates.find(t=>t.code === this.currencyTypeThird).selling);
+
     if(converter === '1')
     {
-        let secondCurrencyRate = this.currencyTypeSecond === GlobalConstants.baseCurrency ? 1 :
-            this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeSecond).rate;
-
-        let thirdCurrencyRate = this.currencyTypeThird === GlobalConstants.baseCurrency ? 1 : 
-            this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeThird).rate;
-
         if(this.currencyTypeFirst === GlobalConstants.baseCurrency)
         {
-          this.currencySecond = +((secondCurrencyRate * this.currencyFirst).toFixed(4));
-          this.currencyThird = +((thirdCurrencyRate * this.currencyFirst).toFixed(4));  
+          this.currencySecond = +((currencySecondBuyOrSell * this.currencyFirst).toFixed(4));
+          this.currencyThird = +((currencyThirdBuyOrSell * this.currencyFirst).toFixed(4));  
         }
         else
         {
-          let firstCurrencyRate = this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeFirst).rate;
-
-          this.currencySecond = +((this.currencyFirst / firstCurrencyRate) * secondCurrencyRate).toFixed(4);
-          this.currencyThird = +((this.currencyFirst / firstCurrencyRate) * thirdCurrencyRate).toFixed(4);
+          this.currencySecond = +((this.currencyFirst / currencyFirstBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
+          this.currencyThird = +((this.currencyFirst / currencyFirstBuyOrSell) * currencyThirdBuyOrSell).toFixed(4);
         }
     }
     else if(converter === '2')
     {
-      let firstCurrencyRate = this.currencyTypeFirst === GlobalConstants.baseCurrency ? 1 : 
-          this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeFirst).rate;
-      let thirdCurrencyRate = this.currencyTypeThird === GlobalConstants.baseCurrency ? 1 : 
-          this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeThird).rate;
-
       if(this.currencyTypeSecond === GlobalConstants.baseCurrency)
       {
-        this.currencyFirst = +(firstCurrencyRate * this.currencySecond).toFixed(4);
-        this.currencyThird = +(thirdCurrencyRate * this.currencySecond).toFixed(4);
+        this.currencyFirst = +(currencyFirstBuyOrSell * this.currencySecond).toFixed(4);
+        this.currencyThird = +(currencyThirdBuyOrSell * this.currencySecond).toFixed(4);
       }
       else
       {
-        let secondCurrencyRate = this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeSecond).rate;
-
-        this.currencyFirst = +((this.currencySecond / secondCurrencyRate) * firstCurrencyRate).toFixed(4);
-        this.currencyThird = +((this.currencySecond / secondCurrencyRate) * thirdCurrencyRate).toFixed(4);
+        this.currencyFirst = +((this.currencySecond / currencySecondBuyOrSell) * currencyFirstBuyOrSell).toFixed(4);
+        this.currencyThird = +((this.currencySecond / currencySecondBuyOrSell) * currencyThirdBuyOrSell).toFixed(4);
       }
     }
     else if(converter === '3')
     {
-      let firstCurrencyRate = this.currencyTypeFirst === GlobalConstants.baseCurrency ? 1 : 
-          this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeFirst).rate;
-      let secondCurrencyRate = this.currencyTypeSecond === GlobalConstants.baseCurrency ? 1 : 
-          this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeSecond).rate;
-
       if(this.currencyTypeThird === GlobalConstants.baseCurrency)
       {
-        this.currencyFirst = +(firstCurrencyRate * this.currencyThird).toFixed(4);
-        this.currencySecond = +(secondCurrencyRate * this.currencyThird).toFixed(4);
+        this.currencyFirst = +(currencyFirstBuyOrSell * this.currencyThird).toFixed(4);
+        this.currencySecond = +(currencySecondBuyOrSell * this.currencyThird).toFixed(4);
       }
       else
       {
-        let thirdCurrencyRate = this.currencyData.currencyRates.rates.find(t=>t.currency === this.currencyTypeThird).rate;
-
-        this.currencyFirst = +((this.currencyThird / thirdCurrencyRate) * firstCurrencyRate).toFixed(4);
-        this.currencySecond = +((this.currencyThird / thirdCurrencyRate) * secondCurrencyRate).toFixed(4);
+        this.currencyFirst = +((this.currencyThird / currencyThirdBuyOrSell) * currencyFirstBuyOrSell).toFixed(4);
+        this.currencySecond = +((this.currencyThird / currencyThirdBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
       }
     }
   }
@@ -126,7 +123,7 @@ export class ConverterComponent implements OnInit {
   getCurrencies() {
 
     let currencyArray: TypeVM[] = [];
-    GlobalConstants.symbols.forEach(function(value, index){
+    GlobalConstants.symbols.sort().forEach(function(value, index){
       let curr = new TypeVM();
       curr.adi = value;
       curr.id = index + 1;

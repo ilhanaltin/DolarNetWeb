@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { ServiceResult } from '../models/ServiceResult';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -71,8 +71,8 @@ export class BaseService {
 
   getForCoins<T>(url: string, params: HttpParams = null)
   {
-    var headersForCoins = this.headers.set(environment.Api.Coin.Header.Header_Host, environment.Api.Coin.Header.Header_Host_Value);  
-    headersForCoins = headersForCoins.set(environment.Api.Coin.Header.Header_Key, environment.Api.Coin.Header.Header_Key_Value);  
+    var headersForCoins = this.headers.set(apiConfig.Api.Coin.Header.Header_Host, apiConfig.Api.Coin.Header.Header_Host_Value);  
+    headersForCoins = headersForCoins.set(apiConfig.Api.Coin.Header.Header_Key, apiConfig.Api.Coin.Header.Header_Key_Value);  
 
     let options = params == null ? {headers: headersForCoins}: {headers: headersForCoins, params: params};
 
@@ -88,9 +88,14 @@ export class BaseService {
       }));
   }
 
-  getForCurrency<T>(url: string, params: HttpParams = null)
+  getForCurrency<T>(url: string)
   {
-    return this.httpClient.get(url, {params: params})
+    let headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+    .set("Authorization", apiConfig.Api.CollectApi.HttpHeaders.Value);
+  
+    //var headersForCurrency = this.headers.set(apiConfig.Api.CollectApi.HttpHeaders.Key, apiConfig.Api.CollectApi.HttpHeaders.Value);  
+
+    return this.httpClient.get(url, { headers: headers })
     .pipe(
       map(responseData => {
 

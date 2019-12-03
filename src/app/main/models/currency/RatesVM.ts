@@ -1,4 +1,13 @@
+import { Time } from '@angular/common';
+
 export class RatesVM {
-    currency: string;
-    rate: number; 
+    name: string;
+    code: string;
+    buying: number;
+    selling: number;
+    rate: number;
+    time: Time;
+    date: Date;
+    calculated: number;
+    mergedDateTime: Date;
 }

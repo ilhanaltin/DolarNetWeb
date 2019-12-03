@@ -1,18 +1,16 @@
 import { GlobalConstants } from './../models/constants/GlobalConstants';
 import { DataValidation } from './../models/currency/DataValidation';
 import { ServiceResult } from './../models/ServiceResult';
-import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { LatestVM } from '../models/Currency/LatestVM';
 import { Observable } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { BaseService } from './base.service';
 import { HttpParams } from '@angular/common/http';
-import { CurrencyRateVM } from '../models/currency/CurrencyRateVM';
 import { RatesVM } from '../models/currency/RatesVM';
 import { HistoricalVM } from '../models/currency/HistoricalVM';
 import { ConvertCurrencyVM } from '../models/currency/ConvertCurrencyVM';
+import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
 
 @Injectable({
   providedIn: 'root'
@@ -21,21 +19,23 @@ export class CurrencyService {
 
   constructor(private baseService: BaseService) { }
 
-  getFromStorage() : DataValidation<LatestVM>
+  getFromStorage() : DataValidation<RatesVM[]>
   {
-    var response = new DataValidation<LatestVM>();
+    var response = new DataValidation<RatesVM[]>();
 
-    var periodicData = JSON.parse(localStorage.getItem(environment.SessionKeys.Currency.CurrencyDataRefreshedPeriodically)) as LatestVM;
+    var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Currency.CurrencyDataRefreshedPeriodically)) as RatesVM[];
 
     if(periodicData == null)
     {
       return response;
     }
 
-    let storedDataDate = new Date(periodicData.timestamp * 1000).getTime();
+    let storedDataDate = Date.parse(periodicData[0].mergedDateTime.toString());
     let nowDateTime = new Date(Date.now()).getTime();
     let time = nowDateTime - storedDataDate;  //msec
     let minutesDiff = time / (60 * 1000);
+
+    console.log(minutesDiff);
 
     if(minutesDiff < 60)
     {
@@ -46,36 +46,16 @@ export class CurrencyService {
     return response;
   }
 
-  getFromApi() : Observable<ServiceResult<LatestVM>>
+  getFromApi() : Observable<ServiceResult<RatesVM[]>>
   {
-    let myParams = new HttpParams()
-    .append('access_key', environment.Api.Currency.AccessKey)
-    //.append('base', baseCurrency)
-    .append('symbols', GlobalConstants.symbols.join(","));
-
-    return this.baseService.getForCurrency(environment.Api.Currency.Url 
-      + environment.Api.Currency.Endpoint.Latest, myParams)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetAllCurrency)
       .pipe(map(responseData =>{
 
-        console.log(responseData);
+        var resp = responseData as ServiceResult<RatesVM[]>;
 
-        var resp = responseData as ServiceResult<LatestVM>;
+        console.log(resp);
 
-        let currencyRates = new CurrencyRateVM();
-        var rates: RatesVM[] = [];
-  
-        GlobalConstants.symbols.forEach(sym => {
-          let rateUSD = new RatesVM();
-          rateUSD.currency = sym;
-          rateUSD.rate = resp.result["rates"][sym] as number;
-          rates.push(rateUSD);
-        });
-
-        currencyRates.date = resp.result.date;
-        currencyRates.rates = rates;
-        resp.result.currencyRates = currencyRates;
-
-        localStorage.setItem(environment.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp.result));
+        localStorage.setItem(apiConfig.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp.result));
 
         resp.status = 200;
 
@@ -83,14 +63,14 @@ export class CurrencyService {
       }));
   }
   
-  getYesterdayFromStorage() : DataValidation<HistoricalVM>
+  /* getYesterdayFromStorage() : DataValidation<HistoricalVM>
   {
     var response = new DataValidation<HistoricalVM>();
 
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
 
-    var storedYesterdayData = JSON.parse(localStorage.getItem(environment.SessionKeys.Currency.CurrencyDataHistoricalYesterday)) as HistoricalVM;
+    var storedYesterdayData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Currency.CurrencyDataHistoricalYesterday)) as HistoricalVM;
 
     if(storedYesterdayData == null)
     {
@@ -122,11 +102,11 @@ export class CurrencyService {
     let baseCurrency = "TRY";
 
     let myParams = new HttpParams()
-    .append('access_key', environment.Api.Currency.AccessKey)
+    .append('access_key', apiConfig.Api.Currency.AccessKey)
     .append('base', baseCurrency)
     .append('symbols', symbols.join(","));
 
-    return this.baseService.getForCurrency(environment.Api.Currency.Url 
+    return this.baseService.getForCurrency(apiConfig.Api.Currency.Url 
       + formatDate(yesterday,'yyyy-MM-dd','en-US').toString(), myParams)
     .pipe(map(responseData =>{
       
@@ -150,7 +130,7 @@ export class CurrencyService {
       currencyRates.rates = rates;
       resp.result.currencyRates = currencyRates;
 
-      localStorage.setItem(environment.SessionKeys.Currency.CurrencyDataHistoricalYesterday ,JSON.stringify(resp));
+      localStorage.setItem(apiConfig.SessionKeys.Currency.CurrencyDataHistoricalYesterday ,JSON.stringify(resp));
 
       return resp;
     }));
@@ -162,9 +142,9 @@ export class CurrencyService {
     let to = "USD";
     let amount = 25;
 
-    return this.baseService.getForCurrency(environment.Api.Currency.Url 
-      + environment.Api.Currency.Endpoint.Convert 
-        + "?access_key=" + environment.Api.Currency.AccessKey 
+    return this.baseService.getForCurrency(apiConfig.Api.Currency.Url 
+      + apiConfig.Api.Currency.Endpoint.Convert 
+        + "?access_key=" + apiConfig.Api.Currency.AccessKey 
           + "&from=" + from
           + "&to=" + to
           + "&amount=" + amount)
@@ -174,5 +154,5 @@ export class CurrencyService {
 
       return resp;
     }));
-  }
-}
+  } */
+}          

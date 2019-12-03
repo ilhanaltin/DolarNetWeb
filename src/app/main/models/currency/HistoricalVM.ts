@@ -1,4 +1,3 @@
-import { CurrencyRateVM } from './CurrencyRateVM';
 
 export class HistoricalVM
 {
@@ -7,5 +6,5 @@ export class HistoricalVM
     date: Date;
     timestamp: number;
     base: string;
-    currencyRates: CurrencyRateVM;
+    //currencyRates: CurrencyRateVM;
 }
