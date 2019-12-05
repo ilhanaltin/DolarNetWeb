@@ -1,24 +1,24 @@
-import { DataValidation } from '../models/integration/DataValidation';
-import { ServiceResult } from './../models/ServiceResult';
+import { ServiceResult } from '../models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
-import { CurrencyRatesVM } from '../models/integration/currency/CurrencyRatesVM';
 import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
+import { BorsaRatesVM } from '../models/integration/borsa/BorsaRatesVM';
+import { DataValidation } from '../models/integration/DataValidation';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CurrencyService {
+export class BorsaService {
 
   constructor(private baseService: BaseService) { }
 
-  getFromStorage() : DataValidation<CurrencyRatesVM[]>
+  getFromStorage() : DataValidation<BorsaRatesVM[]>
   {
-    var response = new DataValidation<CurrencyRatesVM[]>();
+    var response = new DataValidation<BorsaRatesVM[]>();
 
-    var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Currency.CurrencyDataRefreshedPeriodically)) as CurrencyRatesVM[];
+    var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Borsa.BorsaDataRefreshedPeriodically)) as BorsaRatesVM[];
 
     if(periodicData == null)
     {
@@ -30,8 +30,6 @@ export class CurrencyService {
     let time = nowDateTime - storedDataDate;  //msec
     let minutesDiff = time / (60 * 1000);
 
-    console.log(minutesDiff);
-
     if(minutesDiff < 60)
     {
       response.isValid = true;
@@ -41,16 +39,16 @@ export class CurrencyService {
     return response;
   }
 
-  getFromApi() : Observable<ServiceResult<CurrencyRatesVM[]>>
+  getFromApi() : Observable<ServiceResult<BorsaRatesVM[]>>
   {
-    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetAllCurrency)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Borsa.GetAllBorsa)
       .pipe(map(responseData =>{
 
-        var resp = responseData as ServiceResult<CurrencyRatesVM[]>;
+        var resp = responseData as ServiceResult<BorsaRatesVM[]>;
 
         console.log(resp);
 
-        localStorage.setItem(apiConfig.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp.result));
+        localStorage.setItem(apiConfig.SessionKeys.Borsa.BorsaDataRefreshedPeriodically ,JSON.stringify(resp.result));
 
         resp.status = 200;
 

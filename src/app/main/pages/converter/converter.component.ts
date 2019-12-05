@@ -1,4 +1,4 @@
-import { RatesVM } from './../../models/currency/RatesVM';
+import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
 import { GlobalConstants } from './../../models/constants/GlobalConstants';
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -15,7 +15,7 @@ export class ConverterComponent implements OnInit {
 
   currencies = [];
   selectedD = 2;
-  currencyRates: RatesVM[];
+  currencyRates: CurrencyRatesVM[];
   currencyFirst: number;
   currencySecond: number;
   currencyThird: number;

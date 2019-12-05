@@ -51,6 +51,12 @@ export const apiConfig = {
         CurrencyDataHistoricalYesterday: "CurrencyDataHistoricalYesterday",
         CurrencyDataRefreshedPeriodically: "CurrencyDataRefreshedPeriodically"
       },
+      Gold:{
+        GoldDataRefreshedPeriodically: "GoldDataRefreshedPeriodically"
+      },
+      Borsa:{
+        BorsaDataRefreshedPeriodically: "BorsaDataRefreshedPeriodically"
+      },
       Coin:{
         CoinTickersData: "CoinTickersData"
       }
@@ -115,6 +121,14 @@ export const apiConfig = {
         Currency:
         {
           GetAllCurrency: "Currency"
+        },
+        Gold:
+        {
+          GetAllGold: "Gold"
+        },
+        Borsa:
+        {
+          GetAllBorsa: "Borsa"
         }
     }
   };
