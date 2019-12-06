@@ -1,34 +1,40 @@
 export class CurrencyBarVM
 {
-    dolarTLValueInt: number = 0;
-    dolarTLValueStr: string = "0,0000";
+    dolarTLValueInt: number;
+    dolarTLValueStr: string;
 
-    dolarTLRateInt: number = 0;
-    dolarTLRateStr: string = "0,0";
+    dolarTLRateInt: number;
+    dolarTLRateStr: string;
 
-    euroTLValueInt: number = 0;
-    euroTLValueStr: string = "0,0000";
+    euroTLValueInt: number;
+    euroTLValueStr: string;
 
-    euroTLRateInt: number = 0;
-    euroTLRateStr: string = "0,0";
+    euroTLRateInt: number;
+    euroTLRateStr: string;
 
-    sterlinTLValueInt: number = 0;
-    sterlinTLValueStr: string = "0,0000";
+    sterlinTLValueInt: number;
+    sterlinTLValueStr: string;
 
-    sterlinTLRateInt: number = 0;
-    sterlinTLRateStr: string = "0,0";
+    sterlinTLRateInt: number;
+    sterlinTLRateStr: string;    
 
-    goldTLValueInt: number = 0;
-    goldTLValueStr: string = "0,00";
+    borsaTLValueInt: number;
+    borsaTLValueStr: string;
 
-    goldTLRateInt: number = 0;
-    goldTLRateStr: string = "0,0";
+    borsaTLRateInt: number;
+    borsaTLRateStr: string;
 
-    borsaTLValueInt: number = 0;
-    borsaTLValueStr: string = "0,00";
+    goldTLValueInt: number;
+    goldTLValueStr: string;
 
-    borsaTLRateInt: number = 0;
-    borsaTLRateStr: string = "0,0";
+    goldTLRateInt: number;
+    goldTLRateStr: string;
+
+    goldOnsTLValueInt: number;
+    goldOnsTLValueStr: string;
+
+    goldOnsTLRateInt: number;
+    goldOnsTLRateStr: string;
 
     /**
      * Constructor
@@ -54,6 +60,14 @@ export class CurrencyBarVM
             this.borsaTLValueStr = currencyBar.borsaTLValueStr || '0,00';
             this.borsaTLRateInt = currencyBar.borsaTLRateInt || 0;
             this.borsaTLRateStr = currencyBar.borsaTLRateStr || '0,0';
+            this.goldTLValueInt = currencyBar.goldTLValueInt || 0;
+            this.goldTLValueStr = currencyBar.goldTLValueStr || '0,00';
+            this.goldTLRateInt = currencyBar.goldTLRateInt || 0;
+            this.goldTLRateStr = currencyBar.goldTLRateStr || '0,0';
+            this.goldOnsTLValueInt = currencyBar.goldOnsTLValueInt || 0;
+            this.goldOnsTLValueStr = currencyBar.goldOnsTLValueStr || '0,00';
+            this.goldOnsTLRateInt = currencyBar.goldOnsTLRateInt || 0;
+            this.goldOnsTLRateStr = currencyBar.goldOnsTLRateStr || '0,0';
         }
     }
 }

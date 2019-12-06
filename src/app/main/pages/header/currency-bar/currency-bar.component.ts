@@ -105,6 +105,18 @@ export class CurrencyBarComponent implements OnInit {
     });
 
     this.currencyBarVM.goldTLRateInt =  this.goldRates.find(t=>t.name == "Gram Altın").rate;
+
+    //GOLD ONS
+    this.currencyBarVM.goldOnsTLValueInt =  this.goldRates.find(t=>t.name == "ONS").buying;
+    this.currencyBarVM.goldOnsTLValueStr =  this.currencyBarVM.goldOnsTLValueInt.toLocaleString('tr-TR', {
+      maximumFractionDigits: 6,
+    });
+
+    this.currencyBarVM.goldOnsTLRateStr =  this.goldRates.find(t=>t.name == "ONS").rate.toLocaleString('tr-TR', {
+      maximumFractionDigits: 4,
+    });
+
+    this.currencyBarVM.goldOnsTLRateInt =  this.goldRates.find(t=>t.name == "ONS").rate;
   }
 
   setBorsaValues(){
