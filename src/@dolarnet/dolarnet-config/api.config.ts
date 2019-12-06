@@ -26,29 +26,11 @@ export const apiConfig = {
         CurrencyURL: "allCurrency",
         GoldURL: "goldPrice",
         CriptoURL: "cripto"
-      },
-      Coin:
-      {
-        Url: "https://bravenewcoin-v1.p.rapidapi.com/",
-        Endpoint:
-        {
-          Endpoint_ticker: "ticker",
-          Endpoint_convert: "convert",
-          Endpoint_prices: "prices"
-        },
-        Header:
-        {
-          Header_Host: "X-RapidAPI-Host",
-          Header_Host_Value: "bravenewcoin-v1.p.rapidapi.com",
-          Header_Key: "X-RapidAPI-Key",
-          Header_Key_Value: "c370cca97fmshece299f1dfe9bebp126464jsnc72cc0a06b0d"
-        }
       }
     },
     SessionKeys:
     {
       Currency:{
-        CurrencyDataHistoricalYesterday: "CurrencyDataHistoricalYesterday",
         CurrencyDataRefreshedPeriodically: "CurrencyDataRefreshedPeriodically"
       },
       Gold:{
@@ -57,8 +39,8 @@ export const apiConfig = {
       Borsa:{
         BorsaDataRefreshedPeriodically: "BorsaDataRefreshedPeriodically"
       },
-      Coin:{
-        CoinTickersData: "CoinTickersData"
+      Cripto:{
+        CriptoDataRefreshedPeriodically: "CoinDataRefreshedPeriodically"
       }
     },
     Services:
@@ -129,6 +111,10 @@ export const apiConfig = {
         Borsa:
         {
           GetAllBorsa: "Borsa"
+        },
+        Cripto:
+        {
+          GetAllCoins: "Cripto"
         }
     }
   };

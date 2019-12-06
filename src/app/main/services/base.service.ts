@@ -69,25 +69,6 @@ export class BaseService {
         }));
   }
 
-  getForCoins<T>(url: string, params: HttpParams = null)
-  {
-    var headersForCoins = this.headers.set(apiConfig.Api.Coin.Header.Header_Host, apiConfig.Api.Coin.Header.Header_Host_Value);  
-    headersForCoins = headersForCoins.set(apiConfig.Api.Coin.Header.Header_Key, apiConfig.Api.Coin.Header.Header_Key_Value);  
-
-    let options = params == null ? {headers: headersForCoins}: {headers: headersForCoins, params: params};
-
-    return this.httpClient.get(url, options)
-    .pipe(
-      map(responseData => {
-
-        var resp = new ServiceResult<T>();
-        resp.result = responseData as T;
-        resp.status = 200;
-
-        return resp;
-      }));
-  }
-
   getForCurrency<T>(url: string)
   {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' })

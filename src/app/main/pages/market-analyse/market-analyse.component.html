@@ -7,18 +7,68 @@
             <div class="piyasa-ozeti-content-item">
             <div class="row">
                 <div class="col-md-4 text-left">
-                <p>Ethereum</p>
+                <p>Bitcoin</p>
                 </div>
                 <div class="col-md-4 text-left">
-                <p>$10.088,9800</p>
+                <p>${{this.marketAnalyseVM.bitcoinTLValueStr}}</p>
                 </div>
                 <div class="col-md-4 text-right">
-                <p class="text-success">% 0,47
-                    <span>
-                    <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
+                    <p *ngIf ="this.marketAnalyseVM.bitcoinTLRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.bitcoinTLRateStr}}
+                        <span>
+                            <img  src="assets/images/icons/up-icon.svg" alt="">
+                        </span>
+                    </p>
+                    <p *ngIf ="this.marketAnalyseVM.bitcoinTLRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.bitcoinTLRateStr}}
+                        <span>
+                            <img src="assets/images/icons/down-icon.svg" alt="">
+                        </span>
+                    </p>
                 </div>
             </div>
+            </div>
+            <div class="piyasa-ozeti-content-item">
+            <div class="row">
+                <div class="col-md-4 text-left">
+                <p>Etherium</p>
+                </div>
+                <div class="col-md-4 text-left">
+                <p>${{this.marketAnalyseVM.etheriumTLValueStr}} </p>
+                </div>
+                <div class="col-md-4 text-right">
+                    <p *ngIf ="this.marketAnalyseVM.etheriumTLRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.etheriumTLRateStr}}
+                        <span>
+                            <img  src="assets/images/icons/up-icon.svg" alt="">
+                        </span>
+                    </p>
+                    <p *ngIf ="this.marketAnalyseVM.etheriumTLRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.etheriumTLRateStr}}
+                        <span>
+                            <img src="assets/images/icons/down-icon.svg" alt="">
+                        </span>
+                    </p>
+                </div>
+            </div>
+            </div>
+            <div class="piyasa-ozeti-content-item">
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                    <p>XRP</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>${{marketAnalyseVM.xrpTLValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.xrpTLRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.xrpTLRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.xrpTLRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.xrpTLRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
+                </div>
             </div>
             <div class="piyasa-ozeti-content-item">
             <div class="row">
@@ -26,31 +76,43 @@
                 <p>Litecoin</p>
                 </div>
                 <div class="col-md-4 text-left">
-                <p>$69,2000 </p>
+                <p>${{marketAnalyseVM.litecoinTLValueStr}}</p>
                 </div>
                 <div class="col-md-4 text-right">
-                <p class="text-success">% 0,47
-                    <span>
-                    <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
+                    <p *ngIf ="this.marketAnalyseVM.litecoinTLRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.litecoinTLRateStr}}
+                        <span>
+                            <img  src="assets/images/icons/up-icon.svg" alt="">
+                        </span>
+                    </p>
+                    <p *ngIf ="this.marketAnalyseVM.litecoinTLRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.litecoinTLRateStr}}
+                        <span>
+                            <img src="assets/images/icons/down-icon.svg" alt="">
+                        </span>
+                    </p>
                 </div>
             </div>
             </div>
             <div class="piyasa-ozeti-content-item">
-            <div class="row">
-                <div class="col-md-4 text-left">
-                <p>XRP</p>
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                    <p>Bitcoin Cache</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>${{marketAnalyseVM.bitcoinCashTLValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.bitcoinCashTLRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.bitcoinCashTLRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.bitcoinCashTLRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.bitcoinCashTLRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
                 </div>
-                <div class="col-md-4 text-left">
-                <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                <p class="text-danger">% 0,47
-                    <span>
-                    <img src="assets/images/icons/down-icon.svg" alt="">
-                    </span></p>
-                </div>
-            </div>
             </div>
             <div class="piyasa-ozeti-content-item">
             <div class="row">
@@ -58,130 +120,19 @@
                 <p>Euro/Dolar</p>
                 </div>
                 <div class="col-md-4 text-left">
-                <p>$10.088,9800</p>
+                <p>{{marketAnalyseVM.euroDolarValueStr}}</p>
                 </div>
                 <div class="col-md-4 text-right">
-                <p class="text-success">% 0,47
-                    <span>
-                    <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
-                </div>
-            </div>
-            </div>
-            <div class="piyasa-ozeti-content-item">
-            <div class="row">
-                <div class="col-md-4 text-left">
-                <p>Dolar Endeksi</p>
-                </div>
-                <div class="col-md-4 text-left">
-                <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                <p class="text-danger">% 0,47
-                    <span>
-                    <img src="assets/images/icons/down-icon.svg" alt="">
-                    </span></p>
-                </div>
-            </div>
-            </div>
-            <div class="piyasa-ozeti-content-item">
-
-            <div class="row">
-                <div class="col-md-4 text-left">
-                <p>Brent Petrol</p>
-                </div>
-                <div class="col-md-4 text-left">
-                <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                <p class="text-danger">% 0,47
-                    <span>
-                    <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
-                </div>
-            </div>
-            </div>
-
-            <div class="piyasa-ozeti-content-item">
-            <div class="row">
-                <div class="col-md-4 text-left">
-                <p>Döviz Sepeti</p>
-                </div>
-                <div class="col-md-4 text-left">
-                <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                <p class="text-success">% 0,47
-                    <span>
-                    <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
-                </div>
-            </div>
-
-            </div>
-            <div class="piyasa-ozeti-content">
-            <div class="piyasa-ozeti-content-item">
-                <div class="row">
-                <div class="col-md-4 text-left">
-                    <p>Ethereum</p>
-                </div>
-                <div class="col-md-4 text-left">
-                    <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                    <p class="text-success">% 0,47
-                    <span>
-                        <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
-                </div>
-                </div>
-            </div>
-            <div class="piyasa-ozeti-content-item">
-                <div class="row">
-                <div class="col-md-4 text-left">
-                    <p>Litecoin</p>
-                </div>
-                <div class="col-md-4 text-left">
-                    <p>$69,2000 </p>
-                </div>
-                <div class="col-md-4 text-right">
-                    <p class="text-success">% 0,47
-                    <span>
-                        <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
-                </div>
-                </div>
-            </div>
-            <div class="piyasa-ozeti-content-item">
-                <div class="row">
-                <div class="col-md-4 text-left">
-                    <p>XRP</p>
-                </div>
-                <div class="col-md-4 text-left">
-                    <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                    <p class="text-danger">% 0,47
-                    <span>
-                        <img src="assets/images/icons/down-icon.svg" alt="">
-                    </span></p>
-                </div>
-                </div>
-            </div>
-            <div class="piyasa-ozeti-content-item">
-                <div class="row">
-                <div class="col-md-4 text-left">
-                    <p>Euro/Dolar</p>
-                </div>
-                <div class="col-md-4 text-left">
-                    <p>$10.088,9800</p>
-                </div>
-                <div class="col-md-4 text-right">
-                    <p class="text-success">% 0,47
-                    <span>
-                        <img src="assets/images/icons/up-icon.svg" alt="">
-                    </span></p>
-                </div>
+                    <p *ngIf ="this.marketAnalyseVM.euroDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.euroDolarRateStr}}
+                        <span>
+                            <img  src="assets/images/icons/up-icon.svg" alt="">
+                        </span>
+                    </p>
+                    <p *ngIf ="this.marketAnalyseVM.euroDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.euroDolarRateStr}}
+                        <span>
+                            <img src="assets/images/icons/down-icon.svg" alt="">
+                        </span>
+                    </p>
                 </div>
             </div>
             </div>

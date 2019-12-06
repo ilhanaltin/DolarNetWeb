@@ -4,6 +4,7 @@ import { Subscription, timer, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GoldService } from '../../services/gold.service';
 import { BorsaService } from '../../services/borsa.service';
+import { CriptoService } from '../../services/cripto.service';
 
 @Component({
   selector: 'home',
@@ -17,14 +18,17 @@ export class HomeComponent implements OnInit {
   onCurrencyDataChanged: Subject<any>;
   onGoldDataChanged: Subject<any>;
   onBorsaDataChanged: Subject<any>;
+  onCriptoDataChanged: Subject<any>;
 
   constructor(private _currencyService: CurrencyService, 
     private _goldService: GoldService,
-    private _borsaService: BorsaService) 
+    private _borsaService: BorsaService,
+    private _criptoService: CriptoService) 
   {
       this.onCurrencyDataChanged = new Subject();
       this.onGoldDataChanged = new Subject();
       this.onBorsaDataChanged = new Subject();
+      this.onCriptoDataChanged = new Subject();
   }
 
   ngOnInit() {
@@ -39,15 +43,40 @@ export class HomeComponent implements OnInit {
       let storageDataCurrency = this._currencyService.getFromStorage();
       let storageDataGold = this._goldService.getFromStorage();
       let storageDataBorsa = this._borsaService.getFromStorage();
+      let storageDataCripto = this._criptoService.getFromStorage();
 
       if(storageDataCurrency.isValid)
       {
           this.onCurrencyDataChanged.next(storageDataCurrency.data);
+
+          //Get Cripto Data
+          if(storageDataCripto.isValid)
+          {
+              this.onCriptoDataChanged.next(storageDataCripto.data);
+          }
+          else
+          {
+              this._criptoService.getFromApi().subscribe(resp=>{
+                  this.onCriptoDataChanged.next(resp.result);
+              });
+          }
       }
       else
       {
           this._currencyService.getFromApi().subscribe(resp=>{
               this.onCurrencyDataChanged.next(resp.result);
+
+              //Get Cripto Data
+              if(storageDataCripto.isValid)
+              {
+                  this.onCriptoDataChanged.next(storageDataCripto.data);
+              }
+              else
+              {
+                  this._criptoService.getFromApi().subscribe(resp=>{
+                      this.onCriptoDataChanged.next(resp.result);
+                  });
+              }
           });
       }
 
@@ -71,7 +100,7 @@ export class HomeComponent implements OnInit {
           this._borsaService.getFromApi().subscribe(resp=>{
               this.onBorsaDataChanged.next(resp.result);
           });
-      }
+      }      
     });
   }  
 }
