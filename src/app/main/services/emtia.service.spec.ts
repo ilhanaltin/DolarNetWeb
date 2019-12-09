@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EmtiaService } from './emtia.service';
+import { CurrencyService } from './currency.service';
 
-describe('EmtiaService', () => {
+describe('CurrencyService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: EmtiaService = TestBed.get(EmtiaService);
+    const service: CurrencyService = TestBed.get(CurrencyService);
     expect(service).toBeTruthy();
   });
 });

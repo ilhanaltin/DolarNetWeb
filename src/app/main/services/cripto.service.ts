@@ -48,8 +48,6 @@ export class CriptoService {
   
           var resp = responseData as ServiceResult<CriptoRatesVM[]>;
   
-          console.log(resp);
-  
           localStorage.setItem(apiConfig.SessionKeys.Cripto.CriptoDataRefreshedPeriodically ,JSON.stringify(resp.result));
   
           resp.status = 200;

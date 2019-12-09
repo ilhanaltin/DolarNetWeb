@@ -48,6 +48,30 @@ export class MarketAnalyseVM
     bitcoinCashTLRateInt: number;
     bitcoinCashTLRateStr: string;
 
+    brentPetrolDolarValueInt: number;
+    brentPetrolDolarValueStr: string;
+
+    brentPetrolDolarRateInt: number;
+    brentPetrolDolarRateStr: string;
+
+    gumusSpotDolarValueInt: number;
+    gumusSpotDolarValueStr: string;
+
+    gumusSpotDolarRateInt: number;
+    gumusSpotDolarRateStr: string;
+
+    platinSpotDolarValueInt: number;
+    platinSpotDolarValueStr: string;
+
+    platinSpotDolarRateInt: number;
+    platinSpotDolarRateStr: string;
+
+    paladyumSpotDolarValueInt: number;
+    paladyumSpotDolarValueStr: string;
+
+    paladyumSpotDolarRateInt: number;
+    paladyumSpotDolarRateStr: string;
+
     /**
      * Constructor
      *
@@ -80,6 +104,23 @@ export class MarketAnalyseVM
             this.bitcoinCashTLValueStr = currencyBar.bitcoinCashTLValueStr || '0,00';
             this.bitcoinCashTLRateInt = currencyBar.bitcoinCashTLRateInt || 0;
             this.bitcoinCashTLRateStr = currencyBar.bitcoinCashTLRateStr || '0,00';
+            this.brentPetrolDolarValueInt = currencyBar.brentPetrolDolarValueInt || 0;
+            this.brentPetrolDolarValueStr = currencyBar.brentPetrolDolarValueStr || '0,00';
+            this.brentPetrolDolarRateInt = currencyBar.brentPetrolDolarRateInt || 0;
+            this.brentPetrolDolarRateStr = currencyBar.brentPetrolDolarRateStr || '0,00';
+            this.gumusSpotDolarValueInt = currencyBar.gumusSpotDolarValueInt || 0;
+            this.gumusSpotDolarValueStr = currencyBar.gumusSpotDolarValueStr || '0,00';
+            this.gumusSpotDolarRateInt = currencyBar.gumusSpotDolarRateInt || 0;
+            this.gumusSpotDolarRateStr = currencyBar.gumusSpotDolarRateStr || '0,00';
+            this.platinSpotDolarValueInt = currencyBar.platinSpotDolarValueInt || 0;
+            this.platinSpotDolarValueStr = currencyBar.platinSpotDolarValueStr || '0,00';
+            this.platinSpotDolarRateInt = currencyBar.platinSpotDolarRateInt || 0;
+            this.platinSpotDolarRateStr = currencyBar.platinSpotDolarRateStr || '0,00';
+            this.paladyumSpotDolarValueInt = currencyBar.paladyumSpotDolarValueInt || 0;
+            this.paladyumSpotDolarValueStr = currencyBar.paladyumSpotDolarValueStr || '0,00';
+            this.paladyumSpotDolarRateInt = currencyBar.paladyumSpotDolarRateInt || 0;
+            this.paladyumSpotDolarRateStr = currencyBar.paladyumSpotDolarRateStr || '0,00';
+
         }
     }
 }

@@ -117,24 +117,112 @@
             <div class="piyasa-ozeti-content-item">
             <div class="row">
                 <div class="col-md-4 text-left">
-                <p>Euro/Dolar</p>
-                </div>
-                <div class="col-md-4 text-left">
-                <p>{{marketAnalyseVM.euroDolarValueStr}}</p>
-                </div>
-                <div class="col-md-4 text-right">
-                    <p *ngIf ="this.marketAnalyseVM.euroDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.euroDolarRateStr}}
-                        <span>
-                            <img  src="assets/images/icons/up-icon.svg" alt="">
-                        </span>
-                    </p>
-                    <p *ngIf ="this.marketAnalyseVM.euroDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.euroDolarRateStr}}
-                        <span>
-                            <img src="assets/images/icons/down-icon.svg" alt="">
-                        </span>
-                    </p>
+                    <p>Euro/Dolar</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>{{marketAnalyseVM.euroDolarValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.euroDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.euroDolarRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.euroDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.euroDolarRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
                 </div>
             </div>
+            <div class="piyasa-ozeti-content-item">
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                        <p>Blent Petrol</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>${{marketAnalyseVM.brentPetrolDolarValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.brentPetrolDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.brentPetrolDolarRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.brentPetrolDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.brentPetrolDolarRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="piyasa-ozeti-content-item">
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                        <p>Gümüş Spot</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>${{marketAnalyseVM.gumusSpotDolarValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.gumusSpotDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.gumusSpotDolarRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.gumusSpotDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.gumusSpotDolarRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="piyasa-ozeti-content-item">
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                        <p>Platin Spot</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>${{marketAnalyseVM.platinSpotDolarValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.platinSpotDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.platinSpotDolarRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.platinSpotDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.platinSpotDolarRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="piyasa-ozeti-content-item">
+                <div class="row">
+                    <div class="col-md-4 text-left">
+                        <p>Paladyum Spot</p>
+                    </div>
+                    <div class="col-md-4 text-left">
+                    <p>${{marketAnalyseVM.paladyumSpotDolarValueStr}}</p>
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <p *ngIf ="this.marketAnalyseVM.paladyumSpotDolarRateInt >= 0" class="text-success">% {{this.marketAnalyseVM.paladyumSpotDolarRateStr}}
+                            <span>
+                                <img  src="assets/images/icons/up-icon.svg" alt="">
+                            </span>
+                        </p>
+                        <p *ngIf ="this.marketAnalyseVM.paladyumSpotDolarRateInt < 0" class="text-danger">% {{this.marketAnalyseVM.paladyumSpotDolarRateStr}}
+                            <span>
+                                <img src="assets/images/icons/down-icon.svg" alt="">
+                            </span>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -30,8 +30,6 @@ export class CurrencyService {
     let time = nowDateTime - storedDataDate;  //msec
     let minutesDiff = time / (60 * 1000);
 
-    console.log(minutesDiff);
-
     if(minutesDiff < 60)
     {
       response.isValid = true;
@@ -47,8 +45,6 @@ export class CurrencyService {
       .pipe(map(responseData =>{
 
         var resp = responseData as ServiceResult<CurrencyRatesVM[]>;
-
-        console.log(resp);
 
         localStorage.setItem(apiConfig.SessionKeys.Currency.CurrencyDataRefreshedPeriodically ,JSON.stringify(resp.result));
 

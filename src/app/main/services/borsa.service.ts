@@ -46,8 +46,6 @@ export class BorsaService {
 
         var resp = responseData as ServiceResult<BorsaRatesVM[]>;
 
-        console.log(resp);
-
         localStorage.setItem(apiConfig.SessionKeys.Borsa.BorsaDataRefreshedPeriodically ,JSON.stringify(resp.result));
 
         resp.status = 200;

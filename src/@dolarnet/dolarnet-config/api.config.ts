@@ -41,6 +41,9 @@ export const apiConfig = {
       },
       Cripto:{
         CriptoDataRefreshedPeriodically: "CoinDataRefreshedPeriodically"
+      },
+      Emtia:{
+        EmtiaDataRefreshedPeriodically: "EmtiaDataRefreshedPeriodically"
       }
     },
     Services:
@@ -115,6 +118,10 @@ export const apiConfig = {
         Cripto:
         {
           GetAllCoins: "Cripto"
-        }
+        },
+        Emtia:
+        {
+          GetAllEmtia: "Emtia"
+        },
     }
   };

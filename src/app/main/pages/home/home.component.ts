@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 import { GoldService } from '../../services/gold.service';
 import { BorsaService } from '../../services/borsa.service';
 import { CriptoService } from '../../services/cripto.service';
+import { EmtiaService } from '../../services/emtia.service';
 
 @Component({
   selector: 'home',
@@ -19,16 +20,19 @@ export class HomeComponent implements OnInit {
   onGoldDataChanged: Subject<any>;
   onBorsaDataChanged: Subject<any>;
   onCriptoDataChanged: Subject<any>;
+  onEmtiaDataChanged: Subject<any>;
 
   constructor(private _currencyService: CurrencyService, 
     private _goldService: GoldService,
     private _borsaService: BorsaService,
-    private _criptoService: CriptoService) 
+    private _criptoService: CriptoService,
+    private _emtiaService: EmtiaService) 
   {
       this.onCurrencyDataChanged = new Subject();
       this.onGoldDataChanged = new Subject();
       this.onBorsaDataChanged = new Subject();
       this.onCriptoDataChanged = new Subject();
+      this.onEmtiaDataChanged = new Subject();
   }
 
   ngOnInit() {
@@ -44,42 +48,21 @@ export class HomeComponent implements OnInit {
       let storageDataGold = this._goldService.getFromStorage();
       let storageDataBorsa = this._borsaService.getFromStorage();
       let storageDataCripto = this._criptoService.getFromStorage();
+      let storageDataEmtia = this._emtiaService.getFromStorage();
 
+      //Get Currency Data
       if(storageDataCurrency.isValid)
       {
-          this.onCurrencyDataChanged.next(storageDataCurrency.data);
-
-          //Get Cripto Data
-          if(storageDataCripto.isValid)
-          {
-              this.onCriptoDataChanged.next(storageDataCripto.data);
-          }
-          else
-          {
-              this._criptoService.getFromApi().subscribe(resp=>{
-                  this.onCriptoDataChanged.next(resp.result);
-              });
-          }
+          this.onCurrencyDataChanged.next(storageDataCurrency.data);          
       }
       else
       {
           this._currencyService.getFromApi().subscribe(resp=>{
-              this.onCurrencyDataChanged.next(resp.result);
-
-              //Get Cripto Data
-              if(storageDataCripto.isValid)
-              {
-                  this.onCriptoDataChanged.next(storageDataCripto.data);
-              }
-              else
-              {
-                  this._criptoService.getFromApi().subscribe(resp=>{
-                      this.onCriptoDataChanged.next(resp.result);
-                  });
-              }
+              this.onCurrencyDataChanged.next(resp.result);              
           });
       }
 
+      //Get Gold Data
       if(storageDataGold.isValid)
       {
           this.onGoldDataChanged.next(storageDataGold.data);
@@ -91,6 +74,7 @@ export class HomeComponent implements OnInit {
           });
       }
 
+      //Get BIST Data
       if(storageDataBorsa.isValid)
       {
           this.onBorsaDataChanged.next(storageDataBorsa.data);
@@ -100,7 +84,31 @@ export class HomeComponent implements OnInit {
           this._borsaService.getFromApi().subscribe(resp=>{
               this.onBorsaDataChanged.next(resp.result);
           });
-      }      
+      }    
+      
+      //Get Cripto Data
+      if(storageDataCripto.isValid)
+      {
+          this.onCriptoDataChanged.next(storageDataCripto.data);
+      }
+      else
+      {
+          this._criptoService.getFromApi().subscribe(resp=>{
+              this.onCriptoDataChanged.next(resp.result);
+          });
+      }
+
+      //Get Emtia Data
+      if(storageDataEmtia.isValid)
+      {
+          this.onEmtiaDataChanged.next(storageDataEmtia.data);
+      }
+      else
+      {
+          this._emtiaService.getFromApi().subscribe(resp=>{
+              this.onEmtiaDataChanged.next(resp.result);
+          });
+      }
     });
   }  
 }
