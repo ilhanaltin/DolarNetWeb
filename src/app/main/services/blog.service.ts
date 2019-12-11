@@ -15,10 +15,10 @@ export class BlogService {
 
   constructor(private baseService: BaseService) { }
 
-  get(){
+  get() : Observable<ServiceResult<PostListResponseDetailsVM>>{
     let myParams = new HttpParams()
       .append('ItemCount', '10')
-      .append('PageId', '1')
+      .append('PageId', '0')
       .append('CategoryId', '-1');
 
       return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams);
@@ -29,25 +29,5 @@ export class BlogService {
     .append('id', '1')
 
     return this.baseService.get<PostResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetById, myParams);
-  }
-
-  post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
-    let post = {
-      Id: 2,
-      Title: 'Test Post',
-      AuthorId: 1,
-      Content: 'test post',
-      PostCategoryTypeId: 1,
-      PostStatusTypeId: 1
-    };
-
-    return this.baseService.post<StandartResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.Post, post);
-  }
-
-  delete(): Observable<ServiceResult<StandartResponseDetailsVM>>{
-    let myParams = new HttpParams()
-      .append('id', '1')
-
-      return this.baseService.delete<StandartResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.Delete, myParams);
   }
 }
