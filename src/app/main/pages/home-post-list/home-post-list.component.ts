@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PostVM } from '../../models/blog/PostVM';
+import { BlogService } from '../../services/blog.service';
 
 @Component({
   selector: 'home-post-list',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePostListComponent implements OnInit {
 
-  constructor() { }
+  postList: PostVM[];
+
+  constructor(private _blogService: BlogService) { }
 
   ngOnInit() {
+    this.getSliderPosts();
   }
 
+  getSliderPosts()
+  {
+    this._blogService.get().subscribe(response=>{
+        this.postList = response.result.postList;
+        console.log(this.postList);
+    })
+  }
 }

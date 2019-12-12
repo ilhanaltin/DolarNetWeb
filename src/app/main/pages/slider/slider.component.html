@@ -1,52 +1,47 @@
 <div class="home-news-carousel">
         <div id="sync1" class="owl-carousel owl-theme ">
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">Asgari Ücret Tespit Komisyonu 2 Aralık'ta
-            toplanıyor </a>
-            <img [src]="main" alt="">
+            <a *ngIf="post1" href="#" class="home-news-carousel-item-title">{{post1.title}} </a>
+            <img *ngIf="post1" [src]="post1.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">Sigorta şirketleri dokuz ayda 29.1 milyar lira
-            tazminat üstlendi </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <a *ngIf="post2" href="#" class="home-news-carousel-item-title">{{post2.tirle}} </a>
+            <img *ngIf="post2" [src]="post2.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">OPEC Petrol Sepeti varili 63.68 dolara
-            yükseldi</a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <a *ngIf="post3" href="#" class="home-news-carousel-item-title">{{post3.title}}</a>
+            <img *ngIf="post3" [src]="post3.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">Xi Jinping'den korkusuz açıklama </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <a *ngIf="post4" href="#" class="home-news-carousel-item-title">{{post4.title}} </a>
+            <img *ngIf="post4" [src]="post4.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">Ayakkabı ihracatı %5,8 artışla 816 milyon doları
-            aştı </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <a *ngIf="post5" href="#" class="home-news-carousel-item-title">{{post5.title}} </a>
+            <img *ngIf="post5" [src]="post5.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">10 ayda 69 bin 478 şirket ve kooperatif kuruldu
+            <a *ngIf="post6" href="#" class="home-news-carousel-item-title">{{post6.title}}
             </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <img *ngIf="post6" [src]="post6.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">BDDK'nın bazı yetkileri Merkez Bankası'na
-            devrediliyor
+            <a *ngIf="post7" href="#" class="home-news-carousel-item-title">{{post7.title}}
             </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <img *ngIf="post7" [src]="post7.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">BIST100 % 0,28 artışla başladı
+            <a *ngIf="post8" href="#" class="home-news-carousel-item-title">{{post8.title}}
             </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <img *ngIf="post8" [src]="post8.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">Draghi enflasyon hedefinde 'birlik' istedi</a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <a *ngIf="post9" href="#" class="home-news-carousel-item-title">{{post9.title}}</a>
+            <img *ngIf="post9" [src]="post9.mainImage" alt="">
         </div>
         <div class="item home-news-carousel-item">
-            <a href="#" class="home-news-carousel-item-title">Serbest piyasada döviz açılış fiyatları </a>
-            <img src="assets/images/home-news-carousel/slide-1.jpg" alt="">
+            <a *ngIf="post10" href="#" class="home-news-carousel-item-title">post10.title </a>
+            <img *ngIf="post10" [src]="post10.mainImage" alt="">
         </div>
         </div>
 

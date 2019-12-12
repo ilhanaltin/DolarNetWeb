@@ -1,16 +1,15 @@
 <div class="home-news-list mb-4">
     <div class="row">
-    <div class="col-md-6 d-flex align-items-start home-news-list-item">
+    <div *ngFor="let post of postList" class="col-md-6 d-flex align-items-start home-news-list-item">
         <div>
-        <img class="home-news-list-item-featured-image" src="assets/images/news/news-featured-image01.jpg"
-            alt="">
+        <img class="home-news-list-item-featured-image" [src]="post.mainImage" alt="">
         </div>
         <div class="ml-2">
-        <a class="home-news-list-item-title" href="#">TCMB’nin PPK Kararları Kritik Olabilir!</a>
+        <a class="home-news-list-item-title" href="#">{{post.title}}</a>
         <p class="home-news-list-item-date">13.08.2019</p>
         </div>
     </div>
-    <div class="col-md-6 d-flex align-items-start home-news-list-item">
+    <!-- <div class="col-md-6 d-flex align-items-start home-news-list-item">
         <div>
         <img class="home-news-list-item-featured-image" src="assets/images/news/news-featured-image02.jpg"
             alt="">
@@ -81,6 +80,6 @@
         <a class="home-news-list-item-title" href="#">ABD ve Çin'den Piyasaları Destekleyici Adımlar</a>
         <p class="home-news-list-item-date">13.08.2019</p>
         </div>
-    </div>
+    </div> -->
     </div>
 </div>

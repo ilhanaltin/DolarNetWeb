@@ -10,7 +10,16 @@ import { PostVM } from '../../models/blog/PostVM';
 export class SliderComponent implements OnInit {
 
   postList: PostVM[];
-  main: any = "";
+  post1: PostVM;
+  post2: PostVM;
+  post3: PostVM;
+  post4: PostVM;
+  post5: PostVM;
+  post6: PostVM;
+  post7: PostVM;
+  post8: PostVM;
+  post9: PostVM;
+  post10: PostVM;
 
   constructor(private _blogService: BlogService) { }
 
@@ -22,8 +31,16 @@ export class SliderComponent implements OnInit {
   {
     this._blogService.get().subscribe(response=>{
         this.postList = response.result.postList;
-        console.log(this.postList);
-        this.main = this.postList[0].mainImage;
+        this.post1 = this.postList[0];
+        this.post2 = this.postList[1];
+        this.post3 = this.postList[2];
+        this.post4 = this.postList[3];
+        this.post5 = this.postList[4];
+        this.post6 = this.postList[5];
+        this.post7 = this.postList[6];
+        this.post8 = this.postList[7];
+        this.post9 = this.postList[8];
+        this.post10 = this.postList[9];
     })
   }
 }
