@@ -8,6 +8,7 @@ export class PostVM{
     authorName: string;
     authorNickName: string;
     content: string;
+    publishDate: Date;
     categoryTypeId: number;
     categoryTypeName: string;
     statusTypeId: number;

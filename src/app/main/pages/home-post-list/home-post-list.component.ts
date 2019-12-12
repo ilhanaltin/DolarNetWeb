@@ -19,7 +19,7 @@ export class HomePostListComponent implements OnInit {
 
   getSliderPosts()
   {
-    this._blogService.get().subscribe(response=>{
+    this._blogService.get(10, 1).subscribe(response=>{
         this.postList = response.result.postList;
         console.log(this.postList);
     })

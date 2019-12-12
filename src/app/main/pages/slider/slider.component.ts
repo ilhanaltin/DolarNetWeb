@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { PostVM } from '../../models/blog/PostVM';
+import { PagingVM } from '../../models/PagingVM';
 
 @Component({
   selector: 'slider',
@@ -29,7 +30,7 @@ export class SliderComponent implements OnInit {
 
   getSliderPosts()
   {
-    this._blogService.get().subscribe(response=>{
+    this._blogService.get(10, 0).subscribe(response=>{
         this.postList = response.result.postList;
         this.post1 = this.postList[0];
         this.post2 = this.postList[1];

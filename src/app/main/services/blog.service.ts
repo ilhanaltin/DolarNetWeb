@@ -7,6 +7,7 @@ import { PostListResponseDetailsVM } from '../models/blog/PostListResponseDetail
 import { PostResponseDetailsVM } from '../models/blog/PostResponseDetailsVM';
 import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
 import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
+import { PagingVM } from '../models/PagingVM';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ export class BlogService {
 
   constructor(private baseService: BaseService) { }
 
-  get() : Observable<ServiceResult<PostListResponseDetailsVM>>{
+  get(itemCount : number, pageId: number, categoryId: number = -1) : Observable<ServiceResult<PostListResponseDetailsVM>>{
     let myParams = new HttpParams()
-      .append('ItemCount', '10')
-      .append('PageId', '0')
-      .append('CategoryId', '-1');
+      .append('ItemCount', itemCount.toString())
+      .append('PageId', pageId.toString())
+      .append('CategoryId', categoryId.toString());
 
       return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams);
   }
