@@ -1,3 +1,4 @@
+import { CriptoRatesVM } from './../../models/coins/CriptoRatesVM';
 import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
 import { GlobalConstants } from './../../models/constants/GlobalConstants';
 import { Component, OnInit } from '@angular/core';
@@ -5,6 +6,7 @@ import { Subject } from 'rxjs';
 import { HomeComponent } from '../home/home.component';
 import { takeUntil } from 'rxjs/operators';
 import { TypeVM } from '../../models/types/TypeVM';
+import { GoldRatesVM } from '../../models/integration/gold/GoldRatesVM';
 
 @Component({
   selector: 'converter',
@@ -14,8 +16,13 @@ import { TypeVM } from '../../models/types/TypeVM';
 export class ConverterComponent implements OnInit {
 
   currencies = [];
+  golds = [];
+  coins = [];
   selectedD = 2;
   currencyRates: CurrencyRatesVM[];
+  goldRates: GoldRatesVM[];
+  criptoRates: CriptoRatesVM[];
+
   currencyFirst: number;
   currencySecond: number;
   currencyThird: number;
@@ -24,7 +31,19 @@ export class ConverterComponent implements OnInit {
   currencyTypeSecond: string;
   currencyTypeThird: string;
 
-  baseConverter: string;
+  criptoFirst: number;
+  criptoSecond: number;
+  criptoThird: number;
+
+  criptoTypeFirst: string;
+  criptoTypeSecond: string;
+  criptoTypeThird: string;
+
+  goldFirst: number;
+  goldSecond: number;
+
+  goldTypeFirst: string;
+  goldTypeSecond: string;
 
   optionAlisSatis: number;
 
@@ -33,6 +52,8 @@ export class ConverterComponent implements OnInit {
 
   constructor(private _homeComponent: HomeComponent) {
     this.currencies = this.getCurrencies();
+    this.golds = this.getGolds();
+    this.coins = this.getCoins();
 
      // Set the private defaults
      this._unsubscribeAll = new Subject();
@@ -41,7 +62,12 @@ export class ConverterComponent implements OnInit {
      this.currencyTypeSecond= "USD";
      this.currencyTypeThird = "EUR";
 
-     this.baseConverter = "1";
+     this.goldTypeFirst = 'Çeyrek Altın';
+     this.goldTypeSecond = 'TRY';
+
+     this.criptoTypeFirst = "BTC";
+     this.criptoTypeSecond= "ETH";
+     this.criptoTypeThird = "USD";
      
      this.optionAlisSatis = GlobalConstants.Alis;
    }
@@ -49,21 +75,41 @@ export class ConverterComponent implements OnInit {
   ngOnInit() {
 
     this._homeComponent.onCurrencyDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.currencyRates = resp;
-            });
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(resp => {
+            this.currencyRates = resp;
+        });
+
+    this._homeComponent.onGoldDataChanged
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(resp => {
+            this.goldRates = resp;
+        });
+
+    this._homeComponent.onCriptoDataChanged
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe(resp => {
+            this.criptoRates = resp;
+        });   
   }
 
-  onConverterChange()
+  onConverterChangeCurrency()
   {
-    this.onTextBoxChange(this.baseConverter);
+    this.onTextBoxChangeCurrency("1");
   }  
 
-  onTextBoxChange(converter)
+  onConverterChangeGold()
   {
-    this.baseConverter = converter;
+    this.onTextBoxChangeGold("1");
+  } 
 
+  onConverterChangeCripto()
+  {
+    this.onTextBoxChangeCripto("1");
+  }
+
+  onTextBoxChangeCurrency(converter)
+  {
     let currencyFirstBuyOrSell = this.currencyTypeFirst === GlobalConstants.baseCurrency ? 1 :
       (this.optionAlisSatis == GlobalConstants.Alis ? 
         this.currencyRates.find(t=>t.code === this.currencyTypeFirst).buying : 
@@ -120,9 +166,72 @@ export class ConverterComponent implements OnInit {
     }
   }
 
-  getCurrencies() {
+  onTextBoxChangeGold(converter)
+  {
+    let goldValue = this.goldRates.find(t=>t.name === this.goldTypeFirst).buying;
+    let secondCurrencyEffect = this.goldTypeSecond == GlobalConstants.baseCurrency ? 1 : this.currencyRates.find(t=>t.code === this.goldTypeSecond).buying
 
+    if(converter === '1')
+    {
+        this.goldSecond = +(this.goldFirst * (goldValue / secondCurrencyEffect)).toFixed(4);
+    }
+    else if(converter === '2')
+    {
+        this.goldFirst = +(this.goldSecond / (goldValue * secondCurrencyEffect)).toFixed(4);
+    }
+  }
+
+  onTextBoxChangeCripto(converter)
+  {
+      let criptoValueFirst = this.criptoRates.find(t=>t.code === this.criptoTypeFirst).price;
+      let criptoValueSecond  = this.criptoRates.find(t=>t.code === this.criptoTypeSecond).price;
+      let currencyValueThird = this.criptoTypeThird === GlobalConstants.baseCurrency ? 1 : this.currencyRates.find(t=>t.code === this.criptoTypeThird).buying;
+      let baseCurrencyValueCripto = this.currencyRates.find(t=>t.code === GlobalConstants.baseCurrencyCripto).buying;
+
+      if(converter === '1')
+      {
+          this.criptoSecond = +(this.criptoFirst * (criptoValueFirst / criptoValueSecond)).toFixed(4);
+
+          if(this.currencyTypeThird === GlobalConstants.baseCurrencyCripto)
+          {
+              this.criptoThird = +(this.criptoFirst * criptoValueFirst).toFixed(4);
+          }
+          else
+          {
+              this.criptoThird = +(this.criptoFirst * criptoValueFirst * (baseCurrencyValueCripto / currencyValueThird)).toFixed(4);
+          }
+      }
+      else if(converter === '2')
+      {
+          this.criptoFirst = +(this.criptoSecond * (criptoValueSecond / criptoValueFirst)).toFixed(4);
+
+          if(this.currencyTypeThird === GlobalConstants.baseCurrencyCripto)
+          {
+              this.criptoThird = +(this.criptoSecond * criptoValueSecond).toFixed(4);
+          }
+          else
+          {
+              this.criptoThird = +(this.criptoSecond * criptoValueSecond * (baseCurrencyValueCripto / currencyValueThird)).toFixed(4);
+          } 
+      }
+      else if(converter === '3')
+      {
+        if(this.criptoTypeThird === GlobalConstants.baseCurrencyCripto)
+        {
+            this.criptoFirst = +(this.criptoThird / criptoValueFirst).toFixed(4);
+            this.criptoSecond = +(this.criptoThird / criptoValueSecond).toFixed(4);
+        }
+        else
+        {
+          this.criptoFirst = +(this.criptoThird / (criptoValueFirst * (currencyValueThird / baseCurrencyValueCripto))).toFixed(4);
+          this.criptoSecond = +(this.criptoThird / (criptoValueSecond * (currencyValueThird / baseCurrencyValueCripto))).toFixed(4);
+        }
+      }
+  }
+
+  getCurrencies() {
     let currencyArray: TypeVM[] = [];
+
     GlobalConstants.symbols.sort().forEach(function(value, index){
       let curr = new TypeVM();
       curr.adi = value;
@@ -131,6 +240,34 @@ export class ConverterComponent implements OnInit {
    });
 
     return currencyArray;
+  }
+
+  getGolds() {
+    let goldArray: TypeVM[] = [];
+
+    GlobalConstants.goldTypes.forEach(function(value, index){
+      let gold = new TypeVM();
+      gold.adi = value;
+      gold.kisaAdi = GlobalConstants.goldTypesShort[index];
+      gold.id = index + 1;
+      goldArray.push(gold);
+   });
+
+    return goldArray;
+  }
+
+  getCoins() {
+    let criptoArray: TypeVM[] = [];
+
+    GlobalConstants.criptoTypes.forEach(function(value, index){
+      let coin = new TypeVM();
+      coin.adi = value;
+      coin.kisaAdi = value;
+      coin.id = index + 1;
+      criptoArray.push(coin);
+   });
+
+    return criptoArray;
   }
 
    /**

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { PostVM } from '../../models/blog/PostVM';
 import { PagingVM } from '../../models/PagingVM';
+import { PostSearchCriteriaVM } from '../../models/blog/PostSearchCriteriaVM';
 
 @Component({
   selector: 'slider',
@@ -30,7 +31,13 @@ export class SliderComponent implements OnInit {
 
   getSliderPosts()
   {
-    this._blogService.get(10, 0).subscribe(response=>{
+    let criteria = new PostSearchCriteriaVM();
+    criteria.itemCount = 10;
+    criteria.pageId=0;
+    criteria.isSliderPost = true;
+    criteria.categoryId = -1;
+
+    this._blogService.get(criteria).subscribe(response=>{
         this.postList = response.result.postList;
         this.post1 = this.postList[0];
         this.post2 = this.postList[1];

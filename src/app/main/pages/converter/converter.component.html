@@ -1,74 +1,189 @@
-<div class="currency-converter">
-    <div class="currency-converter-header">
-        <img src="assets/images/icons/doviz-cevirici.svg" alt="">
-        <h1>Döviz Çevirici</h1>
-      </div>
-      
-      <div class="currency-converter-content">
-        <div class="form-group d-flex flex-column">
-          <div class="input-group mb-3 ">
-            <input type="number" class="form-control" [(ngModel)] ="currencyFirst" placeholder="" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" (input)="onTextBoxChange('1')">
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon2">
-                <div class="form-group mb-0">
-                    <select class="form-control" name="converterFirst" id="converterFirst" [(ngModel)]="currencyTypeFirst" (change)="onConverterChange()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
-                </div>
-              </span>
-            </div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="doviz-cevirici-tab" data-toggle="tab" href="#doviz-cevirici" role="tab" aria-controls="doviz-cevirici" aria-selected="true">Döviz Çev.</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="altin-cevirici-tab" data-toggle="tab" href="#altin-cevirici" role="tab" aria-controls="altin-cevirici" aria-selected="true">Altın Çev.</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="cripto-cevirici-tab" data-toggle="tab" href="#cripto-cevirici" role="tab" aria-controls="cripto-cevirici" aria-selected="true">Cripto Çev.</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="doviz-cevirici" role="tabpanel" aria-labelledby="doviz-cevirici-tab">
+      <div class="currency-converter">
+        <div class="currency-converter-header">
+            <img src="assets/images/icons/doviz-cevirici.svg" alt="">
+            <h1>Döviz Çevirici</h1>
           </div>
           
-          <div class="input-group mb-3 ">
-            <input type="number" class="form-control" [(ngModel)]="currencySecond" placeholder="" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" (input)="onTextBoxChange('2')">
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon3">
-                <div class="form-group mb-0">
-                    <select class="form-control" name="converterSecond" id="converterSecond" [(ngModel)]="currencyTypeSecond" (change)="onConverterChange()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '2'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+          <div class="currency-converter-content">
+            <div class="form-group d-flex flex-column">
+              <div class="input-group mb-3 ">
+                <input type="number" class="form-control" [(ngModel)] ="currencyFirst" placeholder="" aria-label=""
+                  aria-describedby="basic-addon2" (input)="onTextBoxChangeCurrency('1')">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon2">
+                    <div class="form-group mb-0">
+                        <select class="form-control" name="converterFirstCurrency" id="converterFirstCurrency" [(ngModel)]="currencyTypeFirst" (change)="onConverterChangeCurrency()">
+                            <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
+                                {{curr.adi}}
+                            </option>
+                        </select>
+                    </div>
+                  </span>
                 </div>
-              </span>
-            </div>
-          </div>
-          <div class="input-group mb-3">
-            <input type="number" class="form-control" [(ngModel)]="currencyThird" placeholder="" aria-label="Recipient's username"
-              aria-describedby="basic-addon2" (input)="onTextBoxChange('3')">
-            <div class="input-group-append">
-              <span class="input-group-text" id="basic-addon3">
-                <div class="form-group mb-0">
-                    <select class="form-control" name="converterThird" id="converterThird" [(ngModel)]="currencyTypeThird" (change)="onConverterChange()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+              </div>
+              
+              <div class="input-group mb-3 ">
+                <input type="number" class="form-control" [(ngModel)]="currencySecond" placeholder="" aria-label=""
+                  aria-describedby="basic-addon2" (input)="onTextBoxChangeCurrency('2')">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon3">
+                    <div class="form-group mb-0">
+                        <select class="form-control" name="converterSecondCurrency" id="converterSecondCurrency" [(ngModel)]="currencyTypeSecond" (change)="onConverterChangeCurrency()">
+                            <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '2'">
+                                {{curr.adi}}
+                            </option>
+                        </select>
+                    </div>
+                  </span>
                 </div>
-              </span>
+              </div>
+              <div class="input-group mb-3">
+                <input type="number" class="form-control" [(ngModel)]="currencyThird" placeholder="" aria-label=""
+                  aria-describedby="basic-addon2" (input)="onTextBoxChangeCurrency('3')">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="basic-addon3">
+                    <div class="form-group mb-0">
+                        <select class="form-control" name="converterThirdCurrency" id="converterThirdCurrency" [(ngModel)]="currencyTypeThird" (change)="onConverterChangeCurrency()">
+                            <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
+                                {{curr.adi}}
+                            </option>
+                        </select>
+                    </div>
+                  </span>
+                </div>
+              </div>
+              <span class="border"></span>
+    
+              <div class="d-flex align-items-center">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioAlis"
+                  [(ngModel)]="optionAlisSatis" [value]="1" [checked]="optionAlisSatis=='1'" (change)="onConverterChange()">
+                  <label class="form-check-label" for="inlineRadioAlis">Alış</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioSatis"
+                  [(ngModel)]="optionAlisSatis" [value]="2" [checked]="optionAlisSatis === '2'" (change)="onConverterChange()">
+                  <label class="form-check-label" for="inlineRadioSatis">Satış</label>
+                </div>
+              </div>
             </div>
           </div>
-          <span class="border"></span>
-
-
-          <div class="d-flex align-items-center justify-content-between ">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioAlis"
-              [(ngModel)]="optionAlisSatis" [value]="1" [checked]="optionAlisSatis=='1'" (change)="onConverterChange()">
-              <label class="form-check-label" for="inlineRadioAlis">Alış</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioSatis"
-              [(ngModel)]="optionAlisSatis" [value]="2" [checked]="optionAlisSatis === '2'" (change)="onConverterChange()">
-              <label class="form-check-label" for="inlineRadioSatis">Satış</label>
-            </div>
-          </div>
-
-        </div>
-
       </div>
+  </div>
+  <div class="tab-pane fade" id="altin-cevirici" role="tabpanel" aria-labelledby="altin-cevirici-tab">
+    <div class="currency-converter">
+      <div class="currency-converter-header">
+          <img src="assets/images/icons/doviz-cevirici.svg" alt="">
+          <h1>Altın Çevirici</h1>
+        </div>
+        
+        <div class="currency-converter-content">
+          <div class="form-group d-flex flex-column">
+            <div class="input-group mb-3 ">
+              <input type="number" class="form-control" [(ngModel)] ="goldFirst" placeholder="" aria-label=""
+                aria-describedby="basic-addon2" (input)="onTextBoxChangeGold('1')">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">
+                  <div class="form-group mb-0">
+                      <select class="form-control" name="converterFirstGold" id="converterFirstGold" [(ngModel)]="goldTypeFirst" (change)="onConverterChangeGold()">
+                          <option *ngFor="let gold of golds; let j = index" [value]="golds[j].adi" [selected]="gold.id == '1'">
+                              {{gold.kisaAdi}}
+                          </option>
+                      </select>
+                  </div>
+                </span>
+              </div>
+            </div>
+            
+            <div class="input-group mb-3 ">
+              <input type="number" class="form-control" [(ngModel)]="goldSecond" placeholder="" aria-label=""
+                aria-describedby="basic-addon2" (input)="onTextBoxChangeGold('2')">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon3">
+                  <div class="form-group mb-0">
+                      <select class="form-control" name="converterSecondGold" id="converterSecondGold" [(ngModel)]="goldTypeSecond" (change)="onConverterChangeGold()">
+                          <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
+                              {{curr.adi}}
+                          </option>
+                      </select>
+                  </div>
+                </span>
+              </div>
+            </div>            
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="tab-pane fade" id="cripto-cevirici" role="tabpanel" aria-labelledby="cripto-cevirici-tab">
+    <div class="currency-converter">
+      <div class="currency-converter-header">
+          <img src="assets/images/icons/doviz-cevirici.svg" alt="">
+          <h1>Cripto Çevirici</h1>
+        </div>
+        
+        <div class="currency-converter-content">
+          <div class="form-group d-flex flex-column">
+            <div class="input-group mb-3 ">
+              <input type="number" class="form-control" [(ngModel)] ="criptoFirst" placeholder="" aria-label=""
+                aria-describedby="basic-addon2" (input)="onTextBoxChangeCripto('1')">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">
+                  <div class="form-group mb-0">
+                      <select class="form-control" name="converterFirstCripto" id="converterFirstCripto" [(ngModel)]="criptoTypeFirst" (change)="onConverterChangeCripto()">
+                          <option *ngFor="let coin of coins; let j = index" [value]="coins[j].adi" [selected]="coin.id == '1'">
+                              {{coin.adi}}
+                          </option>
+                      </select>
+                  </div>
+                </span>
+              </div>
+            </div>
+            
+            <div class="input-group mb-3 ">
+              <input type="number" class="form-control" [(ngModel)]="criptoSecond" placeholder="" aria-label=""
+                aria-describedby="basic-addon2" (input)="onTextBoxChangeCripto('2')">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon3">
+                  <div class="form-group mb-0">
+                      <select class="form-control" name="converterSecondCripto" id="converterSecondCripto" [(ngModel)]="criptoTypeSecond" (change)="onConverterChangeCripto()">
+                          <option *ngFor="let coin of coins; let j = index" [value]="coins[j].adi" [selected]="coin.id == '2'">
+                              {{coin.adi}}
+                          </option>
+                      </select>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="number" class="form-control" [(ngModel)]="criptoThird" placeholder="" aria-label=""
+                aria-describedby="basic-addon2" (input)="onTextBoxChangeCripto('3')">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon3">
+                  <div class="form-group mb-0">
+                      <select class="form-control" name="converterThirdCripto" id="converterThirdCripto" [(ngModel)]="criptoTypeThird" (change)="onConverterChangeCripto()">
+                          <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
+                              {{curr.adi}}
+                          </option>
+                      </select>
+                  </div>
+                </span>
+              </div>
+            </div>                        
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
