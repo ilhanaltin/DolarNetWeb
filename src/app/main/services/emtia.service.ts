@@ -41,7 +41,7 @@ export class EmtiaService {
 
   getFromApi() : Observable<ServiceResult<EmtiaRatesVM[]>>
   {
-    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Emtia.GetAllEmtia)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Emtia.GetAllEmtia, null, true)
       .pipe(map(responseData =>{
 
         var resp = responseData as ServiceResult<EmtiaRatesVM[]>;

@@ -24,7 +24,7 @@ export class BlogService {
       .append('CategoryId', criteria.categoryId.toString())
       .append('IsSliderPost', criteria.isSliderPost.toString());
 
-      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams);
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams, true);
   }
 
   getById() : Observable<ServiceResult<PostResponseDetailsVM>> {

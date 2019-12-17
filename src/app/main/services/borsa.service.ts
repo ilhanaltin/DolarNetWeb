@@ -41,7 +41,7 @@ export class BorsaService {
 
   getFromApi() : Observable<ServiceResult<BorsaRatesVM[]>>
   {
-    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Borsa.GetAllBorsa)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Borsa.GetAllBorsa, null, true)
       .pipe(map(responseData =>{
 
         var resp = responseData as ServiceResult<BorsaRatesVM[]>;

@@ -41,7 +41,7 @@ export class GoldService {
 
   getFromApi() : Observable<ServiceResult<GoldRatesVM[]>>
   {
-    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Gold.GetAllGold)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Gold.GetAllGold, null, true)
       .pipe(map(responseData =>{
 
         var resp = responseData as ServiceResult<GoldRatesVM[]>;

@@ -36,79 +36,99 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+        const ti = timer(0,60000);
 
-    localStorage.setItem("token","Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzaWQiOiIxIiwidW5pcXVlX25hbWUiOiLEsGxoYW4iLCJmYW1pbHlfbmFtZSI6IkFMVElOIiwicm9sZSI6IjEuWcO2bmV0aWNpIiwibmJmIjoxNTcwNDc2OTgzLCJleHAiOjE2MDIwMTI5ODMsImlhdCI6MTU3MDQ3Njk4M30.8-5VRRHrWXAj6NiNrZpwTn1QyopkIVq2MTO00yIsQPQ")
-
-    const ti = timer(0,60000);
-
-    this.myTimerSub = ti.subscribe(t => {    
-      console.log("Tick"); 
-
-      let storageDataCurrency = this._currencyService.getFromStorage();
-      let storageDataGold = this._goldService.getFromStorage();
-      let storageDataBorsa = this._borsaService.getFromStorage();
-      let storageDataCripto = this._criptoService.getFromStorage();
-      let storageDataEmtia = this._emtiaService.getFromStorage();
-
-      //Get Currency Data
-      if(storageDataCurrency.isValid)
-      {
-          this.onCurrencyDataChanged.next(storageDataCurrency.data);          
-      }
-      else
-      {
-          this._currencyService.getFromApi().subscribe(resp=>{
-              this.onCurrencyDataChanged.next(resp.result);              
-          });
-      }
-
-      //Get Gold Data
-      if(storageDataGold.isValid)
-      {
-          this.onGoldDataChanged.next(storageDataGold.data);
-      }
-      else
-      {
-          this._goldService.getFromApi().subscribe(resp=>{
-              this.onGoldDataChanged.next(resp.result);
-          });
-      }
-
-      //Get BIST Data
-      if(storageDataBorsa.isValid)
-      {
-          this.onBorsaDataChanged.next(storageDataBorsa.data);
-      }
-      else
-      {
-          this._borsaService.getFromApi().subscribe(resp=>{
-              this.onBorsaDataChanged.next(resp.result);
-          });
-      }    
-      
-      //Get Cripto Data
-      if(storageDataCripto.isValid)
-      {
-          this.onCriptoDataChanged.next(storageDataCripto.data);
-      }
-      else
-      {
-          this._criptoService.getFromApi().subscribe(resp=>{
-              this.onCriptoDataChanged.next(resp.result);
-          });
-      }
-
-      //Get Emtia Data
-      if(storageDataEmtia.isValid)
-      {
-          this.onEmtiaDataChanged.next(storageDataEmtia.data);
-      }
-      else
-      {
-          this._emtiaService.getFromApi().subscribe(resp=>{
-              this.onEmtiaDataChanged.next(resp.result);
-          });
-      }
-    });
+        this.myTimerSub = ti.subscribe(t => {    
+            console.log("Tick"); 
+            this.getCurrencyAndConnectedData();
+        });
   }  
+
+  getCurrencyAndConnectedData()
+  {
+        let storageDataCurrency = this._currencyService.getFromStorage();
+
+        if(storageDataCurrency.isValid)
+        {
+            this.onCurrencyDataChanged.next(storageDataCurrency.data);  
+            this.getGoldData();
+            this.getBistData();
+            this.getCriptoData();
+            this.getEmtiaData();        
+        }
+        else
+        {
+            this._currencyService.getFromApi().subscribe(resp=>{
+                this.onCurrencyDataChanged.next(resp.result);  
+                this.getGoldData();
+                this.getBistData();
+                this.getCriptoData();
+                this.getEmtiaData();                        
+            });
+        }
+  }
+
+  getGoldData()
+  {
+        let storageDataGold = this._goldService.getFromStorage();
+
+        if(storageDataGold.isValid)
+        {
+            this.onGoldDataChanged.next(storageDataGold.data);
+        }
+        else
+        {
+            this._goldService.getFromApi().subscribe(resp=>{
+                this.onGoldDataChanged.next(resp.result);
+            });
+        }
+  }
+
+  getBistData()
+  {
+        let storageDataBorsa = this._borsaService.getFromStorage();
+
+        if(storageDataBorsa.isValid)
+        {
+            this.onBorsaDataChanged.next(storageDataBorsa.data);
+        }
+        else
+        {
+            this._borsaService.getFromApi().subscribe(resp=>{
+                this.onBorsaDataChanged.next(resp.result);
+            });
+        }   
+  }
+
+  getCriptoData()
+  {
+        let storageDataCripto = this._criptoService.getFromStorage();
+
+        if(storageDataCripto.isValid)
+        {
+            this.onCriptoDataChanged.next(storageDataCripto.data);
+        }
+        else
+        {
+            this._criptoService.getFromApi().subscribe(resp=>{
+                this.onCriptoDataChanged.next(resp.result);
+            });
+      }
+  }
+
+  getEmtiaData()
+  {
+        let storageDataEmtia = this._emtiaService.getFromStorage();
+
+        if(storageDataEmtia.isValid)
+        {
+            this.onEmtiaDataChanged.next(storageDataEmtia.data);
+        }
+        else
+        {
+            this._emtiaService.getFromApi().subscribe(resp=>{
+                this.onEmtiaDataChanged.next(resp.result);
+            });
+        }
+  }
 }

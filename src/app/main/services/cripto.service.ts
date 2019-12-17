@@ -43,7 +43,7 @@ export class CriptoService {
   
     getFromApi() : Observable<ServiceResult<CriptoRatesVM[]>>
     {
-      return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Cripto.GetAllCoins)
+      return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Cripto.GetAllCoins, null, true)
         .pipe(map(responseData =>{
   
           var resp = responseData as ServiceResult<CriptoRatesVM[]>;

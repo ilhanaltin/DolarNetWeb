@@ -41,7 +41,7 @@ export class CurrencyService {
 
   getFromApi() : Observable<ServiceResult<CurrencyRatesVM[]>>
   {
-    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetAllCurrency)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetAllCurrency, null, true)
       .pipe(map(responseData =>{
 
         var resp = responseData as ServiceResult<CurrencyRatesVM[]>;
