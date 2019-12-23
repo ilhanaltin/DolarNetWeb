@@ -43,14 +43,53 @@
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
     padding-bottom: 0;
 
+    &-tab {
+        li {
+            a {
+                border: 0!important;
+                padding: .9rem;
+                &.active { 
+                }
+
+                &:hover {
+                    border: 0;
+                }
+            }
+        }
+    }
+
+    .input-group-text {
+        padding: 0;
+        margin: 0;
+
+        select {
+            width: 85px;
+            border: 0;
+            border-radius: 0;
+            height: 50px;
+            background: url('assets/images/currency-converter/down.svg') no-repeat right;
+            -webkit-appearance: none;
+            background-position-x: 60px;
+            background-size: 15px;
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
+    }
+
     &-header {
         margin-bottom: 15px;
         display: flex;
         align-items: center;
 
+        img {
+            max-width: 1.5rem;
+        }
+
         h1 {
             font-weight: 600;
-            font-size: 16px;
+            font-size: .9rem;
             margin-bottom: 0;
             color: #414649;
             margin-left: 10px;
@@ -104,4 +143,3 @@
 
     }
 }
-
