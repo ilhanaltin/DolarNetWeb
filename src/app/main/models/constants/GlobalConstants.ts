@@ -21,6 +21,7 @@ export const GlobalConstants = {
     'AION','FTM','NULS','R','TT','ARK','WAXP','DRG','IGNIS','IOTX','WAN','YOU','WIN','DPT','QASH','LOOM','TNT','DCN','BUSD',
     'POWR','DIVI','LOKI','ONE','EDC','GT','RDD','TRUE','CVC','XMX','BNT','BHP','PAI','ERD','STORJ','DAG','MTL','ROX','CND','ANT',
     'GNO','DENT','SAN','OCEAN','CELR','GO','GRS','TEL','ORBS','LEND','CS','NXS','ODE','SYS','ABT','LBA','PIVX','WXT','COCOS','RET',
-    'MEDX','EDO','KAN','FX','SUSD','ADN','DATA','CTXC','VTC','GAS']
+    'MEDX','EDO','KAN','FX','SUSD','ADN','DATA','CTXC','VTC','GAS'],
+    UserRoles: { Admin: 1, Editor: 2, User: 3 }
     };
     

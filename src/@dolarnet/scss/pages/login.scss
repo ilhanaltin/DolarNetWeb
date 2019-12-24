@@ -1,0 +1,143 @@
+.login {
+    .row {
+        height: 100vh;
+    }
+
+    .col-md-9 {
+
+        background: url('assets/images/login/login-bg.jpg');
+
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+
+        h1,
+        h4 {
+            color: #fff;
+        }
+
+        ;
+    }
+
+    p.or {
+        font-size: .8rem;
+        text-align: center;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        margin-bottom: 0;
+        position: relative;
+
+        &::before {
+            position: absolute;
+            display: inline-block;
+            content: "";
+            height: 1px;
+            width: 45%;
+            background-color: #404649;
+            right: 0;
+            top: 25px;
+
+        }
+
+        &::after {
+            position: absolute;
+            display: inline-block;
+            content: "";
+            height: 1px;
+            width: 45%;
+            background-color: #404649;
+            left: 0;
+            top: 25px;
+
+        }
+    }
+
+    input {
+        font-size: 17px;
+        border: 0;
+        height: 60px;
+
+    }
+
+    a {
+        text-decoration: none;
+        color: currentColor;
+
+        &:hover {
+            text-decoration: none;
+            color: currentColor;
+        }
+    }
+
+    h1 {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 41px;
+        color: #414649;
+
+
+    }
+
+    p {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 23px;
+
+        display: block;
+        color: #414649;
+    }
+
+    small {
+
+        text-align: center;
+        display: block;
+        color: #414649;
+
+
+    }
+
+    .col-md-3 {
+        background-color: #F6F5F1;
+        padding: 2rem 3rem;
+    }
+
+    .btn {
+        padding: 19px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+
+
+        &-secondary {
+            background-color: #404649;
+            text-align: left;
+            color: #fff;
+            font-size: 1rem;
+
+            svg {
+                float: right;
+            }
+
+            &:hover {
+                color: #fff;
+            }
+        }
+
+        &-success {
+            background-color: #00A268;
+            text-align: left;
+            color: #fff;
+            font-size: 1rem;
+
+            svg {
+                float: right;
+            }
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+
+}

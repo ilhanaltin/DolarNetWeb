@@ -47,6 +47,8 @@ export class ConverterComponent implements OnInit {
 
   optionAlisSatis: number;
 
+  baseConverter: string;
+
   // Private
   private _unsubscribeAll: Subject<any>;
 
@@ -54,6 +56,8 @@ export class ConverterComponent implements OnInit {
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.coins = this.getCoins();
+
+    this.baseConverter = "1";
 
      // Set the private defaults
      this._unsubscribeAll = new Subject();
@@ -95,21 +99,22 @@ export class ConverterComponent implements OnInit {
 
   onConverterChangeCurrency()
   {
-    this.onTextBoxChangeCurrency("1");
+    this.onTextBoxChangeCurrency(this.baseConverter);
   }  
 
   onConverterChangeGold()
   {
-    this.onTextBoxChangeGold("1");
+    this.onTextBoxChangeGold(this.baseConverter);
   } 
 
   onConverterChangeCripto()
   {
-    this.onTextBoxChangeCripto("1");
+    this.onTextBoxChangeCripto(this.baseConverter);
   }
 
   onTextBoxChangeCurrency(converter)
   {
+    this.baseConverter = converter;
     let currencyFirstBuyOrSell = this.currencyTypeFirst === GlobalConstants.baseCurrency ? 1 :
       (this.optionAlisSatis == GlobalConstants.Alis ? 
         this.currencyRates.find(t=>t.code === this.currencyTypeFirst).buying : 
@@ -129,45 +134,52 @@ export class ConverterComponent implements OnInit {
     {
         if(this.currencyTypeFirst === GlobalConstants.baseCurrency)
         {
-          this.currencySecond = +((currencySecondBuyOrSell * this.currencyFirst).toFixed(4));
-          this.currencyThird = +((currencyThirdBuyOrSell * this.currencyFirst).toFixed(4));  
+          this.currencySecond = +((this.currencyFirst / currencySecondBuyOrSell).toFixed(4));
+          this.currencyThird = +((this.currencyFirst / currencyThirdBuyOrSell).toFixed(4));  
         }
         else
         {
-          this.currencySecond = +((this.currencyFirst / currencyFirstBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
-          this.currencyThird = +((this.currencyFirst / currencyFirstBuyOrSell) * currencyThirdBuyOrSell).toFixed(4);
+          this.currencySecond = +((this.currencyFirst / currencySecondBuyOrSell) * currencyFirstBuyOrSell).toFixed(4);
+          this.currencyThird = +((this.currencyFirst / currencyThirdBuyOrSell) * currencyFirstBuyOrSell).toFixed(4);
         }
     }
     else if(converter === '2')
     {
       if(this.currencyTypeSecond === GlobalConstants.baseCurrency)
       {
-        this.currencyFirst = +(currencyFirstBuyOrSell * this.currencySecond).toFixed(4);
-        this.currencyThird = +(currencyThirdBuyOrSell * this.currencySecond).toFixed(4);
+        this.currencyFirst = +(this.currencySecond / currencyFirstBuyOrSell).toFixed(4);
+        this.currencyThird = +(this.currencySecond / currencyThirdBuyOrSell).toFixed(4);
       }
       else
       {
-        this.currencyFirst = +((this.currencySecond / currencySecondBuyOrSell) * currencyFirstBuyOrSell).toFixed(4);
-        this.currencyThird = +((this.currencySecond / currencySecondBuyOrSell) * currencyThirdBuyOrSell).toFixed(4);
+        this.currencyFirst = +((this.currencySecond / currencyFirstBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
+        this.currencyThird = +((this.currencySecond / currencyThirdBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
+
+        
+        console.log("currencyFirstBuyOrSell: " + currencyFirstBuyOrSell);
+        console.log("currencySecondBuyOrSell: " + currencySecondBuyOrSell);
+
       }
     }
     else if(converter === '3')
     {
       if(this.currencyTypeThird === GlobalConstants.baseCurrency)
       {
-        this.currencyFirst = +(currencyFirstBuyOrSell * this.currencyThird).toFixed(4);
-        this.currencySecond = +(currencySecondBuyOrSell * this.currencyThird).toFixed(4);
+        this.currencyFirst = +(this.currencyThird / currencyFirstBuyOrSell).toFixed(4);
+        this.currencySecond = +(this.currencyThird / currencySecondBuyOrSell).toFixed(4);
       }
       else
       {
-        this.currencyFirst = +((this.currencyThird / currencyThirdBuyOrSell) * currencyFirstBuyOrSell).toFixed(4);
-        this.currencySecond = +((this.currencyThird / currencyThirdBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
+        this.currencyFirst = +((this.currencyThird / currencyFirstBuyOrSell) * currencyThirdBuyOrSell).toFixed(4);
+        this.currencySecond = +((this.currencyThird / currencySecondBuyOrSell) * currencyThirdBuyOrSell).toFixed(4);
       }
     }
   }
 
   onTextBoxChangeGold(converter)
   {
+    this.baseConverter = converter;
+
     let goldValue = this.goldRates.find(t=>t.name === this.goldTypeFirst).buying;
     let secondCurrencyEffect = this.goldTypeSecond == GlobalConstants.baseCurrency ? 1 : this.currencyRates.find(t=>t.code === this.goldTypeSecond).buying
 
@@ -183,6 +195,8 @@ export class ConverterComponent implements OnInit {
 
   onTextBoxChangeCripto(converter)
   {
+      this.baseConverter = converter;
+
       let criptoValueFirst = this.criptoRates.find(t=>t.code === this.criptoTypeFirst).price;
       let criptoValueSecond  = this.criptoRates.find(t=>t.code === this.criptoTypeSecond).price;
       let currencyValueThird = this.criptoTypeThird === GlobalConstants.baseCurrency ? 1 : this.currencyRates.find(t=>t.code === this.criptoTypeThird).buying;

@@ -15,6 +15,7 @@ import { CurrencyBarComponent } from './main/pages/header/currency-bar/currency-
 import { FooterDolarnetComponent } from './main/pages/footer-dolarnet/footer-dolarnet/footer-dolarnet.component';
 import { HomePostListComponent } from './main/pages/home-post-list/home-post-list.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './main/pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     ConverterComponent,
     MarketAnalyseComponent,
     FooterDolarnetComponent,
-    HomePostListComponent
+    HomePostListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
