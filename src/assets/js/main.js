@@ -4,6 +4,8 @@ $(document).ready(function () {
   var sync2 = $("#sync2");
   var slidesPerPage = 10;
 
+  console.log("ready");
+
   sync1.owlCarousel({
     items: 1,
     slideSpeed: 2000,
@@ -40,7 +42,6 @@ $(document).ready(function () {
     if (current > count) {
       current = 0;
     }
-
 
     sync2
       .find(".owl-item")

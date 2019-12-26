@@ -153,12 +153,7 @@ export class ConverterComponent implements OnInit {
       else
       {
         this.currencyFirst = +((this.currencySecond / currencyFirstBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
-        this.currencyThird = +((this.currencySecond / currencyThirdBuyOrSell) * currencySecondBuyOrSell).toFixed(4);
-
-        
-        console.log("currencyFirstBuyOrSell: " + currencyFirstBuyOrSell);
-        console.log("currencySecondBuyOrSell: " + currencySecondBuyOrSell);
-
+        this.currencyThird = +((this.currencySecond / currencyThirdBuyOrSell) * currencySecondBuyOrSell).toFixed(4);        
       }
     }
     else if(converter === '3')

@@ -27,11 +27,9 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/@dolarnet/js/jquery-3.2.1.min.js", 
-              "src/@dolarnet/js/popper.min.js", 
-              "src/@dolarnet/js/bootstrap.min.js", 
-              "src/@dolarnet/js/owl.carousel.js", 
-              "src/@dolarnet/js/main.js"
+              "src/assets/js/jquery-3.2.1.min.js", 
+              "src/assets/js/popper.min.js", 
+              "src/assets/js/bootstrap.min.js"
             ]
           },
           "configurations": {

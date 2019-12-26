@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { PostVM } from '../../models/blog/PostVM';
 import { PagingVM } from '../../models/PagingVM';
 import { PostSearchCriteriaVM } from '../../models/blog/PostSearchCriteriaVM';
+/* import '../../../../@dolarnet/js/main.js';
+import '../../../../@dolarnet/js/owl.carousel.js'; */
 
 @Component({
   selector: 'slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.css']
 })
-export class SliderComponent implements OnInit {
+export class SliderComponent implements OnInit {  
 
   postList: PostVM[];
   post1: PostVM;
@@ -23,14 +25,34 @@ export class SliderComponent implements OnInit {
   post9: PostVM;
   post10: PostVM;
 
-  constructor(private _blogService: BlogService) { }
+  constructor(private _blogService: BlogService) {
+    this.loadScripts();
+    this.getSliderPosts();
+   }
 
   ngOnInit() {
-    this.getSliderPosts();
+  }
+
+  loadScripts() {
+    const dynamicScripts = [
+     '../../../assets/js/owl.carousel.js',
+     '../../../assets/js/main.js'
+    ];
+
+    for (let i = 0; i < dynamicScripts.length; i++) {
+      const node = document.createElement('script');
+      node.src = dynamicScripts[i];
+      node.type = 'text/javascript';
+      node.async = false;
+      node.charset = 'utf-8';
+      document.getElementsByTagName('head')[0].appendChild(node);
+    }
   }
 
   getSliderPosts()
   {
+    console.log("getSliderPosts");
+
     let criteria = new PostSearchCriteriaVM();
     criteria.itemCount = 10;
     criteria.pageId=0;

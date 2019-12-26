@@ -14,8 +14,9 @@ import { NavigationHeaderComponent } from './main/pages/header/navigation-header
 import { CurrencyBarComponent } from './main/pages/header/currency-bar/currency-bar.component';
 import { FooterDolarnetComponent } from './main/pages/footer-dolarnet/footer-dolarnet/footer-dolarnet.component';
 import { HomePostListComponent } from './main/pages/home-post-list/home-post-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './main/pages/login/login.component';
+import { LoginStateProfileBoxComponent } from './main/pages/login-state-profile-box/login-state-profile-box.component';
 
 @NgModule({
   declarations: [
@@ -28,14 +29,16 @@ import { LoginComponent } from './main/pages/login/login.component';
     MarketAnalyseComponent,
     FooterDolarnetComponent,
     HomePostListComponent,
-    LoginComponent
+    LoginComponent,
+    LoginStateProfileBoxComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     CKEditorModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

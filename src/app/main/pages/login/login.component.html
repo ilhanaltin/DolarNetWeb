@@ -36,28 +36,46 @@
                 <p>
                     Hesabınıza giriş yapın, portföyünüzü yönetme, takip etmeye başlayın.
                 </p>
-                <div class="form-group">
+                <form name="loginForm" [formGroup]="loginForm" novalidate>
+                    <div class="form-group">
+                        <input id="email" name="email" type="email" class="form-control form-control-lg"
+                            placeholder="E-Posta" formControlName="email" required>
+                    </div>
+                    <div *ngIf="loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="loginForm.get('email').errors.required">
+                            E-Posta giriniz.
+                        </div>
+                        <div *ngIf="loginForm.get('email').errors?.email">
+                            Geçersiz E-Posta
+                        </div>
+                    </div>
 
-                    <input type="text" class="form-control form-control-lg"
-                        placeholder="Kullanıcı Adı">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" 
-                        aria-describedby="helpId" placeholder="Şifre">
-                </div>
+                    <div class="form-group">
+                        <input id="password" name="password" type="password" class="form-control form-control-lg" 
+                            aria-describedby="helpId" placeholder="Şifre" formControlName="password" required>
+                    </div>
 
-                <a class="btn btn-secondary btn-block" href="#" role="button">
-                    Giriş Yap
-                    <span>
-                        <svg width="35" height="16" viewBox="0 0 35 16" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M26.9122 0.000136614C26.6174 -0.00558704 26.3455 0.168995 26.2282 0.438025C26.1108 0.712777 26.1709 1.0276 26.377 1.23652L32.1754 7.27536H0.736252C0.475809 7.2725 0.229676 7.40988 0.100886 7.63598C-0.0336286 7.86494 -0.0336286 8.14255 0.100886 8.36865C0.229676 8.59761 0.475809 8.73213 0.736252 8.72926H32.1754L26.377 14.7681C26.0994 15.0572 26.1108 15.5179 26.3999 15.7956C26.6889 16.076 27.1497 16.0675 27.4273 15.7727L34.8886 8.00231L27.4273 0.23196C27.2957 0.0859974 27.1068 0.005861 26.9122 0.000136614Z"
-                                fill="white" />
-                        </svg>
+                    <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="loginForm.get('password').errors.required">
+                            Şifre giriniz.
+                        </div>
+                    </div>
 
-                    </span>
-                </a>
+                    <button class="btn btn-secondary btn-block" [disabled]="loginForm.invalid" (click)="login(loginForm.value)">
+                        Giriş Yap
+                        <span>
+                            <svg width="35" height="16" viewBox="0 0 35 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M26.9122 0.000136614C26.6174 -0.00558704 26.3455 0.168995 26.2282 0.438025C26.1108 0.712777 26.1709 1.0276 26.377 1.23652L32.1754 7.27536H0.736252C0.475809 7.2725 0.229676 7.40988 0.100886 7.63598C-0.0336286 7.86494 -0.0336286 8.14255 0.100886 8.36865C0.229676 8.59761 0.475809 8.73213 0.736252 8.72926H32.1754L26.377 14.7681C26.0994 15.0572 26.1108 15.5179 26.3999 15.7956C26.6889 16.076 27.1497 16.0675 27.4273 15.7727L34.8886 8.00231L27.4273 0.23196C27.2957 0.0859974 27.1068 0.005861 26.9122 0.000136614Z"
+                                    fill="white" />
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+
                 <p class="or">VEYA</p>
                 <a  class="btn btn-success btn-block" href="#" role="button">
                     Üye Ol

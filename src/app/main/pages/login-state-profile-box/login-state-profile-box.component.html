@@ -1,0 +1,14 @@
+<div class="login-state-profile-box" *ngIf="_authenticationService.isLoggedIn()">
+    <div class="row d-flex flex-row align-items-center">
+        <div>
+            <img class="img-fluid login-state-profile-box-photo" [src]="_authenticationService.avatar" alt="">
+        </div>
+        <div>
+            <p>Hoşgeldiniz <span>Sn. {{_authenticationService.currentUser.name + ' ' + _authenticationService.currentUser.lastName}}</span></p>
+            <small>
+                <img src="assets/images/icons/profile-box-time-icon.svg" alt="">
+                Son İşlem Tarihiniz: 19 September 2019
+            </small>
+        </div>
+    </div>
+</div>
