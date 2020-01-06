@@ -1,3 +1,4 @@
+import { LoginModule } from './main/pages/login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,20 +18,24 @@ import { HomePostListComponent } from './main/pages/home-post-list/home-post-lis
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './main/pages/login/login.component';
 import { LoginStateProfileBoxComponent } from './main/pages/login-state-profile-box/login-state-profile-box.component';
+import { NewsComponent } from './main/pages/news/news.component';
+import { HomeModule } from './main/pages/home/home.module';
+import { NewsModule } from './main/pages/news/news.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavigationHeaderComponent,
-    HomeComponent,
-    CurrencyBarComponent,
-    SliderComponent,
-    ConverterComponent,
-    MarketAnalyseComponent,
-    FooterDolarnetComponent,
-    HomePostListComponent,
-    LoginComponent,
-    LoginStateProfileBoxComponent
+    AppComponent
+    //NavigationHeaderComponent,
+    //HomeComponent,
+    //CurrencyBarComponent,
+    //SliderComponent,
+    //ConverterComponent,
+    //MarketAnalyseComponent,
+    //FooterDolarnetComponent,
+    //HomePostListComponent,
+    //LoginComponent,
+    //LoginStateProfileBoxComponent,
+    //NewsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,10 @@ import { LoginStateProfileBoxComponent } from './main/pages/login-state-profile-
     HttpClientModule,
     CKEditorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HomeModule,
+    NewsModule,
+    LoginModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

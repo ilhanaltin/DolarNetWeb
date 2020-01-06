@@ -1,11 +1,12 @@
+import { EmtiaService } from './../../services/emtia.service';
 import { MarketAnalyseVM } from './../../models/integration/MarketAnalyseVM';
 import { Component, OnInit } from '@angular/core';
 import { CriptoRatesVM } from '../../models/coins/CriptoRatesVM';
-import { Subject } from 'rxjs';
-import { HomeComponent } from '../home/home.component';
+import { Subscription, timer } from 'rxjs';
 import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
-import { takeUntil } from 'rxjs/operators';
 import { EmtiaRatesVM } from '../../models/integration/emtia/EmtiaRatesVM';
+import { CurrencyService } from '../../services/currency.service';
+import { CriptoService } from '../../services/cripto.service';
 
 @Component({
   selector: 'market-analyse',
@@ -14,43 +15,89 @@ import { EmtiaRatesVM } from '../../models/integration/emtia/EmtiaRatesVM';
 })
 export class MarketAnalyseComponent implements OnInit {
 
+  private myTimerSub: Subscription;    
+
   criptoRates: CriptoRatesVM[];
   currencyRates: CurrencyRatesVM[];
   emtiaRates: EmtiaRatesVM[];
 
   marketAnalyseVM: MarketAnalyseVM;
 
-  private _unsubscribeAll: Subject<any>;
-
-  constructor(private _homeComponent: HomeComponent) {
-
-    // Set the private defaults
-    this._unsubscribeAll = new Subject();
+  constructor(private _currencyService: CurrencyService, 
+    private _criptoService: CriptoService,
+    private _emtiaService: EmtiaService) {
 
     this.marketAnalyseVM = new MarketAnalyseVM({});
    }
 
   ngOnInit() {
-    this._homeComponent.onCurrencyDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.currencyRates = resp;
-                this.setCurrencyValues();
-            });
 
-      this._homeComponent.onCriptoDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.criptoRates = resp;
+    const ti = timer(0,60000);
+
+        this.myTimerSub = ti.subscribe(t => {    
+            console.log("Tick-Currency-Bar"); 
+            this.getCurrencyAndConnectedData();
+        });
+  }
+
+  getCurrencyAndConnectedData()
+  {
+        let storageDataCurrency = this._currencyService.getFromStorage();
+
+        if(storageDataCurrency.isValid)
+        {
+            this.currencyRates = storageDataCurrency.data;
+
+            this.setCurrencyValues();
+            this.getCriptoData();
+            this.getEmtiaData();
+        }
+        else
+        {
+            this._currencyService.getFromApi().subscribe(resp=>{
+                this.currencyRates = resp.result;
+
+                this.setCurrencyValues();
+                this.getCriptoData();
+                this.getEmtiaData();
+            });
+        }
+  }
+
+  getCriptoData()
+  {
+        let storageDataCripto = this._criptoService.getFromStorage();
+
+        if(storageDataCripto.isValid)
+        {
+            this.criptoRates = storageDataCripto.data;
+            this.setCriptoValues();
+        }
+        else
+        {
+            this._criptoService.getFromApi().subscribe(resp=>{
+                this.criptoRates = resp.result;
                 this.setCriptoValues();
             });
+      }
+  }
 
-      this._homeComponent.onEmtiaDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.emtiaRates = resp;
+  getEmtiaData()
+  {
+        let storageDataEmtia = this._emtiaService.getFromStorage();
+
+        if(storageDataEmtia.isValid)
+        {
+            this.emtiaRates = storageDataEmtia.data;
+            this.setEmtiaValues();
+        }
+        else
+        {
+            this._emtiaService.getFromApi().subscribe(resp=>{
+                this.emtiaRates = resp.result;
                 this.setEmtiaValues();
             });
+        }
   }
 
   setCurrencyValues()

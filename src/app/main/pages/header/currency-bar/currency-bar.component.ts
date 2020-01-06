@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CurrencyRatesVM } from 'src/app/main/models/integration/currency/CurrencyRatesVM';
 import { HomeComponent } from '../../home/home.component';
 import { GoldRatesVM } from 'src/app/main/models/integration/gold/GoldRatesVM';
 import { BorsaRatesVM } from 'src/app/main/models/integration/borsa/BorsaRatesVM';
 import { CurrencyBarVM } from 'src/app/main/models/integration/CurrencyBarVM';
+
+import { CurrencyService } from '../../../services/currency.service';
+import { Subscription, timer, Subject } from 'rxjs';
+import { GoldService } from '../../../services/gold.service';
+import { BorsaService } from '../../../services/borsa.service';
 
 @Component({
   selector: 'currency-bar',
@@ -14,43 +18,88 @@ import { CurrencyBarVM } from 'src/app/main/models/integration/CurrencyBarVM';
 })
 export class CurrencyBarComponent implements OnInit {
 
+  private myTimerSub: Subscription;    
+
   currencyRates: CurrencyRatesVM[];
   goldRates: GoldRatesVM[];
   borsaRates: BorsaRatesVM[];
 
   currencyBarVM: CurrencyBarVM;
 
-  private _unsubscribeAll: Subject<any>;
-
-  constructor(private _homeComponent: HomeComponent) { 
-      
-      // Set the private defaults
-      this._unsubscribeAll = new Subject();
+  constructor(private _currencyService: CurrencyService, 
+    private _goldService: GoldService,
+    private _borsaService: BorsaService) {     
 
       this.currencyBarVM = new CurrencyBarVM({});
   }
 
   ngOnInit() {
-    this._homeComponent.onCurrencyDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.currencyRates = resp;
-                this.setCurrencyValues();
-            });
+    const ti = timer(0,60000);
 
-    this._homeComponent.onGoldDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.goldRates = resp;
-                this.setGoldValues();
-            });
+        this.myTimerSub = ti.subscribe(t => {    
+            console.log("Tick-Currency-Bar"); 
+            this.getCurrencyAndConnectedData();
+        });
+  }
 
-    this._homeComponent.onBorsaDataChanged
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe(resp => {
-                this.borsaRates = resp;
+  getCurrencyAndConnectedData()
+  {
+        let storageDataCurrency = this._currencyService.getFromStorage();
+
+        if(storageDataCurrency.isValid)
+        {
+            this.currencyRates = storageDataCurrency.data;
+
+            this.setCurrencyValues();
+            this.getGoldData();
+            this.getBistData();
+        }
+        else
+        {
+            this._currencyService.getFromApi().subscribe(resp=>{
+              this.currencyRates = resp.result;
+
+              this.setCurrencyValues();
+              this.getGoldData();
+              this.getBistData();
+            });
+        }
+  }
+
+  getGoldData()
+  {
+        let storageDataGold = this._goldService.getFromStorage();
+
+        if(storageDataGold.isValid)
+        {
+            this.goldRates = storageDataGold.data;
+            this.setGoldValues();
+        }
+        else
+        {
+            this._goldService.getFromApi().subscribe(resp=>{
+              this.goldRates = resp.result;
+              this.setGoldValues();
+            });
+        }
+  }
+
+  getBistData()
+  {
+        let storageDataBorsa = this._borsaService.getFromStorage();
+
+        if(storageDataBorsa.isValid)
+        {
+            this.borsaRates = storageDataBorsa.data;
+            this.setBorsaValues();
+        }
+        else
+        {
+            this._borsaService.getFromApi().subscribe(resp=>{
+                this.borsaRates = resp.result;
                 this.setBorsaValues();
             });
+        }   
   }
 
   setCurrencyValues()
@@ -138,9 +187,6 @@ export class CurrencyBarComponent implements OnInit {
   */
   ngOnDestroy(): void
   {
-      // Unsubscribe from all subscriptions
-      this._unsubscribeAll.next();
-      this._unsubscribeAll.complete();
+      
   }
-
 }

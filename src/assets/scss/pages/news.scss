@@ -1,0 +1,223 @@
+.sub-page {
+    .hero-bar {
+        padding-bottom: 1rem;
+    }
+
+    .information-box {
+        p {
+            font-size: .9rem;
+            font-weight: 500;
+        }
+    }
+
+    .sub-page-top-links {
+        background-color: #D9D9D9;
+
+        &-box {
+
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .col {
+                text-align: center;
+
+                &::after {
+                    content: "";
+                    height: 100%;
+                    width: 1px;
+                    background-color: $black;
+                    position: absolute;
+                    right: 0;
+                }
+
+                &:last-child {
+                    &::after {
+                        display: none;
+                    }
+                }
+
+                a {
+                    font-size: 1rem;
+                    color: #000;
+                    font-weight: 500;
+                    letter-spacing: -.03rem;
+                    white-space: nowrap;
+                    text-align: center;
+                    transition: $transition-base;
+                    &::after{
+                        content: "";
+                        left: 0;
+                        height: 3px;
+                        width: 0;
+                        background-color: $doviz-color;
+                        position: absolute;
+                        bottom: -.7rem;
+                        transition: $transition-base;
+                    }
+                    &:hover{
+                        &::after{
+                            content: "";
+                            left: 0;
+                            height: 3px;
+                            width: 100%;
+                            background-color: $doviz-color;
+                            position: absolute;
+                            bottom: -.7rem;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+    }
+}
+
+.right-categories-default {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 3.35rem;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.featured-news-title {
+    .col-md-12 {
+        border-bottom: 2px solid $gray-500;
+
+        h1 {
+            font-size: 1.5rem;
+            letter-spacing: -.06rem;
+            font-weight: 600;
+            color: $doviz-color;
+
+        }
+    }
+
+}
+
+.news-featured-categories {
+
+    a {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: $white;
+    }
+
+    &-gundem {
+        background: url(assets/images/news/featured-categories/gundem.jpg);
+        @extend .right-categories-default;
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $box-shadow;
+            transform: scale(1.01);
+        }
+    }
+
+    &-doviz {
+        @extend .right-categories-default;
+        background: url(assets/images/news/featured-categories/doviz.jpg);
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $box-shadow;
+            transform: scale(1.01);
+        }
+    }
+
+    &-paralar {
+        @extend .right-categories-default;
+        background: url(assets/images/news/featured-categories/kripto-paralar.jpg);
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $box-shadow;
+            transform: scale(1.01);
+        }
+    }
+
+    &-altin {
+        @extend .right-categories-default;
+        background: url(assets/images/news/featured-categories/altin.jpg);
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $box-shadow;
+            transform: scale(1.01);
+        }
+    }
+
+    &-borsa {
+        @extend .right-categories-default;
+        background: url(assets/images/news/featured-categories/borsa.jpg);
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $box-shadow;
+            transform: scale(1.01);
+        }
+    }
+
+    &-emtia {
+        @extend .right-categories-default;
+        background: url(assets/images/news/featured-categories/emtia.jpg);
+        transition: $transition-base;
+
+        &:hover {
+            box-shadow: $box-shadow;
+            transform: scale(1.01);
+        }
+    }
+}
+
+.news-list {
+    &-item {
+        a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: $black;
+            line-height: 1.3rem;
+            position: relative;
+
+            &:hover {
+                img {
+                    filter: none;
+                    box-shadow: $box-shadow;
+                }
+
+            }
+
+            p {
+                font-size: 1rem;
+                margin-bottom: 0;
+                bottom: 1rem;
+
+                color: $black;
+            }
+
+            img {
+
+                filter: grayscale(.5);
+                transition: $transition-base;
+                margin-bottom: 1rem;
+                box-shadow: $box-shadow-sm;
+
+            }
+
+            date {
+                font-size: .8rem;
+                font-weight: 600;
+            }
+        }
+
+    }
+}

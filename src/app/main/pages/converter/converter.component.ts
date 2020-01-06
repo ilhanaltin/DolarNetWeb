@@ -2,11 +2,12 @@ import { CriptoRatesVM } from './../../models/coins/CriptoRatesVM';
 import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
 import { GlobalConstants } from './../../models/constants/GlobalConstants';
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { HomeComponent } from '../home/home.component';
-import { takeUntil } from 'rxjs/operators';
+import { Subscription, timer } from 'rxjs';
 import { TypeVM } from '../../models/types/TypeVM';
 import { GoldRatesVM } from '../../models/integration/gold/GoldRatesVM';
+import { CurrencyService } from '../../services/currency.service';
+import { GoldService } from '../../services/gold.service';
+import { CriptoService } from '../../services/cripto.service';
 
 @Component({
   selector: 'converter',
@@ -14,6 +15,8 @@ import { GoldRatesVM } from '../../models/integration/gold/GoldRatesVM';
   styleUrls: ['./converter.component.css']
 })
 export class ConverterComponent implements OnInit {
+
+  private myTimerSub: Subscription;    
 
   currencies = [];
   golds = [];
@@ -49,18 +52,15 @@ export class ConverterComponent implements OnInit {
 
   baseConverter: string;
 
-  // Private
-  private _unsubscribeAll: Subject<any>;
+  constructor(private _currencyService: CurrencyService, 
+    private _goldService: GoldService,
+    private _criptoService: CriptoService) {
 
-  constructor(private _homeComponent: HomeComponent) {
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.coins = this.getCoins();
 
     this.baseConverter = "1";
-
-     // Set the private defaults
-     this._unsubscribeAll = new Subject();
 
      this.currencyTypeFirst = "TRY";
      this.currencyTypeSecond= "USD";
@@ -78,23 +78,66 @@ export class ConverterComponent implements OnInit {
 
   ngOnInit() {
 
-    this._homeComponent.onCurrencyDataChanged
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(resp => {
-            this.currencyRates = resp;
-        });
+    const ti = timer(0,60000);
 
-    this._homeComponent.onGoldDataChanged
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(resp => {
-            this.goldRates = resp;
+        this.myTimerSub = ti.subscribe(t => {    
+            console.log("Tick-Converter"); 
+            this.getCurrencyAndConnectedData();
         });
+  }
 
-    this._homeComponent.onCriptoDataChanged
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe(resp => {
-            this.criptoRates = resp;
-        });   
+  getCurrencyAndConnectedData()
+  {
+        let storageDataCurrency = this._currencyService.getFromStorage();
+
+        if(storageDataCurrency.isValid)
+        {
+            this.currencyRates = storageDataCurrency.data;
+
+            this.getGoldData();
+            this.getCriptoData();
+        }
+        else
+        {
+            this._currencyService.getFromApi().subscribe(resp=>{
+              this.currencyRates = resp.result;
+
+              this.getGoldData();
+              this.getCriptoData();
+            });
+        }
+  }
+
+  getGoldData()
+  {
+        let storageDataGold = this._goldService.getFromStorage();
+
+        if(storageDataGold.isValid)
+        {
+            this.goldRates = storageDataGold.data;
+        }
+        else
+        {
+            this._goldService.getFromApi().subscribe(resp=>{
+              this.goldRates = resp.result;
+            });
+        }
+  }
+
+  getCriptoData()
+  {
+        let storageDataCripto = this._criptoService.getFromStorage();
+
+        if(storageDataCripto.isValid)
+        {
+            this.criptoRates = storageDataCripto.data;
+        }
+        else
+        {
+            this._criptoService.getFromApi().subscribe(resp=>{
+                this.criptoRates = resp.result;
+            });
+      }
   }
 
   onConverterChangeCurrency()
@@ -284,8 +327,5 @@ export class ConverterComponent implements OnInit {
      */
     ngOnDestroy(): void
     {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
     }
 }
