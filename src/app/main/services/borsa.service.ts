@@ -20,7 +20,7 @@ export class BorsaService {
 
     var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Borsa.BorsaDataRefreshedPeriodically)) as BorsaRatesVM[];
 
-    if(periodicData == null)
+    if(periodicData == null || periodicData.length == 0)
     {
       return response;
     }

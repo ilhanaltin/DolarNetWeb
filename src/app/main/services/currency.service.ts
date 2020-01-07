@@ -20,7 +20,7 @@ export class CurrencyService {
 
     var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Currency.CurrencyDataRefreshedPeriodically)) as CurrencyRatesVM[];
 
-    if(periodicData == null)
+    if(periodicData == null || periodicData.length == 0)
     {
       return response;
     }

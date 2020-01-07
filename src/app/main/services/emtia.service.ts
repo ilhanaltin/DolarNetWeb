@@ -20,7 +20,7 @@ export class EmtiaService {
 
     var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Emtia.EmtiaDataRefreshedPeriodically)) as EmtiaRatesVM[];
 
-    if(periodicData == null)
+    if(periodicData == null || periodicData.length == 0)
     {
       return response;
     }

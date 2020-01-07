@@ -20,7 +20,7 @@ export class GoldService {
 
     var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Gold.GoldDataRefreshedPeriodically)) as GoldRatesVM[];
 
-    if(periodicData == null)
+    if(periodicData == null || periodicData.length == 0)
     {
       return response;
     }
