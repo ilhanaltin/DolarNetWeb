@@ -52,6 +52,8 @@ export class CriptoService {
   
           resp.status = 200;
   
+          console.log(resp);
+
           return resp;
         }));
     }

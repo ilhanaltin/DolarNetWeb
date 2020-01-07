@@ -1,10 +1,38 @@
-body{
+body {
     font-family: $font-rajdhani;
 }
-a:hover{
+
+a:hover {
     color: currentColor;
     text-decoration: none;
 }
-html{
+
+html {
     font-size: 16px;
+}
+
+.remix {
+    width: 24px;
+    height: 24px;
+    fill: #333;
+}
+
+.tooltip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4rem;
+    .tooltip-inner{
+        background-color: $doviz-color;
+        &::before {
+            border-color: red;
+        }
+        small {
+            letter-spacing: -.06rem;
+    
+            font-size: .75rem;
+        }
+    }
+    
+   
 }

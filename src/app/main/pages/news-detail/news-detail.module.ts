@@ -1,31 +1,29 @@
+import { MarketAnalyseModule } from './../market-analyse/market-analyse.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NewsComponent } from './news.component';
 import { NavigationHeaderModule } from '../header/navigation-header/navigation-header.module';
 import { CurrencyBarModule } from '../header/currency-bar/currency-bar.module';
-import { SliderModule } from '../slider/slider.module';
 import { HttpClientModule } from '@angular/common/http';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module';
+import { NewsDetailComponent } from './news-detail.component';
 
 @NgModule({
     declarations   : [
-        NewsComponent        
+        NewsDetailComponent        
     ],
     imports        : [
         CommonModule,
         BrowserModule,
         HttpClientModule,
         ReactiveFormsModule,
-        CKEditorModule,
         FormsModule,
         ReactiveFormsModule,
         NavigationHeaderModule,
         CurrencyBarModule,
-        SliderModule, 
-        FooterDolarnetModule
+        FooterDolarnetModule,
+        MarketAnalyseModule
     ],
     providers      : [
     ],
@@ -33,6 +31,6 @@ import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module'
     ]
 })
 
-export class NewsModule
+export class NewsDetailModule
 {
 }
