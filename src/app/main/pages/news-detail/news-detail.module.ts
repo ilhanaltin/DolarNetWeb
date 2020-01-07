@@ -8,6 +8,7 @@ import { CurrencyBarModule } from '../header/currency-bar/currency-bar.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module';
 import { NewsDetailComponent } from './news-detail.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations   : [
@@ -17,6 +18,7 @@ import { NewsDetailComponent } from './news-detail.component';
         CommonModule,
         BrowserModule,
         HttpClientModule,
+        RouterModule,
         ReactiveFormsModule,
         FormsModule,
         ReactiveFormsModule,

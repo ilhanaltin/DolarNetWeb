@@ -28,6 +28,6 @@ export class HomePostListComponent implements OnInit {
     
     this._blogService.get(criteria).subscribe(response=>{
         this.postList = response.result.postList;
-    })
+    });
   }
 }

@@ -27,9 +27,9 @@ export class BlogService {
       return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams, true);
   }
 
-  getById() : Observable<ServiceResult<PostResponseDetailsVM>> {
+  getById(id) : Observable<ServiceResult<PostResponseDetailsVM>> {
     let myParams = new HttpParams()
-    .append('id', '1')
+    .append('id', id)
 
     return this.baseService.get<PostResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetById, myParams);
   }

@@ -22,7 +22,7 @@ export class CriptoService {
   
       var periodicData = JSON.parse(localStorage.getItem(apiConfig.SessionKeys.Cripto.CriptoDataRefreshedPeriodically)) as CriptoRatesVM[];
   
-      if(periodicData == null)
+      if(periodicData == null || periodicData.length == 0)
       {
         return response;
       }
@@ -52,8 +52,6 @@ export class CriptoService {
   
           resp.status = 200;
   
-          console.log(resp);
-
           return resp;
         }));
     }

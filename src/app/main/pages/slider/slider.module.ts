@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { SliderComponent } from './slider.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations   : [
@@ -11,7 +12,8 @@ import { SliderComponent } from './slider.component';
     imports        : [
         CommonModule,
         BrowserModule,
-        FormsModule
+        FormsModule,
+        RouterModule
     ],
     exports   : [
         SliderComponent
