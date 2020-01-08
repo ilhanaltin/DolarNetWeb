@@ -21,7 +21,6 @@ import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module'
         ReactiveFormsModule,
         CKEditorModule,
         FormsModule,
-        ReactiveFormsModule,
         NavigationHeaderModule,
         CurrencyBarModule,
         SliderModule, 

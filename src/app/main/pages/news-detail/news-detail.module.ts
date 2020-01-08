@@ -21,7 +21,6 @@ import { RouterModule } from '@angular/router';
         RouterModule,
         ReactiveFormsModule,
         FormsModule,
-        ReactiveFormsModule,
         NavigationHeaderModule,
         CurrencyBarModule,
         FooterDolarnetModule,
