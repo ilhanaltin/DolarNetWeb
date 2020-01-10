@@ -1,3 +1,4 @@
+import { NewsCategoryBoxModule } from './../news-category-box/news-category-box.module';
 import { PostCategoryHeaderModule } from './../../header/post-category-header/post-category-header.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,7 +27,8 @@ import { FooterDolarnetModule } from '../../footer-dolarnet/footer-dolarnet.modu
         CurrencyBarModule,
         SliderModule, 
         FooterDolarnetModule,
-        PostCategoryHeaderModule
+        PostCategoryHeaderModule,
+        NewsCategoryBoxModule
     ],
     providers      : [
     ],

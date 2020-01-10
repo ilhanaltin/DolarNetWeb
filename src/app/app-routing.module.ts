@@ -25,6 +25,10 @@ const routes: Routes = [
     component: NewsComponent
   },
   {
+    path     : 'news-list/:category',
+    component: NewsListComponent
+  },
+  {
     path     : 'news-list',
     component: NewsListComponent
   },

@@ -22,6 +22,8 @@ export const GlobalConstants = {
     'POWR','DIVI','LOKI','ONE','EDC','GT','RDD','TRUE','CVC','XMX','BNT','BHP','PAI','ERD','STORJ','DAG','MTL','ROX','CND','ANT',
     'GNO','DENT','SAN','OCEAN','CELR','GO','GRS','TEL','ORBS','LEND','CS','NXS','ODE','SYS','ABT','LBA','PIVX','WXT','COCOS','RET',
     'MEDX','EDO','KAN','FX','SUSD','ADN','DATA','CTXC','VTC','GAS'],
-    UserRoles: { Admin: 1, Editor: 2, User: 3 }
+    UserRoles: { Admin: 1, Editor: 2, User: 3 },
+    PostCategories: { Doviz: 1, Altin: 2, Kripto: 3, Gundem: 4, Borsa: 5, Emtia: 6, EnSon: 7, EnPopuler: 8, EkonIndikator: 9,
+        Ekonomi: 10, Dunya: 11, Turkiye: 12 }
     };
     

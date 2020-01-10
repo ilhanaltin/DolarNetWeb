@@ -1,3 +1,4 @@
+import { GlobalConstants } from './../../../models/constants/GlobalConstants';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-category-header.component.css']
 })
 export class PostCategoryHeaderComponent implements OnInit {
+
+  readonly _globalConstants = GlobalConstants;
 
   constructor() { }
 

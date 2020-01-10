@@ -1,23 +1,22 @@
-import { MarketAnalyseModule } from '../../market-analyse/market-analyse.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { PostCategoryHeaderComponent } from './post-category-header.component';
+import { NewsCategoryBoxComponent } from './news-category-box.component';
 
 @NgModule({
     declarations   : [
-        PostCategoryHeaderComponent        
+        NewsCategoryBoxComponent
     ],
     imports        : [
         CommonModule,
         BrowserModule,
-        HttpClientModule,
+        FormsModule,
         RouterModule
     ],
-    exports: [
-        PostCategoryHeaderComponent
+    exports   : [
+        NewsCategoryBoxComponent
     ],
     providers      : [
     ],
@@ -25,6 +24,6 @@ import { PostCategoryHeaderComponent } from './post-category-header.component';
     ]
 })
 
-export class PostCategoryHeaderModule
+export class NewsCategoryBoxModule
 {
 }

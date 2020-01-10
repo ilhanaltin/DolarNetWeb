@@ -1,3 +1,4 @@
+import { NewsCategoryBoxModule } from './main/pages/post/news-category-box/news-category-box.module';
 import { NewsListModule } from './main/pages/post/news-list/news-list.module';
 import { BorsaListModule } from './main/pages/standart-list/borsa-list/borsa-list.module';
 import { NewsDetailModule } from './main/pages/post/news-detail/news-detail.module';
@@ -40,7 +41,8 @@ import { PostCategoryHeaderModule } from './main/pages/header/post-category-head
     CriptoCoinListModule,
     BorsaListModule,
     NewsListModule,
-    PostCategoryHeaderModule
+    PostCategoryHeaderModule,
+    NewsCategoryBoxModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
