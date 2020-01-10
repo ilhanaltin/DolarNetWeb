@@ -1,8 +1,8 @@
-import { BlogService } from './../../services/blog.service';
+import { BlogService } from '../../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { PostVM } from '../../models/blog/PostVM';
+import { PostVM } from '../../../models/blog/PostVM';
 
 @Component({
   selector: 'news-detail',

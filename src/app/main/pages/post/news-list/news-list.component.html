@@ -1,0 +1,144 @@
+<navigation-header></navigation-header>
+<main class="sub-page">
+    <section class="hero-bar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container mt-4">
+                    <currency-bar></currency-bar>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <post-category-header></post-category-header>
+        <div class="container-fluid mt-2 information-box">
+            <div class="row">
+                <div class="container">
+                    <p>Bu bölüm, küresel döviz, emtia ve hisse senedi piyasalarındaki son finansal raporları ve son
+                        dakika haberlerini içermektedir. Ayrıca emtia, hisse senetleri, faiz oranlarını geniş
+                        kapsamlı olarak ve faiz oranları ile ek ekonomik göstergeleri ise çok geniş bir yelpazede
+                        bulacaksınız.</p>
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="row d-flex flex-row align-items-stretch">
+                <div class="col-md-8">
+                    <div class="featured-news-title mt-3 mb-3">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <h1>
+                                    <svg class='remix'>
+                                        <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-article-line">
+                                        </use>
+                                    </svg>
+                                    Döviz Haberleri
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row news-list">
+                        <div *ngFor="let post of postList" class="col-md-12 news-list-item">
+                            <!-- <div>
+                                <img class="home-news-list-item-featured-image" [src]="post.mainImage" alt="">
+                            </div>
+                            <div class="ml-2">
+                                <a class="home-news-list-item-title" [routerLink]="['/news-detail', post.id]">{{post.title}}</a>
+                                <p class="home-news-list-item-date">{{post.publishDate | date :'dd-MM-yyyy'}}</p>
+                            </div> -->
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img class="img-fluid rounded w-100" [src]="post.mainImage" alt='' />
+
+                                </div>
+                                <div class="col-md-9">
+                                    <time>
+                                        <svg class='remix'>
+                                            <use
+                                                xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-calendar-line">
+                                            </use>
+                                        </svg>
+
+                                        {{post.publishDate | date :'dd-MM-yyyy'}}
+                                    </time>
+
+
+                                    <h4 class="mt-3">{{post.title}}
+                                    </h4>
+                                    <p class="mt-3">{{removeHtmlTags(post.content)}}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="col-md-12 news-list-item">
+                            <a href="">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="img-fluid rounded w-100"
+                                            src='http://unsplash.it/500/500?random&gravity=center' alt='' />
+
+                                    </div>
+                                    <div class="col-md-9">
+                                        <time>
+                                            <svg class='remix'>
+                                                <use
+                                                    xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-calendar-line">
+                                                </use>
+                                            </svg>
+
+                                            Sat Jan 12 2019 01:18:56 GMT+0300 (GMT+03:00)
+                                        </time>
+
+
+                                        <h4 class="mt-3">Meksika piyasaları kapanışta düştü; S&P/BMV IPC 0,30% değer
+                                            kaybetti
+                                        </h4>
+                                        <p class="mt-3">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                            Similique
+                                            excepturi saepe, esse ullam fugiat voluptatum sequi doloremque ducimus
+                                            consectetur velit?</p>
+
+
+                                    </div>
+                                </div>
+
+                            </a>
+                        </div> -->
+
+                        
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 news-featured-categories">
+                    <div class="row news-featured-categories-gundem">
+                        <a href="">Gündem</a>
+                    </div>
+                    <div class="row news-featured-categories-doviz">
+                        <a href="">Döviz</a>
+
+                    </div>
+                    <div class="row news-featured-categories-paralar">
+                        <a href="">Kripto Paralar</a>
+
+                    </div>
+                    <div class="row news-featured-categories-altin">
+                        <a href="">Altın</a>
+
+                    </div>
+                    <div class="row news-featured-categories-borsa">
+                        <a href="">Borsa</a>
+
+                    </div>
+                    <div class="row news-featured-categories-emtia">
+                        <a href="">Emtia</a>
+
+                    </div>
+                    <market-analyse></market-analyse>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<footer-dolarnet></footer-dolarnet>

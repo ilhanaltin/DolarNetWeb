@@ -1,14 +1,15 @@
-import { MarketAnalyseModule } from './../market-analyse/market-analyse.module';
+import { MarketAnalyseModule } from '../../market-analyse/market-analyse.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavigationHeaderModule } from '../header/navigation-header/navigation-header.module';
-import { CurrencyBarModule } from '../header/currency-bar/currency-bar.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module';
-import { NewsDetailComponent } from './news-detail.component';
 import { RouterModule } from '@angular/router';
+import { NewsDetailComponent } from './news-detail.component';
+import { NavigationHeaderModule } from '../../header/navigation-header/navigation-header.module';
+import { CurrencyBarModule } from '../../header/currency-bar/currency-bar.module';
+import { FooterDolarnetModule } from '../../footer-dolarnet/footer-dolarnet.module';
+import { PostCategoryHeaderModule } from '../../header/post-category-header/post-category-header.module';
 
 @NgModule({
     declarations   : [
@@ -24,7 +25,8 @@ import { RouterModule } from '@angular/router';
         NavigationHeaderModule,
         CurrencyBarModule,
         FooterDolarnetModule,
-        MarketAnalyseModule
+        MarketAnalyseModule,
+        PostCategoryHeaderModule
     ],
     providers      : [
     ],

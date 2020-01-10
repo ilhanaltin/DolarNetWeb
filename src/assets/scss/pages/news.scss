@@ -46,7 +46,8 @@
                     white-space: nowrap;
                     text-align: center;
                     transition: $transition-base;
-                    &::after{
+
+                    &::after {
                         content: "";
                         left: 0;
                         height: 3px;
@@ -56,8 +57,9 @@
                         bottom: -.7rem;
                         transition: $transition-base;
                     }
-                    &:hover{
-                        &::after{
+
+                    &:hover {
+                        &::after {
                             content: "";
                             left: 0;
                             height: 3px;
@@ -93,11 +95,16 @@
     .col-md-12 {
         border-bottom: 2px solid $gray-500;
 
+        svg {
+            fill: $color-gray-5;
+           
+        }
+
         h1 {
             font-size: 1.5rem;
             letter-spacing: -.06rem;
             font-weight: 600;
-            color: $doviz-color;
+            color: $color-gray-5;
 
         }
     }
@@ -181,6 +188,8 @@
 
 .news-list {
     &-item {
+        margin-top: 1.5rem;
+
         a {
             font-size: 1rem;
             font-weight: 500;
@@ -188,10 +197,11 @@
             line-height: 1.3rem;
             position: relative;
 
+
             &:hover {
                 img {
                     filter: none;
-                    box-shadow: $box-shadow;
+                    // box-shadow: $box-shadow;
                 }
 
             }
@@ -209,13 +219,24 @@
                 filter: grayscale(.5);
                 transition: $transition-base;
                 margin-bottom: 1rem;
-                box-shadow: $box-shadow-sm;
+                // box-shadow: $box-shadow-sm;
 
             }
 
-            date {
-                font-size: .8rem;
-                font-weight: 600;
+            time {
+                display: flex;
+                align-items: center;
+                font-size: .9rem;
+
+                font-weight: 500;
+                color: $gray-700;
+
+                svg {
+                    fill: $gray-700;
+                    width: 1.1rem;
+                    height: 1.1rem;
+                    margin-right: 0.3rem;
+                }
             }
         }
 

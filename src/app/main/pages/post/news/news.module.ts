@@ -1,14 +1,15 @@
+import { PostCategoryHeaderModule } from './../../header/post-category-header/post-category-header.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewsComponent } from './news.component';
-import { NavigationHeaderModule } from '../header/navigation-header/navigation-header.module';
-import { CurrencyBarModule } from '../header/currency-bar/currency-bar.module';
-import { SliderModule } from '../slider/slider.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module';
+import { NavigationHeaderModule } from '../../header/navigation-header/navigation-header.module';
+import { CurrencyBarModule } from '../../header/currency-bar/currency-bar.module';
+import { SliderModule } from '../../slider/slider.module';
+import { FooterDolarnetModule } from '../../footer-dolarnet/footer-dolarnet.module';
 
 @NgModule({
     declarations   : [
@@ -24,7 +25,8 @@ import { FooterDolarnetModule } from '../footer-dolarnet/footer-dolarnet.module'
         NavigationHeaderModule,
         CurrencyBarModule,
         SliderModule, 
-        FooterDolarnetModule
+        FooterDolarnetModule,
+        PostCategoryHeaderModule
     ],
     providers      : [
     ],

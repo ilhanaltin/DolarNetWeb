@@ -15,10 +15,10 @@ export class HomePostListComponent implements OnInit {
   constructor(private _blogService: BlogService) { }
 
   ngOnInit() {
-    this.getSliderPosts();
+    this.getPosts();
   }
 
-  getSliderPosts()
+  getPosts()
   {
     let criteria = new PostSearchCriteriaVM();
     criteria.itemCount = 10;
