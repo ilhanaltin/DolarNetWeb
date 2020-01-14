@@ -14,13 +14,49 @@
             <div class="row">
                 <div class="container">
                     <p>Bu bölüm, son döviz verilerini içermektedir.</p>
-                </div>
+                </div>                
             </div>
         </div>
         <div class="container">
             <div class="row row d-flex flex-row align-items-stretch">
-                <div class="col-md-8 news-detail">
-                    <p>Döviz Datası....</p>
+                <div class="col-md-8 news-detail">  
+                    <div class="row">
+                        <div class="col-md-3 text-left">
+                            <p>Birim</p>
+                        </div>
+                        <div class="col-md-3 text-left">
+                            <p>Alış</p>
+                        </div>
+                        <div class="col-md-3 text-left">
+                            <p>Satış</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p>Değişim</p>
+                        </div>
+                    </div>                  
+                    <div class="row" *ngFor="let currency of currencyRates">
+                        <div class="col-md-3 text-left">
+                        <p>{{currency.code}}</p>
+                        </div>
+                        <div class="col-md-3 text-left">
+                        <p>{{currency.buying}}</p>
+                        </div>
+                        <div class="col-md-3 text-left">
+                            <p>{{currency.selling}}</p>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <p *ngIf ="currency.rate >= 0" class="text-success">% {{currency.rate}}
+                                <span>
+                                    <img src="../assets/images/icons/up-icon.svg" alt="">
+                                </span>
+                            </p>
+                            <p *ngIf ="currency.rate < 0" class="text-danger">% {{currency.rate}}
+                                <span>
+                                    <img src="../assets/images/icons/down-icon.svg" alt="">
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 currency-converter">
                     <converter></converter>

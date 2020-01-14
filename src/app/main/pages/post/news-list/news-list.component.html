@@ -38,30 +38,32 @@
                         </div>
                     </div>
                     <div class="row news-list">
-                        <div *ngFor="let post of postList" class="col-md-12 news-list-item">                            
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img class="img-fluid rounded w-100" [src]="post.mainImage" alt='' />
-
+                        <div *ngFor="let post of postList" class="col-md-12 news-list-item"> 
+                            <a [routerLink]="['/news-detail', post.id]">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="img-fluid rounded w-100" [src]="post.mainImage" alt='' />
+    
+                                    </div>
+                                    <div class="col-md-9">
+                                        <time>
+                                            <svg class='remix'>
+                                                <use
+                                                    xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-calendar-line">
+                                                </use>
+                                            </svg>
+    
+                                            {{post.publishDate | date :'dd-MM-yyyy'}}
+                                        </time>
+    
+    
+                                        <h4 class="mt-3">{{post.title}}
+                                        </h4>
+                                        <p class="mt-3">{{removeHtmlTags(post.content)}}</p>
+    
+                                    </div>
                                 </div>
-                                <div class="col-md-9">
-                                    <time>
-                                        <svg class='remix'>
-                                            <use
-                                                xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-calendar-line">
-                                            </use>
-                                        </svg>
-
-                                        {{post.publishDate | date :'dd-MM-yyyy'}}
-                                    </time>
-
-
-                                    <h4 class="mt-3">{{post.title}}
-                                    </h4>
-                                    <p class="mt-3">{{removeHtmlTags(post.content)}}</p>
-
-                                </div>
-                            </div>
+                            </a>                                                       
                         </div>
                         
                         <!-- <div class="col-md-12 news-list-item">

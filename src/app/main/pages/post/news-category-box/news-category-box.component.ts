@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 
 @Component({
   selector: 'news-category-box',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./news-category-box.component.css']
 })
 export class NewsCategoryBoxComponent implements OnInit {
+
+  readonly _globalConstants = GlobalConstants;
 
   constructor() { }
 
