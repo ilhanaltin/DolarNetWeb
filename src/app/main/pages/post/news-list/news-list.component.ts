@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostSearchCriteriaVM } from '../../../models/blog/PostSearchCriteriaVM';
 import { BlogService } from '../../../services/blog.service';
 import { PostVM } from '../../../models/blog/PostVM';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'news-list',
@@ -12,19 +13,36 @@ export class NewsListComponent implements OnInit {
 
   postList: PostVM[];
 
-  constructor(private _blogService: BlogService) { }
+  constructor(
+    private _blogService: BlogService,
+    private route: ActivatedRoute) 
+    { 
+      
+    }
 
   ngOnInit() {
-    this.getPosts()
+      this.route.paramMap.subscribe((params : ParamMap)=> {  
+        
+        console.log(params.get('category'));
+
+        if(params.get('category') == null || params.get('category') == "")
+        {
+          this.getPosts(-1);
+        }
+        else
+        {
+          this.getPosts(params.get('category'));
+        }
+      });
   }
 
-  getPosts()
+  getPosts(category)
   {
     let criteria = new PostSearchCriteriaVM();
     criteria.itemCount = 10;
     criteria.pageId = 0;
-    criteria.isSliderPost = false;
-    criteria.categoryId = -1;
+    criteria.isSliderPost = null;
+    criteria.categoryId = category;
     
     this._blogService.get(criteria).subscribe(response=>{
         this.postList = response.result.postList;
