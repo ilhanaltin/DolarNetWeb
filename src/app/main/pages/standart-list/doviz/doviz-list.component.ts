@@ -1,3 +1,4 @@
+import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 import { CurrencyService } from './../../../services/currency.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription, timer } from 'rxjs';
@@ -40,4 +41,16 @@ export class DovizListComponent implements OnInit {
         }
   }
 
+  getCurrencyFlagCss(code: string) : string
+  {
+      if(code == null || code == "")
+        return "";
+
+      return "flag-icon flag-icon-" + code.toLocaleLowerCase().split("ı").join("i").substring(0,2);
+  }
+
+  getCurrencyName(code: string) : string
+  {
+      return GlobalConstants.symbolNames[GlobalConstants.symbols.indexOf(code)];
+  }
 }

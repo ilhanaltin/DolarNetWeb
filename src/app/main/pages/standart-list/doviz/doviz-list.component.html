@@ -21,30 +21,30 @@
             <div class="row row d-flex flex-row align-items-stretch">
                 <div class="col-md-8 news-detail">  
                     <div class="row">
-                        <div class="col-md-3 text-left">
+                        <div class="col-md-6 text-left">
                             <p>Birim</p>
                         </div>
-                        <div class="col-md-3 text-left">
+                        <div class="col-md-2 text-left">
                             <p>Alış</p>
                         </div>
-                        <div class="col-md-3 text-left">
+                        <div class="col-md-2 text-left">
                             <p>Satış</p>
                         </div>
-                        <div class="col-md-3 text-right">
+                        <div class="col-md-2 text-right">
                             <p>Değişim</p>
                         </div>
                     </div>                  
                     <div class="row" *ngFor="let currency of currencyRates">
-                        <div class="col-md-3 text-left">
-                        <p>{{currency.code}}</p>
+                        <div class="col-md-6 text-left">                            
+                            <p><span [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} - {{getCurrencyName(currency.code)}}</p>
                         </div>
-                        <div class="col-md-3 text-left">
+                        <div class="col-md-2 text-left">
                         <p>{{currency.buying}}</p>
                         </div>
-                        <div class="col-md-3 text-left">
+                        <div class="col-md-2 text-left">
                             <p>{{currency.selling}}</p>
                         </div>
-                        <div class="col-md-3 text-right">
+                        <div class="col-md-2 text-right">
                             <p *ngIf ="currency.rate >= 0" class="text-success">% {{currency.rate}}
                                 <span>
                                     <img src="../assets/images/icons/up-icon.svg" alt="">

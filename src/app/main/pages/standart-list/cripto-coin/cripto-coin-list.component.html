@@ -20,7 +20,43 @@
         <div class="container">
             <div class="row row d-flex flex-row align-items-stretch">
                 <div class="col-md-8 news-detail">
-                    <p>Cripto Para Datası....</p>
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <p>Birim</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>Satış ($)</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p class="simge-tl">Satış (&#8378;)</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p>Değişim</p>
+                        </div>
+                    </div>                  
+                    <div class="row" *ngFor="let coin of criptoRates">
+                        <div class="col-md-6 text-left">                            
+                            <p><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                        <p>{{coin.price}}</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>{{getConvertedToTry(coin.price)}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p *ngIf ="coin.changeDay >= 0" class="text-success">% {{coin.changeDay}}
+                                <span>
+                                    <img src="../assets/images/icons/up-icon.svg" alt="">
+                                </span>
+                            </p>
+                            <p *ngIf ="coin.changeDay < 0" class="text-danger">% {{coin.changeDay}}
+                                <span>
+                                    <img src="../assets/images/icons/down-icon.svg" alt="">
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 currency-converter">
                     <converter></converter>

@@ -24,6 +24,7 @@
     "@ckeditor/ckeditor5-angular": "^1.1.0",
     "@ckeditor/ckeditor5-build-classic": "^15.0.0",
     "angular2-jwt": "^0.2.3",
+    "flag-icon-css": "^3.4.5",
     "md5-typescript": "^1.0.5",
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.3",

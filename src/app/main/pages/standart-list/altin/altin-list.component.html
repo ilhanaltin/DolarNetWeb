@@ -20,7 +20,43 @@
         <div class="container">
             <div class="row row d-flex flex-row align-items-stretch">
                 <div class="col-md-8 news-detail">
-                    <p>Altın Datası....</p>
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <p>Birim</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>Alış</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>Satış</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p>Değişim</p>
+                        </div>
+                    </div>                  
+                    <div class="row" *ngFor="let gold of goldRates">
+                        <div class="col-md-6 text-left">                            
+                            <p>{{gold.name}}</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                        <p>{{gold.buying}}</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>{{gold.selling}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p *ngIf ="gold.rate >= 0" class="text-success">% {{gold.rate}}
+                                <span>
+                                    <img src="../assets/images/icons/up-icon.svg" alt="">
+                                </span>
+                            </p>
+                            <p *ngIf ="gold.rate < 0" class="text-danger">% {{gold.rate}}
+                                <span>
+                                    <img src="../assets/images/icons/down-icon.svg" alt="">
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 currency-converter">
                     <converter></converter>
