@@ -6,10 +6,11 @@ import { DovizListComponent } from './main/pages/standart-list/doviz/doviz-list.
 import { AltinListComponent } from './main/pages/standart-list/altin/altin-list.component';
 import { ParitelerListComponent } from './main/pages/standart-list/pariteler/pariteler-list.component';
 import { CriptoCoinListComponent } from './main/pages/standart-list/cripto-coin/cripto-coin-list.component';
-import { BorsaListComponent } from './main/pages/standart-list/borsa-list/borsa-list.component';
 import { NewsComponent } from './main/pages/post/news/news.component';
 import { NewsListComponent } from './main/pages/post/news-list/news-list.component';
 import { NewsDetailComponent } from './main/pages/post/news-detail/news-detail.component';
+import { BorsaHisseListComponent } from './main/pages/standart-list/borsa-hisse-list/borsa-hisse-list.component';
+import { EmtiaListComponent } from './main/pages/standart-list/emtia-list/emtia-list.component';
 
 const routes: Routes = [
   {
@@ -53,8 +54,12 @@ const routes: Routes = [
     component: CriptoCoinListComponent
   },
   {
-    path     : 'borsa-list',
-    component: BorsaListComponent
+    path     : 'borsa-hisse-list',
+    component: BorsaHisseListComponent
+  },
+  {
+    path     : 'emtia-list',
+    component: EmtiaListComponent
   },
   {
     path     : '**',

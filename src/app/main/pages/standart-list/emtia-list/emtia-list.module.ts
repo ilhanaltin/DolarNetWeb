@@ -7,11 +7,11 @@ import { NavigationHeaderModule } from '../../header/navigation-header/navigatio
 import { CurrencyBarModule } from '../../header/currency-bar/currency-bar.module';
 import { FooterDolarnetModule } from '../../footer-dolarnet/footer-dolarnet.module';
 import { ConverterModule } from '../../converter/converter.module';
-import { BorsaListComponent } from './borsa-list.component';
+import { EmtiaListComponent } from './emtia-list.component';
 
 @NgModule({
     declarations   : [
-        BorsaListComponent        
+        EmtiaListComponent        
     ],
     imports        : [
         CommonModule,
@@ -29,6 +29,6 @@ import { BorsaListComponent } from './borsa-list.component';
     ]
 })
 
-export class BorsaListModule
+export class EmtiaListModule
 {
 }

@@ -18,25 +18,25 @@
                     <a class="nav-link" href="#" routerLink="/altin-list">Altın</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="#" routerLink="/emtia-list">Emtialar</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="#" routerLink="/pariteler-list">Pariteler</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" routerLink="/cripto-coin-list">Kripto Paralar</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" routerLink="/borsa-list">Borsa</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="borsaDropdown" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Borsa</a>
+                    <div class="dropdown-menu" aria-labelledby="borsaDropdown">
+                    <a class="dropdown-item" href="#" routerLink="/borsa-hisse-list">Hisseler</a>
+                    <a class="dropdown-item" href="#">Canlı Borsa</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" routerLink="/news">Haberler</a>
-                </li>
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownId">
-                    <a class="dropdown-item" href="#">Action 1</a>
-                    <a class="dropdown-item" href="#">Action 2</a>
-                    </div>
-                </li> -->
+                </li>                
                 </ul>
                 <div class="mr-0" *ngIf="!_authenticationService.isLoggedIn()">
                     <a name="" id="" class="btn btn-light header-register-btn" href="#" role="button">

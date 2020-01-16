@@ -1,6 +1,7 @@
+import { EmtiaListModule } from './main/pages/standart-list/emtia-list/emtia-list.module';
 import { NewsCategoryBoxModule } from './main/pages/post/news-category-box/news-category-box.module';
 import { NewsListModule } from './main/pages/post/news-list/news-list.module';
-import { BorsaListModule } from './main/pages/standart-list/borsa-list/borsa-list.module';
+import { BorsaHisseListModule } from './main/pages/standart-list/borsa-hisse-list/borsa-hisse-list.module';
 import { NewsDetailModule } from './main/pages/post/news-detail/news-detail.module';
 import { LoginModule } from './main/pages/login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
@@ -39,10 +40,11 @@ import { PostCategoryHeaderModule } from './main/pages/header/post-category-head
     AltinListModule,
     ParitelerListModule,
     CriptoCoinListModule,
-    BorsaListModule,
+    BorsaHisseListModule,
     NewsListModule,
     PostCategoryHeaderModule,
-    NewsCategoryBoxModule
+    NewsCategoryBoxModule,
+    EmtiaListModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
