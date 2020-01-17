@@ -23,8 +23,6 @@ export class NewsListComponent implements OnInit {
   ngOnInit() {
       this.route.paramMap.subscribe((params : ParamMap)=> {  
         
-        console.log(params.get('category'));
-
         if(params.get('category') == null || params.get('category') == "")
         {
           this.getPosts(-1);

@@ -20,6 +20,7 @@ import { AltinListModule } from './main/pages/standart-list/altin/altin-list.mod
 import { ParitelerListModule } from './main/pages/standart-list/pariteler/pariteler-list.module';
 import { CriptoCoinListModule } from './main/pages/standart-list/cripto-coin/cripto-coin-list.module';
 import { PostCategoryHeaderModule } from './main/pages/header/post-category-header/post-category-header.module';
+import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/borsa-live-list.module';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { PostCategoryHeaderModule } from './main/pages/header/post-category-head
     ParitelerListModule,
     CriptoCoinListModule,
     BorsaHisseListModule,
+    BorsaLiveListModule,
     NewsListModule,
     PostCategoryHeaderModule,
     NewsCategoryBoxModule,

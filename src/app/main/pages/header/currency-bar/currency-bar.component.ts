@@ -37,7 +37,6 @@ export class CurrencyBarComponent implements OnInit {
     const ti = timer(0,60000);
 
         this.myTimerSub = ti.subscribe(t => {    
-            console.log("Tick-Currency-Bar"); 
             this.getCurrencyAndConnectedData();
         });
   }

@@ -13,7 +13,7 @@
         <div class="container-fluid mt-2 information-box">
             <div class="row">
                 <div class="container">
-                    <p>Bu bölüm, son borsa verilerini içermektedir.</p>
+                    <p>Bu bölüm, son canlı borsa verilerini içermektedir.</p>
                 </div>
             </div>
         </div>
@@ -24,33 +24,27 @@
                         <div class="col-md-6 text-left">
                             <p>Hisse</p>
                         </div>
-                        <div class="col-md-2 text-left">
+                        <div class="col-md-3 text-left">
                             <p>Değer</p>
                         </div>
-                        <div class="col-md-2 text-left">
-                            <p>Hacim</p>
-                        </div>
-                        <div class="col-md-2 text-right">
+                        <div class="col-md-3 text-right">
                             <p>Değişim</p>
                         </div>
                     </div>                  
-                    <div class="row" *ngFor="let hisse of borsaHisseRates">
+                    <div class="row" *ngFor="let live of borsaLiveRates">
                         <div class="col-md-6 text-left">                            
-                            <p>{{hisse.text}}</p>
+                            <p>{{live.name}}</p>
                         </div>
-                        <div class="col-md-2 text-left">
-                            <p>{{hisse.lastprice}}</p>
+                        <div class="col-md-3 text-left">
+                            <p>{{live.price}} &#8378;</p>
                         </div>
-                        <div class="col-md-2 text-left">
-                            <p>{{hisse.hacim}}</p>
-                        </div>
-                        <div class="col-md-2 text-right">
-                            <p *ngIf ="hisse.rate >= 0" class="text-success">% {{hisse.rate}}
+                        <div class="col-md-3 text-right">
+                            <p *ngIf ="live.rate >= 0" class="text-success">% {{live.rate}}
                                 <span>
                                     <img src="../assets/images/icons/up-icon.svg" alt="">
                                 </span>
                             </p>
-                            <p *ngIf ="hisse.rate < 0" class="text-danger">% {{hisse.rate}}
+                            <p *ngIf ="live.rate < 0" class="text-danger">% {{live.rate}}
                                 <span>
                                     <img src="../assets/images/icons/down-icon.svg" alt="">
                                 </span>

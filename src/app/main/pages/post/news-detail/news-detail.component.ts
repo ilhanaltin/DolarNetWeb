@@ -25,8 +25,6 @@ export class NewsDetailComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe((params : ParamMap)=> {  
           this._blogService.getById(params.get('id')).subscribe(response => {
-            console.log(params.get('id'));
-            console.log(response);
             this.post = response.result.post;
         });
     });

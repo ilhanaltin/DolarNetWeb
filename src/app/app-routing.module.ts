@@ -1,3 +1,4 @@
+import { BorsaLiveListComponent } from './main/pages/standart-list/borsa-live-list/borsa-live-list.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './main/pages/home/home.component';
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path     : 'borsa-hisse-list',
     component: BorsaHisseListComponent
+  },
+  {
+    path     : 'borsa-live-list',
+    component: BorsaLiveListComponent
   },
   {
     path     : 'emtia-list',

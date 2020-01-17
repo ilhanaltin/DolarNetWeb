@@ -6,16 +6,6 @@ export const apiConfig = {
       {
         Url: "https://localhost:44366/api/"
       },
-      Currency:
-      {
-        Url: "http://data.fixer.io/api/",
-        Endpoint: 
-        {
-          Latest: "latest",
-          Convert: "convert"
-        },
-        AccessKey: "d0b5ebf24379ec61a70dc9a83d95cf92"
-      },
       CollectApi:
       {
         BaseUrl: "https://api.collectapi.com/economy/",
@@ -31,13 +21,16 @@ export const apiConfig = {
     SessionKeys:
     {
       Currency:{
-        CurrencyDataRefreshedPeriodically: "CurrencyDataRefreshedPeriodically"
+        CurrencyDataRefreshedPeriodically: "CurrencyDataRefreshedPeriodically",
+        PariteDataRefreshedPeriodically: "PariteDataRefreshedPeriodically"
       },
       Gold:{
         GoldDataRefreshedPeriodically: "GoldDataRefreshedPeriodically"
       },
       Borsa:{
-        BorsaDataRefreshedPeriodically: "BorsaDataRefreshedPeriodically"
+        BorsaDataRefreshedPeriodically: "BorsaDataRefreshedPeriodically",
+        BorsaHisseDataRefreshedPeriodically: "BorsaHisseDataRefreshedPeriodically",
+        BorsaLiveDataRefreshedPeriodically: "BorsaLiveDataRefreshedPeriodically"
       },
       Cripto:{
         CriptoDataRefreshedPeriodically: "CoinDataRefreshedPeriodically"
@@ -105,7 +98,8 @@ export const apiConfig = {
         },
         Currency:
         {
-          GetAllCurrency: "Currency"
+          GetAllCurrency: "Currency",
+          GetPariteler: "Currency/GetPariteler"
         },
         Gold:
         {
@@ -113,7 +107,9 @@ export const apiConfig = {
         },
         Borsa:
         {
-          GetAllBorsa: "Borsa"
+          GetAllBorsa: "Borsa",
+          GetHisseSenedi: "Borsa/GetHisseSenedi",
+          GetLiveBorsa: "Borsa/GetLiveBorsa"
         },
         Cripto:
         {

@@ -19,8 +19,44 @@
         </div>
         <div class="container">
             <div class="row row d-flex flex-row align-items-stretch">
-                <div class="col-md-8 news-detail">
-                    <p>Parite Datası....</p>
+                <div class="col-md-8 news-detail">  
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <p>Birim</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>Alış</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>Satış</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p>Değişim</p>
+                        </div>
+                    </div>                  
+                    <div class="row" *ngFor="let parite of pariteler">
+                        <div class="col-md-6 text-left">                            
+                            <p>{{parite.name}} - {{parite.text}}</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                        <p>{{parite.buying}}</p>
+                        </div>
+                        <div class="col-md-2 text-left">
+                            <p>{{parite.selling}}</p>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <p *ngIf ="parite.rate >= 0" class="text-success">% {{parite.rate}}
+                                <span>
+                                    <img src="../assets/images/icons/up-icon.svg" alt="">
+                                </span>
+                            </p>
+                            <p *ngIf ="parite.rate < 0" class="text-danger">% {{parite.rate}}
+                                <span>
+                                    <img src="../assets/images/icons/down-icon.svg" alt="">
+                                </span>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 currency-converter">
                     <converter></converter>

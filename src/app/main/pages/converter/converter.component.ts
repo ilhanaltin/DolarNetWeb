@@ -81,7 +81,6 @@ export class ConverterComponent implements OnInit {
     const ti = timer(0,60000);
 
         this.myTimerSub = ti.subscribe(t => {    
-            console.log("Tick-Converter"); 
             this.getCurrencyAndConnectedData();
         });
   }

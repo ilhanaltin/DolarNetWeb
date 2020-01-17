@@ -51,8 +51,6 @@ export class SliderComponent implements OnInit {
 
   getSliderPosts()
   {
-    console.log("getSliderPosts");
-
     let criteria = new PostSearchCriteriaVM();
     criteria.itemCount = 10;
     criteria.pageId=0;
