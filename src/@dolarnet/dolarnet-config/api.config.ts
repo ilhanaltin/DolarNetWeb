@@ -69,7 +69,9 @@ export const apiConfig = {
           GetAll: "Blog",
           GetById: "Blog/GetById",
           Post: "Blog",
-          Delete: "Blog"
+          Delete: "Blog",
+          GetSliderPosts: "Blog/GetSliderPosts",
+          GetMostPopularPosts: "Blog/GetMostPopularPosts"
         },
         Integration:
         {

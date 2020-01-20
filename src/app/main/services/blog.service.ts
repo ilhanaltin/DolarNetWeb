@@ -23,12 +23,20 @@ export class BlogService {
       .append('PageId', criteria.pageId.toString())
       .append('CategoryId', criteria.categoryId.toString());
 
-      if(criteria.isSliderPost != null)
-      {
-          myParams.append('IsSliderPost', criteria.isSliderPost.toString());        
-      }
-
       return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams, true);
+  }
+
+  getSliderPosts() : Observable<ServiceResult<PostListResponseDetailsVM>>{
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetSliderPosts, null, true);
+  }
+
+  getMostPopularPosts(criteria: PostSearchCriteriaVM) : Observable<ServiceResult<PostListResponseDetailsVM>>{
+    let myParams = new HttpParams()
+      .append('ItemCount', criteria.itemCount.toString())
+      .append('PageId', criteria.pageId.toString())
+      .append('CategoryId', criteria.categoryId.toString());
+
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetMostPopularPosts, myParams, true);
   }
 
   getById(id) : Observable<ServiceResult<PostResponseDetailsVM>> {

@@ -39,7 +39,6 @@ export class NewsListComponent implements OnInit {
     let criteria = new PostSearchCriteriaVM();
     criteria.itemCount = 10;
     criteria.pageId = 0;
-    criteria.isSliderPost = null;
     criteria.categoryId = category;
     
     this._blogService.get(criteria).subscribe(response=>{

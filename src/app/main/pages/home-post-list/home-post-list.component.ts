@@ -23,7 +23,6 @@ export class HomePostListComponent implements OnInit {
     let criteria = new PostSearchCriteriaVM();
     criteria.itemCount = 10;
     criteria.pageId=0;
-    criteria.isSliderPost = false;
     criteria.categoryId = -1;
     
     this._blogService.get(criteria).subscribe(response=>{

@@ -1,3 +1,5 @@
+import { NewsPopularModule } from './main/pages/post/news-popular/news-popular.module';
+import { NewsLatestModule } from './main/pages/post/news-latest/news-latest.module';
 import { EmtiaListModule } from './main/pages/standart-list/emtia-list/emtia-list.module';
 import { NewsCategoryBoxModule } from './main/pages/post/news-category-box/news-category-box.module';
 import { NewsListModule } from './main/pages/post/news-list/news-list.module';
@@ -46,7 +48,9 @@ import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/
     NewsListModule,
     PostCategoryHeaderModule,
     NewsCategoryBoxModule,
-    EmtiaListModule
+    EmtiaListModule,
+    NewsLatestModule,
+    NewsPopularModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

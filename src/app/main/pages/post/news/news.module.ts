@@ -11,6 +11,8 @@ import { NavigationHeaderModule } from '../../header/navigation-header/navigatio
 import { CurrencyBarModule } from '../../header/currency-bar/currency-bar.module';
 import { SliderModule } from '../../slider/slider.module';
 import { FooterDolarnetModule } from '../../footer-dolarnet/footer-dolarnet.module';
+import { NewsLatestModule } from '../news-latest/news-latest.module';
+import { NewsPopularModule } from '../news-popular/news-popular.module';
 
 @NgModule({
     declarations   : [
@@ -28,7 +30,9 @@ import { FooterDolarnetModule } from '../../footer-dolarnet/footer-dolarnet.modu
         SliderModule, 
         FooterDolarnetModule,
         PostCategoryHeaderModule,
-        NewsCategoryBoxModule
+        NewsCategoryBoxModule,
+        NewsLatestModule,
+        NewsPopularModule
     ],
     providers      : [
     ],

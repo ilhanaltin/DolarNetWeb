@@ -51,13 +51,7 @@ export class SliderComponent implements OnInit {
 
   getSliderPosts()
   {
-    let criteria = new PostSearchCriteriaVM();
-    criteria.itemCount = 10;
-    criteria.pageId=0;
-    criteria.isSliderPost = true;
-    criteria.categoryId = -1;
-
-    this._blogService.get(criteria).subscribe(response=>{
+    this._blogService.getSliderPosts().subscribe(response=>{
         this.postList = response.result.postList;
         this.post1 = this.postList[0];
         this.post2 = this.postList[1];
