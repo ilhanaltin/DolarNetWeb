@@ -23,11 +23,11 @@ export class BlogService {
       .append('PageId', criteria.pageId.toString())
       .append('CategoryId', criteria.categoryId.toString());
 
-      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams, true);
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams);
   }
 
   getSliderPosts() : Observable<ServiceResult<PostListResponseDetailsVM>>{
-      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetSliderPosts, null, true);
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetSliderPosts, null);
   }
 
   getMostPopularPosts(criteria: PostSearchCriteriaVM) : Observable<ServiceResult<PostListResponseDetailsVM>>{
@@ -36,7 +36,7 @@ export class BlogService {
       .append('PageId', criteria.pageId.toString())
       .append('CategoryId', criteria.categoryId.toString());
 
-      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetMostPopularPosts, myParams, true);
+      return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetMostPopularPosts, myParams);
   }
 
   getById(id) : Observable<ServiceResult<PostResponseDetailsVM>> {

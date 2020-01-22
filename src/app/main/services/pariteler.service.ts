@@ -41,7 +41,7 @@ export class ParitelerService {
 
   getFromApi() : Observable<ServiceResult<ParitelerVM[]>>
   {
-    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetPariteler, null, true)
+    return this.baseService.get(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetPariteler, null)
       .pipe(map(responseData =>{
 
         var resp = responseData as ServiceResult<ParitelerVM[]>;
