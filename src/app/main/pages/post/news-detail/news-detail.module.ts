@@ -1,3 +1,5 @@
+import { NewsLatestModule } from './../news-latest/news-latest.module';
+import { NewsPopularModule } from './../news-popular/news-popular.module';
 import { MarketAnalyseModule } from '../../market-analyse/market-analyse.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,7 +28,9 @@ import { PostCategoryHeaderModule } from '../../header/post-category-header/post
         CurrencyBarModule,
         FooterDolarnetModule,
         MarketAnalyseModule,
-        PostCategoryHeaderModule
+        PostCategoryHeaderModule,
+        NewsPopularModule,
+        NewsLatestModule
     ],
     providers      : [
     ],

@@ -1,3 +1,4 @@
+import { NewsLatestModule } from './../../post/news-latest/news-latest.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,7 +22,8 @@ import { BorsaHisseListComponent } from './borsa-hisse-list.component';
         NavigationHeaderModule,
         CurrencyBarModule,
         FooterDolarnetModule,
-        ConverterModule
+        ConverterModule,
+        NewsLatestModule
     ],
     providers      : [
     ],
