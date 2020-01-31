@@ -4,7 +4,7 @@ export const apiConfig = {
     {
       Main:
       {
-        Url: "https://frapan.net/api/",
+        Url: "https://api-dolar.com/api/",
         UrlLocal: "https://localhost:44366/api/"
       },
       CollectApi:

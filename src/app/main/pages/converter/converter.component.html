@@ -97,12 +97,12 @@
           <div class="d-flex align-items-center">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioAlis"
-              [(ngModel)]="optionAlisSatis" [value]="1" [checked]="optionAlisSatis=='1'" (change)="onConverterChange()">
+              [(ngModel)]="optionAlisSatis" [value]="1" [checked]="optionAlisSatis === _globalConstants.Alis" (change)="onConverterChangeCurrency()">
               <label class="form-check-label" for="inlineRadioAlis">Alış</label>
             </div>
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadioSatis"
-              [(ngModel)]="optionAlisSatis" [value]="2" [checked]="optionAlisSatis === '2'" (change)="onConverterChange()">
+              [(ngModel)]="optionAlisSatis" [value]="2" [checked]="optionAlisSatis === _globalConstants.Satis" (change)="onConverterChangeCurrency()">
               <label class="form-check-label" for="inlineRadioSatis">Satış</label>
             </div>
           </div>

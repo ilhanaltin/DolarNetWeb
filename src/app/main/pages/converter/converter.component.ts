@@ -18,6 +18,8 @@ export class ConverterComponent implements OnInit {
 
   private myTimerSub: Subscription;    
 
+  readonly _globalConstants = GlobalConstants;
+
   currencies = [];
   golds = [];
   coins = [];

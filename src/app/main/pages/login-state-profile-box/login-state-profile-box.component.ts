@@ -8,7 +8,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginStateProfileBoxComponent implements OnInit {
 
-  constructor(private _authenticationService: AuthenticationService) { }
+  constructor(public _authenticationService: AuthenticationService) { }
 
   ngOnInit() {
   }
