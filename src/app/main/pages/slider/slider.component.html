@@ -43,6 +43,10 @@
                 <a *ngIf="post10" href="#" [routerLink]="['/news-detail', post10.id]" class="home-news-carousel-item-title">{{post10.title}} </a>
                 <img *ngIf="post10" [src]="post10.mainImage" alt="">
             </div>
+            <div class="item home-news-carousel-item">
+                <a *ngIf="post11" href="#" [routerLink]="['/news-detail', post11.id]" class="home-news-carousel-item-title">{{post11.title}} </a>
+                <img *ngIf="post11" [src]="post10.mainImage" alt="">
+            </div>
         </div>
 
         <div id="sync2" class="owl-carousel owl-theme home-news-carousel-count">
@@ -75,6 +79,9 @@
             </div>
             <div class="item">
                 <h1>10</h1>
+            </div>
+            <div class="item">
+                <h1>11</h1>
             </div>
         </div>
     </div>
