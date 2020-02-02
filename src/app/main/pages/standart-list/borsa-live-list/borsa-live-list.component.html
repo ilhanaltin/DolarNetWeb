@@ -1,63 +1,75 @@
 <navigation-header></navigation-header>
 <main class="sub-page">
-    <section class="hero-bar">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="container mt-4">
-                    <currency-bar></currency-bar>
-                </div>
-            </div>
+  <section class="hero-bar">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="container mt-4">
+          <currency-bar></currency-bar>
         </div>
-    </section>
-    <section>
-        <div class="container-fluid mt-2 information-box">
-            <div class="row">
-                <div class="container">
-                    <p>Bu bölüm, son canlı borsa verilerini içermektedir.</p>
-                </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="row row d-flex flex-row align-items-stretch">
+        <div class="col-md-8 news-detail">
+          <div class="col-12 mt-4 mb-4">
+            <img class="img-fluid rounded shadow-sm" src="/assets/images/header-banners/kripto-header.jpg" alt="">
+            <svg class='remix mt-2'>
+              <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-exchange-dollar-line"></use>
+            </svg>
+            <h1>Canlı Borsa Verileri </h1>
+            <p class="font-weight-normal">Bu bölüm, son canlı borsa verilerini içermektedir. </p>
+          </div>
+          <div class="col-12">
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      <p>Hisse</p>
+                    </th>
+                    <th scope="col">
+                      <p>Değer</p>
+                    </th>
+
+                    <th scope="col">
+                      <p>Değişim</p>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="align-middle" *ngFor="let live of borsaLiveRates">
+                    <td class="col-5">
+                      {{live.name}}
+                    </td>
+                    <td class="col-1">
+                      {{live.price}}
+                    </td>
+                    <td class="col-5">
+                      <p *ngIf="live.rate >= 0" class="text-success">% {{live.rate}}
+                        <span>
+                          <img src="../assets/images/icons/up-icon.svg" alt="">
+                        </span>
+                      </p>
+                      <p *ngIf="live.rate < 0" class="text-danger">% {{live.rate}}
+                        <span>
+                          <img src="../assets/images/icons/down-icon.svg" alt="">
+                        </span>
+                      </p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-        <div class="container">
-            <div class="row row d-flex flex-row align-items-stretch">
-                <div class="col-md-8 news-detail">
-                    <div class="row">
-                        <div class="col-md-6 text-left">
-                            <p>Hisse</p>
-                        </div>
-                        <div class="col-md-3 text-left">
-                            <p>Değer</p>
-                        </div>
-                        <div class="col-md-3 text-right">
-                            <p>Değişim</p>
-                        </div>
-                    </div>                  
-                    <div class="row" *ngFor="let live of borsaLiveRates">
-                        <div class="col-md-6 text-left">                            
-                            <p>{{live.name}}</p>
-                        </div>
-                        <div class="col-md-3 text-left">
-                            <p>{{live.price}} &#8378;</p>
-                        </div>
-                        <div class="col-md-3 text-right">
-                            <p *ngIf ="live.rate >= 0" class="text-success">% {{live.rate}}
-                                <span>
-                                    <img src="../assets/images/icons/up-icon.svg" alt="">
-                                </span>
-                            </p>
-                            <p *ngIf ="live.rate < 0" class="text-danger">% {{live.rate}}
-                                <span>
-                                    <img src="../assets/images/icons/down-icon.svg" alt="">
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 currency-converter">
-                    <converter></converter>
-                </div>
-            </div>
-            <news-latest></news-latest>
+        <div class="col-md-4 currency-converter mt-4 align-self-start">
+          <converter></converter>
         </div>
-    </section>
+      </div>
+      <news-latest></news-latest>
+    </div>
+  </section>
 </main>
 <footer-dolarnet></footer-dolarnet>
