@@ -1,8 +1,7 @@
+import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { PostVM } from '../../models/blog/PostVM';
-import { PagingVM } from '../../models/PagingVM';
-import { PostSearchCriteriaVM } from '../../models/blog/PostSearchCriteriaVM';
 /* import '../../../../@dolarnet/js/main.js';
 import '../../../../@dolarnet/js/owl.carousel.js'; */
 
@@ -12,6 +11,8 @@ import '../../../../@dolarnet/js/owl.carousel.js'; */
   styleUrls: ['./slider.component.css']
 })
 export class SliderComponent implements OnInit {  
+
+  readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
   post1: PostVM;

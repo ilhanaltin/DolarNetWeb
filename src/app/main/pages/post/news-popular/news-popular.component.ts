@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostSearchCriteriaVM } from 'src/app/main/models/blog/PostSearchCriteriaVM';
 import { BlogService } from 'src/app/main/services/blog.service';
 import { ActivatedRoute } from '@angular/router';
+import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 
 @Component({
   selector: 'news-popular',
@@ -10,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./news-popular.component.css']
 })
 export class NewsPopularComponent implements OnInit {
+
+  readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
 

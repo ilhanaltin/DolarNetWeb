@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostVM } from '../../models/blog/PostVM';
 import { BlogService } from '../../services/blog.service';
 import { PostSearchCriteriaVM } from '../../models/blog/PostSearchCriteriaVM';
+import { GlobalConstants } from '../../models/constants/GlobalConstants';
 
 @Component({
   selector: 'home-post-list',
@@ -9,6 +10,8 @@ import { PostSearchCriteriaVM } from '../../models/blog/PostSearchCriteriaVM';
   styleUrls: ['./home-post-list.component.css']
 })
 export class HomePostListComponent implements OnInit {
+
+  readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
 

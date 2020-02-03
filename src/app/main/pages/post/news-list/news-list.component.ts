@@ -3,6 +3,7 @@ import { PostSearchCriteriaVM } from '../../../models/blog/PostSearchCriteriaVM'
 import { BlogService } from '../../../services/blog.service';
 import { PostVM } from '../../../models/blog/PostVM';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 
 @Component({
   selector: 'news-list',
@@ -10,6 +11,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./news-list.component.css']
 })
 export class NewsListComponent implements OnInit {
+
+  readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
 

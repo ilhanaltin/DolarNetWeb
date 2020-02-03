@@ -3,6 +3,7 @@ import { PostVM } from 'src/app/main/models/blog/PostVM';
 import { BlogService } from 'src/app/main/services/blog.service';
 import { ActivatedRoute } from '@angular/router';
 import { PostSearchCriteriaVM } from 'src/app/main/models/blog/PostSearchCriteriaVM';
+import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 
 @Component({
   selector: 'news-latest',
@@ -10,6 +11,8 @@ import { PostSearchCriteriaVM } from 'src/app/main/models/blog/PostSearchCriteri
   styleUrls: ['./news-latest.component.css']
 })
 export class NewsLatestComponent implements OnInit {
+
+  readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
 

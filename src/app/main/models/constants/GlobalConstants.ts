@@ -1,4 +1,5 @@
 export const GlobalConstants = {
+    siteUrl: "https://api-dolar.com/",
     baseCurrency: "TRY",
     baseCurrencyCripto: "USD",
     symbols: ['TRY','USD','EUR','GBP','CHF','CAD','RUB','AED','AUD','DKK','SEK','NOK','JPY','KWD','ZAR','OMR','MYR',
