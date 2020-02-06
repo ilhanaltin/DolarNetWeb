@@ -3,7 +3,9 @@
         <div class="row">
         <div class="container">
             <nav class="navbar navbar-expand-sm navbar-light w-100">
-            <a class="navbar-brand text-white" href="#">DOLAR.NET</a>
+                <a class="navbar-brand text-white" href="#">
+                    <img class="img-fluid" src="assets/images/logo/dolarnet_logo.png" alt="">
+                </a>
             <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
                 data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -51,7 +53,7 @@
                     </a>                    
                 </div>
                 <div class="mr-0" *ngIf="!_authenticationService.isLoggedIn()">
-                    <a name="" id="" class="btn btn-light header-register-btn" href="#" role="button">
+                    <a name="" id="" class="btn btn-light header-register-btn" href="#" routerLink="/login" role="button">
                         <svg class='remix'>
                             <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-login-circle-line"></use>
                           </svg>
