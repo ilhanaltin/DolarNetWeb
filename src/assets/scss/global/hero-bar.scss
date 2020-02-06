@@ -1,50 +1,46 @@
 .hero-bar {
-  background: url("assets/images/hero-background.jpg");
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  // height: 300px;
-  left: 0;
-  right: 0;
-
-  @include media-breakpoint-down(md) {
-
-    background-size: auto;
+    background: url("assets/images/hero-background.jpg");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    // height: 300px;
     left: 0;
     right: 0;
-  }
 
-  .hero-bar-currency {
-
+<<<<<<< HEAD
     @include media-breakpoint-down(md) {
       margin-bottom: 1rem;
       text-align: center;
     }
+=======
+    .hero-bar-currency {
+>>>>>>> 30dd3a0224526bc8ab4558a69fc9aaa499756fa2
 
-    color: #fff;
-    line-height: 1.2;
+        color: #fff;
+        line-height: 1.2;
 
-    &-type {
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    &-price {
-      font-weight: 600;
-      font-size: 28px;
-    }
-
-    &-state {
-      font-size: 14px;
-      font-weight: 500;
-
-      span {
-        svg {
-          margin-left: 3px;
+        &-type {
+            font-weight: 700;
+            font-size: 13px;
         }
 
+        &-price {
+            font-weight: 600;
+            font-size: 28px;
+        }
 
-      }
+        &-state {
+            font-size: 14px;
+            font-weight: 500;
+
+            span {
+                svg {
+                    margin-left: 3px;
+                }
+
+
+            }
+        }
     }
-  }
 }
+

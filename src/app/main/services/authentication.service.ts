@@ -1,3 +1,4 @@
+import { RegisterResponseDetailsVM } from './../models/user/RegisterResponseDetailsVM';
 import { Injectable } from '@angular/core';
 import {Md5} from "md5-typescript";
 import { map } from 'rxjs/operators';
@@ -41,13 +42,32 @@ export class AuthenticationService {
          }));
   }
 
+  register(user)
+  {
+    user.password = Md5.init(user.password);
+
+    console.log(user);
+
+    return this._baseService.post<RegisterResponseDetailsVM>(apiConfig.Api.Main.Url 
+      + apiConfig.Services.User.Register, user)
+        .pipe(
+          map(response => {
+            if(response.status == 200)
+            {
+                return true;
+            }
+
+            return false;
+         }));
+  }
+
   logout(){
     localStorage.removeItem('token');
     localStorage.removeItem('current-user');
     localStorage.removeItem('current-user-avatar');
     localStorage.removeItem('current-user-role');
 
-    this._router.navigate(['/login']);
+    this._router.navigate(['/home']);
   }
 
   isLoggedIn()

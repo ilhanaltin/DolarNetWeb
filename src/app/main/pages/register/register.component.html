@@ -1,0 +1,150 @@
+<div class="container-fluid login ">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+               <div class="content">
+                <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cursus hac velit proin ut ac non
+                    viverra. </h4>
+                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M15.4688 2.0625C8.07211 2.0625 2.0625 8.07211 2.0625 15.4688C2.0625 22.8654 8.07211 28.875 15.4688 28.875C22.8654 28.875 28.875 22.8654 28.875 15.4688C28.875 8.07211 22.8654 2.0625 15.4688 2.0625ZM20.625 20.625H10.3125V18.5625H17.1213L9.63703 11.0937L11.0937 9.63703L18.5625 17.0878V10.3125H20.625V20.625Z"
+                        fill="white" />
+                </svg>
+
+               </div>
+            </div>
+
+        </div>
+        <div class="col-md-3 d-flex align-items-center">
+            <div class="">
+                <svg width="107" height="107" viewBox="0 0 107 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d)">
+                        <circle cx="53.5" cy="49.5" r="49.5" fill="white" />
+                    </g>
+                    <path
+                        d="M32 26V70H47.125L52.5625 75.4375L54 76.8125L55.4375 75.4375L60.875 70H76V26H32ZM36 30H72V66H59.1875L58.5625 66.5625L54 71.125L49.4375 66.5625L48.8125 66H36V30ZM54 36C49.6016 36 46 39.6016 46 44C46 46.1328 46.8672 48.0625 48.25 49.5C44.5469 51.5469 42 55.4922 42 60H46C46 55.5625 49.5625 52 54 52C58.4375 52 62 55.5625 62 60H66C66 55.4922 63.4531 51.5469 59.75 49.5C61.1328 48.0625 62 46.1328 62 44C62 39.6016 58.3984 36 54 36ZM54 40C56.2344 40 58 41.7656 58 44C58 46.2344 56.2344 48 54 48C51.7656 48 50 46.2344 50 44C50 41.7656 51.7656 40 54 40Z"
+                        fill="#476D55" />
+                    <defs>
+                        <filter id="filter0_d" x="0" y="0" width="107" height="107" filterUnits="userSpaceOnUse"
+                            color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                            <feColorMatrix in="SourceAlpha" type="matrix"
+                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                            <feOffset dy="4" />
+                            <feGaussianBlur stdDeviation="2" />
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                        </filter>
+                    </defs>
+                </svg>
+                <h1>Üye Ol</h1>
+                <p>
+                    Hesabınıza giriş yapın, portföyünüzü yönetme, takip etmeye başlayın.
+                </p>
+                <form [formGroup]="registerForm" novalidate>                    
+                    <div class="form-group">
+                        <input id="name" name="name" type="text" class="form-control form-control-lg" placeholder="Adı" 
+                            formControlName="name" required>
+                    </div>
+                    <div *ngIf="registerForm.get('name').invalid && (registerForm.get('name').dirty || registerForm.get('name').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="registerForm.get('name').errors.required">
+                            İsim giriniz.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input id="lastName" name="lastName" type="text" class="form-control form-control-lg" placeholder="Soyadı" 
+                        formControlName="lastName" required>
+                    </div>
+                    <div *ngIf="registerForm.get('lastName').invalid && (registerForm.get('lastName').dirty || registerForm.get('lastName').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="registerForm.get('lastName').errors.required">
+                            Soyad giriniz.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input id="email" name="email" type="email" class="form-control form-control-lg"
+                            placeholder="E-Posta" formControlName="email" required>
+                    </div>
+                    <div *ngIf="registerForm.get('email').invalid && (registerForm.get('email').dirty || registerForm.get('email').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="registerForm.get('email').errors.required">
+                            E-Posta giriniz.
+                        </div>
+                        <div *ngIf="registerForm.get('email').errors?.email">
+                            Geçersiz E-Posta
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-lg" aria-describedby="helpId"
+                            placeholder="Şifre" formControlName="password" required>
+                    </div>
+                    <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').dirty || registerForm.get('password').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="registerForm.get('password').errors.required">
+                            Şifre giriniz.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-lg" aria-describedby="helpId"
+                            placeholder="Şifre Tekrar" formControlName="passwordConfirm" required>
+                    </div>
+                    <div *ngIf="registerForm.get('password').invalid && (registerForm.get('password').dirty || registerForm.get('password').touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="registerForm.get('passwordConfirm').hasError('required')">
+                            Şifre tekrarı zorunludur
+                        </div>
+                        <div *ngIf="!registerForm.get('passwordConfirm').hasError('required') &&
+                                    registerForm.get('passwordConfirm').hasError('passwordsNotMatching')">
+                            Şifreler eşleşmedi
+                        </div>
+                    </div>
+>
+                    <div class="form-group">
+                        <input name="nickName" type="text" class="form-control form-control-lg" placeholder="Rumuz" 
+                            formControlName="nickName" required>
+                    </div>
+                    <div *ngIf="registerForm.get('nickName').invalid && (registerForm.get('nickName').dirty || registerForm.get('nickName').touched)"
+                            class="alert alert-danger">
+                        <div *ngIf="registerForm.get('nickName').errors.required">
+                            Rumuz giriniz.
+                        </div>
+                    </div>
+                    <button class="btn btn-success btn-block" [disabled]="registerForm.invalid" (click)="register(registerForm.value)">
+                        Üye Ol
+                        <span>
+                            <svg width="35" height="16" viewBox="0 0 35 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M26.9122 0.000136614C26.6174 -0.00558704 26.3455 0.168995 26.2282 0.438025C26.1108 0.712777 26.1709 1.0276 26.377 1.23652L32.1754 7.27536H0.736252C0.475809 7.2725 0.229676 7.40988 0.100886 7.63598C-0.0336286 7.86494 -0.0336286 8.14255 0.100886 8.36865C0.229676 8.59761 0.475809 8.73213 0.736252 8.72926H32.1754L26.377 14.7681C26.0994 15.0572 26.1108 15.5179 26.3999 15.7956C26.6889 16.076 27.1497 16.0675 27.4273 15.7727L34.8886 8.00231L27.4273 0.23196C27.2957 0.0859974 27.1068 0.005861 26.9122 0.000136614Z"
+                                    fill="white" />
+                            </svg>
+
+                        </span>
+                    </button>
+                    <p class="or">VEYA</p>
+                    <button class="btn btn-outline-dark btn-block text-danger font-weight-bold" href="#" role="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3.064 7.51A9.996 9.996 0 0 1 12 2c2.695 0 4.959.99 6.69 2.605l-2.867 2.868C14.786 6.482 13.468 5.977 12 5.977c-2.605 0-4.81 1.76-5.595 4.123-.2.6-.314 1.24-.314 1.9 0 .66.114 1.3.314 1.9.786 2.364 2.99 4.123 5.595 4.123 1.345 0 2.49-.355 3.386-.955a4.6 4.6 0 0 0 1.996-3.018H12v-3.868h9.418c.118.654.182 1.336.182 2.045 0 3.046-1.09 5.61-2.982 7.35C16.964 21.105 14.7 22 12 22A9.996 9.996 0 0 1 2 12c0-1.614.386-3.14 1.064-4.49z" fill="rgba(231,76,60,1)"/></svg>
+                        Google ile Giriş Yap
+                        <span>
+                            <svg width="35" height="16" viewBox="0 0 35 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M26.9122 0.000136614C26.6174 -0.00558704 26.3455 0.168995 26.2282 0.438025C26.1108 0.712777 26.1709 1.0276 26.377 1.23652L32.1754 7.27536H0.736252C0.475809 7.2725 0.229676 7.40988 0.100886 7.63598C-0.0336286 7.86494 -0.0336286 8.14255 0.100886 8.36865C0.229676 8.59761 0.475809 8.73213 0.736252 8.72926H32.1754L26.377 14.7681C26.0994 15.0572 26.1108 15.5179 26.3999 15.7956C26.6889 16.076 27.1497 16.0675 27.4273 15.7727L34.8886 8.00231L27.4273 0.23196C27.2957 0.0859974 27.1068 0.005861 26.9122 0.000136614Z"
+                                    fill="#E74C3D" />
+                            </svg>
+
+                        </span>
+                    </button>
+                </form>
+                
+                <a class="btn btn-link btn-block align-items-center justify-content-center" href="#" role="button">Giriş Yap.</a>
+                <small>
+                    © 2019 Soltra Bilişim. Tüm Hakları Saklıdır
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
