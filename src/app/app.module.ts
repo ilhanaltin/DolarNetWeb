@@ -1,3 +1,4 @@
+import { RegisterModule } from './main/pages/register/register.module';
 import { NewsPopularModule } from './main/pages/post/news-popular/news-popular.module';
 import { NewsLatestModule } from './main/pages/post/news-latest/news-latest.module';
 import { EmtiaListModule } from './main/pages/standart-list/emtia-list/emtia-list.module';
@@ -23,11 +24,12 @@ import { ParitelerListModule } from './main/pages/standart-list/pariteler/parite
 import { CriptoCoinListModule } from './main/pages/standart-list/cripto-coin/cripto-coin-list.module';
 import { PostCategoryHeaderModule } from './main/pages/header/post-category-header/post-category-header.module';
 import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/borsa-live-list.module';
+import { ProfileModule } from './main/pages/profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent
-      ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -50,7 +52,9 @@ import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/
     NewsCategoryBoxModule,
     EmtiaListModule,
     NewsLatestModule,
-    NewsPopularModule
+    NewsPopularModule,
+    RegisterModule,
+    ProfileModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

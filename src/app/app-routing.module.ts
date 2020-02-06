@@ -12,6 +12,9 @@ import { NewsListComponent } from './main/pages/post/news-list/news-list.compone
 import { NewsDetailComponent } from './main/pages/post/news-detail/news-detail.component';
 import { BorsaHisseListComponent } from './main/pages/standart-list/borsa-hisse-list/borsa-hisse-list.component';
 import { EmtiaListComponent } from './main/pages/standart-list/emtia-list/emtia-list.component';
+import { RegisterComponent } from './main/pages/register/register.component';
+import { ProfileComponent } from './main/pages/profile/profile.component';
+import { AuthGuard } from './main/services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -21,6 +24,15 @@ const routes: Routes = [
   {
     path     : 'login',
     component: LoginComponent
+  },
+  {
+    path     : 'register',
+    component: RegisterComponent
+  },
+  {
+    path     : 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path     : 'news',

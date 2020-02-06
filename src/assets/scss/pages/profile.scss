@@ -1,0 +1,37 @@
+.breadcrumb {
+  background: transparent;
+
+  &-item {
+    a {
+      color: $white;
+    }
+
+    &.active {
+      color: $white;
+      font-weight: 600;
+    }
+  }
+}
+.profile-bar-right-menu{
+  a{
+    margin-left: 1rem;
+  }
+}
+
+.nav-link.active {
+  color: $doviz-color-2 !important;
+  font-weight: 600;
+  background-color: #fff;
+  border-color: #239e6c #239e6c #fff !important;
+}
+.profile-tab-content {
+  li{
+     a{
+       &.active{
+         li{
+          background-color: red;
+         }
+        }
+     }
+  }
+}

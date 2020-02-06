@@ -39,7 +39,7 @@
                 </li>                
                 </ul>
                 <div class="mr-0" *ngIf="!_authenticationService.isLoggedIn()">
-                    <a name="" id="" class="btn btn-light header-register-btn" href="#" role="button">
+                    <a name="" id="" class="btn btn-light header-register-btn" href="#" routerLink="/register" role="button">
                         <span>
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -107,7 +107,7 @@
 
                             Grafikler
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" href="#" (click)="_authenticationService.logout()">
                             <svg width="17" height="17" viewBox="0 0 17 17" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
