@@ -39,7 +39,7 @@
                 </li>                
                 </ul>
                 <div class="mr-0" *ngIf="!_authenticationService.isLoggedIn()">
-                    <a name="" id="" class="btn btn-light header-register-btn" href="#" role="button">
+                    <a name="" id="" class="btn btn-light header-register-btn mr-2" href="#" role="button">
                         <span>
                             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -50,7 +50,14 @@
                         ÜCRETSİZ ÜYE OL
                     </a>                    
                 </div>
-
+                <div class="mr-0" *ngIf="!_authenticationService.isLoggedIn()">
+                    <a name="" id="" class="btn btn-light header-register-btn" href="#" role="button">
+                        <svg class='remix'>
+                            <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-login-circle-line"></use>
+                          </svg>
+                        Giriş Yap
+                    </a>                    
+                </div>
                 <div class="dropdown mr-0" *ngIf="_authenticationService.isLoggedIn()">
                     <a name="" id="" class="btn btn-light header-register-btn dropdown-toggle" href="#"
                         role="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
@@ -120,7 +127,7 @@
                     </div>
                 </div>
 
-                <a name="" id="" class="ml-5" href="#" role="button">
+                <!-- <a name="" id="" class="ml-5" href="#" role="button">
                     <span>
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -128,7 +135,7 @@
                             fill="white" />
                         </svg>
                     </span>
-                </a>
+                </a> -->
                 <!-- <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
