@@ -29,19 +29,10 @@ text-align:left;
         }
     }
 }
-<<<<<<< HEAD
 .navbar-toggler{
   @include media-breakpoint-down(md) {
 border-color:white !important;
 background-color: #f8f9fa;
   border-radius:0;
   }
-=======
-.navbar-brand {
-    
-    img{
-        max-width: 14rem;
-    }
-    
->>>>>>> 30dd3a0224526bc8ab4558a69fc9aaa499756fa2
 }
