@@ -21,12 +21,12 @@
 }
 
 .home-news-carousel-count {
-  @include media-breakpoint-down(md) {
-    margin: 0 auto;
-    width: 100% !important;
-  }
-
-  left: 20px;
+    @include media-breakpoint-down(md) {
+      margin: 0 auto;
+      width: 100% !important;
+    }
+  
+    left: 20px;
 }
 
 #sync1 {
@@ -37,30 +37,8 @@
 }
 
 #sync2 {
-  .active {
-    width: 50px !important;
-
-    @include media-breakpoint-down(md) {
-      width: auto !important;
-    }
-  }
-
-  .item {
-    background: #ffffff;
-    padding: 10px;
-    margin: 5px;
-    color: #000;
-    width: 40px;
-    height: 40px;
-    border-radius: 3px;
-    text-align: center;
-    cursor: pointer;
-
-    @include media-breakpoint-down(md) {
-      width: 35px;
-      height: 35px;
-      padding: 8px;
-      margin: 0.2rem;
+    .active {
+        width: 50px !important;
     }
 
     .item {
@@ -136,4 +114,3 @@
       margin-top: .2rem;
     }
   }
-}
