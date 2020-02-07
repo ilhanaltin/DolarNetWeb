@@ -7,14 +7,10 @@
     left: 0;
     right: 0;
 
-<<<<<<< HEAD
     @include media-breakpoint-down(md) {
       margin-bottom: 1rem;
       text-align: center;
     }
-=======
-    .hero-bar-currency {
->>>>>>> 30dd3a0224526bc8ab4558a69fc9aaa499756fa2
 
         color: #fff;
         line-height: 1.2;
@@ -42,5 +38,5 @@
             }
         }
     }
-}
+
 
