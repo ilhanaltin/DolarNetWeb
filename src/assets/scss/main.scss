@@ -20,14 +20,14 @@
 @import "global/login-profile-box";
 
 
-
-//Plugins
-@import "owl-carousel/scss/owl.carousel.scss";
-@import "owl-carousel/scss/owl.theme.default";
-@import "global/owl-custom";
-
 @import "pages/index";
 @import "pages/login";
 @import "pages/news";
 @import "pages/news-detail";
 @import "pages/profile";
+
+
+//Plugins
+@import "owl-carousel/scss/owl.carousel.scss";
+@import "owl-carousel/scss/owl.theme.default";
+@import "global/owl-custom";
