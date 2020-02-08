@@ -2,8 +2,7 @@ $(document).ready(function () {
 
   var sync1 = $("#sync1");
   var sync2 = $("#sync2");
-  var syncedSecondary = true;
-  var slidesPerPage = 8;
+  var slidesPerPage = 10;
 
   sync1.owlCarousel({
     items: 1,

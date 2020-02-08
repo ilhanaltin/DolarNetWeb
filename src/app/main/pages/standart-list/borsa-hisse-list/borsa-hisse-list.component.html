@@ -24,25 +24,41 @@
               </h1>
               <p class="font-weight-normal">Bu bölüm, son borsa hisse verilerini içermektedir.</p>
             </div>
+            <table class="table">
+              <thead>
+                <tr>
+
+                  <th scope="col">Birim</th>
+                  <th scope="col">Satış ($)</th>
+                  <th scope="col">Satış (&#8378;)</th>
+                  <th>Değişim</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
             <div class="col-12">
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">
-                        <p>Birim</p>
-                      </th>
-                      <th scope="col">
-                        <p>Satış ($)</p>
-                      </th>
-                      <th scope="col">
-                        <p class="simge-tl">Satış (&#8378;)</p>
-                      </th>
-                      <th scope="col">
-                        <p>Değişim</p>
-                      </th>
-                    </tr>
-                  </thead>
+                 
                   <tbody>
                     <tr class="align-middle" *ngFor="let hisse of borsaHisseRates">
                       <td class="col-5">
