@@ -25,6 +25,7 @@ import { CriptoCoinListModule } from './main/pages/standart-list/cripto-coin/cri
 import { PostCategoryHeaderModule } from './main/pages/header/post-category-header/post-category-header.module';
 import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/borsa-live-list.module';
 import { ProfileModule } from './main/pages/profile/profile.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ProfileModule } from './main/pages/profile/profile.module';
     NewsLatestModule,
     NewsPopularModule,
     RegisterModule,
-    ProfileModule
+    ProfileModule,
+    BrowserAnimationsModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]

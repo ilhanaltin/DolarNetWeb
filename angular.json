@@ -28,6 +28,7 @@
               "src/styles.scss"
             ],
             "scripts": [
+              "node_modules/hammerjs/hammer.min.js",
               "src/assets/js/jquery-3.2.1.min.js", 
               "src/assets/js/popper.min.js", 
               "src/assets/js/bootstrap.min.js"

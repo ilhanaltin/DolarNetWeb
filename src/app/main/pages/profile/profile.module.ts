@@ -12,6 +12,8 @@ import { ConverterModule } from '../converter/converter.module';
 import { NewsPopularModule } from '../post/news-popular/news-popular.module';
 import { NewsLatestModule } from '../post/news-latest/news-latest.module';
 
+import { MatInputModule } from '@angular/material/input';
+
 @NgModule({
     declarations   : [
         ProfileComponent
@@ -28,7 +30,8 @@ import { NewsLatestModule } from '../post/news-latest/news-latest.module';
         MarketAnalyseModule,
         ConverterModule,
         NewsPopularModule,
-        NewsLatestModule
+        NewsLatestModule,
+        MatInputModule
     ],
     providers      : [
     ],
