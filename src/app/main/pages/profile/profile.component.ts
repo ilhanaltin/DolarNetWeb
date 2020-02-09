@@ -29,4 +29,9 @@ export class ProfileComponent implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+
+  onPositionTypeChanged()
+  {
+    
+  }
 }

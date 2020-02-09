@@ -13,6 +13,7 @@ import { NewsPopularModule } from '../post/news-popular/news-popular.module';
 import { NewsLatestModule } from '../post/news-latest/news-latest.module';
 
 import { MatInputModule } from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
     declarations   : [
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
         ConverterModule,
         NewsPopularModule,
         NewsLatestModule,
-        MatInputModule
+        MatInputModule,
+        MatAutocompleteModule
     ],
     providers      : [
     ],
