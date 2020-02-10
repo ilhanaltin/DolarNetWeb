@@ -1,4 +1,4 @@
-$('.slider-single').slick({
+$('.slider-single').not('.slick-initialized').slick({
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: false,
