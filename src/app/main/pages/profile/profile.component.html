@@ -62,36 +62,65 @@
                             <div class="form-group mt-3">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCurrency"
-                                    (change)="onPositionTypeChanged()" checked="true">
+                                    [(ngModel)]="optionPositionType" [value]="1" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Currency">
                                     <label class="form-check-label" for="inlineRadioCurrency">Döviz</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioGold"
-                                    (change)="onPositionTypeChanged()">
+                                    [(ngModel)]="optionPositionType" [value]="2" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Gold">
                                     <label class="form-check-label" for="inlineRadioGold">Altın</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCripto"
-                                    (change)="onPositionTypeChanged()"> 
+                                    [(ngModel)]="optionPositionType" [value]="3" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Cripto"> 
                                     <label class="form-check-label" for="inlineRadioCripto">Kripto Para</label>
                                 </div>
                             </div>
                             
-                            <div class="form-group mt-3">
-                                <!-- <label for="">EUR/USD or AAPL</label> -->
-                                <!-- <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                                    placeholder="Pozisyon Arayın"> -->
-
+                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Currency">
                                 <mat-form-field class="example-full-width">
                                     <input type="text"
-                                            placeholder="Pick one"
+                                            placeholder="Pozisyon Arayın"
                                             aria-label="Number"
                                             matInput
-                                            [formControl]="myControl"
+                                            [formControl]="listBoxCurrency"
                                             [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                        {{option}}
+                                        <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi">
+                                            <p>
+                                                <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
+                                                <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
+                                            </p>
+                                        </mat-option>
+                                    </mat-autocomplete> 
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Gold">
+                                <mat-form-field class="example-full-width">
+                                    <input type="text"
+                                            placeholder="Pozisyon Arayın"
+                                            aria-label="Number"
+                                            matInput
+                                            [formControl]="listBoxGold"
+                                            [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi">
+                                            <span> {{gold.adi}}</span>
+                                        </mat-option>
+                                    </mat-autocomplete> 
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Cripto">
+                                <mat-form-field class="example-full-width">
+                                    <input type="text"
+                                            placeholder="Pozisyon Arayın"
+                                            aria-label="Number"
+                                            matInput
+                                            [formControl]="listBoxCoin"
+                                            [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code">
+                                            <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
                                         </mat-option>
                                     </mat-autocomplete> 
                                 </mat-form-field>

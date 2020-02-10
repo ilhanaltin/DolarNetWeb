@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { GlobalConstants } from '../../models/constants/GlobalConstants';
+import { TypeVM } from '../../models/types/TypeVM';
+import { CriptoService } from '../../services/cripto.service';
+import { CriptoRatesVM } from '../../models/coins/CriptoRatesVM';
 
 @Component({
   selector: 'profile',
@@ -10,28 +14,127 @@ import { startWith, map } from 'rxjs/operators';
 })
 export class ProfileComponent implements OnInit {
 
-  myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+  readonly _globalConstants = GlobalConstants;
+
+  listBoxCurrency = new FormControl();
+  listBoxGold = new FormControl();
+  listBoxCoin = new FormControl();
+  currencies: TypeVM[];
+  golds: TypeVM[];
+  filteredCurrencies: Observable<TypeVM[]>;
+  filteredGolds: Observable<TypeVM[]>;
+  filteredCoins: Observable<CriptoRatesVM[]>;
+  optionPositionType: number;
+
+  criptoRates: CriptoRatesVM[];
   
-  constructor() { }
+  constructor( private _criptoService: CriptoService) {
+    this.currencies = this.getCurrencies();
+    this.golds = this.getGolds();
+    this.getCriptoData();
+
+    this.optionPositionType = GlobalConstants.PositionType.Currency;
+   }
 
   ngOnInit() {
-      this.filteredOptions = this.myControl.valueChanges
+      this.filteredCurrencies = this.listBoxCurrency.valueChanges
         .pipe(
           startWith(''),
-          map(value => this._filter(value))
+          map(value => this._filterCurrency(value))
+        );
+
+        this.filteredGolds = this.listBoxGold.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterGold(value))
+        );
+
+        this.filteredCoins = this.listBoxCoin.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterCoins(value))
         );
   }
 
-  private _filter(value: string): string[] {
+  private _filterCurrency(value: string): TypeVM[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.currencies.filter(option => option.adi.toLowerCase().includes(filterValue));
+  }
+
+  private _filterGold(value: string): TypeVM[] {
+    const filterValue = value.toLowerCase();
+
+    return this.golds.filter(option => option.adi.toLowerCase().includes(filterValue));
+  }
+
+  private _filterCoins(value: string): CriptoRatesVM[] {
+    const filterValue = value.toLowerCase();
+
+    return this.criptoRates.filter(option => option.code.toLowerCase().includes(filterValue));
   }
 
   onPositionTypeChanged()
   {
     
+  }
+
+  getCurrencies() {
+    let currencyArray: TypeVM[] = [];
+
+    GlobalConstants.symbols.forEach(function(value, index){
+      let curr = new TypeVM();
+      curr.adi = value;
+      curr.uzunAdi = GlobalConstants.symbolNames[index];
+      curr.id = index + 1;
+      currencyArray.push(curr);
+    });
+
+    return currencyArray;
+  }
+
+  getGolds() {
+    let goldArray: TypeVM[] = [];
+
+    GlobalConstants.goldTypes.forEach(function(value, index){
+      let gold = new TypeVM();
+      gold.adi = value;
+      gold.id = index + 1;
+      goldArray.push(gold);
+    });
+
+    return goldArray;
+  }
+
+  getCriptoData()
+  {
+      let storageDataCripto = this._criptoService.getFromStorage();
+
+      if(storageDataCripto.isValid)
+      {
+        this.criptoRates = storageDataCripto.data;
+      }
+      else
+      {
+          this._criptoService.getFromApi().subscribe(resp=>{
+            this.criptoRates = resp.result;
+          });
+      }
+  }
+
+  getCurrencyFlagCss(code: string) : string
+  {
+      if(code == null || code == "")
+        return "";
+
+      return "flag-icon flag-icon-" + code.toLocaleLowerCase().split("ı").join("i").substring(0,2);
+  }
+
+  getCriptoFlagCss(code: string) : string
+  {
+      if(code == null || code == "")
+        return "";
+
+      return "../../../../../assets/images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
   }
 }

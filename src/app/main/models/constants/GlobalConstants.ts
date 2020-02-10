@@ -34,6 +34,7 @@ export const GlobalConstants = {
     'GNO','DENT','SAN','OCEAN','CELR','GO','GRS','TEL','ORBS','LEND','CS','NXS','ODE','SYS','ABT','LBA','PIVX','WXT','COCOS','RET',
     'MEDX','EDO','KAN','FX','SUSD','ADN','DATA','CTXC','VTC','GAS'],
     UserRoles: { Admin: 1, Editor: 2, User: 3 },
+    PositionType: { Currency: 1, Gold: 2, Cripto: 3} ,
     PostCategories: { Doviz: 1, Altin: 2, Kripto: 3, Gundem: 4, Borsa: 5, Emtia: 6, EnSon: 7, EnPopuler: 8, EkonIndikator: 9,
         Ekonomi: 10, Dunya: 11, Turkiye: 12 }
     };
