@@ -1,40 +1,68 @@
 body {
-    font-family: $font-rajdhani;
+  font-family: $font-rajdhani;
 }
 
 a:hover {
-    color: currentColor;
-    text-decoration: none;
+  color: currentColor;
+  text-decoration: none;
 }
 
 html {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .remix {
-    width: 24px;
-    height: 24px;
-    fill: #333;
+  width: 24px;
+  height: 24px;
+  fill: #333;
 }
-p{
-    line-height: 1.1rem;
+
+p {
+  line-height: 1.1rem;
 }
+
 .tooltip {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1.4rem;
-    .tooltip-inner{
-        background-color: $doviz-color;
-        &::before {
-            border-color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.4rem;
+
+  .tooltip-inner {
+    background-color: $doviz-color;
+
+    &::before {
+      border-color: red;
+    }
+
+    small {
+      letter-spacing: -.06rem;
+
+      font-size: .75rem;
+    }
+  }
+
+
+}
+
+table {
+  p {
+    margin-bottom: 0;
+    display: inline-flex;
+    white-space: nowrap;
+text-align: right;
+    span {
+      margin-left: .5rem;
+    }
+  }
+ tbody{
+   tr{
+    .col-5{
+        &:last-child{
+            text-align: right;
         }
-        small {
-            letter-spacing: -.06rem;
-    
-            font-size: .75rem;
-        }
+       
     }
     
-   
+   }
+ }
 }

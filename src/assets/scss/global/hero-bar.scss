@@ -1,19 +1,21 @@
+.small-header {
+  .hero-bar {
+    min-height: 6rem !important;
+  }
+}
+
 .hero-bar {
   background: url("assets/images/hero-background.jpg");
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 100%;
-  // height: 300px;
-  left: 0;
-  right: 0;
+  background-size: cover;
+  min-height: 15rem;
 
   @include media-breakpoint-down(md) {
     margin-bottom: 1rem;
     text-align: center;
     background-size: inherit;
   }
-
-
 
   .hero-bar-currency {
     color: #fff;
@@ -41,5 +43,15 @@
 
       }
     }
+  }
+}
+
+.content {
+  margin-top: -8rem;
+  display: block;
+  z-index: 5;
+
+  @include media-breakpoint-down (md) {
+    margin-top: .5rem;
   }
 }
