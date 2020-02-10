@@ -1,0 +1,155 @@
+.login .row {
+  height: 100vh;
+}
+
+.login .row .col-md-9 .row {
+  background: url("assets/images/login/login-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.login .row .col-md-9 .row .content {
+  margin-left: 10rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.login .row .col-md-9 .row .content h1 {
+  color: #fff;
+  line-height: 1rem;
+}
+
+.login .row .col-md-9 .row .content h4 {
+  color: #fff;
+}
+
+.login .row .col-md-3 {
+  background-color: #F6F5F1;
+  padding: 2rem 3rem;
+}
+
+.login .row .col-md-3 p.or {
+  font-size: .8rem;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+  position: relative;
+}
+
+.login .row .col-md-3 p.or::before {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  height: 1px;
+  width: 45%;
+  background-color: #404649;
+  right: 0;
+  top: 25px;
+}
+
+.login .row .col-md-3 p.or::after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  height: 1px;
+  width: 45%;
+  background-color: #404649;
+  left: 0;
+  top: 25px;
+}
+
+.login .row .col-md-3 input {
+  font-size: 17px;
+  border: 0;
+  height: 60px;
+}
+
+.login .row .col-md-3 a {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.login .row .col-md-3 a:hover {
+  text-decoration: none;
+  color: currentColor;
+}
+
+.login .row .col-md-3 h1 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 41px;
+  color: #414649;
+}
+
+.login .row .col-md-3 p {
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 23px;
+  display: block;
+  color: #414649;
+}
+
+.login .row .col-md-3 small {
+  text-align: center;
+  display: block;
+  color: #414649;
+}
+
+.login .row .col-md-3 .btn {
+  padding: 19px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.login .row .col-md-3 .btn-secondary {
+  background-color: #404649;
+  text-align: left;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login .row .col-md-3 .btn-secondary svg {
+  float: right;
+}
+
+.login .row .col-md-3 .btn-secondary:hover {
+  color: #fff;
+}
+
+.login .row .col-md-3 .btn-success {
+  background-color: #00A268;
+  text-align: left;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.login .row .col-md-3 .btn-success svg {
+  float: right;
+}
+
+.login .row .col-md-3 .btn-success:hover {
+  color: #fff;
+}
+/*# sourceMappingURL=login.css.map */
