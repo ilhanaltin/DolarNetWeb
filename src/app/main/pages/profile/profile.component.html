@@ -84,9 +84,10 @@
                                             aria-label="Number"
                                             matInput
                                             [formControl]="listBoxCurrency"
+                                            [(ngModel)]="selectedCurrency"
                                             [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi">
+                                        <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi" (onSelectionChange)="onPositionSelectedCurrency(curr)">
                                             <p>
                                                 <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
                                                 <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
@@ -102,9 +103,10 @@
                                             aria-label="Number"
                                             matInput
                                             [formControl]="listBoxGold"
+                                            [(ngModel)]="selectedGold"
                                             [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi">
+                                        <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi" (onSelectionChange)="onPositionSelectedGold(gold)">
                                             <span> {{gold.adi}}</span>
                                         </mat-option>
                                     </mat-autocomplete> 
@@ -117,9 +119,10 @@
                                             aria-label="Number"
                                             matInput
                                             [formControl]="listBoxCoin"
+                                            [(ngModel)]="selectedCoin"
                                             [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code">
+                                        <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code" (onSelectionChange)="onPositionSelectedCoin(coin)">
                                             <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
                                         </mat-option>
                                     </mat-autocomplete> 

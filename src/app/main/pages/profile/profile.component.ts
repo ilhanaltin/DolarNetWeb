@@ -1,9 +1,9 @@
+import { TypeVM } from './../../models/types/TypeVM';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { GlobalConstants } from '../../models/constants/GlobalConstants';
-import { TypeVM } from '../../models/types/TypeVM';
 import { CriptoService } from '../../services/cripto.service';
 import { CriptoRatesVM } from '../../models/coins/CriptoRatesVM';
 
@@ -21,6 +21,11 @@ export class ProfileComponent implements OnInit {
   listBoxCoin = new FormControl();
   currencies: TypeVM[];
   golds: TypeVM[];
+
+  selectedCurrency: TypeVM;
+  selectedGold: TypeVM;
+  selectedCoin: CriptoRatesVM;
+
   filteredCurrencies: Observable<TypeVM[]>;
   filteredGolds: Observable<TypeVM[]>;
   filteredCoins: Observable<CriptoRatesVM[]>;
@@ -76,7 +81,33 @@ export class ProfileComponent implements OnInit {
 
   onPositionTypeChanged()
   {
-    
+      if(this.optionPositionType === GlobalConstants.PositionType.Currency)
+      {
+        this.selectedGold = null;
+        this.selectedCoin = null;
+      }
+      else if(this.optionPositionType === GlobalConstants.PositionType.Gold)
+      {
+        this.selectedCurrency = null;
+        this.selectedCoin = null;
+      }
+      else
+      {
+        this.selectedCurrency = null;
+        this.selectedGold = null;
+      }
+  }
+
+  onPositionSelectedCurrency(curr)
+  {
+  }
+
+  onPositionSelectedGold(gold)
+  {
+  }
+
+  onPositionSelectedCoin(coin)
+  {
   }
 
   getCurrencies() {
