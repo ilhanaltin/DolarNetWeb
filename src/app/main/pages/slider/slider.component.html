@@ -1,74 +1,11 @@
 <div class="slider slider-single">
-  <div>
-    <a *ngIf="post1" href="" [routerLink]="['/news-detail', post1.id]">{{post1.title}}</a>
-    <img *ngIf="post1" [src]="_globalConstants.siteUrl + post1.imagePath" class="img-fluid" [alt]="post1.title">
+  <div *ngFor="let post of postList">
+    <a href="" [routerLink]="['/news-detail', post.id]">{{post.title}}</a>
+    <img [src]="_globalConstants.siteUrl + post.imagePath" class="img-fluid" [alt]="post.title">
   </div>
-  <div>
-    <a *ngIf="post2" href="" [routerLink]="['/news-detail', post2.id]">{{post2.title}}</a>
-    <img *ngIf="post2" [src]="_globalConstants.siteUrl + post2.imagePath" class="img-fluid" [alt]="post2.title">
-  </div>
-  <div>
-    <a *ngIf="post3" href="" [routerLink]="['/news-detail', post3.id]">{{post3.title}}</a>
-    <img *ngIf="post3" [src]="_globalConstants.siteUrl + post3.imagePath" class="img-fluid" [alt]="post3.title">
-  </div>
-  <div>
-    <a *ngIf="post4" href="" [routerLink]="['/news-detail', post4.id]">{{post4.title}}</a>
-    <img *ngIf="post4" [src]="_globalConstants.siteUrl + post4.imagePath" class="img-fluid" [alt]="post4.title">
-  </div>
-  <div>
-    <a *ngIf="post5" href="" [routerLink]="['/news-detail', post5.id]">{{post5.title}}</a>
-    <img *ngIf="post5" [src]="_globalConstants.siteUrl + post5.imagePath" class="img-fluid" [alt]="post5.title">
-  </div>
-  <div>
-    <a *ngIf="post6" href="" [routerLink]="['/news-detail', post6.id]">{{post6.title}}</a>
-    <img *ngIf="post6" [src]="_globalConstants.siteUrl + post6.imagePath" class="img-fluid" [alt]="post6.title">
-  </div>
-  <div>
-    <a *ngIf="post7" href="" [routerLink]="['/news-detail', post7.id]">{{post3.title}}</a>
-    <img *ngIf="post7" [src]="_globalConstants.siteUrl + post7.imagePath" class="img-fluid" [alt]="post7.title">
-  </div>
-  <div>
-    <a *ngIf="post8" href="" [routerLink]="['/news-detail', post8.id]">{{post8.title}}</a>
-    <img *ngIf="post8" [src]="_globalConstants.siteUrl + post8.imagePath" class="img-fluid" [alt]="post8.title">
-  </div>
-  <div>
-    <a *ngIf="post9" href="" [routerLink]="['/news-detail', post9.id]">{{post9.title}}</a>
-    <img *ngIf="post9" [src]="_globalConstants.siteUrl + post9.imagePath" class="img-fluid" [alt]="post9.title">
-  </div>
-  <div>
-    <a *ngIf="post10" href="" [routerLink]="['/news-detail', post10.id]">{{post10.title}}</a>
-    <img *ngIf="post10" [src]="_globalConstants.siteUrl + post10.imagePath" class="img-fluid" [alt]="post10.title">
-  </div>  
 </div>
-<div class="slider slider-nav" *ngIf="post1">
-  <div>
-    <h3><span>1</span></h3>
-  </div>
-  <div>
-    <h3><span>2</span></h3>
-  </div>
-  <div>
-    <h3><span>3</span></h3>
-  </div>
-  <div>
-    <h3><span>4</span></h3>
-  </div>
-  <div>
-    <h3><span>5</span></h3>
-  </div>
-  <div>
-    <h3><span>6</span></h3>
-  </div>
-  <div>
-    <h3><span>7</span></h3>
-  </div>
-  <div>
-    <h3><span>8</span></h3>
-  </div>
-  <div>
-    <h3><span>9</span></h3>
-  </div>
-  <div>
-    <h3><span>10</span></h3>
+<div class="slider slider-nav">
+  <div *ngFor="let post of postList; let j = index">
+    <h3><span>{{ j+1 }}</span></h3>
   </div>
 </div>
