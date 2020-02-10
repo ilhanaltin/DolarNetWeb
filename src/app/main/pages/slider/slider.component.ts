@@ -27,7 +27,6 @@ export class SliderComponent implements OnInit {
   post10: PostVM;
 
   constructor(private _blogService: BlogService) {
-    this.loadScripts();
     this.getSliderPosts();
    }
 
@@ -36,7 +35,6 @@ export class SliderComponent implements OnInit {
 
   loadScripts() {
     const dynamicScripts = [
-     '../../../assets/js/owl.carousel.js',
      '../../../assets/js/main.js'
     ];
 
@@ -64,6 +62,8 @@ export class SliderComponent implements OnInit {
         this.post8 = this.postList[7];
         this.post9 = this.postList[8];
         this.post10 = this.postList[9];
+
+        this.loadScripts();
     })
   }
 }
