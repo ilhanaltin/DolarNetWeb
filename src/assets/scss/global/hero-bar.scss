@@ -8,7 +8,7 @@
   background: url("assets/images/hero-background.jpg");
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100%;
   min-height: 15rem;
 
   @include media-breakpoint-down(md) {

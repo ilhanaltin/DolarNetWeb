@@ -24,53 +24,28 @@
               </h1>
               <p class="font-weight-normal">Bu bölüm, son borsa hisse verilerini içermektedir.</p>
             </div>
-            <table class="table">
-              <thead>
-                <tr>
-
-                  <th scope="col">Birim</th>
-                  <th scope="col">Satış ($)</th>
-                  <th scope="col">Satış (&#8378;)</th>
-                  <th>Değişim</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="col-12">
-              <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                 
-                  <tbody>
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Birim</th>
+                    <th scope="col">Değer($)</th>
+                    <th scope="col">Hacim ($)</th>
+                    <th scope="col">Değişim</th>
+                  </tr>
+                </thead>
+                <tbody>
                     <tr class="align-middle" *ngFor="let hisse of borsaHisseRates">
-                      <td class="col-5">
-                        {{hisse.text}}
+                      <td class="col-4">
+                        <p class="mb-0">{{hisse.text}}</p>
+                      </td>
+                      <td class="col-4">
+                        <p class="mb-0">{{hisse.lastprice}}</p>
                       </td>
                       <td class="col-1">
-                        {{hisse.lastprice}}
+                        <p class="mb-0">{{hisse.hacim}}</p>
                       </td>
-                      <td class="col-1">
-                        {{hisse.hacim}}
-                      </td>
-                      <td class="col-5">
+                      <td class="col-3">
                         <p *ngIf="hisse.rate >= 0" class="text-success">% {{hisse.rate}}
                           <span>
                             <img src="../assets/images/icons/up-icon.svg" alt="">
@@ -83,10 +58,8 @@
                         </p>
                       </td>
                     </tr>
-                  </tbody>
-                </table>
-
-              </div>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>

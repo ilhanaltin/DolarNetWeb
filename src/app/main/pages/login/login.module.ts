@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations   : [
@@ -12,7 +13,8 @@ import { LoginComponent } from './login.component';
         CommonModule,
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule
     ],
     providers      : [
     ],
