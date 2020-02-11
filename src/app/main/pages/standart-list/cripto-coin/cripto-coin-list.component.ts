@@ -68,7 +68,7 @@ export class CriptoCoinListComponent implements OnInit {
       if(code == null || code == "")
         return "";
 
-      return "../../../../../assets/images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
+      return "https://api-dolar.com/Images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
   }
 
   getConvertedToTry(value: number) : string
