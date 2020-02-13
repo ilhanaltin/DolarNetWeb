@@ -21,6 +21,7 @@ export class BlogService {
     let myParams = new HttpParams()
       .append('ItemCount', criteria.itemCount.toString())
       .append('PageId', criteria.pageId.toString())
+      .append('IsSliderPost', "false")
       .append('CategoryId', criteria.categoryId.toString());
 
       return this.baseService.get<PostListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetAll,myParams);

@@ -1,8 +1,9 @@
 export class HoldingVM
 {
     userId: number;
-    coinTypeId: number;
-    coinTypeAdi: string;
+    holdingTypeId: number;
+    holdingTypeAdi: string;
+    holdingCode: string;
     purchaseDate: Date;
     amount: number;
     price: number;

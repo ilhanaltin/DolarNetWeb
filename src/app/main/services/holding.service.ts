@@ -1,3 +1,4 @@
+import { AuthenticationService } from './authentication.service';
 import { ServiceResult } from './../Models/ServiceResult';
 import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
@@ -6,20 +7,21 @@ import { HttpParams } from '@angular/common/http';
 import { HoldingListResponseDetailsVM } from '../models/holding/HoldingListResponseDetailsVM';
 import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
 import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
+import { HoldingSearchCriteriaVM } from '../models/holding/HoldingSearchCriteriaVM';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HoldingService {
 
-  constructor(private baseService: BaseService) { }
+  constructor(private baseService: BaseService, private _authService: AuthenticationService) { }
 
-  get() : Observable<ServiceResult<HoldingListResponseDetailsVM>>{
+  get(criteria: HoldingSearchCriteriaVM) : Observable<ServiceResult<HoldingListResponseDetailsVM>>{
     
     let myParams = new HttpParams()
-    .append('ItemCount', '10')
-    .append('PageId', '1')
-    .append('RoleId', '1');
+      .append('ItemCount', criteria.itemCount.toString())
+      .append('PageId', criteria.pageId.toString())
+      .append('UserId', criteria.userId.toString());
 
     return this.baseService.get<HoldingListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Holding.Get, myParams);
   }

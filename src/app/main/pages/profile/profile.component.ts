@@ -6,6 +6,9 @@ import { startWith, map } from 'rxjs/operators';
 import { GlobalConstants } from '../../models/constants/GlobalConstants';
 import { CriptoService } from '../../services/cripto.service';
 import { CriptoRatesVM } from '../../models/coins/CriptoRatesVM';
+import { HoldingService } from '../../services/holding.service';
+import { HoldingSearchCriteriaVM } from '../../models/holding/HoldingSearchCriteriaVM';
+import { HoldingVM } from '../../models/holding/HoldingVM';
 
 @Component({
   selector: 'profile',
@@ -32,8 +35,12 @@ export class ProfileComponent implements OnInit {
   optionPositionType: number;
 
   criptoRates: CriptoRatesVM[];
+
+  holdings: HoldingVM[];
   
-  constructor( private _criptoService: CriptoService) {
+  constructor( private _criptoService: CriptoService,
+    private _holdingService: HoldingService) {
+
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.getCriptoData();
@@ -41,7 +48,7 @@ export class ProfileComponent implements OnInit {
     this.optionPositionType = GlobalConstants.PositionType.Currency;
    }
 
-  ngOnInit() {
+  ngOnInit() {    
       this.filteredCurrencies = this.listBoxCurrency.valueChanges
         .pipe(
           startWith(''),
@@ -59,6 +66,8 @@ export class ProfileComponent implements OnInit {
           startWith(''),
           map(value => this._filterCoins(value))
         );
+
+        this.getholdings();
   }
 
   private _filterCurrency(value: string): TypeVM[] {
@@ -167,5 +176,17 @@ export class ProfileComponent implements OnInit {
         return "";
 
       return "https://api-dolar.com/Images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
+  }
+
+  getholdings()
+  {
+      let criteria = new HoldingSearchCriteriaVM();
+      criteria.itemCount = 30;
+      criteria.pageId = 0;
+      criteria.userId = 1;
+
+      this._holdingService.get(criteria).subscribe(response=>{
+        this.holdings = response.result.holdings;
+      });
   }
 }

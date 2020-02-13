@@ -95,6 +95,9 @@ export class ConverterComponent implements OnInit {
         {
             this.currencyRates = storageDataCurrency.data;
 
+            this.currencySecond = 1;
+            this.onTextBoxChangeCurrency("2");
+
             this.getGoldData();
             this.getCriptoData();
         }
@@ -102,6 +105,9 @@ export class ConverterComponent implements OnInit {
         {
             this._currencyService.getFromApi().subscribe(resp=>{
               this.currencyRates = resp.result;
+
+              this.currencySecond = 1;
+              this.onTextBoxChangeCurrency("2");
 
               this.getGoldData();
               this.getCriptoData();
@@ -116,11 +122,18 @@ export class ConverterComponent implements OnInit {
         if(storageDataGold.isValid)
         {
             this.goldRates = storageDataGold.data;
+
+            this.goldFirst = 1;
+            this.onTextBoxChangeGold("1");
+
         }
         else
         {
             this._goldService.getFromApi().subscribe(resp=>{
               this.goldRates = resp.result;
+
+              this.goldFirst = 1;
+              this.onTextBoxChangeGold("1");
             });
         }
   }
@@ -132,11 +145,17 @@ export class ConverterComponent implements OnInit {
         if(storageDataCripto.isValid)
         {
             this.criptoRates = storageDataCripto.data;
+
+            this.criptoFirst = 1;
+            this.onTextBoxChangeCripto("1");
         }
         else
         {
             this._criptoService.getFromApi().subscribe(resp=>{
                 this.criptoRates = resp.result;
+
+                this.criptoFirst = 1;
+                this.onTextBoxChangeCripto("1");
             });
       }
   }

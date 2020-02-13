@@ -155,22 +155,31 @@
                                     <table class="table table-bordered table-hover mt-4">
                                         <thead>
                                             <tr>
-                                                <th>1</th>
-                                                <th>2</th>
-                                                <th>3</th>
+                                                <th scope="col">Adı</th>
+                                                <th scope="col">Alış Tarihi</th>
+                                                <th scope="col">Miktar</th>
+                                                <th scope="col">Alınan Değer</th>
+                                                <th scope="col">Şimdiki Değer</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td scope="row">2</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row">c</td>
-                                                <td>a</td>
-                                                <td>a</td>
-                                            </tr>
+                                            <tr class="align-middle" *ngFor="let holding of holdings">
+                                                <th scope="row">
+                                                    {{holding.holdingCode}}
+                                                </th>                                                                                                    
+                                                <td>
+                                                    {{holding.purchaseDate | date :'dd-MM-yyyy'}} 
+                                                </td>
+                                                <td>
+                                                    {{holding.amount}}
+                                                </td>
+                                                <td>
+                                                    {{holding.price}}
+                                                </td>
+                                                <td>
+                                                    ???
+                                                </td>
+                                              </tr>
                                         </tbody>
                                     </table></div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel"
