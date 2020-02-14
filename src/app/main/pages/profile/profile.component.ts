@@ -1,6 +1,6 @@
 import { TypeVM } from './../../models/types/TypeVM';
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { GlobalConstants } from '../../models/constants/GlobalConstants';
@@ -9,6 +9,7 @@ import { CriptoRatesVM } from '../../models/coins/CriptoRatesVM';
 import { HoldingService } from '../../services/holding.service';
 import { HoldingSearchCriteriaVM } from '../../models/holding/HoldingSearchCriteriaVM';
 import { HoldingVM } from '../../models/holding/HoldingVM';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'profile',
@@ -18,6 +19,8 @@ import { HoldingVM } from '../../models/holding/HoldingVM';
 export class ProfileComponent implements OnInit {
 
   readonly _globalConstants = GlobalConstants;
+
+  postHoldingForm: FormGroup;
 
   listBoxCurrency = new FormControl();
   listBoxGold = new FormControl();
@@ -38,9 +41,14 @@ export class ProfileComponent implements OnInit {
 
   holdings: HoldingVM[];
   
-  constructor( private _criptoService: CriptoService,
-    private _holdingService: HoldingService) {
+  holding: HoldingVM;
 
+  constructor( private _criptoService: CriptoService,
+    private _holdingService: HoldingService,
+    private _formBuilder: FormBuilder,
+    public _authenticationService: AuthenticationService) {
+
+    this.holding = new HoldingVM({});
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.getCriptoData();
@@ -68,6 +76,8 @@ export class ProfileComponent implements OnInit {
         );
 
         this.getholdings();
+
+        this.postHoldingForm = this.createPostHoldingForm();
   }
 
   private _filterCurrency(value: string): TypeVM[] {
@@ -87,6 +97,24 @@ export class ProfileComponent implements OnInit {
 
     return this.criptoRates.filter(option => option.code.toLowerCase().includes(filterValue));
   }
+
+  /**
+     * Create post form
+     *
+     * @returns {FormGroup}
+     */
+    createPostHoldingForm(): FormGroup
+    {
+        let currentUser = this._authenticationService.currentUser;
+
+        return this._formBuilder.group({          
+            id              : [this.holding.id],
+            userId          : [currentUser.id],
+            purchaseDate    : [this.holding.purchaseDate, Validators.required],
+            amount          : [this.holding.amount, Validators.min(1), Validators.required],
+            price           : [this.holding.price, Validators.min(1), Validators.required]
+        });
+    }
 
   onPositionTypeChanged()
   {
@@ -117,6 +145,10 @@ export class ProfileComponent implements OnInit {
 
   onPositionSelectedCoin(coin)
   {
+  }
+
+  saveHolding(){
+
   }
 
   getCurrencies() {

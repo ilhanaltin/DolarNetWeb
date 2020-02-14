@@ -14,6 +14,10 @@ import { NewsLatestModule } from '../post/news-latest/news-latest.module';
 
 import { MatInputModule } from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     declarations   : [
@@ -33,7 +37,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         NewsPopularModule,
         NewsLatestModule,
         MatInputModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        MatButtonModule,
+        MatIconModule,
+        FlexLayoutModule
     ],
     providers      : [
     ],

@@ -59,6 +59,9 @@
                                     </a>
                                 </div>
                             </div> -->
+                            <p></p>
+                            <div class="h4 mb-24">Varlık Bilgisi Giriş</div>
+
                             <div class="form-group mt-3">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCurrency"
@@ -127,6 +130,47 @@
                                         </mat-option>
                                     </mat-autocomplete> 
                                 </mat-form-field>
+                            </div>
+
+                            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                                
+                                <form fxLayout="column" fxLayoutAlign="start"
+                                    fxFlex="1 0 auto" name="postHoldingForm" [formGroup]="postHoldingForm">
+
+                                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                                        <mat-form-field appearance="outline" fxFlex="25" class="pr-2">
+                                            <mat-label>Alış Tarihi</mat-label>
+                                            <input matInput [matDatepicker]="purchaseDatePicker" 
+                                                name="purchaseDatePicker" 
+                                                formControlName="purchaseDate"
+                                                required>
+                                            <mat-datepicker-toggle matSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #purchaseDatePicker></mat-datepicker>
+                                        </mat-form-field>    
+                                        
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="25" class="pr-2">
+                                            <mat-label>Miktar</mat-label>
+                                            <input matInput placeholder="Miktar"
+                                                    name="amountOfHolding"
+                                                    formControlName="amount"
+                                                    type="number">
+                                        </mat-form-field>
+
+                                        <mat-form-field appearance="outline" floatLabel="always" fxFlex="30" class="pr-2">
+                                            <mat-label>Alış Değeri</mat-label>
+                                            <input matInput placeholder="Alış Değeri"
+                                                    name="priceOfHolding"
+                                                    formControlName="price"
+                                                    type="number">
+                                            <span matPrefix>₺&nbsp;</span>
+                                        </mat-form-field>
+                                        <div fxFlex="10" class="pr-2">
+                                            <button type="button" class="btn btn-success btn-block" [disabled]="postHoldingForm.invalid">Ekle</button>
+                                        </div>
+                                    </div>
+                                    
+                                </form>
                             </div>
                             <div class="btn-group" role="group" aria-label="">
                                 <button type="button" class="btn btn-success active">Varlikler</button>

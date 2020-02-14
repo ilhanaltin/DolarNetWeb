@@ -26,6 +26,7 @@ import { PostCategoryHeaderModule } from './main/pages/header/post-category-head
 import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/borsa-live-list.module';
 import { ProfileModule } from './main/pages/profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NewsPopularModule,
     RegisterModule,
     ProfileModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+
+    // Material moment date module
+    MatMomentDateModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
