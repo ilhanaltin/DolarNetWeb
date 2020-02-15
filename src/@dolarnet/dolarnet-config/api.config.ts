@@ -4,7 +4,7 @@ export const apiConfig = {
     {
       Main:
       {
-          Url: "https://api-dolar.com/api/"
+          Url: "https://api.dolar.net/api/"
           //Url: "https://localhost:44366/api/"
       },
       CollectApi:
