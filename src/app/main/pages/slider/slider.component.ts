@@ -15,16 +15,6 @@ export class SliderComponent implements OnInit {
   readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
-  post1: PostVM;
-  post2: PostVM;
-  post3: PostVM;
-  post4: PostVM;
-  post5: PostVM;
-  post6: PostVM;
-  post7: PostVM;
-  post8: PostVM;
-  post9: PostVM;
-  post10: PostVM;
 
   constructor(private _blogService: BlogService) {
    }
@@ -56,6 +46,3 @@ export class SliderComponent implements OnInit {
     })
   }
 }
-
-
-
