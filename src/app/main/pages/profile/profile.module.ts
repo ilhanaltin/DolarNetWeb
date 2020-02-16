@@ -43,6 +43,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatIconModule,
         FlexLayoutModule
     ],
+    exports : [
+        MatIconModule, MatButtonModule
+    ],
     providers      : [
     ],
     entryComponents: [

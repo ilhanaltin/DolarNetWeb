@@ -28,9 +28,9 @@ export class ProfileComponent implements OnInit {
   currencies: TypeVM[];
   golds: TypeVM[];
 
-  selectedCurrency: TypeVM;
-  selectedGold: TypeVM;
-  selectedCoin: CriptoRatesVM;
+  selectedCurrency: string = "";
+  selectedGold: string = "";
+  selectedCoin: string = "";
 
   filteredCurrencies: Observable<TypeVM[]>;
   filteredGolds: Observable<TypeVM[]>;
@@ -42,6 +42,8 @@ export class ProfileComponent implements OnInit {
   holdings: HoldingVM[];
   
   holding: HoldingVM;
+
+  action: string = "new";
 
   constructor( private _criptoService: CriptoService,
     private _holdingService: HoldingService,
@@ -81,6 +83,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private _filterCurrency(value: string): TypeVM[] {
+    
     const filterValue = value.toLowerCase();
 
     return this.currencies.filter(option => option.adi.toLowerCase().includes(filterValue));
@@ -98,40 +101,50 @@ export class ProfileComponent implements OnInit {
     return this.criptoRates.filter(option => option.code.toLowerCase().includes(filterValue));
   }
 
-  /**
-     * Create post form
-     *
-     * @returns {FormGroup}
-     */
-    createPostHoldingForm(): FormGroup
-    {
-        let currentUser = this._authenticationService.currentUser;
+  
+  createPostHoldingForm(): FormGroup
+  {
+      let currentUser = this._authenticationService.currentUser;
 
-        return this._formBuilder.group({          
-            id              : [this.holding.id],
-            userId          : [currentUser.id],
-            purchaseDate    : [this.holding.purchaseDate, Validators.required],
-            amount          : [this.holding.amount, Validators.min(1), Validators.required],
-            price           : [this.holding.price, Validators.min(1), Validators.required]
-        });
-    }
+      if(this.action === "new")
+      {
+          return this._formBuilder.group({          
+              id              : [this.holding.id],
+              userId          : [currentUser.id],
+              purchaseDate    : [this.holding.purchaseDate, Validators.required],
+              amount          : [this.holding.amount, [Validators.min(1), Validators.required]],
+              price           : [this.holding.price, [Validators.min(1), Validators.required]]
+          });
+      }
+      else if(this.action === "edit")
+      {
+          return this._formBuilder.group({          
+              id              : [this.holding.id],
+              userId          : [currentUser.id],
+              purchaseDate    : [this.holding.purchaseDate, Validators.required],
+              amount          : [this.holding.amount, [Validators.min(1), Validators.required]],
+              price           : [this.holding.price, [Validators.min(1), Validators.required]]
+          });
+      }
+      
+  }
 
   onPositionTypeChanged()
   {
       if(this.optionPositionType === GlobalConstants.PositionType.Currency)
       {
-        this.selectedGold = null;
-        this.selectedCoin = null;
+        this.selectedGold = "";
+        this.selectedCoin = "";
       }
       else if(this.optionPositionType === GlobalConstants.PositionType.Gold)
       {
-        this.selectedCurrency = null;
-        this.selectedCoin = null;
+        this.selectedCurrency = "";
+        this.selectedCoin = "";
       }
       else
       {
-        this.selectedCurrency = null;
-        this.selectedGold = null;
+        this.selectedCurrency = "";
+        this.selectedGold = "";
       }
   }
 
@@ -147,8 +160,84 @@ export class ProfileComponent implements OnInit {
   {
   }
 
-  saveHolding(){
+  clearSearchField(){
+      this.selectedCurrency = "";
+      this.selectedCoin = "";
+      this.selectedGold = "";
+  }
 
+  saveHolding(holding){
+
+    let holdingVM = new HoldingVM({});
+
+    holdingVM.id = holding.id;
+    holdingVM.userId = holding.userId;
+    holdingVM.purchaseDate = holding.purchaseDate;
+    holdingVM.amount = holding.amount;
+    holdingVM.price = holding.price;
+    holdingVM.holdingTypeId = this.optionPositionType;
+
+    if(this.optionPositionType === GlobalConstants.PositionType.Currency)
+    {
+        holdingVM.holdingCode = this.selectedCurrency;
+    }
+    else if(this.optionPositionType === GlobalConstants.PositionType.Gold)
+    {
+        holdingVM.holdingCode = this.selectedGold;
+    }
+    else
+    {
+        holdingVM.holdingCode = this.selectedCoin;
+    }
+
+    this._holdingService.post(holdingVM).subscribe(resp=>{
+      this.getholdings();
+    });
+  }
+
+  editHolding(holding)
+  {
+      this.holding = this.holdings.filter(t=>t.id == holding.id)[0];
+      this.optionPositionType = this.holding.holdingTypeId;
+
+      if(this.optionPositionType === GlobalConstants.PositionType.Currency)
+      {
+          this.selectedCurrency = this.holding.holdingCode;
+      }
+      else if(this.optionPositionType === GlobalConstants.PositionType.Gold)
+      {
+          this.selectedGold = this.holding.holdingCode;
+      }
+      else
+      {
+          this.selectedCoin = this.holding.holdingCode;
+      } 
+
+      this.action="edit";
+      this.postHoldingForm = this.createPostHoldingForm();
+  }
+
+  deleteHolding(holding)
+  {
+    this._holdingService.delete(holding.id).subscribe(resp=>{
+      this.getholdings();
+    });
+  }
+
+  get isPositionSelected()
+  {
+      if(this.optionPositionType === GlobalConstants.PositionType.Currency)
+      {
+          return this.selectedCurrency !== "";
+      }
+      else if(this.optionPositionType === GlobalConstants.PositionType.Gold)
+      {
+          return this.selectedGold !== "";
+      }
+      else
+      {
+          return this.selectedCoin !== "";
+      }      
   }
 
   getCurrencies() {

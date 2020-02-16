@@ -80,59 +80,64 @@
                                 </div>
                             </div>
                             
-                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Currency">
-                                <mat-form-field class="example-full-width">
-                                    <input type="text"
-                                            placeholder="Pozisyon Arayın"
-                                            aria-label="Number"
-                                            matInput
-                                            [formControl]="listBoxCurrency"
-                                            [(ngModel)]="selectedCurrency"
-                                            [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi" (onSelectionChange)="onPositionSelectedCurrency(curr)">
-                                            <p>
-                                                <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
-                                                <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
-                                            </p>
-                                        </mat-option>
-                                    </mat-autocomplete> 
-                                </mat-form-field>
-                            </div>
-                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Gold">
-                                <mat-form-field class="example-full-width">
-                                    <input type="text"
-                                            placeholder="Pozisyon Arayın"
-                                            aria-label="Number"
-                                            matInput
-                                            [formControl]="listBoxGold"
-                                            [(ngModel)]="selectedGold"
-                                            [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi" (onSelectionChange)="onPositionSelectedGold(gold)">
-                                            <span> {{gold.adi}}</span>
-                                        </mat-option>
-                                    </mat-autocomplete> 
-                                </mat-form-field>
-                            </div>
-                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Cripto">
-                                <mat-form-field class="example-full-width">
-                                    <input type="text"
-                                            placeholder="Pozisyon Arayın"
-                                            aria-label="Number"
-                                            matInput
-                                            [formControl]="listBoxCoin"
-                                            [(ngModel)]="selectedCoin"
-                                            [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code" (onSelectionChange)="onPositionSelectedCoin(coin)">
-                                            <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
-                                        </mat-option>
-                                    </mat-autocomplete> 
-                                </mat-form-field>
+                            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                                <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Currency" fxFlex="70">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text"
+                                                placeholder="Pozisyon Arayın"
+                                                aria-label="Number"
+                                                matInput
+                                                [formControl]="listBoxCurrency"
+                                                [(ngModel)]="selectedCurrency"
+                                                [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi" (onSelectionChange)="onPositionSelectedCurrency(curr)">
+                                                <p>
+                                                    <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
+                                                    <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
+                                                </p>
+                                            </mat-option>
+                                        </mat-autocomplete> 
+                                        <button mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="selectedCurrency">
+                                            <mat-icon>close</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Gold" fxFlex="70">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text"
+                                                placeholder="Pozisyon Arayın"
+                                                aria-label="Number"
+                                                matInput
+                                                [formControl]="listBoxGold"
+                                                [(ngModel)]="selectedGold"
+                                                [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi" (onSelectionChange)="onPositionSelectedGold(gold)">
+                                                <span> {{gold.adi}}</span>
+                                            </mat-option>
+                                        </mat-autocomplete> 
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Cripto" fxFlex="70">
+                                    <mat-form-field class="example-full-width">
+                                        <input type="text"
+                                                placeholder="Pozisyon Arayın"
+                                                aria-label="Number"
+                                                matInput
+                                                [formControl]="listBoxCoin"
+                                                [(ngModel)]="selectedCoin"
+                                                [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                            <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code" (onSelectionChange)="onPositionSelectedCoin(coin)">
+                                                <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
+                                            </mat-option>
+                                        </mat-autocomplete> 
+                                    </mat-form-field>
+                                </div>
                             </div>
 
-                            <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                            <div *ngIf="isPositionSelected" class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
                                 
                                 <form fxLayout="column" fxLayoutAlign="start"
                                     fxFlex="1 0 auto" name="postHoldingForm" [formGroup]="postHoldingForm">
@@ -166,7 +171,9 @@
                                             <span matPrefix>₺&nbsp;</span>
                                         </mat-form-field>
                                         <div fxFlex="10" class="pr-2">
-                                            <button type="button" class="btn btn-success btn-block" [disabled]="postHoldingForm.invalid">Ekle</button>
+                                            <button type="button" class="btn btn-success btn-block"  
+                                            (click) = "saveHolding(postHoldingForm.value)"
+                                            [disabled]="postHoldingForm.invalid">Ekle</button>
                                         </div>
                                     </div>
                                     
@@ -199,6 +206,7 @@
                                     <table class="table table-bordered table-hover mt-4">
                                         <thead>
                                             <tr>
+                                                <th scope="col"></th>
                                                 <th scope="col">Adı</th>
                                                 <th scope="col">Alış Tarihi</th>
                                                 <th scope="col">Miktar</th>
@@ -207,7 +215,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="align-middle" *ngFor="let holding of holdings">
+                                            <tr class="align-middle" *ngFor="let holding of holdings" (click)="editHolding(holding)">
+                                                <td (click)="$event.stopPropagation()">
+                                                    <button (click)="deleteHolding(holding)" mat-icon-button color="#b71c1c">
+                                                        <mat-icon aria-label="Delete">delete</mat-icon>
+                                                    </button>
+                                                </td>
                                                 <th scope="row">
                                                     {{holding.holdingCode}}
                                                 </th>                                                                                                    
@@ -222,7 +235,7 @@
                                                 </td>
                                                 <td>
                                                     ???
-                                                </td>
+                                                </td>                                                
                                               </tr>
                                         </tbody>
                                     </table></div>

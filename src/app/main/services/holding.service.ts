@@ -26,19 +26,15 @@ export class HoldingService {
     return this.baseService.get<HoldingListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Holding.Get, myParams);
   }
 
-  post() : Observable<ServiceResult<StandartResponseDetailsVM>>{
-    let post = {
-      Id: -1,
-      UserId: 1,
-      CoinTypeId: 1
-    };
+  post(holding) : Observable<ServiceResult<StandartResponseDetailsVM>>{
 
-    return this.baseService.post(apiConfig.Api.Main.Url + apiConfig.Services.Holding.Post, post);
+    return this.baseService.post(apiConfig.Api.Main.Url + apiConfig.Services.Holding.Post, holding);
   }
 
-  delete(): Observable<ServiceResult<StandartResponseDetailsVM>> {
+  delete(id: number): Observable<ServiceResult<StandartResponseDetailsVM>> {
+    
     let myParams = new HttpParams()
-      .append('id', '1')
+      .append('id', id.toString())
 
     return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(apiConfig.Api.Main.Url + apiConfig.Services.Holding.Delete, myParams);
   }
