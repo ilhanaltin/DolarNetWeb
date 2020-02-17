@@ -296,7 +296,7 @@ export class ProfileComponent implements OnInit {
       if(code == null || code == "")
         return "";
 
-      return "https://api-dolar.com/Images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
+      return "https://api.dolar.net/Images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
   }
 
   getholdings()
