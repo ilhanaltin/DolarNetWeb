@@ -34,8 +34,7 @@
               "src/assets/js/jquery-3.2.1.min.js", 
               "src/assets/js/popper.min.js", 
               "src/assets/js/bootstrap.min.js",
-              "src/assets/plugins/slick/slick/slick.min.js",
-              "src/assets/js/main.js"
+              "src/assets/plugins/slick/slick/slick.min.js"
             ]
           },
           "configurations": {

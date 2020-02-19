@@ -14,6 +14,7 @@ export class SliderComponent implements OnInit {
 
   readonly _globalConstants = GlobalConstants;
 
+  isSliderHidden: boolean = true;
   postList: PostVM[];
 
   constructor(private _blogService: BlogService) {
@@ -41,8 +42,13 @@ export class SliderComponent implements OnInit {
   getSliderPosts()
   {
     this._blogService.getSliderPosts().subscribe(response=>{
-        this.postList = response.result.postList;        
+      this.postList = response.result.postList;   
+
+      setTimeout(() => 
+      {
         this.loadScripts();
-    })
-  }
+        this.isSliderHidden = false;
+      },1000);
+    });
+  }  
 }

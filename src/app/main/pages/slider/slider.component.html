@@ -1,10 +1,10 @@
 <div class="slider slider-single">
-  <div *ngFor="let post of postList">
+  <div *ngFor="let post of postList" [hidden]="isSliderHidden">
     <a href="" [routerLink]="['/news-detail', post.id]">{{post.title}}</a>
     <img [src]="_globalConstants.siteUrl + post.imagePath" class="img-fluid" [alt]="post.title">
   </div>
 </div>
-<div class="slider slider-nav">
+<div class="slider slider-nav" [hidden]="isSliderHidden">
   <div *ngFor="let post of postList; let j = index">
     <h3><span>{{ j+1 }}</span></h3>
   </div>
