@@ -1,7 +1,7 @@
 import { TypeVM } from './../../models/types/TypeVM';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, timer } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { GlobalConstants } from '../../models/constants/GlobalConstants';
 import { CriptoService } from '../../services/cripto.service';
@@ -10,6 +10,10 @@ import { HoldingService } from '../../services/holding.service';
 import { HoldingSearchCriteriaVM } from '../../models/holding/HoldingSearchCriteriaVM';
 import { HoldingVM } from '../../models/holding/HoldingVM';
 import { AuthenticationService } from '../../services/authentication.service';
+import { CurrencyService } from '../../services/currency.service';
+import { GoldService } from '../../services/gold.service';
+import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
+import { GoldRatesVM } from '../../models/integration/gold/GoldRatesVM';
 
 @Component({
   selector: 'profile',
@@ -18,10 +22,15 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class ProfileComponent implements OnInit {
 
+  private myTimerSub: Subscription;
   readonly _globalConstants = GlobalConstants;
 
   postHoldingForm: FormGroup;
 
+  currencyRates: CurrencyRatesVM[];
+  goldRates: GoldRatesVM[];
+  criptoRates: CriptoRatesVM[];
+  
   listBoxCurrency = new FormControl();
   listBoxGold = new FormControl();
   listBoxCoin = new FormControl();
@@ -37,8 +46,6 @@ export class ProfileComponent implements OnInit {
   filteredCoins: Observable<CriptoRatesVM[]>;
   optionPositionType: number;
 
-  criptoRates: CriptoRatesVM[];
-
   holdings: HoldingVM[];
   
   holding: HoldingVM;
@@ -48,17 +55,24 @@ export class ProfileComponent implements OnInit {
   constructor( private _criptoService: CriptoService,
     private _holdingService: HoldingService,
     private _formBuilder: FormBuilder,
-    public _authenticationService: AuthenticationService) {
+    public _authenticationService: AuthenticationService,
+    private _currencyService: CurrencyService, 
+    private _goldService: GoldService) {
 
     this.holding = new HoldingVM({});
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
-    this.getCriptoData();
-
     this.optionPositionType = GlobalConstants.PositionType.Currency;
    }
 
-  ngOnInit() {    
+  ngOnInit() {  
+    
+      const ti = timer(0,60000);
+
+        this.myTimerSub = ti.subscribe(t => {    
+            this.getCurrencyAndConnectedData();
+        });
+
       this.filteredCurrencies = this.listBoxCurrency.valueChanges
         .pipe(
           startWith(''),
@@ -75,11 +89,65 @@ export class ProfileComponent implements OnInit {
         .pipe(
           startWith(''),
           map(value => this._filterCoins(value))
-        );
-
-        this.getholdings();
+        );        
 
         this.postHoldingForm = this.createPostHoldingForm();
+  }
+
+  getCurrencyAndConnectedData()
+  {
+        let storageDataCurrency = this._currencyService.getFromStorage();
+
+        if(storageDataCurrency.isValid)
+        {
+            this.currencyRates = storageDataCurrency.data;
+
+            this.getGoldData();
+            this.getCriptoData();
+            this.getholdings();
+        }
+        else
+        {
+            this._currencyService.getFromApi().subscribe(resp=>{
+              this.currencyRates = resp.result;
+
+              this.getGoldData();
+              this.getCriptoData();
+              this.getholdings();
+            });
+        }
+  }
+
+  getGoldData()
+  {
+        let storageDataGold = this._goldService.getFromStorage();
+
+        if(storageDataGold.isValid)
+        {
+            this.goldRates = storageDataGold.data;
+        }
+        else
+        {
+            this._goldService.getFromApi().subscribe(resp=>{
+              this.goldRates = resp.result;
+            });
+        }
+  }
+
+  getCriptoData()
+  {
+      let storageDataCripto = this._criptoService.getFromStorage();
+
+      if(storageDataCripto.isValid)
+      {
+        this.criptoRates = storageDataCripto.data;
+      }
+      else
+      {
+          this._criptoService.getFromApi().subscribe(resp=>{
+            this.criptoRates = resp.result;
+          });
+      }
   }
 
   private _filterCurrency(value: string): TypeVM[] {
@@ -100,7 +168,6 @@ export class ProfileComponent implements OnInit {
 
     return this.criptoRates.filter(option => option.code.toLowerCase().includes(filterValue));
   }
-
   
   createPostHoldingForm(): FormGroup
   {
@@ -265,23 +332,7 @@ export class ProfileComponent implements OnInit {
     });
 
     return goldArray;
-  }
-
-  getCriptoData()
-  {
-      let storageDataCripto = this._criptoService.getFromStorage();
-
-      if(storageDataCripto.isValid)
-      {
-        this.criptoRates = storageDataCripto.data;
-      }
-      else
-      {
-          this._criptoService.getFromApi().subscribe(resp=>{
-            this.criptoRates = resp.result;
-          });
-      }
-  }
+  }  
 
   getCurrencyFlagCss(code: string) : string
   {
@@ -308,6 +359,85 @@ export class ProfileComponent implements OnInit {
 
       this._holdingService.get(criteria).subscribe(response=>{
         this.holdings = response.result.holdings;
+
+        var _now = new Date(Date.now());
+        var today = new Date(_now.getFullYear(), _now.getMonth(), _now.getDay());
+
+        this.holdings.forEach(hold => {
+
+            var _purchaseDate = new Date(
+              (new Date(hold.purchaseDate.toString())).getFullYear(),
+              (new Date(hold.purchaseDate.toString())).getMonth(),
+              (new Date(hold.purchaseDate.toString())).getDay()
+            );
+
+            if(hold.holdingTypeId === GlobalConstants.PositionType.Currency)
+            {
+                hold.todaysPrice =  this.currencyRates.find(t=>t.code === hold.holdingCode).buying;
+                hold.marketPrice =  this.currencyRates.find(t=>t.code === hold.holdingCode).buying * hold.amount;
+
+                if(_purchaseDate.getTime() === today.getTime())
+                {
+                    var yesterdaysValue = this.currencyRates.find(t=>t.code === hold.holdingCode).buying * (100 - this.currencyRates.find(t=>t.code === hold.holdingCode).rate) / 100;
+                    hold.dailyChangeRate =  100 * (yesterdaysValue - hold.price) / 100;
+                }
+                else 
+                {
+                    hold.dailyChangeRate = this.currencyRates.find(t=>t.code === hold.holdingCode).rate;
+                }
+
+                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate;
+
+                hold.openChangeRate = (this.currencyRates.find(t=>t.code === hold.holdingCode).buying * 100 / hold.price) - 100;
+                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate;
+            }
+            else if(hold.holdingTypeId === GlobalConstants.PositionType.Gold)
+            {
+                hold.todaysPrice =  this.goldRates.find(t=>t.name === hold.holdingCode).buying;
+                hold.marketPrice =  this.goldRates.find(t=>t.name === hold.holdingCode).buying * hold.amount;
+
+                if(_purchaseDate.getTime() === today.getTime())
+                {
+                    var yesterdaysValue = this.goldRates.find(t=>t.name === hold.holdingCode).buying * (100 - this.goldRates.find(t=>t.name === hold.holdingCode).rate) / 100;
+
+                    hold.dailyChangeRate =  100 * (yesterdaysValue - hold.price) / 100;
+                }
+                else 
+                {
+                    hold.dailyChangeRate = this.goldRates.find(t=>t.name === hold.holdingCode).rate;
+                }
+
+                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate;
+                hold.openChangeRate = (this.goldRates.find(t=>t.name === hold.holdingCode).buying * 100 / hold.price) - 100;
+                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate;
+            }
+            else
+            {
+                hold.todaysPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price;
+                hold.marketPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price * hold.amount;
+
+                if(_purchaseDate.getTime() === today.getTime())
+                {
+                    var yesterdaysValue = this.criptoRates.find(t=>t.name === hold.holdingCode).price * (100 - this.criptoRates.find(t=>t.name === hold.holdingCode).changeDay) / 100;
+                    hold.dailyChangeRate =  100 * (yesterdaysValue - hold.price) / 100;
+                }
+                else 
+                {
+                    hold.dailyChangeRate = this.criptoRates.find(t=>t.code === hold.holdingCode).changeDay;
+                }
+
+                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate;
+                hold.openChangeRate = (this.criptoRates.find(t=>t.code === hold.holdingCode).price * 100 / hold.price) - 100;
+                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate;
+            } 
+        });
+      });
+  }
+
+  getConvertedToTry(value: number) : string
+  {
+      return value.toLocaleString('tr-TR', {
+        maximumFractionDigits: 2,
       });
   }
 }

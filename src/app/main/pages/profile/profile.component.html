@@ -203,15 +203,20 @@
                             <div class="tab-content border pl-3 pr-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel"
                                     aria-labelledby="home-tab">
-                                    <table class="table table-bordered table-hover mt-4">
+                                    <table class="table table-bordered table-hover mt-4 w-auto small">
                                         <thead>
                                             <tr>
                                                 <th scope="col"></th>
                                                 <th scope="col">Adı</th>
                                                 <th scope="col">Alış Tarihi</th>
                                                 <th scope="col">Miktar</th>
-                                                <th scope="col">Alınan Değer</th>
-                                                <th scope="col">Şimdiki Değer</th>
+                                                <th scope="col">Alınan Değer(&#8378;)</th>
+                                                <th scope="col">Şimdiki Değeri(&#8378;)</th>
+                                                <th scope="col">Piyasa Değeri(&#8378;)</th>
+                                                <th scope="col">Günlük (%)</th>
+                                                <th scope="col">Günlük (&#8378;)</th>
+                                                <th scope="col">Açık (%)</th>
+                                                <th scope="col">Açık (&#8378;)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -231,14 +236,30 @@
                                                     {{holding.amount}}
                                                 </td>
                                                 <td>
-                                                    {{holding.price}}
+                                                    {{getConvertedToTry(holding.price)}}
                                                 </td>
                                                 <td>
-                                                    ???
-                                                </td>                                                
+                                                    {{getConvertedToTry(holding.todaysPrice)}}
+                                                </td> 
+                                                <td>
+                                                    {{getConvertedToTry(holding.marketPrice)}}
+                                                </td>  
+                                                <td>
+                                                    {{getConvertedToTry(holding.dailyChangeRate)}}
+                                                </td> 
+                                                <td>
+                                                    {{getConvertedToTry(holding.dailyChange)}}
+                                                </td> 
+                                                <td>
+                                                    {{getConvertedToTry(holding.openChangeRate)}}
+                                                </td>  
+                                                <td>
+                                                    {{getConvertedToTry(holding.openChange)}}
+                                                </td>                                               
                                               </tr>
                                         </tbody>
-                                    </table></div>
+                                    </table>
+                                </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel"
                                     aria-labelledby="profile-tab">...</div>
                                 <div class="tab-pane fade" id="contact" role="tabpanel"
@@ -251,9 +272,9 @@
                         <div class="currency-converter">
                             <converter></converter>
                         </div>
-                        <div class="mt-4">
+                        <!-- <div class="mt-4">
                             <market-analyse></market-analyse>
-                        </div>
+                        </div> -->
                     </div>
 
                 </div>
