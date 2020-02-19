@@ -46,6 +46,12 @@ export class ProfileComponent implements OnInit {
   filteredCoins: Observable<CriptoRatesVM[]>;
   optionPositionType: number;
 
+  marketValue: number;
+  openPrice: number;
+  openPriceRate: number;
+  dailyPrice: number;
+  dailyPriceRate: number;
+
   holdings: HoldingVM[];
   
   holding: HoldingVM;
@@ -193,7 +199,6 @@ export class ProfileComponent implements OnInit {
               price           : [this.holding.price, [Validators.min(1), Validators.required]]
           });
       }
-      
   }
 
   onPositionTypeChanged()
@@ -378,18 +383,16 @@ export class ProfileComponent implements OnInit {
 
                 if(_purchaseDate.getTime() === today.getTime())
                 {
-                    var yesterdaysValue = this.currencyRates.find(t=>t.code === hold.holdingCode).buying * (100 - this.currencyRates.find(t=>t.code === hold.holdingCode).rate) / 100;
-                    hold.dailyChangeRate =  100 * (yesterdaysValue - hold.price) / 100;
+                    hold.dailyChangeRate =  (hold.todaysPrice - hold.price) * 100 / hold.price;
                 }
                 else 
                 {
                     hold.dailyChangeRate = this.currencyRates.find(t=>t.code === hold.holdingCode).rate;
                 }
 
-                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate;
-
+                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate / 100;
                 hold.openChangeRate = (this.currencyRates.find(t=>t.code === hold.holdingCode).buying * 100 / hold.price) - 100;
-                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate;
+                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate / 100;
             }
             else if(hold.holdingTypeId === GlobalConstants.PositionType.Gold)
             {
@@ -398,18 +401,16 @@ export class ProfileComponent implements OnInit {
 
                 if(_purchaseDate.getTime() === today.getTime())
                 {
-                    var yesterdaysValue = this.goldRates.find(t=>t.name === hold.holdingCode).buying * (100 - this.goldRates.find(t=>t.name === hold.holdingCode).rate) / 100;
-
-                    hold.dailyChangeRate =  100 * (yesterdaysValue - hold.price) / 100;
+                    hold.dailyChangeRate =  (hold.todaysPrice - hold.price) * 100 / hold.price;
                 }
                 else 
                 {
                     hold.dailyChangeRate = this.goldRates.find(t=>t.name === hold.holdingCode).rate;
                 }
 
-                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate;
+                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate / 100;
                 hold.openChangeRate = (this.goldRates.find(t=>t.name === hold.holdingCode).buying * 100 / hold.price) - 100;
-                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate;
+                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate / 100;
             }
             else
             {
@@ -418,24 +419,40 @@ export class ProfileComponent implements OnInit {
 
                 if(_purchaseDate.getTime() === today.getTime())
                 {
-                    var yesterdaysValue = this.criptoRates.find(t=>t.name === hold.holdingCode).price * (100 - this.criptoRates.find(t=>t.name === hold.holdingCode).changeDay) / 100;
-                    hold.dailyChangeRate =  100 * (yesterdaysValue - hold.price) / 100;
+                    hold.dailyChangeRate =  (hold.todaysPrice - hold.price) * 100 / hold.price;
                 }
                 else 
                 {
                     hold.dailyChangeRate = this.criptoRates.find(t=>t.code === hold.holdingCode).changeDay;
                 }
 
-                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate;
+                hold.dailyChange =  (hold.amount * hold.price) * hold.dailyChangeRate / 100;
                 hold.openChangeRate = (this.criptoRates.find(t=>t.code === hold.holdingCode).price * 100 / hold.price) - 100;
-                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate;
+                hold.openChange = (hold.amount * hold.price) * hold.openChangeRate / 100;
             } 
         });
+
+        this.marketValue = this.holdings.reduce(function(prev, cur) {
+          return prev + cur.marketPrice;
+        }, 0);
+
+        var valueBefore = this.holdings.reduce(function(prev, cur) {
+          return prev + cur.amount * cur.price;
+        }, 0);
+
+        this.openPrice = this.marketValue - valueBefore;
+
+        this.dailyPrice = this.holdings.reduce(function(prev, cur) {
+          return prev + cur.dailyChange;
+        }, 0);
       });
   }
 
   getConvertedToTry(value: number) : string
   {
+      if(value == null)
+        return "";
+
       return value.toLocaleString('tr-TR', {
         maximumFractionDigits: 2,
       });
