@@ -50,6 +50,127 @@
                             </div>
                         </div>
 
+                        <p></p>
+                        <div class="h4 mb-24">Varlık/Portfolio Bilgisi Giriş</div>
+
+                        <div class="form-group mt-3">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCurrency"
+                                [(ngModel)]="optionPositionType" [value]="1" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Currency">
+                                <label class="form-check-label" for="inlineRadioCurrency">Döviz</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioGold"
+                                [(ngModel)]="optionPositionType" [value]="2" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Gold">
+                                <label class="form-check-label" for="inlineRadioGold">Altın</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCripto"
+                                [(ngModel)]="optionPositionType" [value]="3" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Cripto"> 
+                                <label class="form-check-label" for="inlineRadioCripto">Kripto Para</label>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Currency" fxFlex="70">
+                                <mat-form-field class="example-full-width">
+                                    <input type="text"
+                                            placeholder="Pozisyon Arayın"
+                                            aria-label="Number"
+                                            matInput
+                                            [formControl]="listBoxCurrency"
+                                            [(ngModel)]="selectedCurrency"
+                                            [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi" (onSelectionChange)="onPositionSelectedCurrency(curr)">
+                                            <p>
+                                                <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
+                                                <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
+                                            </p>
+                                        </mat-option>
+                                    </mat-autocomplete> 
+                                    <button mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="selectedCurrency">
+                                        <mat-icon>close</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Gold" fxFlex="70">
+                                <mat-form-field class="example-full-width">
+                                    <input type="text"
+                                            placeholder="Pozisyon Arayın"
+                                            aria-label="Number"
+                                            matInput
+                                            [formControl]="listBoxGold"
+                                            [(ngModel)]="selectedGold"
+                                            [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi" (onSelectionChange)="onPositionSelectedGold(gold)">
+                                            <span> {{gold.adi}}</span>
+                                        </mat-option>
+                                    </mat-autocomplete> 
+                                </mat-form-field>
+                            </div>
+                            <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Cripto" fxFlex="70">
+                                <mat-form-field class="example-full-width">
+                                    <input type="text"
+                                            placeholder="Pozisyon Arayın"
+                                            aria-label="Number"
+                                            matInput
+                                            [formControl]="listBoxCoin"
+                                            [(ngModel)]="selectedCoin"
+                                            [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code" (onSelectionChange)="onPositionSelectedCoin(coin)">
+                                            <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
+                                        </mat-option>
+                                    </mat-autocomplete> 
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div *ngIf="isPositionSelected" class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                            
+                            <form fxLayout="column" fxLayoutAlign="start"
+                                fxFlex="1 0 auto" name="postHoldingForm" [formGroup]="postHoldingForm">
+
+                                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                                    <mat-form-field appearance="outline" fxFlex="25" class="pr-2">
+                                        <mat-label>Alış Tarihi</mat-label>
+                                        <input matInput [matDatepicker]="purchaseDatePicker" 
+                                            name="purchaseDatePicker" 
+                                            formControlName="purchaseDate"
+                                            required>
+                                        <mat-datepicker-toggle matSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #purchaseDatePicker></mat-datepicker>
+                                    </mat-form-field>    
+                                    
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="25" class="pr-2">
+                                        <mat-label>Miktar</mat-label>
+                                        <input matInput placeholder="Miktar"
+                                                name="amountOfHolding"
+                                                formControlName="amount"
+                                                type="number">
+                                    </mat-form-field>
+
+                                    <mat-form-field appearance="outline" floatLabel="always" fxFlex="30" class="pr-2">
+                                        <mat-label>Alış Değeri</mat-label>
+                                        <input matInput placeholder="Alış Değeri"
+                                                name="priceOfHolding"
+                                                formControlName="price"
+                                                type="number">
+                                        <span matPrefix>₺&nbsp;</span>
+                                    </mat-form-field>
+                                    <div fxFlex="10" class="pr-2">
+                                        <button type="button" class="btn btn-success btn-block"  
+                                        (click) = "saveHolding(postHoldingForm.value)"
+                                        [disabled]="postHoldingForm.invalid">Ekle</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+
                         <div class="col-md-12">
                             <!-- <div class="row">
                                 <div class="col mt-4">
@@ -62,7 +183,6 @@
                                     </a>
                                 </div>
                             </div> -->
-                            <p></p>                            
                             
                             <ul class="nav nav-tabs profile-tab-content" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -76,127 +196,8 @@
                             </ul>
                             <div class="tab-content border pl-3 pr-3" id="myTabContent">
                                 <div class="tab-pane fade show active" id="holdings" role="tabpanel"
-                                    aria-labelledby="holdings-tab">
-                                    <p></p>
-                                    <div class="h4 mb-24">Varlık Bilgisi Giriş</div>
-
-                                    <div class="form-group mt-3">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCurrency"
-                                            [(ngModel)]="optionPositionType" [value]="1" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Currency">
-                                            <label class="form-check-label" for="inlineRadioCurrency">Döviz</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioGold"
-                                            [(ngModel)]="optionPositionType" [value]="2" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Gold">
-                                            <label class="form-check-label" for="inlineRadioGold">Altın</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptionsForPosition" id="inlineRadioCripto"
-                                            [(ngModel)]="optionPositionType" [value]="3" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Cripto"> 
-                                            <label class="form-check-label" for="inlineRadioCripto">Kripto Para</label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
-                                        <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Currency" fxFlex="70">
-                                            <mat-form-field class="example-full-width">
-                                                <input type="text"
-                                                        placeholder="Pozisyon Arayın"
-                                                        aria-label="Number"
-                                                        matInput
-                                                        [formControl]="listBoxCurrency"
-                                                        [(ngModel)]="selectedCurrency"
-                                                        [matAutocomplete]="auto">
-                                                <mat-autocomplete #auto="matAutocomplete">
-                                                    <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi" (onSelectionChange)="onPositionSelectedCurrency(curr)">
-                                                        <p>
-                                                            <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
-                                                            <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
-                                                        </p>
-                                                    </mat-option>
-                                                </mat-autocomplete> 
-                                                <button mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="selectedCurrency">
-                                                    <mat-icon>close</mat-icon>
-                                                </button>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Gold" fxFlex="70">
-                                            <mat-form-field class="example-full-width">
-                                                <input type="text"
-                                                        placeholder="Pozisyon Arayın"
-                                                        aria-label="Number"
-                                                        matInput
-                                                        [formControl]="listBoxGold"
-                                                        [(ngModel)]="selectedGold"
-                                                        [matAutocomplete]="auto">
-                                                <mat-autocomplete #auto="matAutocomplete">
-                                                    <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi" (onSelectionChange)="onPositionSelectedGold(gold)">
-                                                        <span> {{gold.adi}}</span>
-                                                    </mat-option>
-                                                </mat-autocomplete> 
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Cripto" fxFlex="70">
-                                            <mat-form-field class="example-full-width">
-                                                <input type="text"
-                                                        placeholder="Pozisyon Arayın"
-                                                        aria-label="Number"
-                                                        matInput
-                                                        [formControl]="listBoxCoin"
-                                                        [(ngModel)]="selectedCoin"
-                                                        [matAutocomplete]="auto">
-                                                <mat-autocomplete #auto="matAutocomplete">
-                                                    <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code" (onSelectionChange)="onPositionSelectedCoin(coin)">
-                                                        <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
-                                                    </mat-option>
-                                                </mat-autocomplete> 
-                                            </mat-form-field>
-                                        </div>
-                                    </div>
-
-                                    <div *ngIf="isPositionSelected" class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
-                                        
-                                        <form fxLayout="column" fxLayoutAlign="start"
-                                            fxFlex="1 0 auto" name="postHoldingForm" [formGroup]="postHoldingForm">
-
-                                            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-
-                                                <mat-form-field appearance="outline" fxFlex="25" class="pr-2">
-                                                    <mat-label>Alış Tarihi</mat-label>
-                                                    <input matInput [matDatepicker]="purchaseDatePicker" 
-                                                        name="purchaseDatePicker" 
-                                                        formControlName="purchaseDate"
-                                                        required>
-                                                    <mat-datepicker-toggle matSuffix [for]="purchaseDatePicker"></mat-datepicker-toggle>
-                                                    <mat-datepicker #purchaseDatePicker></mat-datepicker>
-                                                </mat-form-field>    
-                                                
-                                                <mat-form-field appearance="outline" floatLabel="always" fxFlex="25" class="pr-2">
-                                                    <mat-label>Miktar</mat-label>
-                                                    <input matInput placeholder="Miktar"
-                                                            name="amountOfHolding"
-                                                            formControlName="amount"
-                                                            type="number">
-                                                </mat-form-field>
-
-                                                <mat-form-field appearance="outline" floatLabel="always" fxFlex="30" class="pr-2">
-                                                    <mat-label>Alış Değeri</mat-label>
-                                                    <input matInput placeholder="Alış Değeri"
-                                                            name="priceOfHolding"
-                                                            formControlName="price"
-                                                            type="number">
-                                                    <span matPrefix>₺&nbsp;</span>
-                                                </mat-form-field>
-                                                <div fxFlex="10" class="pr-2">
-                                                    <button type="button" class="btn btn-success btn-block"  
-                                                    (click) = "saveHolding(postHoldingForm.value)"
-                                                    [disabled]="postHoldingForm.invalid">Ekle</button>
-                                                </div>
-                                            </div>
-                                            
-                                        </form>
-                                    </div>
+                                    aria-labelledby="holdings-tab"> 
+                                    <p></p>                               
                                     <div class="btn-group" role="group" aria-label="">
                                         <button type="button" class="btn btn-success active">Varlikler</button>
                                         <button type="button" class="btn btn-secondary"> İşlemler</button>

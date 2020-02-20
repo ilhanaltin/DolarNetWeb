@@ -109,8 +109,7 @@ export class ProfileComponent implements OnInit {
             this.currencyRates = storageDataCurrency.data;
 
             this.getGoldData();
-            this.getCriptoData();
-            this.getholdings();
+            this.getCriptoData();            
         }
         else
         {
@@ -118,8 +117,7 @@ export class ProfileComponent implements OnInit {
               this.currencyRates = resp.result;
 
               this.getGoldData();
-              this.getCriptoData();
-              this.getholdings();
+              this.getCriptoData();              
             });
         }
   }
@@ -147,11 +145,13 @@ export class ProfileComponent implements OnInit {
       if(storageDataCripto.isValid)
       {
         this.criptoRates = storageDataCripto.data;
+        this.getholdings();
       }
       else
       {
           this._criptoService.getFromApi().subscribe(resp=>{
             this.criptoRates = resp.result;
+            this.getholdings();
           });
       }
   }
