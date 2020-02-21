@@ -40,34 +40,34 @@
                                     <div class="row d-flex align-items-center justify-content-between">
                                         <div class="col">
                                             <div class="border rounded d-flex align-items-center justify-content-between">
-                                                <img src="assets/images/profile/profile-down-arrow.png" alt="">
+                                                <img [src]="getUpDownImageWithValue(this.openPrice)" alt="">
                                                 <div class="d-flex mr-2 flex-column align-items-end justify-content-center">
-                                                    <h5 class="mb-0">₺ {{getConvertedToTry(this.marketValue)}}</h5>
-                                                    <h5 class="mb-0"></h5>
+                                                    <h5 [class]="getCssWithValue(this.openPrice)">₺ {{getConvertedToTry(this.marketValue)}}</h5>
+                                                    <h5 [class]="getCssWithValue(this.openPrice)"></h5>
                                                     <small>Piyasa Değeri </small>
                                                 </div>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                         <div class="col">
                                             <div class="border rounded d-flex align-items-center justify-content-between">
-                                                <img src="assets/images/profile/profile-up-arrow.png" alt="">
+                                                <img [src]="getUpDownImageWithValue(this.openPrice)" alt="">
                                                 <div class="d-flex mr-2 flex-column align-items-end justify-content-center">
-                                                    <h5 class="text-success mb-0">₺ {{getConvertedToTry(openPrice)}}</h5>
-                                                    <h5 class="text-success mb-0">{{getConvertedToTry(openPriceRate)}}%</h5>
+                                                    <h5 [class]="getCssWithValue(this.openPrice)">₺ {{getConvertedToTry(openPrice)}}</h5>
+                                                    <h5 [class]="getCssWithValue(this.openPrice)">{{getConvertedToTry(openPriceRate)}}%</h5>
                                                     <small>Açık Kâr/Zarar</small>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <div class="border rounded d-flex align-items-center justify-content-between">
-                                                <img class="ml-0 p-0 img-fluid" src="assets/images/profile/profile-default-icon.png"
+                                                <img class="ml-0 p-0 img-fluid" [src]="getUpDownImageWithValue(this.dailyPrice)"
                                                     alt="">
                                                 <div class="d-flex mr-2 flex-column align-items-end justify-content-center">
-                                                    <h5 class="text-danger mb-0">₺ {{getConvertedToTry(dailyPrice)}}</h5>
-                                                    <h5 class="text-danger mb-0">{{getConvertedToTry(dailyPriceRate)}}%</h5>
+                                                    <h5 [class]="getCssWithValue(this.dailyPrice)">₺ {{getConvertedToTry(dailyPrice)}}</h5>
+                                                    <h5 [class]="getCssWithValue(this.dailyPrice)">{{getConvertedToTry(dailyPriceRate)}}%</h5>
                                                     <small>Günlük Kâr/Zarar </small>
                                                 </div>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                     </div>
             
@@ -219,34 +219,40 @@
                                                         <mat-icon aria-label="Delete">delete</mat-icon>
                                                     </button>
                                                 </td>
-                                                <th scope="row">
-                                                    {{holding.holdingCode}}
-                                                </th>                                                                                                    
-                                                <td>
+                                                <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Currency">
+                                                    <span [ngClass]="getCurrencyFlagCss(holding.holdingCode)"></span> {{holding.holdingCode}} - {{holding.holdingLongName}}
+                                                </th>
+                                                <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Cripto">
+                                                    <img [src]="getCriptoFlagCss(holding.holdingCode)" height="16" width="16"> {{holding.holdingCode}} - {{holding.holdingLongName}}
+                                                </th> 
+                                                <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Gold">
+                                                    <img src="assets/images/icons/gold.png" height="16" width="16"> {{holding.holdingCode}} - {{holding.holdingLongName}}
+                                                </th>                                                                                                
+                                                <td scope="row">
                                                     {{holding.purchaseDate | date :'dd-MM-yyyy'}} 
                                                 </td>
-                                                <td>
+                                                <td scope="row">
                                                     {{holding.amount}}
                                                 </td>
-                                                <td>
+                                                <td scope="row">
                                                     {{getConvertedToTry(holding.price)}}
                                                 </td>
-                                                <td>
+                                                <td scope="row">
                                                     {{getConvertedToTry(holding.todaysPrice)}}
                                                 </td> 
-                                                <td>
+                                                <td scope="row">
                                                     {{getConvertedToTry(holding.marketPrice)}}
                                                 </td>  
-                                                <td>
+                                                <td [class]="getCssWithValue(holding.dailyChange)" scope="row">
                                                     {{getConvertedToTry(holding.dailyChangeRate)}}
                                                 </td> 
-                                                <td>
+                                                <td [class]="getCssWithValue(holding.dailyChange)" scope="row">
                                                     {{getConvertedToTry(holding.dailyChange)}}
                                                 </td> 
-                                                <td>
+                                                <td [class]="getCssWithValue(holding.openChange)" scope="row">
                                                     {{getConvertedToTry(holding.openChangeRate)}}
                                                 </td>  
-                                                <td>
+                                                <td [class]="getCssWithValue(holding.openChange)" scope="row">
                                                     {{getConvertedToTry(holding.openChange)}}
                                                 </td>                                               
                                               </tr>
@@ -348,21 +354,27 @@
                                                         <mat-icon aria-label="Delete">delete</mat-icon>
                                                     </button>
                                                 </td>
-                                                <th scope="row">
-                                                    {{portfolio.holdingCode}}
+                                                <th scope="row" *ngIf="portfolio.holdingTypeId === _globalConstants.PositionType.Currency">
+                                                    <span [ngClass]="getCurrencyFlagCss(portfolio.holdingCode)"></span> {{portfolio.holdingCode}} - {{portfolio.holdingLongName}}
+                                                </th>
+                                                <th scope="row" *ngIf="portfolio.holdingTypeId === _globalConstants.PositionType.Cripto">
+                                                    <img [src]="getCriptoFlagCss(portfolio.holdingCode)" height="16" width="16"> {{portfolio.holdingCode}} - {{portfolio.holdingLongName}}
                                                 </th> 
-                                                <th scope="row">
+                                                <th scope="row" *ngIf="portfolio.holdingTypeId === _globalConstants.PositionType.Gold">
+                                                    <img src="assets/images/icons/gold.png" height="16" width="16"> {{portfolio.holdingCode}} - {{portfolio.holdingLongName}}
+                                                </th>  
+                                                <td scope="row">
                                                     {{getConvertedToTry(portfolio.value)}}
-                                                </th> 
-                                                <th scope="row">
-                                                    {{getConvertedToTry(portfolio.dailyChange)}}
-                                                </th>
-                                                <th scope="row">
+                                                </td> 
+                                                <td [class]="getCssWithValue(portfolio.dailyChange)" scope="row">
+                                                    {{getConvertedToTry(portfolio.dailyChange,4)}}
+                                                </td>
+                                                <td [class]="getCssWithValue(portfolio.dailyChange)" scope="row">
                                                     {{getConvertedToTry(portfolio.dailyChangeRate)}}
-                                                </th>
-                                                <th scope="row">
+                                                </td>
+                                                <td scope="row">
                                                     {{ portfolio.dateTime | date:'HH:mm:ss' }} 
-                                                </th>
+                                                </td>
                                               </tr>
                                         </tbody>
                                     </table>

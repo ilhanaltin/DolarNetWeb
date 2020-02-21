@@ -401,6 +401,7 @@ export class ProfileComponent implements OnInit {
             {
                 hold.todaysPrice =  this.currencyRates.find(t=>t.code === hold.holdingCode).buying;
                 hold.marketPrice =  this.currencyRates.find(t=>t.code === hold.holdingCode).buying * hold.amount;
+                hold.holdingLongName = this.currencyRates.find(t=>t.code === hold.holdingCode).name;
 
                 if(_purchaseDate.getTime() === today.getTime())
                 {
@@ -419,6 +420,7 @@ export class ProfileComponent implements OnInit {
             {
                 hold.todaysPrice =  this.goldRates.find(t=>t.name === hold.holdingCode).buying;
                 hold.marketPrice =  this.goldRates.find(t=>t.name === hold.holdingCode).buying * hold.amount;
+                hold.holdingLongName = this.goldRates.find(t=>t.name === hold.holdingCode).name;
 
                 if(_purchaseDate.getTime() === today.getTime())
                 {
@@ -437,7 +439,8 @@ export class ProfileComponent implements OnInit {
             {
                 hold.todaysPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price;
                 hold.marketPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price * hold.amount;
-
+                hold.holdingLongName = this.criptoRates.find(t=>t.code === hold.holdingCode).name;
+                
                 if(_purchaseDate.getTime() === today.getTime())
                 {
                     hold.dailyChangeRate =  (hold.todaysPrice - hold.price) * 100 / hold.price;
@@ -494,6 +497,8 @@ export class ProfileComponent implements OnInit {
                 port.dailyChange =  this.currencyRates.find(t=>t.code === port.holdingCode).rate * port.value / 100;
                 port.dailyChangeRate =  this.currencyRates.find(t=>t.code === port.holdingCode).rate;
                 port.dateTime = this.currencyRates.find(t=>t.code === port.holdingCode).dateTime;
+                port.holdingLongName = this.currencyRates.find(t=>t.code === port.holdingCode).name;
+
             }
             else if(port.holdingTypeId === GlobalConstants.PositionType.Gold)
             {
@@ -501,6 +506,7 @@ export class ProfileComponent implements OnInit {
                 port.dailyChange =  this.goldRates.find(t=>t.name === port.holdingCode).rate * port.value / 100;
                 port.dailyChangeRate =  this.goldRates.find(t=>t.name === port.holdingCode).rate;
                 port.dateTime = this.goldRates.find(t=>t.name === port.holdingCode).dateTime;
+                port.holdingLongName = this.goldRates.find(t=>t.name === port.holdingCode).name;
             }
             else
             {
@@ -508,18 +514,29 @@ export class ProfileComponent implements OnInit {
                 port.dailyChange =  this.criptoRates.find(t=>t.code === port.holdingCode).changeDay * port.value / 100;                
                 port.dailyChangeRate =  this.criptoRates.find(t=>t.code === port.holdingCode).changeDay; 
                 port.dateTime = this.criptoRates.find(t=>t.code === port.holdingCode).dateTime;
+                port.holdingLongName = this.criptoRates.find(t=>t.code === port.holdingCode).name;
             } 
         });
       });
   }
 
-  getConvertedToTry(value: number) : string
+  getConvertedToTry(value: number, presicion: number = 2) : string
   {
       if(value == null)
         return "";
 
       return value.toLocaleString('tr-TR', {
-        maximumFractionDigits: 2,
+        maximumFractionDigits: presicion,
       });
+  }
+
+  getCssWithValue(value)
+  {
+      return value >= 0 ? "text-success mb-0" : "text-danger mb-0";
+  }
+
+  getUpDownImageWithValue(value)
+  {
+      return value >= 0 ? "assets/images/profile/profile-up-arrow.png" : "assets/images/profile/profile-down-arrow.png";
   }
 }

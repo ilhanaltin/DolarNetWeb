@@ -5,6 +5,7 @@ export class HoldingVM
     holdingTypeId: number;
     holdingTypeAdi: string;
     holdingCode: string;
+    holdingLongName: string;
     purchaseDate: Date;
     amount: number;
     price: number;

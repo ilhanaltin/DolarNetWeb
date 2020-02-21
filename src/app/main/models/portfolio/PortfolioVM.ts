@@ -5,6 +5,7 @@ export class PortfolioVM
     holdingTypeId: number;
     holdingTypeAdi: string;
     holdingCode: string;
+    holdingLongName: string;
     value: number;
     dailyChange: number;
     dailyChangeRate: number;

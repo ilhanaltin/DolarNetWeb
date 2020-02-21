@@ -304,7 +304,7 @@ export class ConverterComponent implements OnInit {
   getCurrencies() {
     let currencyArray: TypeVM[] = [];
 
-    GlobalConstants.symbols.sort().forEach(function(value, index){
+    GlobalConstants.symbols.forEach(function(value, index){
       let curr = new TypeVM();
       curr.adi = value;
       curr.id = index + 1;
