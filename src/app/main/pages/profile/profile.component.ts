@@ -1,3 +1,5 @@
+import { PortfolioService } from './../../services/portfolio.service';
+import { PortfolioVM } from './../../models/portfolio/PortfolioVM';
 import { TypeVM } from './../../models/types/TypeVM';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,6 +16,7 @@ import { CurrencyService } from '../../services/currency.service';
 import { GoldService } from '../../services/gold.service';
 import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
 import { GoldRatesVM } from '../../models/integration/gold/GoldRatesVM';
+import { PortfolioSearchCriteriaVM } from '../../models/portfolio/PortfolioSearchCriteriaVM';
 
 @Component({
   selector: 'profile',
@@ -34,6 +37,11 @@ export class ProfileComponent implements OnInit {
   listBoxCurrency = new FormControl();
   listBoxGold = new FormControl();
   listBoxCoin = new FormControl();
+
+  listBoxCurrencyPortfolio = new FormControl();
+  listBoxGoldPortfolio = new FormControl();
+  listBoxCoinPortfolio = new FormControl();
+
   currencies: TypeVM[];
   golds: TypeVM[];
 
@@ -53,19 +61,23 @@ export class ProfileComponent implements OnInit {
   dailyPriceRate: number;
 
   holdings: HoldingVM[];
+  portfolios: PortfolioVM[];
   
   holding: HoldingVM;
+  portfolio: PortfolioVM;
 
   action: string = "new";
 
   constructor( private _criptoService: CriptoService,
     private _holdingService: HoldingService,
+    private _portfolioService: PortfolioService,
     private _formBuilder: FormBuilder,
     public _authenticationService: AuthenticationService,
     private _currencyService: CurrencyService, 
     private _goldService: GoldService) {
 
     this.holding = new HoldingVM({});
+    this.portfolio = new PortfolioVM({});
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.optionPositionType = GlobalConstants.PositionType.Currency;
@@ -145,13 +157,15 @@ export class ProfileComponent implements OnInit {
       if(storageDataCripto.isValid)
       {
         this.criptoRates = storageDataCripto.data;
-        this.getholdings();
+        this.getHoldings();
+        this.getPortfolios();
       }
       else
       {
           this._criptoService.getFromApi().subscribe(resp=>{
             this.criptoRates = resp.result;
-            this.getholdings();
+            this.getHoldings();
+            this.getPortfolios();
           });
       }
   }
@@ -263,7 +277,7 @@ export class ProfileComponent implements OnInit {
     }
 
     this._holdingService.post(holdingVM).subscribe(resp=>{
-      this.getholdings();
+      this.getHoldings();
     });
   }
 
@@ -292,7 +306,14 @@ export class ProfileComponent implements OnInit {
   deleteHolding(holding)
   {
     this._holdingService.delete(holding.id).subscribe(resp=>{
-      this.getholdings();
+      this.getHoldings();
+    });
+  }
+
+  deletePortfolio(portfolio)
+  {
+    this._portfolioService.delete(portfolio.id).subscribe(resp=>{
+      this.getPortfolios();
     });
   }
 
@@ -355,12 +376,12 @@ export class ProfileComponent implements OnInit {
       return "https://api.dolar.net/Images/cripto-coin-icons/" + code.toLocaleLowerCase().split("ı").join("i") + ".png";
   }
 
-  getholdings()
+  getHoldings()
   {
       let criteria = new HoldingSearchCriteriaVM();
       criteria.itemCount = 30;
       criteria.pageId = 0;
-      criteria.userId = 1;
+      criteria.userId = this._authenticationService.currentUser.id;
 
       this._holdingService.get(criteria).subscribe(response=>{
         this.holdings = response.result.holdings;
@@ -452,6 +473,43 @@ export class ProfileComponent implements OnInit {
         this.dailyPrice = this.holdings.reduce(function(prev, cur) {
           return prev + cur.dailyChange;
         }, 0);
+      });
+  }
+
+  getPortfolios()
+  {
+      let criteria = new PortfolioSearchCriteriaVM();
+      criteria.itemCount = 30;
+      criteria.pageId = 0;
+      criteria.userId = this._authenticationService.currentUser.id;
+
+      this._portfolioService.get(criteria).subscribe(response=>{
+        this.portfolios = response.result.portfolios;
+
+        this.portfolios.forEach(port => {
+
+            if(port.holdingTypeId === GlobalConstants.PositionType.Currency)
+            {
+                port.value =  this.currencyRates.find(t=>t.code === port.holdingCode).buying;
+                port.dailyChange =  this.currencyRates.find(t=>t.code === port.holdingCode).rate * port.value / 100;
+                port.dailyChangeRate =  this.currencyRates.find(t=>t.code === port.holdingCode).rate;
+                port.dateTime = this.currencyRates.find(t=>t.code === port.holdingCode).dateTime;
+            }
+            else if(port.holdingTypeId === GlobalConstants.PositionType.Gold)
+            {
+                port.value =  this.goldRates.find(t=>t.name === port.holdingCode).buying;
+                port.dailyChange =  this.goldRates.find(t=>t.name === port.holdingCode).rate * port.value / 100;
+                port.dailyChangeRate =  this.goldRates.find(t=>t.name === port.holdingCode).rate;
+                port.dateTime = this.goldRates.find(t=>t.name === port.holdingCode).dateTime;
+            }
+            else
+            {
+                port.value =  this.criptoRates.find(t=>t.code === port.holdingCode).price * this.currencyRates.find(t=>t.code === "USD").buying;
+                port.dailyChange =  this.criptoRates.find(t=>t.code === port.holdingCode).changeDay * port.value / 100;                
+                port.dailyChangeRate =  this.criptoRates.find(t=>t.code === port.holdingCode).changeDay; 
+                port.dateTime = this.criptoRates.find(t=>t.code === port.holdingCode).dateTime;
+            } 
+        });
       });
   }
 

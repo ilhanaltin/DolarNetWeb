@@ -9,7 +9,7 @@
             </div>
             <div class="container">
                 <div class="row row d-flex flex-row align-items-stretch">
-                    <div class="col-md-10 news-detail mt-5">
+                    <div class="col-md-12 news-detail mt-5">
                         <div class="col-md-8">
                             <login-state-profile-box></login-state-profile-box>
                         </div>
@@ -253,10 +253,120 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel"
-                                    aria-labelledby="profile-tab">...</div>
-                                <div class="tab-pane fade" id="contact" role="tabpanel"
-                                    aria-labelledby="contact-tab">...</div>
+                                <div class="tab-pane fade" id="portfolio" role="tabpanel"
+                                    aria-labelledby="portfolio-tab">
+                                    <div class="form-group mt-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptionsForPositionPortfolio" id="inlineRadioCurrencyPortfolio"
+                                            [(ngModel)]="optionPositionType" [value]="1" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Currency">
+                                            <label class="form-check-label" for="inlineRadioCurrencyPortfolio">Döviz</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptionsForPositionPortfolio" id="inlineRadioGoldPortfolio"
+                                            [(ngModel)]="optionPositionType" [value]="2" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Gold">
+                                            <label class="form-check-label" for="inlineRadioGoldPortfolio">Altın</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptionsForPositionPortfolio" id="inlineRadioCriptoPortfolio"
+                                            [(ngModel)]="optionPositionType" [value]="3" (change)="onPositionTypeChanged()" [checked]="optionPositionType === _globalConstants.PositionType.Cripto"> 
+                                            <label class="form-check-label" for="inlineRadioCriptoPortfolio">Kripto Para</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-24" fxLayout="column" fxLayoutAlign="start" fxLayout.gt-md="row">
+                                        <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Currency" fxFlex="70">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text"
+                                                        placeholder="Pozisyon Arayın"
+                                                        aria-label="Number"
+                                                        matInput
+                                                        [formControl]="listBoxCurrencyPortfolio"
+                                                        [(ngModel)]="selectedCurrency"
+                                                        [matAutocomplete]="auto">
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                    <mat-option *ngFor="let curr of filteredCurrencies | async" [value]="curr.adi" (onSelectionChange)="onPositionSelectedCurrency(curr)">
+                                                        <p>
+                                                            <span [ngClass]="getCurrencyFlagCss(curr.adi)"></span>                                            
+                                                            <span> {{curr.adi}}</span> | <small>{{curr.uzunAdi}}</small>
+                                                        </p>
+                                                    </mat-option>
+                                                </mat-autocomplete> 
+                                                <button mat-button mat-icon-button matSuffix (click)="clearSearchField()" *ngIf="selectedCurrency">
+                                                    <mat-icon>close</mat-icon>
+                                                </button>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Gold" fxFlex="70">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text"
+                                                        placeholder="Pozisyon Arayın"
+                                                        aria-label="Number"
+                                                        matInput
+                                                        [formControl]="listBoxGoldPortfolio"
+                                                        [(ngModel)]="selectedGold"
+                                                        [matAutocomplete]="auto">
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                    <mat-option *ngFor="let gold of filteredGolds | async" [value]="gold.adi" (onSelectionChange)="onPositionSelectedGold(gold)">
+                                                        <span> {{gold.adi}}</span>
+                                                    </mat-option>
+                                                </mat-autocomplete> 
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="form-group mt-3" *ngIf="optionPositionType === _globalConstants.PositionType.Cripto" fxFlex="70">
+                                            <mat-form-field class="example-full-width">
+                                                <input type="text"
+                                                        placeholder="Pozisyon Arayın"
+                                                        aria-label="Number"
+                                                        matInput
+                                                        [formControl]="listBoxCoinPortfolio"
+                                                        [(ngModel)]="selectedCoin"
+                                                        [matAutocomplete]="auto">
+                                                <mat-autocomplete #auto="matAutocomplete">
+                                                    <mat-option *ngFor="let coin of filteredCoins | async" [value]="coin.code" (onSelectionChange)="onPositionSelectedCoin(coin)">
+                                                        <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
+                                                    </mat-option>
+                                                </mat-autocomplete> 
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+            
+                                    <table class="table table-bordered table-hover mt-4 w-auto small">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Adı</th>
+                                                <th scope="col">Market Değeri</th>
+                                                <th scope="col">Günlük Değişim (&#8378;)</th>
+                                                <th scope="col">Günlük Değişim (%)</th>
+                                                <th scope="col">Saat</th>                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="align-middle" *ngFor="let portfolio of portfolios">
+                                                <td (click)="$event.stopPropagation()">
+                                                    <button (click)="deletePortfolio(portfolio)" mat-icon-button color="#b71c1c">
+                                                        <mat-icon aria-label="Delete">delete</mat-icon>
+                                                    </button>
+                                                </td>
+                                                <th scope="row">
+                                                    {{portfolio.holdingCode}}
+                                                </th> 
+                                                <th scope="row">
+                                                    {{getConvertedToTry(portfolio.value)}}
+                                                </th> 
+                                                <th scope="row">
+                                                    {{getConvertedToTry(portfolio.dailyChange)}}
+                                                </th>
+                                                <th scope="row">
+                                                    {{getConvertedToTry(portfolio.dailyChangeRate)}}
+                                                </th>
+                                                <th scope="row">
+                                                    {{ portfolio.dateTime | date:'HH:mm:ss' }} 
+                                                </th>
+                                              </tr>
+                                        </tbody>
+                                    </table>
+                                </div>                                
                             </div>
                         </div>
                     </div>
