@@ -440,7 +440,14 @@ export class ProfileComponent implements OnInit {
           return prev + cur.amount * cur.price;
         }, 0);
 
+        var todaysChange = this.holdings.reduce(function(prev, cur) {
+          return prev + cur.dailyChange;
+        }, 0); 
+
         this.openPrice = this.marketValue - valueBefore;
+
+        this.openPriceRate = this.openPrice * 100 / valueBefore;
+        this.dailyPriceRate = 100 * todaysChange / (this.marketValue - todaysChange);
 
         this.dailyPrice = this.holdings.reduce(function(prev, cur) {
           return prev + cur.dailyChange;

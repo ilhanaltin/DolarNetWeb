@@ -59,6 +59,12 @@ export const apiConfig = {
           Post: "Holding",
           Delete: "Holding"
         },
+        Portfolio:
+        {
+          Get: "Portfolio",
+          Post: "Portfolio",
+          Delete: "Portfolio"
+        },
         Blog:
         {
           GetAll: "Blog",
