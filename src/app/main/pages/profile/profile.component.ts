@@ -49,10 +49,20 @@ export class ProfileComponent implements OnInit {
   selectedGold: string = "";
   selectedCoin: string = "";
 
+  selectedCurrencyPortfolio: string = "";
+  selectedGoldPortfolio: string = "";
+  selectedCoinPortfolio: string = "";
+
   filteredCurrencies: Observable<TypeVM[]>;
   filteredGolds: Observable<TypeVM[]>;
   filteredCoins: Observable<CriptoRatesVM[]>;
+
+  filteredCurrenciesPortfolio: Observable<TypeVM[]>;
+  filteredGoldsPortfolio: Observable<TypeVM[]>;
+  filteredCoinsPortfolio: Observable<CriptoRatesVM[]>;
+
   optionPositionType: number;
+  optionPositionTypePortfolio: number;
 
   marketValue: number;
   openPrice: number;
@@ -81,6 +91,7 @@ export class ProfileComponent implements OnInit {
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.optionPositionType = GlobalConstants.PositionType.Currency;
+    this.optionPositionTypePortfolio = GlobalConstants.PositionType.Currency;
    }
 
   ngOnInit() {  
@@ -107,7 +118,25 @@ export class ProfileComponent implements OnInit {
         .pipe(
           startWith(''),
           map(value => this._filterCoins(value))
-        );        
+        );
+        
+        this.filteredCurrenciesPortfolio = this.listBoxCurrencyPortfolio.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterCurrency(value))
+        );
+
+        this.filteredGoldsPortfolio = this.listBoxGoldPortfolio.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterGold(value))
+        );
+
+        this.filteredCoinsPortfolio = this.listBoxCoinPortfolio.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filterCoins(value))
+        );
 
         this.postHoldingForm = this.createPostHoldingForm();
   }
@@ -150,22 +179,30 @@ export class ProfileComponent implements OnInit {
         }
   }
 
-  getCriptoData()
+  getCriptoData(getOnlyCripto: boolean = false)
   {
       let storageDataCripto = this._criptoService.getFromStorage();
 
       if(storageDataCripto.isValid)
       {
         this.criptoRates = storageDataCripto.data;
-        this.getHoldings();
-        this.getPortfolios();
+        
+        if(getOnlyCripto === false)
+        {
+            this.getHoldings();
+            this.getPortfolios();
+        }
       }
       else
       {
           this._criptoService.getFromApi().subscribe(resp=>{
-            this.criptoRates = resp.result;
-            this.getHoldings();
-            this.getPortfolios();
+              this.criptoRates = resp.result;
+              
+              if(getOnlyCripto === false)
+              {
+                this.getHoldings();
+                this.getPortfolios();
+              }
           });
       }
   }
@@ -234,22 +271,47 @@ export class ProfileComponent implements OnInit {
       }
   }
 
-  onPositionSelectedCurrency(curr)
+  onPositionTypeChangedPortfolio()
   {
-  }
-
-  onPositionSelectedGold(gold)
-  {
-  }
-
-  onPositionSelectedCoin(coin)
-  {
+      if(this.optionPositionTypePortfolio === GlobalConstants.PositionType.Currency)
+      {
+        this.selectedGoldPortfolio = "";
+        this.selectedCoinPortfolio = "";
+      }
+      else if(this.optionPositionTypePortfolio === GlobalConstants.PositionType.Gold)
+      {
+        this.selectedCurrencyPortfolio = "";
+        this.selectedCoinPortfolio = "";
+      }
+      else
+      {
+        this.selectedCurrencyPortfolio = "";
+        this.selectedGoldPortfolio = "";
+      }
   }
 
   clearSearchField(){
       this.selectedCurrency = "";
       this.selectedCoin = "";
       this.selectedGold = "";
+
+      this.selectedCurrencyPortfolio = "";
+      this.selectedCoinPortfolio = "";
+      this.selectedGoldPortfolio = "";
+  }
+
+  tabChanged(){
+    this.selectedCurrencyPortfolio = "";
+    this.selectedCoinPortfolio = "";
+    this.selectedGoldPortfolio = "";
+
+    this.selectedCurrency = "";
+    this.selectedCoin = "";
+    this.selectedGold = "";
+
+    this.currencies = this.getCurrencies();
+    this.golds = this.getGolds();
+    this.getCriptoData(true);
   }
 
   saveHolding(holding){
@@ -278,6 +340,31 @@ export class ProfileComponent implements OnInit {
 
     this._holdingService.post(holdingVM).subscribe(resp=>{
       this.getHoldings();
+    });
+  }
+
+  savePortfolio(){
+
+    let portfolioVM = new PortfolioVM({});
+
+    portfolioVM.userId = this._authenticationService.currentUser.id;;
+    portfolioVM.holdingTypeId = this.optionPositionTypePortfolio;
+
+    if(this.optionPositionTypePortfolio === GlobalConstants.PositionType.Currency)
+    {
+        portfolioVM.holdingCode = this.selectedCurrencyPortfolio;
+    }
+    else if(this.optionPositionTypePortfolio === GlobalConstants.PositionType.Gold)
+    {
+        portfolioVM.holdingCode = this.selectedGoldPortfolio;
+    }
+    else
+    {
+        portfolioVM.holdingCode = this.selectedCoinPortfolio;
+    }
+
+    this._portfolioService.post(portfolioVM).subscribe(resp=>{
+      this.getPortfolios();
     });
   }
 
@@ -538,5 +625,10 @@ export class ProfileComponent implements OnInit {
   getUpDownImageWithValue(value)
   {
       return value >= 0 ? "assets/images/profile/profile-up-arrow.png" : "assets/images/profile/profile-down-arrow.png";
+  }
+
+  getIsPortfolioSelected()
+  {
+    return this.selectedCoinPortfolio || this.selectedGoldPortfolio || this.selectedCurrencyPortfolio;
   }
 }
