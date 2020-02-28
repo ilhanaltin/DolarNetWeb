@@ -42,7 +42,7 @@
                             <use xlink:href="../assets/images/remix-icon/remixicon.symbol.svg#ri-time-line"></use>
                         </svg>
                         27.09.2019 11:17</time>
-                    <div [innerHTML]="post.content"></div>
+                    <div [innerHTML]="post.content"></div>                    
                     <small class="font-weight-bold news-detail-tags-title ">
                         <svg class='remix'>
                             <use xlink:href="../assets/images/remix-icon/remixicon.symbol.svg#ri-price-tag-3-line"></use>
@@ -50,12 +50,14 @@
                         HABER ETİKETLERİ
                     </small>
                     <span class="badge news-detail-tag">Türkiye Tarım Yatırımı</span>
-                    <span class="badge news-detail-tag">son dakika haberler</span>
+                    <span class="badge news-detail-tag">son dakika haberler</span>                    
                     <section class="news-detail-comment-section">
                         <div class="row">
-                            <div class="col-md-11 news-detail-comment-section-title">
-                                <h3>Haber
-                                    Yorumlarını Göster</h3>
+                            <div *ngIf="post.comments" class="col-md-8 news-detail-comment-section-title">
+                                <h3>Haber Yorumlarını Göster</h3>
+                            </div>
+                            <div class="col-md-3" style="text-align: right;">
+                                {{post.comments.length}} yorum   
                             </div>
                             <div class="col-md-1 news-detail-comment-section-icon">
                                 <a href="" data-toggle="collapse" data-target="#commets-list" aria-expanded="false"
@@ -72,7 +74,7 @@
                         </div>
                     </section>
                     <p></p>
-                    <div class="featured-news-title mt-3 mb-3">
+                    <div #commentFormDiv class="featured-news-title mt-3 mb-3">
                         <div class="col-md-12">
                             <div class="row">
                                 <h1 *ngIf="commentToReply == null">Yorum Yapın</h1>
@@ -87,9 +89,9 @@
                         </div>
                     </div>
                     <form name="postCommentForm" [formGroup]="postCommentForm">
-                        <div class="form-row">
+                        <div class="form-row" >
                             <div class="form-group col-md-12">
-                                <textarea class="form-control" id="comment" rows="3" formControlName="comment" placeholder="Yorum" required></textarea>
+                                <textarea #commentAreatInput class="form-control" id="comment" rows="3" formControlName="comment" placeholder="Yorum" required></textarea>
                             </div>
                         </div>
                         <div class="form-row" *ngIf="_authenticationService.currentUser == null">

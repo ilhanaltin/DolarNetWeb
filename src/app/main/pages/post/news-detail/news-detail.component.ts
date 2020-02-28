@@ -1,6 +1,6 @@
 import { PostCommentsVM } from './../../../models/blog/PostCommentVM';
 import { BlogService } from '../../../services/blog.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { PostVM } from '../../../models/blog/PostVM';
 import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
@@ -11,10 +11,13 @@ import { PostCommentRequestVM } from 'src/app/main/models/blog/PostCommentReques
 @Component({
   selector: 'news-detail',
   templateUrl: './news-detail.component.html',
-  styleUrls: ['./news-detail.component.css']
+  styleUrls: ['./news-detail.component.scss']
 })
 export class NewsDetailComponent implements OnInit {
-
+  
+  @ViewChild("commentFormDiv") commentForm: ElementRef;
+  @ViewChild("commentAreatInput") commentAreatInput: ElementRef;
+  
   readonly _globalConstants = GlobalConstants;
 
   postComment: PostCommentsVM = new PostCommentsVM({});
@@ -116,20 +119,20 @@ export class NewsDetailComponent implements OnInit {
 
   public replyToComment(comment)
   {
-    if(this.commentToReply)
-    {
-        this.commentToReply = null;
-    }
-    else
-    {
-        this.commentToReply = comment;
-    }
-
-    console.log(this.commentToReply);
+      this.commentToReply = comment;
+      this.focusInput();
   }
 
   public cancelReplyToComment()
   {
     this.commentToReply = null;
+  }
+
+  focusInput() {
+    this.commentForm.nativeElement.scrollIntoView({ behavior: 'smooth' });
+
+    setTimeout( () => {
+      this.commentAreatInput.nativeElement.focus();
+    }, 1500);
   }
 }

@@ -13,6 +13,7 @@ export class PostCommentsVM{
     userNickName: string;
     email: string;
     comment: string;
+    dateTime: Date;
 
     /**
      * Constructor
