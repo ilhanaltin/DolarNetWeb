@@ -1,9 +1,12 @@
+import { PostCommentsVM } from './../../../models/blog/PostCommentVM';
 import { BlogService } from '../../../services/blog.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 import { PostVM } from '../../../models/blog/PostVM';
 import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from 'src/app/main/services/authentication.service';
+import { PostCommentRequestVM } from 'src/app/main/models/blog/PostCommentRequestVM';
 
 @Component({
   selector: 'news-detail',
@@ -14,22 +17,119 @@ export class NewsDetailComponent implements OnInit {
 
   readonly _globalConstants = GlobalConstants;
 
-  post: PostVM;
+  postComment: PostCommentsVM = new PostCommentsVM({});
+  commentToReply: PostCommentsVM;
+  isCommentSaved: boolean = false;
+
+  post: PostVM = new PostVM({});
+
+  postCommentForm: FormGroup;
+
+  parentPostComments: PostCommentsVM[] = [];
 
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
-    private _blogService: BlogService) 
+    private _blogService: BlogService,
+    private _formBuilder: FormBuilder,
+    public _authenticationService: AuthenticationService) 
     {
-      this.post = new PostVM({});
-      
     }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params : ParamMap)=> {  
-          this._blogService.getById(params.get('id')).subscribe(response => {
-            this.post = response.result.post;
-        });
+    this.postCommentForm = this.createPostCommentForm();
+
+    this.route.paramMap.subscribe((params : ParamMap)=> { 
+        this.getPostDetail(params.get('id')); 
     });
+  }
+
+  createPostCommentForm(): FormGroup
+  {
+      let currentUser = this._authenticationService.currentUser;
+
+      if(currentUser == null)
+      {
+        return this._formBuilder.group({          
+          id              : [this.postComment.id],
+          nameSurname     : [this.postComment.nameSurname, Validators.required],
+          email           : [this.postComment.email, [Validators.required, Validators.email]],
+          comment         : [this.postComment.comment, Validators.required]
+        });
+      }
+      else 
+      {
+        return this._formBuilder.group({ 
+          id              : [this.postComment.id],
+          comment         : [this.postComment.comment, Validators.required]
+        });
+      }
+  }
+
+  saveComment(comment)
+  {
+     let currentUser = this._authenticationService.currentUser;
+
+     let postComment = new PostCommentRequestVM({});
+
+     postComment.postId = this.post.id;
+
+     if(currentUser != null)
+     {
+        postComment.userId = currentUser.id;
+     }
+
+     postComment.comment = comment.comment;
+     postComment.email = comment.email;
+     postComment.nameSurname = comment.nameSurname; 
+
+     if(this.commentToReply != null)
+     {
+        postComment.parentId = this.commentToReply.id;
+     }
+
+     this._blogService.addComment(postComment).subscribe(resp=>{
+        this.postCommentForm = this.createPostCommentForm();
+
+        this.isCommentSaved = true;
+        setTimeout( () => {
+          this.isCommentSaved = false;
+          this.commentToReply = null;
+        }, 2000);
+
+        this.getPostDetail(this.post.id);
+    });
+  }
+
+  getPostDetail(id)
+  {
+      this._blogService.getById(id).subscribe(response => {
+        this.post = response.result.post;
+        this.parentPostComments = this.post.comments.filter(t=>t.parentId === null);
+      });
+  }
+
+  getAvatar(avatar)
+  {
+      return avatar == null ? 'assets/images/avatars/profile.jpg' : avatar;
+  }
+
+  public replyToComment(comment)
+  {
+    if(this.commentToReply)
+    {
+        this.commentToReply = null;
+    }
+    else
+    {
+        this.commentToReply = comment;
+    }
+
+    console.log(this.commentToReply);
+  }
+
+  public cancelReplyToComment()
+  {
+    this.commentToReply = null;
   }
 }

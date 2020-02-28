@@ -68,33 +68,49 @@
                             </div>
                         </div>
                         <div class="collapse" id="commets-list">
-                            <div class="row news-detail-comment-section-item">
-                                <div class="col-md-1 pt-0 pl-0 pr-0">
-                                    <img class="news-detail-comment-section-item-avatar img-fluid rounded-circle"
-                                        src="../assets/images/news/avatar/Ellipse.jpg" alt="">
-                                </div>
-                                <div class="col-md-11">
-                                    <p class="news-detail-comment-section-item-user">Enes Kırdemir</p>
-                                    <p class="news-detail-comment-section-item-comment">Lorem ipsum dolor sit amet
-                                        consectetur adipisicing elit. Quo, suscipit.</p>
-                                </div>
+                            <post-comment [comments]="parentPostComments"></post-comment>
+                        </div>
+                    </section>
+                    <p></p>
+                    <div class="featured-news-title mt-3 mb-3">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <h1 *ngIf="commentToReply == null">Yorum Yapın</h1>
+                                <h1 *ngIf="commentToReply">Cevap Verin</h1>
+                                <button *ngIf="commentToReply" mat-button mat-icon-button matSuffix>
+                                    <mat-icon class="mb-3" aria-hidden="false" aria-label="Example home icon" (click)="cancelReplyToComment()">cancel</mat-icon>
+                                </button>
                             </div>
-                            <div class="row news-detail-comment-section-item">
-                                <div class="col-md-1 pt-0 pl-0 pr-0">
-                                    <img class="news-detail-comment-section-item-avatar img-fluid rounded-circle"
-                                        src="../assets/images/news/avatar/Ellipse.jpg" alt="">
-                                </div>
-                                <div class="col-md-11">
-                                    <p class="news-detail-comment-section-item-user">Enes Kırdemir</p>
-                                    <p class="news-detail-comment-section-item-comment">Lorem ipsum dolor sit amet
-                                        consectetur adipisicing elit. Soluta architecto ad aut optio ipsa sed esse?
-                                    </p>
+                            <div *ngIf="isCommentSaved" class="row alert alert-success" role="alert">
+                                Yorumunuz kaydedildi!
+                            </div>
+                        </div>
+                    </div>
+                    <form name="postCommentForm" [formGroup]="postCommentForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <textarea class="form-control" id="comment" rows="3" formControlName="comment" placeholder="Yorum" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row" *ngIf="_authenticationService.currentUser == null">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" id="nameSurname" formControlName="nameSurname" placeholder="Ad Soyad" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <input type="email" class="form-control" id="email" formControlName="email" placeholder="E-posta" required>
+                            </div>
+                            <div *ngIf="postCommentForm.get('email').errors?.email && postCommentForm.get('email').invalid 
+                                        && (postCommentForm.get('email').touched)"
+                                class="alert alert-danger">                                
+                                <div>
+                                    Geçersiz E-Posta
                                 </div>
                             </div>
                         </div>
-                    </section>
-
-
+                            <button type="button" class="btn btn-success btn-block"  
+                            (click) = "saveComment(postCommentForm.value)"
+                            [disabled]="postCommentForm.invalid">Gönder</button>
+                    </form>
                 </div>
 
                 <div class="col-md-4 news-featured-categories">

@@ -15,8 +15,8 @@ export class PostVM{
     statusTypeName: string;
     likeCount: number;
     commentCount: number;
-    comments: PostCommentsVM;
-    votes: PostVotesVM;
+    comments: PostCommentsVM[];
+    votes: PostVotesVM[];
     imagePath: string;
 
     /**

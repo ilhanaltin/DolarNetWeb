@@ -72,7 +72,8 @@ export const apiConfig = {
           Post: "Blog",
           Delete: "Blog",
           GetSliderPosts: "Blog/GetSliderPosts",
-          GetMostPopularPosts: "Blog/GetMostPopularPosts"
+          GetMostPopularPosts: "Blog/GetMostPopularPosts",
+          AddComment: "Blog/AddComment"
         },
         Integration:
         {

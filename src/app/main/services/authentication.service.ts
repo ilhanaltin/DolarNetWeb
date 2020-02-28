@@ -99,7 +99,7 @@ export class AuthenticationService {
   {
     let user = JSON.parse(localStorage.getItem('current-user')) as UserVM;
 
-    if(!user) return new UserVM({});
+    if(!user) return null;
 
     return user;
   }

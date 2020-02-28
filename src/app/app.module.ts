@@ -1,3 +1,4 @@
+import { PostCommentModule } from './main/pages/post/comments/post-comment.module';
 import { RegisterModule } from './main/pages/register/register.module';
 import { NewsPopularModule } from './main/pages/post/news-popular/news-popular.module';
 import { NewsLatestModule } from './main/pages/post/news-latest/news-latest.module';
@@ -14,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { APP_BASE_HREF} from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeModule } from './main/pages/home/home.module';
 import { NewsModule } from './main/pages/post/news/news.module';
@@ -58,6 +59,7 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     RegisterModule,
     ProfileModule,
     BrowserAnimationsModule,
+    PostCommentModule,
 
     // Material moment date module
     MatMomentDateModule

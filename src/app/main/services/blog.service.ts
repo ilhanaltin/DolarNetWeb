@@ -46,4 +46,9 @@ export class BlogService {
 
     return this.baseService.get<PostResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Blog.GetById, myParams);
   }
+
+  addComment(comment): Observable<ServiceResult<StandartResponseDetailsVM>>
+  {
+    return this.baseService.post(apiConfig.Api.Main.Url + apiConfig.Services.Blog.AddComment, comment);
+  }
 }
