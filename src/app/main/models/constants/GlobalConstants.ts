@@ -36,6 +36,8 @@ export const GlobalConstants = {
     UserRoles: { Admin: 1, Editor: 2, User: 3 },
     PositionType: { Currency: 1, Gold: 2, Cripto: 3} ,
     PostCategories: { Doviz: 1, Altin: 2, Kripto: 3, Gundem: 4, Borsa: 5, Emtia: 6, EnSon: 7, EnPopuler: 8, EkonIndikator: 9,
-        Ekonomi: 10, Dunya: 11, Turkiye: 12 }
+        Ekonomi: 10, Dunya: 11, Turkiye: 12, Blog: 13 },
+    PostCategoriesLongName: ['Döviz','Altın','Kripto Paralar','Gündem','Borsa','Emtia','En Son',
+    'En Popüler','Ekonomik İndikatörler','Ekonomi','Dünya','Türkiye','Blog']
     };
     

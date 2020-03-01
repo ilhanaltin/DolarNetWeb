@@ -15,6 +15,7 @@ export class NewsListComponent implements OnInit {
   readonly _globalConstants = GlobalConstants;
 
   postList: PostVM[];
+  categoryId: number;
 
   constructor(
     private _blogService: BlogService,
@@ -33,6 +34,7 @@ export class NewsListComponent implements OnInit {
         else
         {
           this.getPosts(params.get('category'));
+          this.categoryId = +params.get('category');
         }
       });
   }
@@ -52,5 +54,14 @@ export class NewsListComponent implements OnInit {
   removeHtmlTags(content : string) : string
   {
       return content.trim().slice(0,400).replace(/<[^>]+>/g, '');
+  }
+
+  getHeader()
+  {
+      if(this.categoryId === undefined || this.categoryId === 0)
+      {
+          return "Haberler";
+      }
+      return GlobalConstants.PostCategoriesLongName[this.categoryId - 1] + " Haberleri";
   }
 }

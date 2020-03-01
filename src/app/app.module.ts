@@ -28,6 +28,24 @@ import { BorsaLiveListModule } from './main/pages/standart-list/borsa-live-list/
 import { ProfileModule } from './main/pages/profile/profile.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { SocialLoginModule, AuthServiceConfig, AuthService } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+
+export function socialConfigs() {  
+  let config = new AuthServiceConfig([
+    {
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider("663168425346-sfp0a6hkhet3tjihp838ne9daioamk9t.apps.googleusercontent.com")
+    }
+    /* ,
+    {
+      id: FacebookLoginProvider.PROVIDER_ID,
+      provider: new FacebookLoginProvider("Facebook-App-Id")
+    } */
+  ]);
+  
+  return config;  
+}  
 
 @NgModule({
   declarations: [
@@ -60,11 +78,22 @@ import { MatMomentDateModule } from "@angular/material-moment-adapter";
     ProfileModule,
     BrowserAnimationsModule,
     PostCommentModule,
+    SocialLoginModule,
 
     // Material moment date module
     MatMomentDateModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'}],
+  providers: [
+    {
+        provide: APP_BASE_HREF, 
+        useValue: '/'
+    },
+    AuthService,  
+    {  
+      provide: AuthServiceConfig,  
+      useFactory: socialConfigs  
+    }  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

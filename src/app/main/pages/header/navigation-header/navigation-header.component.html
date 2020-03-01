@@ -20,13 +20,13 @@
                   <a class="nav-link" href="#" routerLink="/altin-list">Altın</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" routerLink="/emtia-list">Emtialar</a>
+                  <a class="nav-link" href="#" routerLink="/emtia-list">Emtia</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" routerLink="/pariteler-list">Pariteler</a>
+                  <a class="nav-link" href="#" routerLink="/pariteler-list">Parite</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" routerLink="/cripto-coin-list">Kripto Paralar</a>
+                  <a class="nav-link" href="#" routerLink="/cripto-coin-list">Kripto Para</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="borsaDropdown" data-toggle="dropdown"
@@ -38,6 +38,9 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#" routerLink="/news">Haberler</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#" [routerLink]="['/news-list', _globalConstants.PostCategories.Blog]">Blog</a>
                 </li>
               </ul>
               <div class="mr-0" *ngIf="!_authenticationService.isLoggedIn()">
