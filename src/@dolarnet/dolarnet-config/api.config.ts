@@ -45,6 +45,7 @@ export const apiConfig = {
         User:
         {
           Authenticate: "User/Authenticate",
+          SocialAuthenticate: "User/SocialAuthenticate",
           Register: "User/Register",
           UpdateUser: "User",
           ChangePassword: "User/ChangePassword",

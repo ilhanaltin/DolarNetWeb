@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private _authenticationService: AuthenticationService,  
               public OAuth: AuthService,  
-              private SocialloginService: SocialLoginService,  
+              private _socialloginService: SocialLoginService,  
               private _router: Router,
               private _formBuilder: FormBuilder) { }
 
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
   login(credentials) : void {
     this._authenticationService.login(credentials)
-        .subscribe(result =>{
+        .subscribe(result => {
             if(result)
             {
                 this._router.navigate(['/']);
@@ -55,22 +55,21 @@ export class LoginComponent implements OnInit {
       socialPlatformProvider = GoogleLoginProvider.PROVIDER_ID;  
     }  
     this.OAuth.signIn(socialPlatformProvider).then(socialusers => {  
-      console.log(socialProvider, socialusers);  
-      console.log(socialusers);  
-      //this.Savesresponse(socialusers);  
+      this.saveAndLogin(socialusers);  
     });  
   }  
 
-  /* Savesresponse(socialusers: SocialUsersVM) {  
-    this.SocialloginService.Savesresponse(socialusers).subscribe((res: any) => {  
-      debugger;  
-      console.log(res);  
-      this.socialusers=res;  
-      this.response = res.userDetail;  
-      localStorage.setItem('socialusers', JSON.stringify( this.socialusers));  
-      console.log(localStorage.setItem('socialusers', JSON.stringify(this.socialusers)));  
-      this._router.navigate([`/`]);  
+  saveAndLogin(socialusers: SocialUsersVM) {  
+    this._socialloginService.login(socialusers)
+      .subscribe(result => {  
+          if(result)
+          {
+              this._router.navigate(['/']);
+          }
+          else
+          {
+              this.invalidLogin = true;
+          }
     })  
-  } */
-
+  } 
 }

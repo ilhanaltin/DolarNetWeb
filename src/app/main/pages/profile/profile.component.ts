@@ -65,10 +65,10 @@ export class ProfileComponent implements OnInit {
   optionPositionTypePortfolio: number;
 
   marketValue: number;
-  openPrice: number;
-  openPriceRate: number;
-  dailyPrice: number;
-  dailyPriceRate: number;
+  openPrice: number = 0;
+  openPriceRate: number = 0;
+  dailyPrice: number = 0;
+  dailyPriceRate: number = 0;
 
   holdings: HoldingVM[];
   portfolios: PortfolioVM[];
@@ -543,26 +543,29 @@ export class ProfileComponent implements OnInit {
             } 
         });
 
-        this.marketValue = this.holdings.reduce(function(prev, cur) {
-          return prev + cur.marketPrice;
-        }, 0);
-
-        var valueBefore = this.holdings.reduce(function(prev, cur) {
-          return prev + cur.amount * cur.price;
-        }, 0);
-
-        var todaysChange = this.holdings.reduce(function(prev, cur) {
-          return prev + cur.dailyChange;
-        }, 0); 
-
-        this.openPrice = this.marketValue - valueBefore;
-
-        this.openPriceRate = this.openPrice * 100 / valueBefore;
-        this.dailyPriceRate = 100 * todaysChange / (this.marketValue - todaysChange);
-
-        this.dailyPrice = this.holdings.reduce(function(prev, cur) {
-          return prev + cur.dailyChange;
-        }, 0);
+        if(this.holdings != null && this.holdings.length > 0)
+        {
+          this.marketValue = this.holdings.reduce(function(prev, cur) {
+            return prev + cur.marketPrice;
+          }, 0);
+  
+          var valueBefore = this.holdings.reduce(function(prev, cur) {
+            return prev + cur.amount * cur.price;
+          }, 0);
+  
+          var todaysChange = this.holdings.reduce(function(prev, cur) {
+            return prev + cur.dailyChange;
+          }, 0); 
+  
+          this.openPrice = this.marketValue - valueBefore;
+  
+          this.openPriceRate = this.openPrice * 100 / valueBefore;
+          this.dailyPriceRate = 100 * todaysChange / (this.marketValue - todaysChange);
+  
+          this.dailyPrice = this.holdings.reduce(function(prev, cur) {
+            return prev + cur.dailyChange;
+          }, 0);
+        }
       });
   }
 

@@ -1,17 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { BaseService } from './base.service';
+import { LoginResponseDetailsVM } from '../models/user/LoginResponseDetailsVM';
+import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocialLoginService {
-  url;
 
-  constructor(private http: HttpClient) { }
+  constructor(private _baseService: BaseService) { }
 
-  /* Savesresponse(responce)
-  {
-    this.url =  'http://localhost:64726/Api/Login/Savesresponse';
-    return this.http.post(this.url,responce);
-  } */
+  login(credentials) {
+
+    return this._baseService.post<LoginResponseDetailsVM>(apiConfig.Api.Main.Url 
+      + apiConfig.Services.User.SocialAuthenticate, 
+        credentials)
+        .pipe(
+          map(response => {
+            if(response.status == 200)
+            {
+                localStorage.setItem("token", response.result.token);
+                localStorage.setItem("current-user",JSON.stringify(response.result.user));
+                localStorage.setItem("current-user-avatar", response.result.user.avatar);
+                localStorage.setItem("current-user-role", response.result.user.roleId.toString());
+                return true;
+            }
+
+            return false;
+         }));
+  }
 }

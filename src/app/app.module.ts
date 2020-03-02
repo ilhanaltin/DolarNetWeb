@@ -37,11 +37,11 @@ export function socialConfigs() {
       id: GoogleLoginProvider.PROVIDER_ID,
       provider: new GoogleLoginProvider("663168425346-sfp0a6hkhet3tjihp838ne9daioamk9t.apps.googleusercontent.com")
     }
-    /* ,
+    ,
     {
       id: FacebookLoginProvider.PROVIDER_ID,
-      provider: new FacebookLoginProvider("Facebook-App-Id")
-    } */
+      provider: new FacebookLoginProvider("868431100284693")
+    }
   ]);
   
   return config;  

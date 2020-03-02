@@ -10,7 +10,8 @@ export class UserVM
     statusName: string;
     roleId: number;
     roleName: string;
-
+    userLoginTypeId: number;
+    
     /**
      * Constructor
      *
@@ -29,6 +30,7 @@ export class UserVM
             this.statusName = user.statusName || '';
             this.roleId = user.roleId || 0;
             this.roleName = user.roleName || '';
+            this.userLoginTypeId = user.roleId || 1;
         }
     }
 }

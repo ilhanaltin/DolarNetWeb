@@ -10,7 +10,7 @@ export class SocialUsersVM {
     idToken: string;
     authorizationCode: string;  
 
-    facebook?: any;
+    /* facebook?: any;
 
-    linkedIn?: any;
+    linkedIn?: any; */
 }
