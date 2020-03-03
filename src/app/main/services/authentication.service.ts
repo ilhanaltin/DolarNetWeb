@@ -108,6 +108,8 @@ export class AuthenticationService {
   {
     let avatar = localStorage.getItem('current-user-avatar');
 
+    console.log(avatar);
+
     if(!avatar) return "assets/images/avatars/profile.jpg";
 
     return avatar;

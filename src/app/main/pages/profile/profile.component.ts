@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
   optionPositionType: number;
   optionPositionTypePortfolio: number;
 
-  marketValue: number;
+  marketValue: number = 0;
   openPrice: number = 0;
   openPriceRate: number = 0;
   dailyPrice: number = 0;
