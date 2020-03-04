@@ -30,8 +30,8 @@
                             data-toggle="tooltip" data-placement="left" data-html="true" title="<small><strong>ETİKETLER:</strong> </small>
                         <small>Döviz,</small><small>Dolar</small>" alt="...">
 
-                        <figcaption class="figure-caption">A caption for the above image for search engine
-                            optimization</figcaption>
+                        <!-- <figcaption class="figure-caption">A caption for the above image for search engine
+                            optimization</figcaption> -->
                     </figure>
 
                     <h1 class="news-detail-title">{{post.title}}
@@ -41,7 +41,7 @@
                         <svg class='remix'>
                             <use xlink:href="../assets/images/remix-icon/remixicon.symbol.svg#ri-time-line"></use>
                         </svg>
-                        27.09.2019 11:17</time>
+                        {{post.publishDate | date :'dd-MM-yyyy'}}</time>
                     <div [innerHTML]="post.content"></div>                    
                     <small class="font-weight-bold news-detail-tags-title ">
                         <svg class='remix'>
