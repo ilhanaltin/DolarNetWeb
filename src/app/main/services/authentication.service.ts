@@ -46,8 +46,6 @@ export class AuthenticationService {
   {
     user.password = Md5.init(user.password);
 
-    console.log(user);
-
     return this._baseService.post<RegisterResponseDetailsVM>(apiConfig.Api.Main.Url 
       + apiConfig.Services.User.Register, user)
         .pipe(
@@ -107,8 +105,6 @@ export class AuthenticationService {
   get avatar()
   {
     let avatar = localStorage.getItem('current-user-avatar');
-
-    console.log(avatar);
 
     if(!avatar) return "assets/images/avatars/profile.jpg";
 

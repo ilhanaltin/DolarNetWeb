@@ -4,13 +4,10 @@ body { background-color: #aacccc }
     z-index: 1111;
     bottom: 0px;
 }
+
 .js .slider-single > div:nth-child(1n+2) { display: none }
 
 .js .slider-single.slick-initialized > div:nth-child(1n+2) { display: block }
-
-
-
-
 
 
 .slider-nav .slick-slide { cursor: pointer; }
@@ -20,3 +17,6 @@ body { background-color: #aacccc }
 	background-color: #fff
 }
 
+.pointer {
+    cursor: pointer;
+}

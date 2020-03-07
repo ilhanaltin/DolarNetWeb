@@ -49,8 +49,7 @@
                         </svg>
                         HABER ETİKETLERİ
                     </small>
-                    <span class="badge news-detail-tag">Türkiye Tarım Yatırımı</span>
-                    <span class="badge news-detail-tag">son dakika haberler</span>                    
+                    <span *ngFor="let tag of post.tags" class="badge news-detail-tag">{{tag}}</span>
                     <section class="news-detail-comment-section">
                         <div class="row">
                             <div *ngIf="post.comments" class="col-md-8 news-detail-comment-section-title">

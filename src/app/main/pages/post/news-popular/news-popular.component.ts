@@ -36,9 +36,4 @@ export class NewsPopularComponent implements OnInit {
         this.postList = response.result.postList;
     });
   }
-
-  removeHtmlTags(content : string) : string
-  {
-      return content.trim().slice(0,400).replace(/<[^>]+>/g, '');
-  }
 }

@@ -33,10 +33,5 @@ export class NewsLatestComponent implements OnInit {
     this._blogService.get(criteria).subscribe(response=>{
         this.postList = response.result.postList;
     });
-  }
-
-  removeHtmlTags(content : string) : string
-  {
-      return content.trim().slice(0, 300).replace(/<[^>]+>/g, '');
-  }
+  } 
 }
