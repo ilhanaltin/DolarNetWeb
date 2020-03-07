@@ -15,4 +15,9 @@ export class PostCategoryHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  getCategoryName(category: number) : string
+  {
+      return GlobalConstants.PostCategoriesLongNameForUrl[category - 1];
+  }
+
 }

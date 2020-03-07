@@ -38,6 +38,8 @@ export const GlobalConstants = {
     PostCategories: { Doviz: 1, Altin: 2, Kripto: 3, Gundem: 4, Borsa: 5, Emtia: 6, EnSon: 7, EnPopuler: 8, EkonIndikator: 9,
         Ekonomi: 10, Dunya: 11, Turkiye: 12, Blog: 13 },
     PostCategoriesLongName: ['Döviz','Altın','Kripto Paralar','Gündem','Borsa','Emtia','En Son',
-    'En Popüler','Ekonomik İndikatörler','Ekonomi','Dünya','Türkiye','Blog']
+    'En Popüler','Ekonomik İndikatörler','Ekonomi','Dünya','Türkiye','Blog'],
+    PostCategoriesLongNameForUrl: ['doviz','altin','kripto-paralar','gundem','borsa','emtia','en-son',
+    'en-populer','ekonomik-indikatorler','ekonomi','dunya','turkiye','blog']
     };
     

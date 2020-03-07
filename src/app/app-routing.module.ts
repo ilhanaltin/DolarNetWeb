@@ -39,15 +39,11 @@ const routes: Routes = [
     component: NewsComponent
   },
   {
-    path     : 'news-list/:category',
+    path     : 'news/:category/:categoryname',
     component: NewsListComponent
   },
   {
-    path     : 'news-list',
-    component: NewsListComponent
-  },
-  {
-    path     : 'news-detail/:id/:title',
+    path     : ':id/:title',
     component: NewsDetailComponent
   },
   {
@@ -85,7 +81,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
