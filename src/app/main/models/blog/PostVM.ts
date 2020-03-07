@@ -4,6 +4,7 @@ import { PostCommentsVM } from './PostCommentVM';
 export class PostVM{
     id: number;
     title: string;
+    urlFromTitle: string;
     longTitle: string;
     tags: string[];
     authorId: number;

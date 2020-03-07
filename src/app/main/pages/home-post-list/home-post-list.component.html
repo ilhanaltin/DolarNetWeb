@@ -5,7 +5,7 @@
                 <img class="home-news-list-item-featured-image" [src]="post.imagePath" alt="">
             </div>
             <div class="ml-2">
-                <a class="home-news-list-item-title" [routerLink]="['/news-detail', post.id]">{{post.title}}</a>
+                <a class="home-news-list-item-title" [routerLink]="['/news-detail', post.id, post.urlFromTitle]">{{post.title}}</a>
                 <p class="home-news-list-item-date">{{post.publishDate | date :'dd-MM-yyyy'}}</p>
             </div>
         </div>

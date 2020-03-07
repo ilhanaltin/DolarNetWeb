@@ -1,7 +1,7 @@
 <div class="slider slider-single">
   <div *ngFor="let post of postList" [hidden]="isSliderHidden" class="pointer">
-    <a href="#" [routerLink]="['/news-detail', post.id]">{{post.title}}</a>
-    <img href="#" [src]="post.imagePath" class="img-fluid" [alt]="post.title" [routerLink]="['/news-detail', post.id]">
+    <a href="#" [routerLink]="['/news-detail', post.id, post.urlFromTitle]">{{post.title}}</a>
+    <img href="#" [src]="post.imagePath" class="img-fluid" [alt]="post.title" [routerLink]="['/news-detail', post.id, post.urlFromTitle]">
   </div>
 </div>
 <div class="slider slider-nav" [hidden]="isSliderHidden">

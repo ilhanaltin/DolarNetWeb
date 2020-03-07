@@ -47,7 +47,7 @@ const routes: Routes = [
     component: NewsListComponent
   },
   {
-    path     : 'news-detail/:id',
+    path     : 'news-detail/:id/:title',
     component: NewsDetailComponent
   },
   {
