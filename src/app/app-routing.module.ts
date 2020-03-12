@@ -18,10 +18,6 @@ import { AuthGuard } from './main/services/auth-guard.service';
 
 const routes: Routes = [
   {
-    path     : '',
-    component: HomeComponent
-  },
-  {
     path     : 'login',
     component: LoginComponent
   },
@@ -43,35 +39,35 @@ const routes: Routes = [
     component: NewsListComponent
   },
   {
-    path     : ':id/:title',
+    path     : ':title/:id',
     component: NewsDetailComponent
   },
   {
-    path     : 'doviz-list',
+    path     : 'doviz',
     component: DovizListComponent
   }, 
   {
-    path     : 'altin-list',
+    path     : 'altin',
     component: AltinListComponent
   }, 
   {
-    path     : 'pariteler-list',
+    path     : 'pariteler',
     component: ParitelerListComponent
   },
   {
-    path     : 'cripto-coin-list',
+    path     : 'cripto-coin',
     component: CriptoCoinListComponent
   },
   {
-    path     : 'borsa-hisse-list',
+    path     : 'borsa-hisse',
     component: BorsaHisseListComponent
   },
   {
-    path     : 'borsa-live-list',
+    path     : 'borsa-live',
     component: BorsaLiveListComponent
   },
   {
-    path     : 'emtia-list',
+    path     : 'emtialar',
     component: EmtiaListComponent
   },
   {

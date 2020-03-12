@@ -7,7 +7,7 @@
 </div>
 <div class="row news-list">
     <div *ngFor="let post of postList" class="col-md-3 news-list-item">
-        <a href="" [routerLink]="['/', post.id, post.urlFromTitle]">
+        <a href="" [routerLink]="['/', post.urlFromTitle, post.id]">
             <img [src]="post.imagePath" class="img-fluid rounded w-100" alt="">
             <h4 class="mt-3">{{post.title}}</h4>
             <p class="home-news-list-item-date">{{post.publishDate | date :'dd-MM-yyyy'}}</p>

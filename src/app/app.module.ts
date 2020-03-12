@@ -84,15 +84,11 @@ export function socialConfigs() {
     MatMomentDateModule
   ],
   providers: [
-    {
-        provide: APP_BASE_HREF, 
-        useValue: '/'
-    },
     AuthService,  
     {  
       provide: AuthServiceConfig,  
       useFactory: socialConfigs  
-    }  
+    }
   ],
   bootstrap: [AppComponent]
 })

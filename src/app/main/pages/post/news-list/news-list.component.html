@@ -39,7 +39,7 @@
                     </div>
                     <div class="row news-list">
                         <div *ngFor="let post of postList" class="col-md-12 news-list-item"> 
-                            <a [routerLink]="['/', post.id, post.urlFromTitle]">
+                            <a [routerLink]="['/', post.urlFromTitle, post.id]">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <img class="img-fluid rounded w-100" [src]="post.imagePath" alt='' />
