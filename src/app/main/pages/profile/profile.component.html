@@ -32,9 +32,8 @@
                                         role="tab" aria-controls="portfolio" aria-selected="false" (click)="tabChanged()">Takip Ettiklerim</a>
                                 </li>                                
                             </ul>
-                            <div class="tab-content border pl-3 pr-3" id="myTabContent">
-                                <div class="tab-pane fade show active" id="holdings" role="tabpanel"
-                                    aria-labelledby="holdings-tab"> 
+                            <div class="tab-content border pl-3 pr-3" id="profileTabContent">
+                                <div class="tab-pane fade show active" id="holdings" role="tabpanel" aria-labelledby="holdings-tab"> 
                                     <p></p>                    
                                     
                                     <div class="row d-flex align-items-center justify-content-between">
@@ -197,76 +196,87 @@
                                         </form>
                                     </div>
 
-                                    <div class="btn-group" role="group" aria-label="">
-                                        <button type="button" class="btn btn-success active">Varlikler</button>
-                                        <button type="button" class="btn btn-secondary"> İşlemler</button>
-                                        <button type="button" class="btn btn-secondary">Grafikler</button>
+                                    <ul class="nav nav-tabs profile-tab-content" id="myTab1" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark active" id="holdings-details-tab" data-toggle="tab" href="#holdings-details"
+                                                role="tab" aria-controls="holdings-details" aria-selected="true">Varlıklar</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-dark" id="holdings-graphs-tab" data-toggle="tab" href="#holdings-graphs"
+                                                role="tab" aria-controls="holdings-graphs" aria-selected="false">Grafikler</a>
+                                        </li>                                
+                                    </ul>
+                                    <div class="tab-content border pl-3 pr-3" id="holdingsDetailTabContent">
+                                        <div class="tab-pane fade show active" id="holdings-details" role="tabpanel" aria-labelledby="holdings-details-tab">
+                                            <table class="table table-bordered table-hover mt-4 w-auto small">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"></th>
+                                                        <th scope="col">Adı</th>
+                                                        <th scope="col">Alış Tarihi</th>
+                                                        <th scope="col">Miktar</th>
+                                                        <th scope="col">Alınan Değer(&#8378;)</th>
+                                                        <th scope="col">Şimdiki Değeri(&#8378;)</th>
+                                                        <th scope="col">Piyasa Değeri(&#8378;)</th>
+                                                        <th scope="col">Günlük (%)</th>
+                                                        <th scope="col">Günlük (&#8378;)</th>
+                                                        <th scope="col">Açık (%)</th>
+                                                        <th scope="col">Açık (&#8378;)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="align-middle" *ngFor="let holding of holdings" (click)="editHolding(holding)">
+                                                        <td (click)="$event.stopPropagation()">
+                                                            <button (click)="deleteHolding(holding)" mat-icon-button color="#b71c1c">
+                                                                <mat-icon aria-label="Delete">delete</mat-icon>
+                                                            </button>
+                                                        </td>
+                                                        <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Currency">
+                                                            <span [ngClass]="getCurrencyFlagCss(holding.holdingCode)"></span> {{holding.holdingCode}} - {{holding.holdingLongName}}
+                                                        </th>
+                                                        <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Cripto">
+                                                            <img [src]="getCriptoFlagCss(holding.holdingCode)" height="16" width="16"> {{holding.holdingCode}} - {{holding.holdingLongName}}
+                                                        </th> 
+                                                        <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Gold">
+                                                            <img src="assets/images/icons/gold.png" height="16" width="16"> {{holding.holdingCode}} - {{holding.holdingLongName}}
+                                                        </th>                                                                                                
+                                                        <td scope="row">
+                                                            {{holding.purchaseDate | date :'dd-MM-yyyy'}} 
+                                                        </td>
+                                                        <td scope="row">
+                                                            {{holding.amount}}
+                                                        </td>
+                                                        <td scope="row">
+                                                            {{getConvertedToTry(holding.price)}}
+                                                        </td>
+                                                        <td scope="row">
+                                                            {{getConvertedToTry(holding.todaysPrice)}}
+                                                        </td> 
+                                                        <td scope="row">
+                                                            {{getConvertedToTry(holding.marketPrice)}}
+                                                        </td>  
+                                                        <td [class]="getCssWithValue(holding.dailyChange)" scope="row">
+                                                            {{getConvertedToTry(holding.dailyChangeRate)}}
+                                                        </td> 
+                                                        <td [class]="getCssWithValue(holding.dailyChange)" scope="row">
+                                                            {{getConvertedToTry(holding.dailyChange)}}
+                                                        </td> 
+                                                        <td [class]="getCssWithValue(holding.openChange)" scope="row">
+                                                            {{getConvertedToTry(holding.openChangeRate)}}
+                                                        </td>  
+                                                        <td [class]="getCssWithValue(holding.openChange)" scope="row">
+                                                            {{getConvertedToTry(holding.openChange)}}
+                                                        </td>                                               
+                                                      </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade" id="holdings-graphs" role="tabpanel" aria-labelledby="holdings-graphs-tab">
+                                            graphs...
+                                        </div>
                                     </div>
-                                    <table class="table table-bordered table-hover mt-4 w-auto small">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col"></th>
-                                                <th scope="col">Adı</th>
-                                                <th scope="col">Alış Tarihi</th>
-                                                <th scope="col">Miktar</th>
-                                                <th scope="col">Alınan Değer(&#8378;)</th>
-                                                <th scope="col">Şimdiki Değeri(&#8378;)</th>
-                                                <th scope="col">Piyasa Değeri(&#8378;)</th>
-                                                <th scope="col">Günlük (%)</th>
-                                                <th scope="col">Günlük (&#8378;)</th>
-                                                <th scope="col">Açık (%)</th>
-                                                <th scope="col">Açık (&#8378;)</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="align-middle" *ngFor="let holding of holdings" (click)="editHolding(holding)">
-                                                <td (click)="$event.stopPropagation()">
-                                                    <button (click)="deleteHolding(holding)" mat-icon-button color="#b71c1c">
-                                                        <mat-icon aria-label="Delete">delete</mat-icon>
-                                                    </button>
-                                                </td>
-                                                <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Currency">
-                                                    <span [ngClass]="getCurrencyFlagCss(holding.holdingCode)"></span> {{holding.holdingCode}} - {{holding.holdingLongName}}
-                                                </th>
-                                                <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Cripto">
-                                                    <img [src]="getCriptoFlagCss(holding.holdingCode)" height="16" width="16"> {{holding.holdingCode}} - {{holding.holdingLongName}}
-                                                </th> 
-                                                <th scope="row" *ngIf="holding.holdingTypeId === _globalConstants.PositionType.Gold">
-                                                    <img src="assets/images/icons/gold.png" height="16" width="16"> {{holding.holdingCode}} - {{holding.holdingLongName}}
-                                                </th>                                                                                                
-                                                <td scope="row">
-                                                    {{holding.purchaseDate | date :'dd-MM-yyyy'}} 
-                                                </td>
-                                                <td scope="row">
-                                                    {{holding.amount}}
-                                                </td>
-                                                <td scope="row">
-                                                    {{getConvertedToTry(holding.price)}}
-                                                </td>
-                                                <td scope="row">
-                                                    {{getConvertedToTry(holding.todaysPrice)}}
-                                                </td> 
-                                                <td scope="row">
-                                                    {{getConvertedToTry(holding.marketPrice)}}
-                                                </td>  
-                                                <td [class]="getCssWithValue(holding.dailyChange)" scope="row">
-                                                    {{getConvertedToTry(holding.dailyChangeRate)}}
-                                                </td> 
-                                                <td [class]="getCssWithValue(holding.dailyChange)" scope="row">
-                                                    {{getConvertedToTry(holding.dailyChange)}}
-                                                </td> 
-                                                <td [class]="getCssWithValue(holding.openChange)" scope="row">
-                                                    {{getConvertedToTry(holding.openChangeRate)}}
-                                                </td>  
-                                                <td [class]="getCssWithValue(holding.openChange)" scope="row">
-                                                    {{getConvertedToTry(holding.openChange)}}
-                                                </td>                                               
-                                              </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
-                                <div class="tab-pane fade" id="portfolio" role="tabpanel"
-                                    aria-labelledby="portfolio-tab">
+                                <div class="tab-pane fade" id="portfolio" role="tabpanel" aria-labelledby="portfolio-tab">
                                     <div class="form-group mt-3">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="inlineRadioOptionsForPositionPortfolio" id="inlineRadioCurrencyPortfolio"
