@@ -11,6 +11,7 @@ export class UserVM
     roleId: number;
     roleName: string;
     userLoginTypeId: number;
+    lastLoginTime: Date;
     
     /**
      * Constructor

@@ -1,13 +1,15 @@
+import { TypeVM } from './../../models/types/TypeVM';
 import { CriptoRatesVM } from './../../models/coins/CriptoRatesVM';
 import { CurrencyRatesVM } from '../../models/integration/currency/CurrencyRatesVM';
 import { GlobalConstants } from './../../models/constants/GlobalConstants';
 import { Component, OnInit } from '@angular/core';
-import { Subscription, timer } from 'rxjs';
-import { TypeVM } from '../../models/types/TypeVM';
+import { Subscription, timer, Observable } from 'rxjs';
 import { GoldRatesVM } from '../../models/integration/gold/GoldRatesVM';
 import { CurrencyService } from '../../services/currency.service';
 import { GoldService } from '../../services/gold.service';
 import { CriptoService } from '../../services/cripto.service';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'converter',
@@ -20,9 +22,28 @@ export class ConverterComponent implements OnInit {
 
   readonly _globalConstants = GlobalConstants;
 
-  currencies = [];
-  golds = [];
-  coins = [];
+  listBoxCurrency1 = new FormControl();
+  listBoxCurrency2 = new FormControl();
+  listBoxCurrency3 = new FormControl();
+  filteredCurrencies1: Observable<TypeVM[]>;
+  filteredCurrencies2: Observable<TypeVM[]>;
+  filteredCurrencies3: Observable<TypeVM[]>;
+
+  listBoxGold1 = new FormControl();
+  listBoxGold2 = new FormControl();
+  filteredGolds1: Observable<TypeVM[]>;
+  filteredCurrenciesForGolds: Observable<TypeVM[]>;
+
+  listBoxCoin1 = new FormControl();
+  listBoxCoin2 = new FormControl();
+  listBoxCoin3 = new FormControl();
+  filteredCoins1: Observable<TypeVM[]>;
+  filteredCoins2: Observable<TypeVM[]>;
+  filteredCurrenciesForCoins: Observable<TypeVM[]>;
+
+  currencies: TypeVM[];
+  golds: TypeVM[];
+  coins: TypeVM[];
   selectedD = 2;
   currencyRates: CurrencyRatesVM[];
   goldRates: GoldRatesVM[];
@@ -54,6 +75,7 @@ export class ConverterComponent implements OnInit {
 
   baseConverter: string;
 
+  
   constructor(private _currencyService: CurrencyService, 
     private _goldService: GoldService,
     private _criptoService: CriptoService) {
@@ -85,6 +107,54 @@ export class ConverterComponent implements OnInit {
         this.myTimerSub = ti.subscribe(t => {    
             this.getCurrencyAndConnectedData();
         });
+
+        this.filteredCurrencies1 = this.listBoxCurrency1.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCurrency(value))
+        );
+
+        this.filteredCurrencies2 = this.listBoxCurrency2.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCurrency(value))
+        );
+
+        this.filteredCurrencies3 = this.listBoxCurrency3.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCurrency(value))
+        );
+
+        this.filteredGolds1 = this.listBoxGold1.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterGold(value))
+        );
+
+        this.filteredCurrenciesForGolds = this.listBoxGold2.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCurrency(value))
+        );
+
+        this.filteredCoins1 = this.listBoxCoin1.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCoin(value))
+        );
+
+        this.filteredCoins2 = this.listBoxCoin2.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCoin(value))
+        );
+
+        this.filteredCurrenciesForCoins = this.listBoxCoin3.valueChanges
+          .pipe(
+            startWith(''),
+            map(value => this._filterCurrency(value))
+        );
   }
 
   getCurrencyAndConnectedData()
@@ -158,6 +228,27 @@ export class ConverterComponent implements OnInit {
                 this.onTextBoxChangeCripto("1");
             });
       }
+  }
+
+  private _filterCurrency(value: string): TypeVM[] {
+    
+    const filterValue = value.toLowerCase();
+
+    return this.currencies.filter(option => option.adi.toLowerCase().includes(filterValue));
+  }
+
+  private _filterGold(value: string): TypeVM[] {
+    
+    const filterValue = value.toLowerCase();
+
+    return this.golds.filter(option => option.adi.toLowerCase().includes(filterValue));
+  }
+
+  private _filterCoin(value: string): TypeVM[] {
+    
+    const filterValue = value.toLowerCase();
+
+    return this.coins.filter(option => option.adi.toLowerCase().includes(filterValue));
   }
 
   onConverterChangeCurrency()

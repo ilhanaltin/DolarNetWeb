@@ -36,6 +36,12 @@ export class CurrencyBarVM
     goldOnsTLRateInt: number;
     goldOnsTLRateStr: string;
 
+    bitcoinTLValueInt: number;
+    bitcoinTLValueStr: string;
+
+    bitcoinTLRateInt: number;
+    bitcoinTLRateStr: string;
+
     /**
      * Constructor
      *
@@ -68,6 +74,10 @@ export class CurrencyBarVM
             this.goldOnsTLValueStr = currencyBar.goldOnsTLValueStr || '0,00';
             this.goldOnsTLRateInt = currencyBar.goldOnsTLRateInt || 0;
             this.goldOnsTLRateStr = currencyBar.goldOnsTLRateStr || '0,0';
+            this.bitcoinTLValueInt = currencyBar.bitcoinTLValueInt || 0;
+            this.bitcoinTLValueStr = currencyBar.bitcoinTLValueStr || '0,00';
+            this.bitcoinTLRateInt = currencyBar.bitcoinTLRateInt || 0;
+            this.bitcoinTLRateStr = currencyBar.bitcoinTLRateStr || '0,0';
         }
     }
 }

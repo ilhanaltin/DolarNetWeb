@@ -1,7 +1,9 @@
+import { ServiceResult } from './../../models/ServiceResult';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { RegisterResponseDetailsVM } from '../../models/user/RegisterResponseDetailsVM';
 
 @Component({
   selector: 'register',
@@ -11,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  _result: ServiceResult<RegisterResponseDetailsVM>;
 
   constructor(private _authenticationService: AuthenticationService,    
     private _router: Router,
@@ -35,11 +38,13 @@ export class RegisterComponent implements OnInit {
   {
       this._authenticationService.register(user)
         .subscribe(result =>{
-            if(result)
+            this._result = result;
+
+            if(result.status == 200)
             {
                 this._router.navigate(['/login']);
-            }            
-    });
+            } 
+      });
   }
 }
 

@@ -5,9 +5,9 @@
         </div>
         <div>
             <p>Hoşgeldiniz <span>Sn. {{_authenticationService.currentUser.name + ' ' + _authenticationService.currentUser.lastName}}</span></p>
-            <small>
+            <small *ngIf="_authenticationService.currentUser.lastLoginTime != null">
                 <img src="assets/images/icons/profile-box-time-icon.svg" alt="">
-                Son İşlem Tarihiniz: 19 September 2019
+                Son İşlem Tarihiniz: {{_authenticationService.currentUser.lastLoginTime | date :'dd-MM-yyyy'}}
             </small>
         </div>
     </div>

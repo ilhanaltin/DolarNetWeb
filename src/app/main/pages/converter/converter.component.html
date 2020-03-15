@@ -46,17 +46,27 @@
     <div class="tab-pane fade show active" id="doviz-cevirici" role="tabpanel" aria-labelledby="doviz-cevirici-tab">
       <div class="currency-converter-content">
         <div class="form-group d-flex flex-column">
-          <div class="input-group mb-3 ">
+          <div class="input-group mb-3 ">            
             <input type="number" class="form-control" [(ngModel)] ="currencyFirst" placeholder="" aria-label=""
               aria-describedby="basic-addon2" (input)="onTextBoxChangeCurrency('1')">
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterFirstCurrency" id="converterFirstCurrency" [(ngModel)]="currencyTypeFirst" (change)="onConverterChangeCurrency()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxCurrency1"
+                              [(ngModel)]="currencyTypeFirst"
+                              [matAutocomplete]="autoCurr1">
+                      <mat-autocomplete #autoCurr1="matAutocomplete" (optionSelected)="onConverterChangeCurrency()">
+                          <mat-option *ngFor="let curr of filteredCurrencies1 | async" [value]="curr.adi">
+                              <span> {{curr.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -68,11 +78,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterSecondCurrency" id="converterSecondCurrency" [(ngModel)]="currencyTypeSecond" (change)="onConverterChangeCurrency()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '2'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxCurrency2"
+                              [(ngModel)]="currencyTypeSecond"
+                              [matAutocomplete]="autoCurr2">
+                      <mat-autocomplete #autoCurr2="matAutocomplete" (optionSelected)="onConverterChangeCurrency()">
+                          <mat-option *ngFor="let curr of filteredCurrencies2 | async" [value]="curr.adi">
+                              <span> {{curr.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -83,11 +103,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterThirdCurrency" id="converterThirdCurrency" [(ngModel)]="currencyTypeThird" (change)="onConverterChangeCurrency()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxCurrency3"
+                              [(ngModel)]="currencyTypeThird"
+                              [matAutocomplete]="autoCurr3">
+                      <mat-autocomplete #autoCurr3="matAutocomplete" (optionSelected)="onConverterChangeCurrency()">
+                          <mat-option *ngFor="let curr of filteredCurrencies3 | async" [value]="curr.adi">
+                              <span> {{curr.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -118,11 +148,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterFirstGold" id="converterFirstGold" [(ngModel)]="goldTypeFirst" (change)="onConverterChangeGold()">
-                        <option *ngFor="let gold of golds; let j = index" [value]="golds[j].adi" [selected]="gold.id == '1'">
-                            {{gold.kisaAdi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxGold1"
+                              [(ngModel)]="goldTypeFirst"
+                              [matAutocomplete]="autoGold1">
+                      <mat-autocomplete #autoGold1="matAutocomplete" (optionSelected)="onConverterChangeGold()">
+                          <mat-option *ngFor="let gold of filteredGolds1 | async" [value]="gold.adi">
+                              <span> {{gold.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -134,11 +174,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterSecondGold" id="converterSecondGold" [(ngModel)]="goldTypeSecond" (change)="onConverterChangeGold()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '1'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxGold2"
+                              [(ngModel)]="goldTypeSecond"
+                              [matAutocomplete]="autoGold2">
+                      <mat-autocomplete #autoGold2="matAutocomplete" (optionSelected)="onConverterChangeGold()">
+                          <mat-option *ngFor="let curr of filteredCurrenciesForGolds | async" [value]="curr.adi">
+                              <span> {{curr.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -155,11 +205,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon2">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterFirstCripto" id="converterFirstCripto" [(ngModel)]="criptoTypeFirst" (change)="onConverterChangeCripto()">
-                        <option *ngFor="let coin of coins; let j = index" [value]="coins[j].adi" [selected]="coin.id == '1'">
-                            {{coin.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxCoin1"
+                              [(ngModel)]="criptoTypeFirst"
+                              [matAutocomplete]="autoCoin1">
+                      <mat-autocomplete #autoCoin1="matAutocomplete" (optionSelected)="onConverterChangeCripto()">
+                          <mat-option *ngFor="let coin of filteredCoins1 | async" [value]="coin.adi">
+                              <span> {{coin.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -171,11 +231,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterSecondCripto" id="converterSecondCripto" [(ngModel)]="criptoTypeSecond" (change)="onConverterChangeCripto()">
-                        <option *ngFor="let coin of coins; let j = index" [value]="coins[j].adi" [selected]="coin.id == '2'">
-                            {{coin.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxCoin2"
+                              [(ngModel)]="criptoTypeSecond"
+                              [matAutocomplete]="autoCoin2">
+                      <mat-autocomplete #autoCoin2="matAutocomplete" (optionSelected)="onConverterChangeCripto()">
+                          <mat-option *ngFor="let coin of filteredCoins2 | async" [value]="coin.adi">
+                              <span> {{coin.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>
@@ -186,11 +256,21 @@
             <div class="input-group-append">
               <span class="input-group-text" id="basic-addon3">
                 <div class="form-group mb-0">
-                    <select class="form-control" name="converterThirdCripto" id="converterThirdCripto" [(ngModel)]="criptoTypeThird" (change)="onConverterChangeCripto()">
-                        <option *ngFor="let curr of currencies; let j = index" [value]="currencies[j].adi" [selected]="curr.id == '3'">
-                            {{curr.adi}}
-                        </option>
-                    </select>
+                    <mat-form-field>
+                      <input type="text"
+                              placeholder=""
+                              aria-label="Number"
+                              matInput
+                              [formControl]="listBoxCoin3"
+                              [(ngModel)]="criptoTypeThird"
+                              [matAutocomplete]="autoCoin3">
+                      <mat-autocomplete #autoCoin3="matAutocomplete" (optionSelected)="onConverterChangeCripto()">
+                          <mat-option *ngFor="let curr of filteredCurrenciesForCoins | async" [value]="curr.adi">
+                              <span> {{curr.adi}}</span>
+                          </mat-option>                          
+                      </mat-autocomplete> 
+                      <mat-icon matSuffix class="secondary-text">keyboard_arrow_down</mat-icon>
+                  </mat-form-field>
                 </div>
               </span>
             </div>

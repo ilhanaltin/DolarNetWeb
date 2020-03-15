@@ -10,6 +10,8 @@ import { CurrencyService } from '../../../services/currency.service';
 import { Subscription, timer, Subject } from 'rxjs';
 import { GoldService } from '../../../services/gold.service';
 import { BorsaService } from '../../../services/borsa.service';
+import { CriptoService } from 'src/app/main/services/cripto.service';
+import { CriptoRatesVM } from 'src/app/main/models/coins/CriptoRatesVM';
 
 @Component({
   selector: 'currency-bar',
@@ -23,12 +25,14 @@ export class CurrencyBarComponent implements OnInit {
   currencyRates: CurrencyRatesVM[];
   goldRates: GoldRatesVM[];
   borsaRates: BorsaRatesVM[];
+  criptoRates: CriptoRatesVM[];
 
   currencyBarVM: CurrencyBarVM;
 
   constructor(private _currencyService: CurrencyService, 
     private _goldService: GoldService,
-    private _borsaService: BorsaService) {     
+    private _borsaService: BorsaService,
+    private _criptoService: CriptoService) {     
 
       this.currencyBarVM = new CurrencyBarVM({});
   }
@@ -52,6 +56,7 @@ export class CurrencyBarComponent implements OnInit {
             this.setCurrencyValues();
             this.getGoldData();
             this.getBistData();
+            this.getCriptoData();
         }
         else
         {
@@ -61,6 +66,7 @@ export class CurrencyBarComponent implements OnInit {
               this.setCurrencyValues();
               this.getGoldData();
               this.getBistData();
+              this.getCriptoData();
             });
         }
   }
@@ -99,6 +105,24 @@ export class CurrencyBarComponent implements OnInit {
                 this.setBorsaValues();
             });
         }   
+  }
+
+  getCriptoData()
+  {
+        let storageDataCripto = this._criptoService.getFromStorage();
+
+        if(storageDataCripto.isValid)
+        {
+            this.criptoRates = storageDataCripto.data;
+            this.setCoinValues();
+        }
+        else
+        {
+            this._criptoService.getFromApi().subscribe(resp=>{
+                this.criptoRates = resp.result;
+                this.setCoinValues();
+            });
+      }
   }
 
   setCurrencyValues()
@@ -179,6 +203,20 @@ export class CurrencyBarComponent implements OnInit {
     });
 
     this.currencyBarVM.borsaTLRateInt =  this.borsaRates[0].changeRate;
+  }
+
+  setCoinValues(){
+    //COIN TL
+    this.currencyBarVM.bitcoinTLValueInt = this.criptoRates.find(t=>t.code === "BTC").price;
+    this.currencyBarVM.bitcoinTLValueStr = this.currencyBarVM.bitcoinTLValueInt.toLocaleString('tr-TR', {
+      maximumFractionDigits: 5,
+    });
+
+    this.currencyBarVM.bitcoinTLRateStr = this.criptoRates.find(t=>t.code === "BTC").changeDay.toLocaleString('tr-TR', {
+      maximumFractionDigits: 4,
+    });
+
+    this.currencyBarVM.bitcoinTLRateInt = this.criptoRates.find(t=>t.code === "BTC").changeDay;
   }
 
   /**

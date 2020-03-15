@@ -50,12 +50,7 @@ export class AuthenticationService {
       + apiConfig.Services.User.Register, user)
         .pipe(
           map(response => {
-            if(response.status == 200)
-            {
-                return true;
-            }
-
-            return false;
+            return response;
          }));
   }
 

@@ -61,22 +61,22 @@
     <div class="hero-bar-currency">
       <div class="hero-bar-currency-type">
         <span>
-          STERLİN
+          BİTCOİN
         </span>
       </div>
       <div class="hero-bar-currency-price">
-        <span>{{currencyBarVM.sterlinTLValueStr}}</span>
+        <span>{{currencyBarVM.bitcoinTLValueStr}}</span>
       </div>
       <div class="hero-bar-currency-state">
-        <span>% {{currencyBarVM.sterlinTLRateStr}} </span>
-        <span *ngIf="currencyBarVM.sterlinTLRateInt >= 0">
+        <span>% {{currencyBarVM.bitcoinTLRateStr}} </span>
+        <span *ngIf="currencyBarVM.bitcoinTLRateInt >= 0">
           <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M6.13424 0.195405L0.196769 6.13287C-0.223524 6.55317 0.0741444 7.2718 0.668529 7.2718L12.5435 7.2718C13.1379 7.2718 13.4355 6.55317 13.0152 6.13288L7.07776 0.195405C6.81721 -0.0651403 6.39478 -0.0651404 6.13424 0.195405Z"
               fill="#27AE60" />
           </svg>
         </span>
-        <span *ngIf="currencyBarVM.sterlinTLRateInt < 0">
+        <span *ngIf="currencyBarVM.bitcoinTLRateInt < 0">
           <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M7.07774 7.0764L13.0152 1.13893C13.4355 0.718636 13.1378 0 12.5434 0L0.668505 2.10893e-07C0.0741211 2.10893e-07 -0.223546 0.718636 0.196747 1.13893L6.13422 7.0764C6.39476 7.33694 6.81719 7.33694 7.07774 7.0764Z"
