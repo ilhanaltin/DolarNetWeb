@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SocialLoginModule, AuthServiceConfig, AuthService } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { ServiceResult } from '../../models/ServiceResult';
+import { LoginResponseDetailsVM } from '../../models/user/LoginResponseDetailsVM';
 
 @Component({
   selector: 'login',
@@ -19,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   invalidLogin: boolean;
-
+  _result: ServiceResult<LoginResponseDetailsVM>;
+  
   constructor(private _authenticationService: AuthenticationService,  
               public OAuth: AuthService,  
               private _socialloginService: SocialLoginService,  
@@ -36,7 +39,9 @@ export class LoginComponent implements OnInit {
   login(credentials) : void {
     this._authenticationService.login(credentials)
         .subscribe(result => {
-            if(result)
+            this._result = result;
+
+            if(result.status == 200)
             {
                 this._router.navigate(['/']);
             }

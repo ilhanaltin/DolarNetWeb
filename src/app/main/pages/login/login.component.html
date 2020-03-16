@@ -38,8 +38,9 @@
                 </p>
                 <form name="loginForm" [formGroup]="loginForm" novalidate>
                     <div *ngIf="invalidLogin" class="alert alert-danger">
-                        Hatalı giriş. Lütfen kullanıcı adınızı ve/veya şifrenizi kontrol ediniz.
+                        {{_result.messages.length > 0 ? _result.messages[0] : "Hatalı giriş. Lütfen kullanıcı adınızı ve/veya şifrenizi kontrol ediniz."}}
                     </div> 
+
                     <div class="form-group">
                         <input id="email" name="email" type="email" class="form-control form-control-lg"
                             placeholder="E-Posta" formControlName="email" required>

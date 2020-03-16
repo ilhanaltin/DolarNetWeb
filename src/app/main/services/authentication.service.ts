@@ -34,11 +34,9 @@ export class AuthenticationService {
                 localStorage.setItem("current-user",JSON.stringify(response.result.user));
                 localStorage.setItem("current-user-avatar", response.result.user.avatar);
                 localStorage.setItem("current-user-role", response.result.user.roleId.toString());
-                //localStorage.setItem("token","Bearer " + response.result.token);
-                return true;
             }
 
-            return false;
+            return response;
          }));
   }
 
@@ -74,8 +72,9 @@ export class AuthenticationService {
   {
     let user = JSON.parse(localStorage.getItem('current-user')) as UserVM;
 
+    console.log(user);
     if(!user) return false;
-
+    
     return user.roleId === GlobalConstants.UserRoles.Admin;
   }
 
