@@ -1,3 +1,4 @@
+import { HoldingHistoryVM } from './../../models/holding/HoldingHistoryVM';
 import { PortfolioService } from './../../services/portfolio.service';
 import { PortfolioVM } from './../../models/portfolio/PortfolioVM';
 import { TypeVM } from './../../models/types/TypeVM';
@@ -21,6 +22,8 @@ import { NgZone } from "@angular/core";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import am4lang_tr_TR from "@amcharts/amcharts4/lang/tr_TR";
+import { HoldingHistoryGraphComboVM } from '../../models/holding/HoldingHistoryGraphComboVM';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -77,7 +80,11 @@ export class ProfileComponent implements OnInit {
 
   holdings: HoldingVM[];
   portfolios: PortfolioVM[];
-  
+
+  holdingHistory: HoldingHistoryVM[];
+  holdingHistoryGraphCombo: HoldingHistoryGraphComboVM[] = [];
+  selectedHoldingForGraph: number = 0;
+
   holding: HoldingVM;
   portfolio: PortfolioVM;
 
@@ -147,44 +154,7 @@ export class ProfileComponent implements OnInit {
         );
 
         this.postHoldingForm = this.createPostHoldingForm();
-  }
-
-  ngAfterViewInit() {
-    this.zone.runOutsideAngular(() => {
-      let chart = am4core.create("chartdiv", am4charts.XYChart);
-
-      chart.paddingRight = 20;
-
-      let data = [];
-      let visits = 10;
-      for (let i = 1; i < 366; i++) {
-        visits += Math.round((Math.random() < 0.5 ? 1 : -1) * Math.random() * 10);
-        data.push({ date: new Date(2018, 0, i), name: "name" + i, value: visits });
-      }
-
-      chart.data = data;
-
-      let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-      dateAxis.renderer.grid.template.location = 0;
-
-      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      valueAxis.tooltip.disabled = true;
-      valueAxis.renderer.minWidth = 35;
-
-      let series = chart.series.push(new am4charts.LineSeries());
-      series.dataFields.dateX = "date";
-      series.dataFields.valueY = "value";
-
-      series.tooltipText = "{valueY.value}";
-      chart.cursor = new am4charts.XYCursor();
-
-      let scrollbarX = new am4charts.XYChartScrollbar();
-      scrollbarX.series.push(series);
-      chart.scrollbarX = scrollbarX;
-
-      this.chart = chart;
-    });
-  }
+  }  
 
   getCurrencyAndConnectedData()
   {
@@ -357,6 +327,80 @@ export class ProfileComponent implements OnInit {
     this.currencies = this.getCurrencies();
     this.golds = this.getGolds();
     this.getCriptoData(true);
+  }
+
+  graphsTabSelected()
+  {
+      if(this.holdingHistory == null || this.holdingHistory.length === 0)
+      {
+        this.getHoldingHistory();
+      }      
+  }
+
+  viewHistoryGraph() {
+
+    this.zone.runOutsideAngular(() => {
+      let chart = am4core.create("chartdiv", am4charts.XYChart);
+
+      chart.paddingRight = 20;
+
+      let data = [];
+
+      if(this.selectedHoldingForGraph === 0)
+      {
+          const distinctDates = this.holdingHistory.map(({ date }) => date);
+
+          distinctDates.forEach(_date => {
+              var total = 0;
+              this.holdingHistory.filter(t=>t.date == _date)
+                .forEach(hist => {
+                  total += hist.price * hist.amount;
+                });
+
+                data.push({ date: _date, name: "Tüm Varlıklar", value: total});
+          });
+      }
+      else
+      {
+        this.holdingHistory.filter(t=>t.holdingId == this.selectedHoldingForGraph)
+            .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+              .forEach(hist => {
+                  data.push({ date: hist.date, name: hist.holdingCode + "-" + hist.id, value: hist.price * hist.amount});
+              });
+      }
+
+      chart.data = data;
+
+      chart.language.locale = am4lang_tr_TR;
+
+      chart.numberFormatter.numberFormat = "#,###";
+
+      let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+      dateAxis.renderer.grid.template.location = 0;
+
+      let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      valueAxis.tooltip.disabled = true;
+      valueAxis.renderer.minWidth = 35;
+
+      let series = chart.series.push(new am4charts.LineSeries());
+      series.dataFields.dateX = "date";
+      series.dataFields.valueY = "value";
+
+      series.tooltipText = "{valueY.value}";
+
+      chart.cursor = new am4charts.XYCursor();
+
+      let scrollbarX = new am4charts.XYChartScrollbar();
+      scrollbarX.series.push(series);
+      chart.scrollbarX = scrollbarX;
+
+      this.chart = chart;
+    });
+  }
+
+  onSelectedHoldingForGraphChanged()
+  {
+    this.viewHistoryGraph();
   }
 
   saveHolding(holding){
@@ -569,8 +613,8 @@ export class ProfileComponent implements OnInit {
             }
             else
             {
-                hold.todaysPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price;
-                hold.marketPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price * hold.amount;
+                hold.todaysPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price * this.currencyRates.find(t=>t.code === "USD").buying;
+                hold.marketPrice =  this.criptoRates.find(t=>t.code === hold.holdingCode).price * hold.amount * this.currencyRates.find(t=>t.code === "USD").buying;
                 hold.holdingLongName = this.criptoRates.find(t=>t.code === hold.holdingCode).name;
                 
                 if(_purchaseDate.getTime() === today.getTime())
@@ -652,6 +696,29 @@ export class ProfileComponent implements OnInit {
                 port.holdingLongName = this.criptoRates.find(t=>t.code === port.holdingCode).name;
             } 
         });
+      });
+  }
+
+  getHoldingHistory()
+  {
+      this._holdingService.getHistory(this._authenticationService.currentUser.id).subscribe(response=>{
+        this.holdingHistory = response.result.holdingHistoryList;
+
+        let ids = this.holdingHistory.map(({ holdingId }) => holdingId);
+        let distinctListOfHistoryId = ids.filter((n, i) => ids.indexOf(n) === i);
+
+        distinctListOfHistoryId.forEach(_holdingId => {
+            let orderedHoldings = this.holdingHistory.filter(t=>t.holdingId == _holdingId).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+            let firstItemOrderedByDate = orderedHoldings[0];
+
+            let combo = new HoldingHistoryGraphComboVM;
+            combo.holdingId = _holdingId;
+            combo.holdingCode = firstItemOrderedByDate.holdingCode;
+            combo.date = firstItemOrderedByDate.date;
+            this.holdingHistoryGraphCombo.push(combo);
+        });
+
+        this.viewHistoryGraph();
       });
   }
 

@@ -58,7 +58,8 @@ export const apiConfig = {
         {
           Get: "Holding",
           Post: "Holding",
-          Delete: "Holding"
+          Delete: "Holding",
+          GetHoldingHistory: "Holding/GetHoldingHistory"
         },
         Portfolio:
         {

@@ -72,7 +72,6 @@ export class AuthenticationService {
   {
     let user = JSON.parse(localStorage.getItem('current-user')) as UserVM;
 
-    console.log(user);
     if(!user) return false;
     
     return user.roleId === GlobalConstants.UserRoles.Admin;

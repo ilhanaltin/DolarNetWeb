@@ -8,6 +8,7 @@ import { HoldingListResponseDetailsVM } from '../models/holding/HoldingListRespo
 import { StandartResponseDetailsVM } from '../models/StandartResponseDetailsVM';
 import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
 import { HoldingSearchCriteriaVM } from '../models/holding/HoldingSearchCriteriaVM';
+import { HoldingHistoryListResponseDetailsVM } from '../models/holding/HoldingHistoryListResponseDetailsVM';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,18 @@ export class HoldingService {
       .append('id', id.toString())
 
     return this.baseService.delete<ServiceResult<StandartResponseDetailsVM>>(apiConfig.Api.Main.Url + apiConfig.Services.Holding.Delete, myParams);
+  }
+
+  getHistory(userId: number, holdingId: number = null) : Observable<ServiceResult<HoldingHistoryListResponseDetailsVM>>{
+    
+    let myParams = new HttpParams()
+      .append('UserId', userId.toString());
+    
+    if(holdingId != null)
+    {
+      myParams.append('HoldingId', holdingId.toString());
+    }
+
+    return this.baseService.get<HoldingHistoryListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Holding.GetHoldingHistory, myParams);
   }
 }
