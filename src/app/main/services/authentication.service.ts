@@ -77,6 +77,15 @@ export class AuthenticationService {
     return user.roleId === GlobalConstants.UserRoles.Admin;
   }
 
+  isEditor()
+  {
+    let user = JSON.parse(localStorage.getItem('current-user')) as UserVM;
+
+    if(!user) return false;
+    
+    return user.roleId === GlobalConstants.UserRoles.Editor;
+  }
+
   get currentUserFromJwt()
   {
     let token = localStorage.getItem('token');
