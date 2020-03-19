@@ -46,7 +46,7 @@
                   <tbody>
                     <tr class="align-middle" *ngFor="let coin of criptoRates">
                       <td class="col-5">
-                        <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
+                        <p class="mb-0 d-flex align-items-center"><img [src]="getCriptoFlagCss(coin.code)" class="mr-2"> {{coin.code}} - {{coin.name}}</p>
                       </td>
                       <td class="col-1">
                         <p class="mb-0">{{coin.price}}</p>

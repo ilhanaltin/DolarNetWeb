@@ -44,7 +44,7 @@
               <tbody>
                 <tr class="align-middle" *ngFor="let currency of currencyRates">
                   <td class="col-5">
-                    <p class="mb-0"><span [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} -
+                    <p class="mb-0 d-flex align-items-center"><span class="mr-2" [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} -
                       {{getCurrencyName(currency.code)}}</p>
                   </td>
                   <td class="col-1">
