@@ -1,19 +1,27 @@
 .breadcrumb {
-  background: transparent;
+ display: inline-block;
+  @include media-breakpoint-down(md) {
+    text-align: center;
+    width: 100%;
+    min-width: 100%;
+    display: block;
+  }
 
   &-item {
+    display: inline-block;
     a {
-      color: $white;
+      color: currentColor;
     }
 
     &.active {
-      color: $white;
+      color: currentColor;
       font-weight: 600;
     }
   }
 }
-.profile-bar-right-menu{
-  a{
+
+.profile-bar-right-menu {
+  a {
     margin-left: 1rem;
   }
 }
@@ -24,14 +32,15 @@
   background-color: #fff;
   border-color: #239e6c #239e6c #fff !important;
 }
+
 .profile-tab-content {
-  li{
-     a{
-       &.active{
-         li{
+  li {
+    a {
+      &.active {
+        li {
           background-color: red;
-         }
         }
-     }
+      }
+    }
   }
 }

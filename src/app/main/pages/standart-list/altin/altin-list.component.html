@@ -13,9 +13,10 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-8 rounded bg-light news-detail ">
+        <div class="col-md-8 rounded news-detail ">
           <div class="row">
-            <div class="col-12 mb-4">
+
+            <div class="col-12 bg-white mt-2 mb-4 pt-2">
               <svg class='remix mt-2'>
                 <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-exchange-dollar-line"></use>
               </svg>
@@ -23,42 +24,40 @@
                 Altın Fiyatları
               </h1>
               <p>Bu bölüm, son altın verilerini içermektedir. </p>
-            </div>
-            <div class="col-12">
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <thead>
-                    <tr>
-                      <th scope="col">Birim</th>
-                      <th scope="col">Alış</th>
-                      <th scope="col">Satış</th>
-                      <th scope="col">Değişim</th>
-                    </tr>
+                  <tr>
+                    <th scope="col">Birim</th>
+                    <th scope="col">Alış</th>
+                    <th scope="col">Satış</th>
+                    <th scope="col">Değişim</th>
+                  </tr>
                   </thead>
                   <tbody>
-                    <tr class="align-middle" *ngFor="let gold of goldRates">
-                      <td class="col-5">
-                        {{gold.name}}
-                      </td>
-                      <td class="col-1">
-                        {{gold.buying}}
-                      </td>
-                      <td class="col-1">
-                        {{gold.selling}}
-                      </td>
-                      <td class="col-5">
-                        <p *ngIf="gold.rate >= 0" class="text-success mb-0">% {{gold.rate}}
-                          <span>
+                  <tr class="align-middle" *ngFor="let gold of goldRates">
+                    <td class="col-5">
+                      {{gold.name}}
+                    </td>
+                    <td class="col-1">
+                      {{gold.buying}}
+                    </td>
+                    <td class="col-1">
+                      {{gold.selling}}
+                    </td>
+                    <td class="col-5">
+                      <p *ngIf="gold.rate >= 0" class="text-success mb-0">% {{gold.rate}}
+                        <span>
                             <img src="../assets/images/icons/up-icon.svg" alt="">
                           </span>
-                        </p>
-                        <p *ngIf="gold.rate < 0" class="text-danger mb-0">% {{gold.rate}}
-                          <span>
+                      </p>
+                      <p *ngIf="gold.rate < 0" class="text-danger mb-0">% {{gold.rate}}
+                        <span>
                             <img src="../assets/images/icons/down-icon.svg" alt="">
                           </span>
-                        </p>
-                      </td>
-                    </tr>
+                      </p>
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
 
@@ -68,7 +67,7 @@
           </div>
 
         </div>
-        <div class="col-md-4 currency-converter align-self-start">
+        <div class="col-md-4 mt-2 bg-light currency-converter align-self-start">
           <converter></converter>
         </div>
 
