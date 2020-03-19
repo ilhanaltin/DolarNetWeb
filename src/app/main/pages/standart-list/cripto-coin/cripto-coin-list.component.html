@@ -14,64 +14,63 @@
     <div class="container">
       <div class="row row d-flex flex-row align-items-stretch">
 
-        <div class="col-md-8 bg-light rounded news-detail">
+        <div class="col-md-8 bg-white news-detail">
           <div class="row">
-            <div class="col-12 mt-3 mb-4">
-              <img class="img-fluid rounded shadow-sm" src="/assets/images/header-banners/kripto-header.jpg" alt="">
+            <div class="col-12 mb-4">
+              <img class="img-fluid rounded shadow-sm pt-3" src="/assets/images/header-banners/kripto-header.jpg" alt="">
               <svg class='remix mt-2'>
                 <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-exchange-dollar-line"></use>
               </svg>
               <h1>Kripto Para Verileri </h1>
               <p class="font-weight-normal">Bu bölüm, son cripto para verilerini içermektedir.</p>
-            </div>
-            <div class="col-12">
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <thead>
-                    <tr>
-                      <th scope="col">
-                        <p>Birim</p>
-                      </th>
-                      <th scope="col">
-                        <p>Satış ($)</p>
-                      </th>
-                      <th scope="col">
-                        <p class="simge-tl">Satış (&#8378;)</p>
-                      </th>
-                      <th scope="col">
-                        <p>Değişim</p>
-                      </th>
-                    </tr>
+                  <tr>
+                    <th scope="col">
+                      <p>Birim</p>
+                    </th>
+                    <th scope="col">
+                      <p>Satış ($)</p>
+                    </th>
+                    <th scope="col">
+                      <p class="simge-tl">Satış (&#8378;)</p>
+                    </th>
+                    <th scope="col">
+                      <p>Değişim</p>
+                    </th>
+                  </tr>
                   </thead>
                   <tbody>
-                    <tr class="align-middle" *ngFor="let coin of criptoRates">
-                      <td class="col-5">
-                        <p class="mb-0"><img [src]="getCriptoFlagCss(coin.code)"> {{coin.code}} - {{coin.name}}</p>
-                      </td>
-                      <td class="col-1">
-                        <p class="mb-0">{{coin.price}}</p>
-                      </td>
-                      <td class="col-1">
-                        <p class="mb-0">{{getConvertedToTry(coin.price)}}</p>
-                      </td>
-                      <td class="col-5">
-                        <p *ngIf="coin.changeDay >= 0" class="text-success">% {{coin.changeDay}}
-                          <span>
+                  <tr class="align-middle" *ngFor="let coin of criptoRates">
+                    <td class="col-5">
+                      <p class="mb-0 d-flex align-items-center"><img [src]="getCriptoFlagCss(coin.code)" class="mr-2"> {{coin.code}} - {{coin.name}}</p>
+                    </td>
+                    <td class="col-1">
+                      <p class="mb-0">{{coin.price}}</p>
+                    </td>
+                    <td class="col-1">
+                      <p class="mb-0">{{getConvertedToTry(coin.price)}}</p>
+                    </td>
+                    <td class="col-5">
+                      <p *ngIf="coin.changeDay >= 0" class="text-success">% {{coin.changeDay}}
+                        <span>
                             <img src="../assets/images/icons/up-icon.svg" alt="">
                           </span>
-                        </p>
-                        <p *ngIf="coin.changeDay < 0" class="text-danger">% {{coin.changeDay}}
-                          <span>
+                      </p>
+                      <p *ngIf="coin.changeDay < 0" class="text-danger">% {{coin.changeDay}}
+                        <span>
                             <img src="../assets/images/icons/down-icon.svg" alt="">
                           </span>
-                        </p>
-                      </td>
-                    </tr>
+                      </p>
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
 
               </div>
             </div>
+
           </div>
         </div>
         <div class="col-md-4 currency-converter align-self-start">

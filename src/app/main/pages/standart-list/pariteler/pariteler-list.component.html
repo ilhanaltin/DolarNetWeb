@@ -12,58 +12,58 @@
   <section class="content">
 
     <div class="container">
-      <div class="row row d-flex flex-row align-items-stretch">
-        <div class="col-md-8 rounded bg-light news-detail">
+      <div class="row">
+        <div class="col-md-8 news-detail ">
           <div class="row">
-            <div class="col-12 mt-3 mb-4">
+
+            <div class="col-12 bg-white mb-4">
 
               <svg class='remix mt-2'>
                 <use xlink:href="assets/images/remix-icon/remixicon.symbol.svg#ri-exchange-dollar-line"></use>
               </svg>
               <h1>Pariteler ve Anlık Çapraz Kur Verileri </h1>
               <p class="lead font-weight-normal">Bu bölüm, son parite verilerini içermektedir.</p>
-            </div>
-           
-            <div class="col-12">
               <div class="table-responsive">
                 <table class="table table-striped table-hover">
                   <thead>
-                    <tr>
-                      <th class="col-md-5">Birim</th>
-                      <th class="col-md-1">Alış</th>
-                      <th class="col-md-1">Satış</th>
-                      <th class="col-md-5">Değişim</th>
-                    </tr>
+                  <tr>
+                    <th class="col-md-5">Birim</th>
+                    <th class="col-md-1">Alış</th>
+                    <th class="col-md-1">Satış</th>
+                    <th class="col-md-5">Değişim</th>
+                  </tr>
                   </thead>
                   <tbody>
-                    <tr class="align-middle" *ngFor="let parite of pariteler">
-                      <td class="col-md-5">
-                        {{parite.name}} - {{parite.text}}
-                      </td>
-                      <td class="col-md-1">
-                        {{parite.buying}}
-                      </td>
-                      <td class="col-md-1">
-                        {{parite.selling}}
-                      </td>
-                      <td class="col-md-5">
-                        <p *ngIf="parite.rate >= 0" class="text-success mb-0">% {{parite.rate}}
-                          <span>
+                  <tr class="align-middle" *ngFor="let parite of pariteler">
+                    <td class="col-md-5">
+                      {{parite.name}} - {{parite.text}}
+                    </td>
+                    <td class="col-md-1">
+                      {{parite.buying}}
+                    </td>
+                    <td class="col-md-1">
+                      {{parite.selling}}
+                    </td>
+                    <td class="col-md-5">
+                      <p *ngIf="parite.rate >= 0" class="text-success mb-0">% {{parite.rate}}
+                        <span>
                             <img src="../assets/images/icons/up-icon.svg" alt="">
                           </span>
-                        </p>
-                        <p *ngIf="parite.rate < 0" class="text-danger mb-0">% {{parite.rate}}
-                          <span>
+                      </p>
+                      <p *ngIf="parite.rate < 0" class="text-danger mb-0">% {{parite.rate}}
+                        <span>
                             <img src="../assets/images/icons/down-icon.svg" alt="">
                           </span>
-                        </p>
-                      </td>
-                    </tr>
+                      </p>
+                    </td>
+                  </tr>
                   </tbody>
                 </table>
 
               </div>
             </div>
+
+
 
           </div>
 

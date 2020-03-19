@@ -13,10 +13,10 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-8 rounded bg-light news-detail">
-
+        <div class="col-md-8 rounded news-detail ">
           <div class="row">
-            <div class="col-12 mt-2 mb-4">
+
+            <div class="col-12 bg-white mt-2 mb-4 pt-2">
               <img class="img-fluid rounded shadow"
                 src="https://images.unsplash.com/photo-1515606378517-3451a4fa2e12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=80"
                 alt="">
@@ -44,7 +44,7 @@
               <tbody>
                 <tr class="align-middle" *ngFor="let currency of currencyRates">
                   <td class="col-5">
-                    <p class="mb-0"><span [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} -
+                    <p class="mb-0 d-flex align-items-center"><span class="mr-2" [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} -
                       {{getCurrencyName(currency.code)}}</p>
                   </td>
                   <td class="col-1">
@@ -70,7 +70,7 @@
             </table>
           </div>
         </div>
-        <div class="col-md-4 currency-converter align-self-start">
+        <div class="col-md-4 mt-2 bg-light currency-converter align-self-start">
           <converter></converter>
         </div>
       </div>

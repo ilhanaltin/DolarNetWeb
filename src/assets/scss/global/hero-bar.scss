@@ -8,9 +8,10 @@
   background: url("assets/images/hero-background.jpg");
   background-position: center top;
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: cover;
   min-height: 15rem;
-
+  margin-bottom: 0;
+  padding-bottom: 0;
   @include media-breakpoint-down(md) {
     margin-bottom: 1rem;
     text-align: center;
@@ -51,7 +52,7 @@
   display: block;
   z-index: 5;
 
-  @include media-breakpoint-down (md) {
+  @include media-breakpoint-down(md) {
     margin-top: .5rem;
   }
 }
