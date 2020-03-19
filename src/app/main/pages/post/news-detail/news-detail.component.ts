@@ -7,7 +7,6 @@ import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/app/main/services/authentication.service';
 import { PostCommentRequestVM } from 'src/app/main/models/blog/PostCommentRequestVM';
-import { TitleTagService } from 'src/app/main/services/TitleTagService';
 
 @Component({
   selector: 'news-detail',
@@ -18,13 +17,12 @@ export class NewsDetailComponent implements OnInit {
   
   @ViewChild("commentFormDiv") commentForm: ElementRef;
   @ViewChild("commentAreatInput") commentAreatInput: ElementRef;
-
+  
   readonly _globalConstants = GlobalConstants;
 
   postComment: PostCommentsVM = new PostCommentsVM({});
   commentToReply: PostCommentsVM;
   isCommentSaved: boolean = false;
-  titleUrlOfPost: string;
 
   post: PostVM = new PostVM({});
 
@@ -37,8 +35,7 @@ export class NewsDetailComponent implements OnInit {
     private router: Router,
     private _blogService: BlogService,
     private _formBuilder: FormBuilder,
-    public _authenticationService: AuthenticationService,
-    private titleTagService: TitleTagService) 
+    public _authenticationService: AuthenticationService) 
     {
     }
 
@@ -46,9 +43,8 @@ export class NewsDetailComponent implements OnInit {
     this.postCommentForm = this.createPostCommentForm();
 
     this.route.paramMap.subscribe((params : ParamMap)=> { 
-      this.titleUrlOfPost = params.get('title');
-        this.getPostDetail(params.get('id'));         
-    });    
+        this.getPostDetail(params.get('id')); 
+    });
   }
 
   createPostCommentForm(): FormGroup
@@ -112,15 +108,7 @@ export class NewsDetailComponent implements OnInit {
   {
       this._blogService.getById(id).subscribe(response => {
         this.post = response.result.post;
-        this.parentPostComments = this.post.comments.filter(t=>t.parentId === null);   
-        
-        this.titleTagService.setTitle(this.post.title + " - Dolar.Net");
-        
-        this.titleTagService.setSocialMediaTags(
-          'https://dolar.net/' + this.titleUrlOfPost + "/" + id, 
-            this.post.title,
-            this.post.longTitle,
-            this.post.imagePath);
+        this.parentPostComments = this.post.comments.filter(t=>t.parentId === null);
       });
   }
 

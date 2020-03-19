@@ -2,8 +2,6 @@ import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BlogService } from '../../services/blog.service';
 import { PostVM } from '../../models/blog/PostVM';
-import { TitleTagService } from '../../services/TitleTagService';
-import { Router } from '@angular/router';
 /* import '../../../../@dolarnet/js/main.js';
 import '../../../../@dolarnet/js/owl.carousel.js'; */
 
@@ -19,9 +17,7 @@ export class SliderComponent implements OnInit {
   isSliderHidden: boolean = true;
   postList: PostVM[];
 
-  constructor(private _blogService: BlogService,
-    private _router: Router,
-    private titleTagService: TitleTagService) {
+  constructor(private _blogService: BlogService) {
    }
 
   ngOnInit() {
@@ -55,17 +51,4 @@ export class SliderComponent implements OnInit {
       },1000);
     });
   }  
-
-  routeToNewsDetail(post)
-  {
-      this.titleTagService.setTitle(post.title + " - Dolar.Net");
-          
-      this.titleTagService.setSocialMediaTags(
-        'https://dolar.net/' + post.urlFromTitle + "/" + post.id, 
-          post.title,
-          post.longTitle,
-          post.imagePath);
-
-      this._router.navigate(['/', post.urlFromTitle, post.id]);
-  }
 }

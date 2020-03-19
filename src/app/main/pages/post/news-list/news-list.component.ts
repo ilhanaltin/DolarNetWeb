@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostSearchCriteriaVM } from '../../../models/blog/PostSearchCriteriaVM';
 import { BlogService } from '../../../services/blog.service';
 import { PostVM } from '../../../models/blog/PostVM';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
-import { TitleTagService } from 'src/app/main/services/TitleTagService';
 
 @Component({
   selector: 'news-list',
@@ -20,9 +19,7 @@ export class NewsListComponent implements OnInit {
 
   constructor(
     private _blogService: BlogService,
-    private route: ActivatedRoute,
-    private _router: Router,
-    private titleTagService: TitleTagService) 
+    private route: ActivatedRoute) 
     { 
       
     }
@@ -40,19 +37,6 @@ export class NewsListComponent implements OnInit {
           this.categoryId = +params.get('category');
         }
       });
-  }
-
-  routeToNewsDetail(post)
-  {
-      this.titleTagService.setTitle(post.title + " - Dolar.Net");
-          
-      this.titleTagService.setSocialMediaTags(
-        'https://dolar.net/' + post.urlFromTitle + "/" + post.id, 
-          post.title,
-          post.longTitle,
-          post.imagePath);
-
-      this._router.navigate(['/', post.urlFromTitle, post.id]);
   }
 
   getPosts(category)

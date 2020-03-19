@@ -2,9 +2,8 @@ import { PostVM } from './../../../models/blog/PostVM';
 import { Component, OnInit } from '@angular/core';
 import { PostSearchCriteriaVM } from 'src/app/main/models/blog/PostSearchCriteriaVM';
 import { BlogService } from 'src/app/main/services/blog.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { GlobalConstants } from 'src/app/main/models/constants/GlobalConstants';
-import { TitleTagService } from 'src/app/main/services/TitleTagService';
 
 @Component({
   selector: 'news-popular',
@@ -19,9 +18,7 @@ export class NewsPopularComponent implements OnInit {
 
   constructor(
     private _blogService: BlogService,
-    private route: ActivatedRoute,
-    private _router: Router,
-    private titleTagService: TitleTagService
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -38,18 +35,5 @@ export class NewsPopularComponent implements OnInit {
     this._blogService.getMostPopularPosts(criteria).subscribe(response=>{
         this.postList = response.result.postList;
     });
-  }
-
-  routeToNewsDetail(post)
-  {
-      this.titleTagService.setTitle(post.title + " - Dolar.Net");
-          
-      this.titleTagService.setSocialMediaTags(
-        'https://dolar.net/' + post.urlFromTitle + "/" + post.id, 
-          post.title,
-          post.longTitle,
-          post.imagePath);
-
-      this._router.navigate(['/', post.urlFromTitle, post.id]);
   }
 }
