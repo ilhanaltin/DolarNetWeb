@@ -3,6 +3,8 @@ import { PostVM } from '../../models/blog/PostVM';
 import { BlogService } from '../../services/blog.service';
 import { PostSearchCriteriaVM } from '../../models/blog/PostSearchCriteriaVM';
 import { GlobalConstants } from '../../models/constants/GlobalConstants';
+import { TitleTagService } from '../../services/TitleTagService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'home-post-list',
@@ -15,7 +17,9 @@ export class HomePostListComponent implements OnInit {
 
   postList: PostVM[];
 
-  constructor(private _blogService: BlogService) { }
+  constructor(private _blogService: BlogService,
+    private _router: Router,
+    private titleTagService: TitleTagService) { }
 
   ngOnInit() {
     this.getPosts();
@@ -31,5 +35,18 @@ export class HomePostListComponent implements OnInit {
     this._blogService.get(criteria).subscribe(response=>{
         this.postList = response.result.postList;
     });
+  }
+
+  routeToNewsDetail(post)
+  {
+      this.titleTagService.setTitle(post.title + " - Dolar.Net");
+          
+      this.titleTagService.setSocialMediaTags(
+        'https://dolar.net/' + post.urlFromTitle + "/" + post.id, 
+          post.title,
+          post.longTitle,
+          post.imagePath);
+
+      this._router.navigate(['/', post.urlFromTitle, post.id]);
   }
 }
