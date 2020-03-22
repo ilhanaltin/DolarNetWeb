@@ -1,3 +1,4 @@
+import { CurrencyGraphModule } from './main/pages/graphs/currency/currency-graph/currency-graph.module';
 import { PostCommentModule } from './main/pages/post/comments/post-comment.module';
 import { RegisterModule } from './main/pages/register/register.module';
 import { NewsPopularModule } from './main/pages/post/news-popular/news-popular.module';
@@ -79,6 +80,7 @@ export function socialConfigs() {
     BrowserAnimationsModule,
     PostCommentModule,
     SocialLoginModule,
+    CurrencyGraphModule,
 
     // Material moment date module
     MatMomentDateModule

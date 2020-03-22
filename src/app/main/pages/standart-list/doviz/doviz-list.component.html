@@ -44,8 +44,11 @@
               <tbody>
                 <tr class="align-middle" *ngFor="let currency of currencyRates">
                   <td class="col-5">
-                    <p class="mb-0 d-flex align-items-center"><span class="mr-2" [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} -
-                      {{getCurrencyName(currency.code)}}</p>
+                    <a href="" [routerLink]="['/doviz-graph', currency.code]">                      
+                      <p class="mb-0 d-flex align-items-center">
+                        <span class="mr-2" [ngClass]="getCurrencyFlagCss(currency.code)"></span> {{currency.code}} - {{getCurrencyName(currency.code)}}
+                      </p>
+                    </a>
                   </td>
                   <td class="col-1">
                     <p class="mb-0">{{currency.buying}}</p>

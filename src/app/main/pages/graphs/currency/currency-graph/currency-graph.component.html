@@ -1,0 +1,69 @@
+<navigation-header></navigation-header>
+<main class="sub-page small-header">
+    <section class="hero-bar">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="container mt-4">
+                    <currency-bar></currency-bar>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container-fluid mt-3 ml-4 information-box">
+            <div class="row">
+                <div class="container">
+                    <h2>{{header}}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row row d-flex flex-row align-items-stretch">
+                <div class="col-md-8 news-detail">
+                    <ul class="nav nav-tabs mb-3 ml-5 mt-3" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark active" id="pills-graph-week-tab" data-toggle="pill" href="#pills-graph" (click)="setPeriod(_globalConstants.DatePeriod.Day)"
+                                role="tab" aria-controls="pills-graph" aria-selected="true">Günlük</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" id="pills-graph-week-tab" data-toggle="pill" href="#pills-graph" (click)="setPeriod(_globalConstants.DatePeriod.Week)"
+                            role="tab" aria-controls="pills-graph" aria-selected="true">Haftalık</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" id="pills-graph-month-tab" data-toggle="pill" href="#pills-graph" (click)="setPeriod(_globalConstants.DatePeriod.Month)"
+                            role="tab" aria-controls="pills-graph" aria-selected="false">Aylık</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link text-dark" id="pills-graph-sixmonth-tab" data-toggle="pill" href="#pills-graph" (click)="setPeriod(_globalConstants.DatePeriod.SixMonth)"
+                            role="tab" aria-controls="pills-graph" aria-selected="false">6 Aylık</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="pills-graph-sixmonth-tab" data-toggle="pill" href="#pills-graph" (click)="setPeriod(_globalConstants.DatePeriod.Year)"
+                                role="tab" aria-controls="pills-graph" aria-selected="false">Yıllık</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" id="pills-graph-sixmonth-tab" data-toggle="pill" href="#pills-graph" (click)="setPeriod(_globalConstants.DatePeriod.TenYear)"
+                                role="tab" aria-controls="pills-graph" aria-selected="false">10 Yıllık</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content news-detail" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-graph" role="tabpanel" aria-labelledby="pills-graph-tab">
+                            <div id="chartdiv" style="width: 100%; height: 500px"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-mt-10 news-featured-categories">
+                    <div class="mt-5">   
+                        <market-analyse></market-analyse>
+                    </div>
+                </div>
+
+            </div>
+            <news-popular></news-popular>
+            <news-latest></news-latest>
+        </div>
+    </section>
+</main>
+<footer-dolarnet></footer-dolarnet>

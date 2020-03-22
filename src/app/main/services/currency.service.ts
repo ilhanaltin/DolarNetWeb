@@ -6,6 +6,9 @@ import { Observable } from 'rxjs';
 import { BaseService } from './base.service';
 import { CurrencyRatesVM } from '../models/integration/currency/CurrencyRatesVM';
 import { apiConfig } from 'src/@dolarnet/dolarnet-config/api.config';
+import { CurrencyHistorySearchCriteriaVM } from '../models/integration/currency/CurrencyHistorySearchCriteriaVM';
+import { CurrencyHistoryListResponseDetailsVM } from '../models/integration/currency/CurrencyHistoryListResponseDetailsVM';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +55,14 @@ export class CurrencyService {
 
         return resp;
       }));
+  }
+
+  getHistory(criteria: CurrencyHistorySearchCriteriaVM) : Observable<ServiceResult<CurrencyHistoryListResponseDetailsVM>>{
+    
+    let myParams = new HttpParams()
+      .append('Period', criteria.period.toString())
+      .append('Code', criteria.code.toString());
+      
+    return this.baseService.get<CurrencyHistoryListResponseDetailsVM>(apiConfig.Api.Main.Url + apiConfig.Services.Currency.GetCurrencyHistory, myParams);
   }
 }          

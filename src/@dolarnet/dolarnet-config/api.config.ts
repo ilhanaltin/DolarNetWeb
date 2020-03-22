@@ -105,7 +105,8 @@ export const apiConfig = {
         Currency:
         {
           GetAllCurrency: "Currency",
-          GetPariteler: "Currency/GetPariteler"
+          GetPariteler: "Currency/GetPariteler",
+          GetCurrencyHistory: "Currency/GetCurrencyHistory"
         },
         Gold:
         {

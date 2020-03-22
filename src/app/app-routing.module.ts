@@ -15,6 +15,7 @@ import { EmtiaListComponent } from './main/pages/standart-list/emtia-list/emtia-
 import { RegisterComponent } from './main/pages/register/register.component';
 import { ProfileComponent } from './main/pages/profile/profile.component';
 import { AuthGuard } from './main/services/auth-guard.service';
+import { CurrencyGraphComponent } from './main/pages/graphs/currency/currency-graph/currency-graph.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
     path     : 'profile',
     component: ProfileComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path     : 'doviz-graph/:code',
+    component: CurrencyGraphComponent
   },
   {
     path     : 'news',
@@ -69,7 +74,7 @@ const routes: Routes = [
   {
     path     : 'emtialar',
     component: EmtiaListComponent
-  },
+  },  
   {
     path     : '**',
     component: HomeComponent

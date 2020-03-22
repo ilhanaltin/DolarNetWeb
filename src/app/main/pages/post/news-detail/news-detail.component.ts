@@ -114,14 +114,14 @@ export class NewsDetailComponent implements OnInit {
         this.post = response.result.post;
         this.parentPostComments = this.post.comments.filter(t=>t.parentId === null);   
         
-        this.titleTagService.setTitle(this.post.title + " - Dolar.Net");
+        /* this.titleTagService.setTitle(this.post.title + " - Dolar.Net");
         
         this.titleTagService.setSocialMediaTags(
           'https://dolar.net/' + this.titleUrlOfPost + "/" + id, 
             this.post.title,
             this.post.longTitle,
-            this.post.imagePath);
-      });
+            this.post.imagePath);*/
+      }); 
   }
 
   getAvatar(avatar)
